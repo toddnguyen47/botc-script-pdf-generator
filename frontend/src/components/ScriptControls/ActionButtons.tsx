@@ -33,7 +33,7 @@ export function ActionButtons({
     <div className="action-buttons-section">
       <div className="action-buttons">
         <button onClick={onGeneratePDF} className="print-button primary">
-          Generate PDF
+          Generate HTML
         </button>
         <button onClick={onPrint} className="print-button">
           Browser Print

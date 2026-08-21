@@ -67,7 +67,7 @@ export function usePdfGeneration() {
 
   const downloadPDF = (scriptName?: string) => {
     if (!pdfBlob) return;
-    downloadBlob(pdfBlob, `${scriptName || "script"}.pdf`);
+    downloadBlob(pdfBlob, `${scriptName || "script"}.html`);
   };
 
   const closePdfModal = () => {
