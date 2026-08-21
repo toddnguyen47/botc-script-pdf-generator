@@ -270,9 +270,8 @@
 }
 
 .character-ability {
-  font-family:
-    "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial, sans-serif;
-  font-size: 3.1mm;
+  font-family: "Asap Condensed", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial, sans-serif;
+  font-size: 3.2mm;
   line-height: 1.2;
   margin: 0;
   color: #222;
@@ -396,7 +395,7 @@
 .setup-ability {
   display: inline-block; /* Keep it together */
   white-space: normal; /* Allow internal wrapping if it's long */
-  font-family: "Goudy Old Style", "Goudy Oldstyle", "Goudy", Georgia, serif;
+  font-family: "Asap Condensed", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial, sans-serif;
 }
 
 .jinxes-section {

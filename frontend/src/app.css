@@ -70,6 +70,26 @@ a:visited {
   src: url("/fonts/Dumbledor/DumbledorWide.ttf");
 }
 
+@font-face {
+  font-family: Asap Condensed;
+  src: url("/fonts/AsapCondensed/AsapCondensed-Regular.ttf");
+}
+
+@font-face {
+  font-family: Asap Condensed Bold;
+  src: url("/fonts/AsapCondensed/AsapCondensed-Bold.ttf");
+}
+
+@font-face {
+  font-family: PT Sans Narrow;
+  src: url("/fonts/PTSansNarrow/PTSansNarrow-Regular.ttf");
+}
+
+@font-face {
+  font-family: PT Sans Narrow Bold;
+  src: url("/fonts/PTSansNarrow/PTSansNarrow-Bold.ttf");
+}
+
 .app {
   margin: 0 auto;
   padding: 40px 20px;

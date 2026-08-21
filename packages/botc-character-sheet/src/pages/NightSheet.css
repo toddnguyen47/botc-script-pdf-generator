@@ -56,8 +56,9 @@
 }
 
 .reminder-text {
-  font-family: "Trade Gothic";
-  font-size: 3mm;
+  font-family: "Asap Condensed", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial, sans-serif;
+  font-size: 3.1mm;
+  line-height: 1;
 }
 
 .night-sheet-entry p {
@@ -65,7 +66,7 @@
 }
 
 .night-sheet-entry p strong {
-  font-family: Trade Gothic Bold;
+  font-family: "Asap Condensed Bold";
 }
 
 .night-sheet-entry > img {

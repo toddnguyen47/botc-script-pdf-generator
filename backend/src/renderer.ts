@@ -103,6 +103,22 @@ function getFontFaces(assetBase: string): string {
       font-family: 'Goudy Old Style';
       src: url("${assetBase}/fonts/GoudyOldStyle/GoudyOldStyle.ttf");
     }
+    @font-face {
+      font-family: 'Asap Condensed';
+      src: url("${assetBase}/fonts/AsapCondensed/AsapCondensed-Regular.ttf");
+    }
+    @font-face {
+      font-family: 'Asap Condensed Bold';
+      src: url("${assetBase}/fonts/AsapCondensed/AsapCondensed-Bold.ttf");
+    }
+    @font-face {
+      font-family: 'PT Sans Narrow';
+      src: url("${assetBase}/fonts/PTSansNarrow/PTSansNarrow-Regular.ttf");
+    }
+    @font-face {
+      font-family: 'PT Sans Narrow Bold';
+      src: url("${assetBase}/fonts/PTSansNarrow/PTSansNarrow-Bold.ttf");
+    }
   `;
 }
 
