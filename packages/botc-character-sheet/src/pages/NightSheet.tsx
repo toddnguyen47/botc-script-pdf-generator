@@ -78,7 +78,11 @@ export const NightSheetEntry = (props: NightSheetEntryProps) => {
   }
 
   const replaceReminders = (str: string) =>
-    str.split(":reminder:").map((u, i) => (i % 2 === 0 ? u : <ReminderIcon />));
+    str.split(/(:reminder:)/).map((part, i) =>
+      part === ":reminder:"
+        ? <ReminderIcon key={i} />
+        : part,
+    );
 
   const renderText = (text: string) => {
     const withBold = text
