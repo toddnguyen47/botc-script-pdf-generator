@@ -190,7 +190,7 @@ export function renderCharacterSheet(
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Character Sheet PDF</title>
+  <title>${script.metadata?.name}</title>
   <style>
     ${fontFaces}
 
