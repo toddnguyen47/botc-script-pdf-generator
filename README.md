@@ -84,6 +84,14 @@ The project deploys to Vercel automatically:
 Vercel configuration is in `vercel.json`. The serverless function uses Bun
 runtime (`bunVersion: "1.x"`).
 
+## View generated HTML file
+
+This project, edited by Todd Nguyen-Tran, will generate HTML files. You can then edit the HTML file however you want. Say you want the Marionette to be replaced by the Poisoner token. You can do that by finding the ">Marionette<" text and replace it with ">Marionette (Poisoner token)<".
+
+After the HTML is generated and downloaded, move it to [/frontend/public/html/](/frontend/public/html/) folder. Create that folder if it does not exist. Then, view the file at (if your port is 5173): http://localhost:5173/html/YourScript.html.
+
+If you view the HTML file with Google Chrome or any Chromium browser, you can then Print to PDF as you'd like. Remember to enable "Background Graphics" for the beautiful background created by [JohnForster](https://github.com/JohnForster).
+
 ## Script Format
 
 Scripts are JSON arrays following the
@@ -116,7 +124,7 @@ Characters can be:
 
 - **Title**: "Unlovable" by Letterhead Fonts
 - **Character names**: Goudy Old Style
-- **Abilities**: Trade Gothic
+- **Abilities**: Trade Gothic / Asap Condensed
 
 ## Note on Use of LLMs
 
