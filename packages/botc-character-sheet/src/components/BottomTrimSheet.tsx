@@ -20,7 +20,7 @@ export const BottomTrimSheet = ({
   const { color, includeMargins, dimensions } = options;
   const colors = normalizeColors(color);
   const gradient = createGradient(colors, 20);
-  const overlayBackground = createOverlayBackground(color, 180);
+  // const overlayBackground = createOverlayBackground(color, 180);
 
   return (
     <PrintablePage dimensions={dimensions}>
@@ -40,7 +40,7 @@ export const BottomTrimSheet = ({
       >
         <img
           className="character-sheet-background"
-          src="/images/parchment_texture_a4_lightened.jpg"
+          // src="/images/parchment_texture_a4_lightened.jpg"
         ></img>
         <div className="sheet-content">{children}</div>
         <div className="spacer"></div>
@@ -55,10 +55,10 @@ export const BottomTrimSheet = ({
             <p>Script template by John Forster ravenswoodstudio.xyz</p>
           </div>
           <div className="info-footer-background"></div>
-          <div
+          {/* <div
             className="info-footer-overlay"
             style={{ background: overlayBackground }}
-          ></div>
+          ></div> */}
         </div>
       </div>
     </PrintablePage>
