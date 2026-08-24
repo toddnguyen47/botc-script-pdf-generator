@@ -12,6 +12,7 @@ export function useScriptLoading(
   const [sharedOptions, setSharedOptions] = useState<ScriptOptions | null>(
     null,
   );
+  const [alreadyParsedScript, setAlreadyParsedScript] = useState<ParsedScript | null> (null);
 
   // Load script from URL query parameter or localStorage on mount
   useEffect(() => {
@@ -25,8 +26,7 @@ export function useScriptLoading(
       try {
         const decoded = decodeURIComponent(scriptParam);
         const json = JSON5.parse(decoded);
-        const parsed = loadScript(json);
-        onLoad?.(json, parsed);
+        _loadScript(json);
       } catch (err) {
         console.error("Failed to load script from URL:", err);
         setError(
@@ -46,8 +46,7 @@ export function useScriptLoading(
         })
         .then((text) => {
           const json = JSON5.parse(text);
-          const parsed = loadScript(json);
-          onLoad?.(json, parsed);
+          _loadScript(json);
         })
         .catch((err) => {
           console.error("Failed to fetch script from URL:", err);
@@ -65,8 +64,7 @@ export function useScriptLoading(
             setError("Shared script not found");
             return;
           }
-          const parsed = loadScript(data.rawScript);
-          onLoad?.(data.rawScript, parsed);
+          _loadScript(data.rawScript);
           setSharedOptions(data.options);
         })
         .catch((err) => {
@@ -81,8 +79,7 @@ export function useScriptLoading(
       if (saved) {
         try {
           const json = JSON5.parse(saved);
-          const parsed = loadScript(json);
-          onLoad?.(json, parsed);
+          _loadScript(json);
         } catch {
           /* ignore corrupt data */
         }
@@ -94,8 +91,7 @@ export function useScriptLoading(
   const tryLoadFromText = (text: string): boolean => {
     try {
       const json = JSON5.parse(text);
-      const parsed = loadScript(json);
-      onLoad?.(json, parsed);
+      _loadScript(json);
       return true;
     } catch (err) {
       return false;
@@ -139,15 +135,18 @@ export function useScriptLoading(
 
   const handleFileUpload = (event: Event) => {
     const handler = (json: any) => {
-      const parsed = loadScript(json);
-      onLoad?.(json, parsed);
+      _loadScript(json);
     }
     _handleJsonFileUpload(event, handler)
   };
 
   const handleTokenReplacementUpload = (event: Event) => {
     const handler = (json: any) => {
-      console.log("BRUH");
+      if (alreadyParsedScript == null) {
+        console.error("No parsed script yet. Upload a script first");
+      } else {
+        console.log("WE IN BUSINESS!");
+      }
     }
     _handleJsonFileUpload(event, handler)
   }
@@ -168,6 +167,12 @@ export function useScriptLoading(
       }
     };
     reader.readAsText(file);
+  }
+
+  const _loadScript = (json: any) => {
+    const parsed = loadScript(json);
+    onLoad?.(json, parsed);
+    setAlreadyParsedScript(parsed);
   }
 
   return { sharedOptions, handleFileUpload, handlePasteButtonClick, handleTokenReplacementUpload };
