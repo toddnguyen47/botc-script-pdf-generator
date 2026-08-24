@@ -374,7 +374,7 @@
   position: absolute;
   bottom: 3mm;
   left: 3mm;
-  height: 8mm;
+  height: 14mm;
   margin-left: 3mm;
   padding: var(--print-bleed);
 }
