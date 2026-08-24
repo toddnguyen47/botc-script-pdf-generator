@@ -54,16 +54,25 @@ export function useScriptParsing() {
     json: CharacterReplacementData,
     parsedScript: ParsedScript,
   ): ParsedScript => {
-    parsedScript.characters.map((character) => {
-      if (character.name in json.replacements) {
-        const newName = `${character.name} (${json.replacements[character.name]} token)`;
-        character.name = newName;
-      }
-    });
+    // Need to make a copy so preact renders it.
+    const sanitized = {
+      ...parsedScript,
+      characters: parsedScript.characters.map((character) => {
+        if (character.name in json.replacements) {
+          const newName = `${character.name} (${json.replacements[character.name]} token)`;
+          // Need to make a new object
+          return {
+            ...character,
+            name: newName,
+          };
+        }
+        return character;
+      }),
+    };
 
-    setScript(parsedScript);
-
-    return parsedScript;
+    setScript(sanitized);
+    setNightOrdersState(calculateNightOrders(sanitized));
+    return sanitized;
   };
 
   const handleScriptTextChange = (newText: string) => {
