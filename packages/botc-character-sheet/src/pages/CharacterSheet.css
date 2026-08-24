@@ -24,7 +24,7 @@
 }
 
 .sidebar-background {
-  background-image: url(/images/sidebar-desaturated-small.jpg);
+  /* background-image: url(/images/sidebar-desaturated-small.jpg); */
   background-size: 105mm;
   width: calc(var(--sidebar-width) + var(--print-bleed));
   height: 100%;
@@ -153,9 +153,9 @@
 
 .section-title {
   font-family: "Dumbledor", serif;
-  font-weight: lighter;
+  font-weight: bolder;
   padding: 0 calc(0.25 * var(--sidebar-width));
-  color: #eeeeee;
+  color: #000000;
   margin: -2mm 0 -2mm calc(-1 * var(--sidebar-width));
   min-width: var(--sidebar-width);
   text-align: center;
@@ -167,9 +167,10 @@
   font-size: 4mm;
   line-height: 2;
 
-  filter: drop-shadow(0.1mm 0.1mm 0.3mm #222a)
-    drop-shadow(-0.1mm 0.1mm 0.3mm #2228) drop-shadow(0.1mm -0.1mm 0.3mm #222a)
-    drop-shadow(-0.1mm -0.1mm 0.3mm #222a);
+  /* filter: drop-shadow(0.1mm 0.1mm 0.3mm #222a)
+    drop-shadow(-0.1mm 0.1mm 0.3mm #2228)
+    drop-shadow(0.1mm -0.1mm 0.3mm #222a)
+    drop-shadow(-0.1mm -0.1mm 0.3mm #222a); */
 }
 
 .section-divider {

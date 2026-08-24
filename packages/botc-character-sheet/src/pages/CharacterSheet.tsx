@@ -3,7 +3,7 @@ import {
   teamColours,
   normalizeColors,
   createGradient,
-  createOverlayBackground,
+  // createOverlayBackground,
 } from "../utils/colours";
 import "./CharacterSheet.css";
 import { GroupedCharacters, Jinx, ScriptOptions } from "../types";
@@ -229,14 +229,14 @@ function Header({
 }
 
 function Sidebar({ color }: { color: string | string[] }) {
-  const overlayBackground = createOverlayBackground(color, 180);
+  // const overlayBackground = createOverlayBackground(color, 180);
   return (
     <div className="sidebar-container">
       <div className="sidebar-background"></div>
-      <div
+      {/* <div
         className="sidebar-overlay"
         style={{ background: overlayBackground }}
-      ></div>
+      ></div> */}
     </div>
   );
 }

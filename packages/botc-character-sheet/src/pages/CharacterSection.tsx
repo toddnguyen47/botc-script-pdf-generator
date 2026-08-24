@@ -36,7 +36,9 @@ export function CharacterSection({
 
   return (
     <div className="character-section">
-      <h2 className="section-title">{title}</h2>
+      <h2 className="section-title" style={{ color: charNameColor }}>
+        {title}
+      </h2>
       <div className="character-list">
         <div className="character-column" style={{ justifyContent }}>
           {characters.slice(0, midpoint).map((char) => (
