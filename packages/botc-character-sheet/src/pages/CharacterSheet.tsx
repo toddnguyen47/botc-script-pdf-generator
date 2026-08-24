@@ -103,7 +103,7 @@ export function CharacterSheet({
       >
         <img
           className="character-sheet-background"
-          src="/images/parchment_texture_a4_lightened.jpg"
+          // src="/images/parchment_texture_a4_lightened.jpg"
         ></img>
         <Sidebar color={color} />
         <div className="sheet-content">
