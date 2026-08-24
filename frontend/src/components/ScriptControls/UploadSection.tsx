@@ -42,7 +42,8 @@ export function UploadSection({
         </button>
 
         <label htmlFor="token-replacement-upload" className="upload-label">
-          Upload Token Replacement JSON
+          <div>Upload Token</div>
+          <div>Replacement JSON</div>
         </label>
         <input
           id="token-replacement-upload"
