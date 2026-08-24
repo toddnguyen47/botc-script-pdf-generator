@@ -94,6 +94,7 @@ export function useScriptLoader(
   useScriptPersistence(parsing.rawScript, parsing.script?.metadata?.name);
   const loading = useScriptLoading(
     parsing.loadScript,
+    parsing.loadCharacterTokenReplacement,
     parsing.setError,
     onLoad,
   );

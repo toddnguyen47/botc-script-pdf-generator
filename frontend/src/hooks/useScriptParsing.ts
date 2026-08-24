@@ -3,7 +3,11 @@ import { parseScript } from "../utils/scriptParser";
 import { sanitizeScript } from "../utils/scriptValidation";
 import { sortScript } from "botc-script-checker";
 import type { Script } from "botc-script-checker";
-import { NightOrders, ParsedScript } from "botc-character-sheet";
+import {
+  NightOrders,
+  ParsedScript,
+  CharacterReplacementData,
+} from "botc-character-sheet";
 import { calculateNightOrders } from "../utils/nightOrders";
 import { downloadBlob } from "../utils/downloadFile";
 import type { ValidationIssue } from "../types/validation";
@@ -46,9 +50,21 @@ export function useScriptParsing() {
     return sanitized; // Return parsed script for color loading
   };
 
-  const loadCharacterTokenReplacement = (json: Script) => {
-    console.log("loadCharacterTokenReplacement", json);
-  }
+  const loadCharacterTokenReplacement = (
+    json: CharacterReplacementData,
+    parsedScript: ParsedScript,
+  ): ParsedScript => {
+    parsedScript.characters.map((character) => {
+      if (character.name in json.replacements) {
+        const newName = `${character.name} (${json.replacements[character.name]} token)`;
+        character.name = newName;
+      }
+    });
+
+    setScript(parsedScript);
+
+    return parsedScript;
+  };
 
   const handleScriptTextChange = (newText: string) => {
     setScriptText(newText);
@@ -138,10 +154,10 @@ export function useScriptParsing() {
     isScriptSorted,
     nightOrders: nightOrdersState,
     loadScript,
+    loadCharacterTokenReplacement,
     handleScriptTextChange,
     handleSort,
     updateScriptMetadata,
     handleSaveScript,
-    loadCharacterTokenReplacement,
   };
 }

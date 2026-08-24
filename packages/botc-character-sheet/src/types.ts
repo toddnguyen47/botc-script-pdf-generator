@@ -80,6 +80,10 @@ export interface ParsedScript {
   characters: ScriptCharacter[];
 }
 
+export interface CharacterReplacementData {
+  replacements: CharacterReplacement;
+}
+
 export type NetworkPayload = {
   script: ParsedScript;
   options: ScriptOptions;
@@ -93,3 +97,5 @@ export type PageDimensions = {
   margin: number;
   bleed: number;
 };
+
+export type CharacterReplacement = Record<string, string>;

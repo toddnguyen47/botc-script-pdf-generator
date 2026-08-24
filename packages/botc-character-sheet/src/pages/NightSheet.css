@@ -56,7 +56,9 @@
 }
 
 .reminder-text {
-  font-family: "Asap Condensed", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial, sans-serif;
+  font-family:
+    "Asap Condensed", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue",
+    Arial, sans-serif;
   font-size: 3.1mm;
   line-height: 1;
 }

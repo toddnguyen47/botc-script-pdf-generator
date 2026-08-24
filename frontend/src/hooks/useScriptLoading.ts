@@ -1,18 +1,27 @@
 import { useState, useEffect } from "preact/hooks";
 import type { Script } from "botc-script-checker";
-import type { ParsedScript, ScriptOptions } from "botc-character-sheet";
+import type {
+  ParsedScript,
+  ScriptOptions,
+  CharacterReplacementData,
+} from "botc-character-sheet";
 import { loadScript as loadSharedScript } from "../utils/scriptStorage";
 import JSON5 from "json5";
 
 export function useScriptLoading(
   loadScript: (json: Script) => ParsedScript,
+  loadCharacterTokenReplacement: (
+    json: CharacterReplacementData,
+    parsedScript: ParsedScript,
+  ) => ParsedScript,
   setError: (error: string | null) => void,
   onLoad?: (json: Script, parsed: ParsedScript) => void,
 ) {
   const [sharedOptions, setSharedOptions] = useState<ScriptOptions | null>(
     null,
   );
-  const [alreadyParsedScript, setAlreadyParsedScript] = useState<ParsedScript | null> (null);
+  const [alreadyParsedScript, setAlreadyParsedScript] =
+    useState<ParsedScript | null>(null);
 
   // Load script from URL query parameter or localStorage on mount
   useEffect(() => {
@@ -136,8 +145,8 @@ export function useScriptLoading(
   const handleFileUpload = (event: Event) => {
     const handler = (json: any) => {
       _loadScript(json);
-    }
-    _handleJsonFileUpload(event, handler)
+    };
+    _handleJsonFileUpload(event, handler);
   };
 
   const handleTokenReplacementUpload = (event: Event) => {
@@ -145,13 +154,20 @@ export function useScriptLoading(
       if (alreadyParsedScript == null) {
         console.error("No parsed script yet. Upload a script first");
       } else {
-        console.log("WE IN BUSINESS!");
+        const parsedScriptWithReplacementTokens = loadCharacterTokenReplacement(
+          json,
+          alreadyParsedScript,
+        );
+        onLoad?.(json, parsedScriptWithReplacementTokens);
       }
-    }
-    _handleJsonFileUpload(event, handler)
-  }
+    };
+    _handleJsonFileUpload(event, handler);
+  };
 
-  const _handleJsonFileUpload = (event: Event, handleJson: (json: any) => void) => {
+  const _handleJsonFileUpload = (
+    event: Event,
+    handleJson: (json: any) => void,
+  ) => {
     const target = event.target as HTMLInputElement;
     const file = target.files?.[0];
 
@@ -167,13 +183,18 @@ export function useScriptLoading(
       }
     };
     reader.readAsText(file);
-  }
+  };
 
   const _loadScript = (json: any) => {
     const parsed = loadScript(json);
     onLoad?.(json, parsed);
     setAlreadyParsedScript(parsed);
-  }
+  };
 
-  return { sharedOptions, handleFileUpload, handlePasteButtonClick, handleTokenReplacementUpload };
+  return {
+    sharedOptions,
+    handleFileUpload,
+    handlePasteButtonClick,
+    handleTokenReplacementUpload,
+  };
 }
