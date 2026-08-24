@@ -2,6 +2,7 @@ interface UploadSectionProps {
   hasScript: boolean;
   onFileUpload: (event: Event) => void;
   onPasteButtonClick: () => void;
+  onTokenReplacementUpload: (event: Event) => void;
   onLoadExample: () => void;
   onLoadExampleTeensyville: () => void;
 }
@@ -10,6 +11,7 @@ export function UploadSection({
   hasScript,
   onFileUpload,
   onPasteButtonClick,
+  onTokenReplacementUpload,
   onLoadExample,
   onLoadExampleTeensyville,
 }: UploadSectionProps) {
@@ -38,6 +40,17 @@ export function UploadSection({
         >
           Paste
         </button>
+
+        <label htmlFor="token-replacement-upload" className="upload-label">
+          Upload Token Replacement JSON
+        </label>
+        <input
+          id="token-replacement-upload"
+          type="file"
+          accept=".json,.json5"
+          onChange={onTokenReplacementUpload}
+          className="file-input"
+        />
       </div>
 
       {!hasScript && (

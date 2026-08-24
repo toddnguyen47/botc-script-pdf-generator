@@ -138,6 +138,21 @@ export function useScriptLoading(
   };
 
   const handleFileUpload = (event: Event) => {
+    const handler = (json: any) => {
+      const parsed = loadScript(json);
+      onLoad?.(json, parsed);
+    }
+    _handleJsonFileUpload(event, handler)
+  };
+
+  const handleTokenReplacementUpload = (event: Event) => {
+    const handler = (json: any) => {
+      console.log("BRUH");
+    }
+    _handleJsonFileUpload(event, handler)
+  }
+
+  const _handleJsonFileUpload = (event: Event, handleJson: (json: any) => void) => {
     const target = event.target as HTMLInputElement;
     const file = target.files?.[0];
 
@@ -147,14 +162,13 @@ export function useScriptLoading(
     reader.onload = (e) => {
       try {
         const json = JSON5.parse(e.target?.result as string);
-        const parsed = loadScript(json);
-        onLoad?.(json, parsed);
+        handleJson(json);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to parse JSON");
       }
     };
     reader.readAsText(file);
-  };
+  }
 
-  return { sharedOptions, handleFileUpload, handlePasteButtonClick };
+  return { sharedOptions, handleFileUpload, handlePasteButtonClick, handleTokenReplacementUpload };
 }

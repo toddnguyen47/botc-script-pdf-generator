@@ -19,6 +19,7 @@ interface ScriptControlsProps {
   error: string | null;
   onFileUpload: (event: Event) => void;
   onPasteButtonClick: () => void;
+  onTokenReplacementUpload: (event: Event) => void;
   onLoadExample: () => void;
   onLoadExampleTeensyville: () => void;
   onColorChange: (color: string | string[]) => void;
@@ -55,6 +56,7 @@ export function ScriptControls({
   issues,
   onFileUpload,
   onPasteButtonClick,
+  onTokenReplacementUpload,
   onLoadExample,
   onLoadExampleTeensyville,
   onColorChange,
@@ -88,6 +90,7 @@ export function ScriptControls({
           hasScript={hasScript}
           onFileUpload={onFileUpload}
           onPasteButtonClick={onPasteButtonClick}
+          onTokenReplacementUpload={onTokenReplacementUpload}
           onLoadExample={onLoadExample}
           onLoadExampleTeensyville={onLoadExampleTeensyville}
         />

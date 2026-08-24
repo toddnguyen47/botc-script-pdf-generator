@@ -78,6 +78,7 @@ function EditMode() {
     handleScriptTextChange,
     handleFileUpload,
     handlePasteButtonClick,
+    handleTokenReplacementUpload,
     handleSort,
     handleSaveScript,
     updateScriptMetadata,
@@ -383,6 +384,7 @@ function EditMode() {
               onSave={handleSaveScript}
               onFileUpload={handleFileUpload}
               onPasteButtonClick={handlePasteButtonClick}
+              onTokenReplacementUpload={handleTokenReplacementUpload}
               onLoadExample={handleLoadExample}
               onLoadExampleTeensyville={handleLoadExampleTeensyville}
               onColorChange={handleColorChange}

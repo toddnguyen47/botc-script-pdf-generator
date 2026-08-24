@@ -46,6 +46,10 @@ export function useScriptParsing() {
     return sanitized; // Return parsed script for color loading
   };
 
+  const loadCharacterTokenReplacement = (json: Script) => {
+    console.log("loadCharacterTokenReplacement", json);
+  }
+
   const handleScriptTextChange = (newText: string) => {
     setScriptText(newText);
 
@@ -138,5 +142,6 @@ export function useScriptParsing() {
     handleSort,
     updateScriptMetadata,
     handleSaveScript,
+    loadCharacterTokenReplacement,
   };
 }
