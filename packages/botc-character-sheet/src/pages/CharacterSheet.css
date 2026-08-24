@@ -164,7 +164,7 @@
   text-orientation: upright;
   writing-mode: vertical-lr;
   letter-spacing: -0.6mm;
-  font-size: 4mm;
+  font-size: 3.8mm;
   line-height: 2;
 
   /* filter: drop-shadow(0.1mm 0.1mm 0.3mm #222a)
@@ -475,7 +475,8 @@
 
 .jinx-text {
   font-family:
-    "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial, sans-serif;
+    "Asap Condensed", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue",
+    Arial, sans-serif;
   font-size: 2.6mm;
   line-height: 1.2;
   margin: 0;
