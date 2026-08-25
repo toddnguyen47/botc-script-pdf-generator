@@ -22,7 +22,7 @@
   position: absolute;
   left: 3mm;
   margin-left: 3mm;
-  top: -50%;
+  /* top: -50%; */
   height: 9mm;
 }
 
@@ -41,7 +41,7 @@
   padding-right: 3mm;
   position: absolute;
   right: 0;
-  top: -50%;
+  /* top: -50%; */
 }
 
 .info-author-credit p {
