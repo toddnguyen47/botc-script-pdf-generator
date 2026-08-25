@@ -59,6 +59,7 @@
 
 .night-sheet-entry .reminder-name {
   grid-column: span 2;
+  padding-right: 1mm;
 }
 
 .reminder-text {
