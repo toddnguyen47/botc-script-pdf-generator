@@ -32,16 +32,27 @@
   filter: drop-shadow(0.2mm 0.1mm 0 #222d) drop-shadow(0mm 0mm 0.1mm #2228);
 }
 
+.night-sheet-list {
+  display: flex;
+  margin-left: 8mm;
+  gap: 5mm;
+}
+
 .night-sheet-order {
+  /* display: flex;
+  flex-direction: column;
+  gap: 1mm; */
+  flex: 1 1 0px;
   display: flex;
   flex-direction: column;
-  gap: 1mm;
+  justify-content: space-between;
 }
 
 .night-sheet-entry {
   display: flex;
   align-items: center;
   min-height: 10mm;
+  margin-bottom: 1.6mm;
 }
 
 .reminder-name {
@@ -52,14 +63,14 @@
     Georgia,
     serif;
   font-weight: 700;
-  font-size: 3.3mm;
+  font-size: 3.6mm;
 }
 
 .reminder-text {
   font-family:
     "Asap Condensed", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue",
     Arial, sans-serif;
-  font-size: 3mm;
+  font-size: 3.2mm;
   line-height: 1.2;
 }
 
