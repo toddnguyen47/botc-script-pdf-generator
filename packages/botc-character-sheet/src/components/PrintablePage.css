@@ -16,6 +16,7 @@
   position: absolute;
   height: var(--print-guide-size);
   width: var(--print-guide-size);
+  visibility: hidden;
 }
 
 @media print {
