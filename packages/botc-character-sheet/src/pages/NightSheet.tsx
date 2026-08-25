@@ -3,6 +3,7 @@ import { getImageSrc } from "../utils/nightOrder";
 import "./NightSheet.css";
 import { teamColours } from "../utils/colours";
 import { BottomTrimSheet } from "../components/BottomTrimSheet";
+import { calculateMidpoint } from "../utils/scriptUtils";
 
 const BALANCE_POINT = 10;
 
@@ -45,7 +46,7 @@ export const NightSheet = ({
   }) => {
     if (!order?.length) return null;
 
-    const midpoint = calculateMidpoint(order, night);
+    const midpoint = _calculateMidpoint(order, night);
     const justifyContent = getJustifyContent(order);
 
     const renderColumn = (items: NightOrder, columnIndex: number) => (
@@ -190,34 +191,11 @@ const NON_CHARACTER_REMINDERS: Record<
   },
 };
 
-function calculateMidpoint(
+function _calculateMidpoint(
   characters: NightOrderEntry[],
   night: NightType,
 ): number {
-  const midpoint = Math.ceil(characters.length / 2);
-
-  if (characters.length % 2 === 0 || characters.length <= BALANCE_POINT) {
-    return midpoint;
-  }
-  const leftWeightedMidpoint = midpoint;
-  const rightWeightedMidpoint = midpoint - 1;
-
-  const largerFirstHalf = characters.slice(0, leftWeightedMidpoint);
-  const largerSecondHalf = characters.slice(rightWeightedMidpoint - 1);
-
-  const totalAbilityLengthFirstHalf = largerFirstHalf.reduce(
-    (sum, char) =>
-      sum + (getReminderText(char, night).reminderText?.length ?? 0),
-    0,
-  );
-  const totalAbilityLengthSecondHalf = largerSecondHalf.reduce(
-    (sum, char) =>
-      sum + (getReminderText(char, night).reminderText?.length ?? 0),
-    0,
-  );
-
-  // Return the midpoint that results in more balanced ability lengths
-  return totalAbilityLengthFirstHalf < totalAbilityLengthSecondHalf
-    ? leftWeightedMidpoint
-    : rightWeightedMidpoint;
+  return calculateMidpoint(BALANCE_POINT, characters, (char): number => {
+    return getReminderText(char, night).reminderText?.length ?? 0;
+  });
 }

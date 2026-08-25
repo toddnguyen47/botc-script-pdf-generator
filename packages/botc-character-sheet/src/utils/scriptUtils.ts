@@ -178,3 +178,34 @@ export function getJinxedCharacters(
 
   return allCharacters.filter((char) => jinxedCharacterIds.includes(char.id));
 }
+
+export function calculateMidpoint<T>(
+  balancePoint: number,
+  characters: T[],
+  getLength: (input: T) => number,
+): number {
+  const midpoint = Math.ceil(characters.length / 2);
+
+  if (characters.length % 2 === 0 || characters.length <= balancePoint) {
+    return midpoint;
+  }
+  const leftWeightedMidpoint = midpoint;
+  const rightWeightedMidpoint = midpoint - 1;
+
+  const largerFirstHalf = characters.slice(0, leftWeightedMidpoint);
+  const largerSecondHalf = characters.slice(rightWeightedMidpoint - 1);
+
+  const totalAbilityLengthFirstHalf = largerFirstHalf.reduce(
+    (sum, char) => sum + getLength(char),
+    0,
+  );
+  const totalAbilityLengthSecondHalf = largerSecondHalf.reduce(
+    (sum, char) => sum + getLength(char),
+    0,
+  );
+
+  // Return the midpoint that results in more balanced ability lengths
+  return totalAbilityLengthFirstHalf < totalAbilityLengthSecondHalf
+    ? leftWeightedMidpoint
+    : rightWeightedMidpoint;
+}

@@ -3,6 +3,7 @@ import {
   getJinxedCharacters,
   getImageUrl,
   getGenericIconUrl,
+  calculateMidpoint,
 } from "../utils/scriptUtils";
 
 interface CharacterSectionProps {
@@ -32,7 +33,7 @@ export function CharacterSection({
         ? "space-around"
         : "flex-start";
 
-  const midpoint = calculateMidpoint(characters);
+  const midpoint = _calculateMidpoint(characters);
 
   return (
     <div className="character-section">
@@ -140,29 +141,9 @@ function CharacterCard({
     </div>
   );
 }
-function calculateMidpoint(characters: ResolvedCharacter[]): number {
-  const midpoint = Math.ceil(characters.length / 2);
 
-  if (characters.length % 2 === 0 || characters.length <= BALANCE_POINT) {
-    return midpoint;
-  }
-  const leftWeightedMidpoint = midpoint;
-  const rightWeightedMidpoint = midpoint - 1;
-
-  const largerFirstHalf = characters.slice(0, leftWeightedMidpoint);
-  const largerSecondHalf = characters.slice(rightWeightedMidpoint - 1);
-
-  const totalAbilityLengthFirstHalf = largerFirstHalf.reduce(
-    (sum, char) => sum + char.ability.length,
-    0,
-  );
-  const totalAbilityLengthSecondHalf = largerSecondHalf.reduce(
-    (sum, char) => sum + char.ability.length,
-    0,
-  );
-
-  // Return the midpoint that results in more balanced ability lengths
-  return totalAbilityLengthFirstHalf < totalAbilityLengthSecondHalf
-    ? leftWeightedMidpoint
-    : rightWeightedMidpoint;
+function _calculateMidpoint(characters: ResolvedCharacter[]): number {
+  return calculateMidpoint(BALANCE_POINT, characters, (char): number => {
+    return char.ability.length;
+  });
 }
