@@ -39,7 +39,9 @@
 }
 
 .night-sheet-entry {
-  display: flex;
+  /* display: flex; */
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   align-items: center;
   min-height: 10mm;
 }
@@ -55,12 +57,20 @@
   font-size: 3.3mm;
 }
 
+.night-sheet-entry .reminder-name {
+  grid-column: span 2;
+}
+
 .reminder-text {
   font-family:
     "Asap Condensed", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue",
     Arial, sans-serif;
   font-size: 3mm;
   line-height: 1.2;
+}
+
+.night-sheet-entry .reminder-text {
+  grid-column: span 9;
 }
 
 .night-sheet-entry p {
@@ -78,6 +88,7 @@
   flex-shrink: 0;
   scale: calc(2 * var(--icon-scale, 1));
   margin-right: 3mm;
+  grid-column: span 1;
 }
 
 .night-sheet-entry > img.marker-icon {
