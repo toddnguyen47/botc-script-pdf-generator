@@ -180,13 +180,8 @@
   width: 150%;
   mix-blend-mode: soft-light;
 
-  filter: brightness(0) saturate(100%)
-          invert(87%)
-          sepia(13%)
-          saturate(430%)
-          hue-rotate(335deg)
-          brightness(105%)
-          contrast(88%);
+  filter: brightness(0) saturate(100%) invert(87%) sepia(13%) saturate(430%)
+    hue-rotate(335deg) brightness(105%) contrast(88%);
 }
 
 .character-list {

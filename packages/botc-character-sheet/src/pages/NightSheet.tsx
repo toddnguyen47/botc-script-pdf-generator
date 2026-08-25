@@ -97,11 +97,11 @@ export const NightSheetEntry = (props: NightSheetEntryProps) => {
   return (
     <div className="night-sheet-entry">
       <img src={src} className={isMarker ? "marker-icon" : undefined}></img>
-        <div className="reminder-name" style={{ color: colour }}>
-          {name}
-        </div>
-        <div className="reminder-text">{renderText(reminderText)}</div>
+      <div className="reminder-name" style={{ color: colour }}>
+        {name}
       </div>
+      <div className="reminder-text">{renderText(reminderText)}</div>
+    </div>
   );
 };
 
