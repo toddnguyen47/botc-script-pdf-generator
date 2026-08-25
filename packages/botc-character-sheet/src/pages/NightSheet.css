@@ -23,7 +23,7 @@
   line-height: var(--title-line-height);
   margin: calc(-7mm + var(--title-margin-top)) -7mm
     calc(var(--title-margin-bottom)) -7mm;
-  padding: 7mm;
+  padding: 7mm 7mm 0mm 7mm;
 
   max-width: 50%;
   text-align: center;
