@@ -71,6 +71,8 @@
 
 .night-sheet-entry .reminder-text {
   grid-column: span 9;
+  border-left: 1px solid #E6D5C8;
+  padding-left: 3mm;
 }
 
 .night-sheet-entry p {
