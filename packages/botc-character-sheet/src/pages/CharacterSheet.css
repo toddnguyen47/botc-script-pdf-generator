@@ -280,7 +280,7 @@
   font-size: 3.2mm;
   line-height: 1.2;
   margin: 0;
-  color: #222;
+  color: #B34D00;
   display: inline-block;
 }
 
@@ -365,7 +365,7 @@
   text-align: center;
   font-family: "Goudy Old Style", "Goudy Oldstyle", "Goudy", Georgia, serif;
   font-size: 3.5mm;
-  color: #222;
+  color: #B34D00;
   opacity: 0.7;
 }
 
@@ -388,7 +388,7 @@
   right: 3mm;
   font-family: "Goudy Old Style", "Goudy Oldstyle", "Goudy", Georgia, serif;
   font-size: 3.2mm;
-  color: #222;
+  color: #B34D00;
   opacity: 0.6;
   text-align: right;
   padding: var(--print-bleed);
@@ -483,7 +483,7 @@
   font-size: 2.6mm;
   line-height: 1.2;
   margin: 0;
-  color: #222;
+  color: #B34D00;
   padding-top: 0.5mm;
 }
 
