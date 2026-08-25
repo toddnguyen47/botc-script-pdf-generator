@@ -57,7 +57,7 @@
   /* background-image: url(/images/sidebar-desaturated-small.jpg); */
   background-size: 105mm;
   width: 100%;
-  height: 20mm;
+  height: 18mm;
 }
 
 .info-footer-overlay {
@@ -65,7 +65,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 20mm;
+  height: 18mm;
   /* background-color: rgba(0, 0, 0, 0.2); */
   mix-blend-mode: multiply;
 }
