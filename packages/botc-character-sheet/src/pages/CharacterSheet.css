@@ -187,7 +187,7 @@
 .character-list {
   flex: 1 1 0px;
   display: flex;
-  margin-left: 8mm;
+  margin-left: 5mm;
   gap: 5mm;
 }
 
