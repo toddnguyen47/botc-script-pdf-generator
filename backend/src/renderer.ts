@@ -112,12 +112,12 @@ function getFontFaces(assetBase: string): string {
       src: url("${assetBase}/fonts/AsapCondensed/AsapCondensed-Bold.ttf");
     }
     @font-face {
-      font-family: 'PT Sans Narrow';
-      src: url("${assetBase}/fonts/PTSansNarrow/PTSansNarrow-Regular.ttf");
+      font-family: 'Spline Sans';
+      src: url("${assetBase}/fonts/Spline_Sans/SplineSans-Regular.ttf");
     }
     @font-face {
-      font-family: 'PT Sans Narrow Bold';
-      src: url("${assetBase}/fonts/PTSansNarrow/PTSansNarrow-Bold.ttf");
+      font-family: 'Spline Sans Bold';
+      src: url("${assetBase}/fonts/Spline_Sans/SplineSans-Bold.ttf");
     }
   `;
 }
