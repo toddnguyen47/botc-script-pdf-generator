@@ -41,7 +41,7 @@
 .night-sheet-entry {
   display: flex;
   align-items: center;
-  min-height: 8mm;
+  min-height: 10mm;
 }
 
 .reminder-name {
