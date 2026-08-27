@@ -123,6 +123,22 @@ function getFontFaces(assetBase: string): string {
       font-family: 'Spline Sans Bold';
       src: url("${assetBase}/fonts/Spline_Sans/SplineSans-Bold.ttf");
     }
+    @font-face {
+      font-family: 'PT Sans';
+      src: url("${assetBase}/fonts/PT/PT_Sans/PTSans-Regular.ttf");
+    }
+    @font-face {
+      font-family: 'PT Sans Bold';
+      src: url("${assetBase}/fonts/PT/PT_Sans/PTSans-Bold.ttf");
+    }
+    @font-face {
+      font-family: 'PT Serif';
+      src: url("${assetBase}/fonts/PT/PT_Serif/PTSerif-Regular.ttf");
+    }
+    @font-face {
+      font-family: 'PT Serif Bold';
+      src: url("${assetBase}/fonts/PT/PT_Serif/PTSerif-Bold.ttf");
+    }
   `;
 }
 

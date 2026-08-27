@@ -62,8 +62,8 @@
 
 .reminder-text {
   font-family:
-    "Spline Sans Medium", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue",
-    Arial, sans-serif;
+    "PT Sans", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial,
+    sans-serif;
   font-size: 3mm;
   line-height: 1.2;
 }
@@ -79,7 +79,7 @@
 }
 
 .night-sheet-entry p strong {
-  font-family: "Spline Sans Bold";
+  font-family: "PT Sans Bold";
 }
 
 .night-sheet-entry > img {

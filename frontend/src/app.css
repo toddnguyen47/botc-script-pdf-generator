@@ -95,6 +95,23 @@ a:visited {
   src: url("/fonts/Spline_Sans/SplineSans-Bold.ttf");
 }
 
+@font-face {
+  font-family: "PT Sans";
+  src: url("${assetBase}/fonts/PT/PT_Sans/PTSans-Regular.ttf");
+}
+@font-face {
+  font-family: "PT Sans Bold";
+  src: url("${assetBase}/fonts/PT/PT_Sans/PTSans-Bold.ttf");
+}
+@font-face {
+  font-family: "PT Serif";
+  src: url("${assetBase}/fonts/PT/PT_Serif/PTSerif-Regular.ttf");
+}
+@font-face {
+  font-family: "PT Serif Bold";
+  src: url("${assetBase}/fonts/PT/PT_Serif/PTSerif-Bold.ttf");
+}
+
 .app {
   margin: 0 auto;
   padding: 40px 20px;
