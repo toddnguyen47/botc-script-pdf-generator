@@ -100,7 +100,9 @@ export const NightSheetEntry = (props: NightSheetEntryProps) => {
       <div className="reminder-name" style={{ color: colour }}>
         {name}
       </div>
-      <div className="reminder-text">{renderText(reminderText)}</div>
+      <div className="reminder-text" style={{ color: colour }}>
+        {renderText(reminderText)}
+      </div>
     </div>
   );
 };

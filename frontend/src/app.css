@@ -96,20 +96,23 @@ a:visited {
 }
 
 @font-face {
-  font-family: "PT Sans";
-  src: url("${assetBase}/fonts/PT/PT_Sans/PTSans-Regular.ttf");
+  font-family: PT Sans;
+  src: url("/fonts/PT/PT_Sans/PTSans-Regular.ttf");
 }
+
 @font-face {
-  font-family: "PT Sans Bold";
-  src: url("${assetBase}/fonts/PT/PT_Sans/PTSans-Bold.ttf");
+  font-family: PT Sans Bold;
+  src: url("/fonts/PT/PT_Sans/PTSans-Bold.ttf");
 }
+
 @font-face {
-  font-family: "PT Serif";
-  src: url("${assetBase}/fonts/PT/PT_Serif/PTSerif-Regular.ttf");
+  font-family: PT Serif;
+  src: url("/fonts/PT/PT_Serif/PTSerif-Regular.ttf");
 }
+
 @font-face {
-  font-family: "PT Serif Bold";
-  src: url("${assetBase}/fonts/PT/PT_Serif/PTSerif-Bold.ttf");
+  font-family: PT Serif Bold;
+  src: url("/fonts/PT/PT_Serif/PTSerif-Bold.ttf");
 }
 
 .app {

@@ -117,7 +117,13 @@ function CharacterCard({
       </div>
       <div className="character-info">
         <h3 className="character-name" style={{ color: color }}>
-          {character.name}
+          <span
+            style={{
+              backgroundColor: `color-mix(in srgb, #FFFF00 40%, white)`,
+            }}
+          >
+            {character.name}
+          </span>
           {jinxedCharacters.length > 0 && (
             <span className="inline-jinx-icons">
               {jinxedCharacters.map((jinxedChar) => {
@@ -135,7 +141,9 @@ function CharacterCard({
             </span>
           )}
         </h3>
-        <p className="character-ability">{renderAbility(character.ability)}</p>
+        <p className="character-ability" style={{ color: color }}>
+          {renderAbility(character.ability)}
+        </p>
       </div>
     </div>
   );
