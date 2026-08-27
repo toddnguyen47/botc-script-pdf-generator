@@ -116,6 +116,10 @@ function getFontFaces(assetBase: string): string {
       src: url("${assetBase}/fonts/Spline_Sans/SplineSans-Regular.ttf");
     }
     @font-face {
+      font-family: 'Spline Sans Medium';
+      src: url("${assetBase}/fonts/Spline_Sans/SplineSans-Medium.ttf");
+    }
+    @font-face {
       font-family: 'Spline Sans Bold';
       src: url("${assetBase}/fonts/Spline_Sans/SplineSans-Bold.ttf");
     }

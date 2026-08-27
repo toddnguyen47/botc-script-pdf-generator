@@ -86,6 +86,11 @@ a:visited {
 }
 
 @font-face {
+  font-family: Spline Sans Medium;
+  src: url("/fonts/Spline_Sans/SplineSans-Medium.ttf");
+}
+
+@font-face {
   font-family: Spline Sans Bold;
   src: url("/fonts/Spline_Sans/SplineSans-Bold.ttf");
 }
