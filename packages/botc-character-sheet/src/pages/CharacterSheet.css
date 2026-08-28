@@ -129,7 +129,7 @@
 }
 
 .sheet-author {
-  font-family: "PT Serif", "Goudy Oldstyle", "Goudy", Georgia, serif;
+  font-family: "Goudy Oldstyle", "Goudy", Georgia, serif;
   font-size: 3.5mm;
   font-weight: bold;
   text-align: center;
@@ -236,7 +236,7 @@
 }
 
 .character-name {
-  font-family: "PT Serif", "Goudy Oldstyle", "Goudy", Georgia, serif;
+  font-family: "Goudy Oldstyle", "Goudy", Georgia, serif;
   font-size: 3.5mm;
   font-weight: 700;
   margin: 0 0 0.5mm 0;
@@ -276,9 +276,8 @@
 
 .character-ability {
   font-family:
-    "PT Sans", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial,
-    sans-serif;
-  font-size: 3.2mm;
+    "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial, sans-serif;
+  font-size: 3.1mm;
   line-height: 1.2;
   margin: 0;
   color: #4d8000;
@@ -364,7 +363,7 @@
 
 .sheet-footer {
   text-align: center;
-  font-family: "PT Serif", "Goudy Oldstyle", "Goudy", Georgia, serif;
+  font-family: "Goudy Oldstyle", "Goudy", Georgia, serif;
   font-size: 3.5mm;
   color: #b34d00;
   opacity: 0.7;
@@ -387,7 +386,7 @@
   position: absolute;
   bottom: 3mm;
   right: 3mm;
-  font-family: "PT Serif", "Goudy Oldstyle", "Goudy", Georgia, serif;
+  font-family: "Goudy Oldstyle", "Goudy", Georgia, serif;
   font-size: 3.2mm;
   color: #b34d00;
   opacity: 0.6;
@@ -403,8 +402,7 @@
   display: inline-block; /* Keep it together */
   white-space: normal; /* Allow internal wrapping if it's long */
   font-family:
-    "PT Sans", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial,
-    sans-serif;
+    "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial, sans-serif;
 }
 
 .jinxes-section {
@@ -479,8 +477,7 @@
 
 .jinx-text {
   font-family:
-    "PT Sans", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial,
-    sans-serif;
+    "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial, sans-serif;
   font-size: 2.6mm;
   line-height: 1.2;
   margin: 0;
@@ -497,7 +494,7 @@
 }
 
 .loric-name {
-  font-family: "PT Serif";
+  font-family: "Goudy Old Style";
   font-size: 3mm;
   padding-top: 0;
 }
