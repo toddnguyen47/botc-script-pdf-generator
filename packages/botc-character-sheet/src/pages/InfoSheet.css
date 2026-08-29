@@ -13,7 +13,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  font-size: 11mm;
+  font-size: 31.2pt;
   line-height: var(--title-line-height);
 
   margin: calc(-7mm + var(--title-margin-top)) -7mm
@@ -34,14 +34,14 @@
 
 .info-sheet-content h4 {
   font-family: "Dumbledor";
-  font-size: 5mm;
+  font-size: 14.2pt;
   margin: 2mm 0;
   font-weight: lighter;
 }
 
 .info-sheet-content h5 {
   font-family: "Dumbledor";
-  font-size: 4mm;
+  font-size: 11.3pt;
 }
 
 .info-sheet-section {
@@ -64,14 +64,14 @@
 .info-fabled-loric-name {
   font-family: "Goudy Old Style";
   margin: 0;
-  font-size: 3.5mm;
+  font-size: 9.9pt;
 }
 
 .info-fabled-loric-note {
   font-family:
     "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial, sans-serif;
   margin: 0;
-  font-size: 3mm;
+  font-size: 8.5pt;
 }
 
 .info-jinx-text {
@@ -81,14 +81,14 @@
 .info-jinx-name {
   font-family: "Goudy Old Style";
   margin: 0;
-  font-size: 3.5mm;
+  font-size: 9.9pt;
 }
 
 .info-jinx-note {
   font-family:
     "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial, sans-serif;
   margin: 0;
-  font-size: 3mm;
+  font-size: 8.5pt;
 }
 
 .info-jinx-entry {

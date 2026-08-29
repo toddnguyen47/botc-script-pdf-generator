@@ -6,7 +6,7 @@
 
 .night-sheet-heading .night-title {
   font-family: Dumbledor;
-  font-size: 7mm;
+  font-size: 19.8pt;
   margin: 0;
 }
 
@@ -19,7 +19,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  font-size: 11mm;
+  font-size: 31.2pt;
   line-height: var(--title-line-height);
   margin: calc(-7mm + var(--title-margin-top)) -7mm
     calc(var(--title-margin-bottom)) -7mm;
@@ -52,7 +52,7 @@
     Georgia,
     serif;
   font-weight: 700;
-  font-size: 3.3mm;
+  font-size: 9.4pt;
 }
 
 .night-sheet-entry .reminder-name {
@@ -63,7 +63,7 @@
 .reminder-text {
   font-family:
     "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial, sans-serif;
-  font-size: 3mm;
+  font-size: 8.5pt;
   line-height: 1.2;
 }
 

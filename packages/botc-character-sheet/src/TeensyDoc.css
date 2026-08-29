@@ -7,13 +7,13 @@
 /* Inline | http://localhost:5173/ */
 
 .teensy .section-title {
-  /* font-size: 4mm; */
-  font-size: 3mm;
+  /* font-size: 11.3pt; */
+  font-size: 8.5pt;
 }
 
 .teensy .appearance-mega-compact .sheet-header span {
-  /* font-size: 11mm; */
-  font-size: 9mm;
+  /* font-size: 31.2pt; */
+  font-size: 25.5pt;
 }
 
 .teensy .swirl-divider {
@@ -26,16 +26,16 @@
 }
 
 .teensy .appearance-super-compact .sheet-header span {
-  /* font-size: 12mm; */
-  font-size: 10mm;
+  /* font-size: 34.0pt; */
+  font-size: 28.3pt;
 }
 
 .teensy .player-count-container {
   /* gap: 5mm; */
   /* max-width: 130mm; */
-  /* font-size: 6mm; */
+  /* font-size: 17.0pt; */
   gap: 4mm;
-  font-size: 5mm;
+  font-size: 14.2pt;
 }
 
 .teensy .night-orders-container {
@@ -48,9 +48,9 @@
 }
 
 .teensy .sheet-backing h1 {
-  /* font-size: 30mm; */
+  /* font-size: 85.0pt; */
   /* word-spacing: -10mm; */
-  font-size: 20mm;
+  font-size: 56.7pt;
   word-spacing: -5mm;
 }
 

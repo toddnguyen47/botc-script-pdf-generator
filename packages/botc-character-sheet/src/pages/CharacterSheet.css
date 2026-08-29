@@ -53,7 +53,7 @@
 }
 
 .sidebar-label {
-  font-size: 3.5mm;
+  font-size: 9.9pt;
   font-weight: 600;
   letter-spacing: 0.5mm;
   color: #eeeeee;
@@ -104,7 +104,7 @@
   -webkit-text-fill-color: transparent;
   font-family: var(--title-font), serif;
   font-weight: 100;
-  font-size: 14mm;
+  font-size: 39.7pt;
   padding: 4mm 8mm;
   margin-left: -8mm;
   margin-right: -8mm;
@@ -130,7 +130,7 @@
 
 .sheet-author {
   font-family: "Goudy Oldstyle", "Goudy", Georgia, serif;
-  font-size: 3.5mm;
+  font-size: 9.9pt;
   font-weight: bold;
   text-align: center;
   margin: -5mm 0 3mm 0;
@@ -164,7 +164,7 @@
   text-orientation: upright;
   writing-mode: vertical-lr;
   letter-spacing: -0.6mm;
-  font-size: 3.8mm;
+  font-size: 10.8pt;
   line-height: 2;
 
   /* filter: drop-shadow(0.1mm 0.1mm 0.3mm #222a)
@@ -232,12 +232,12 @@
   justify-content: center;
   color: #eeeeee;
   font-weight: bold;
-  font-size: 6mm;
+  font-size: 17pt;
 }
 
 .character-name {
   font-family: "Goudy Oldstyle", "Goudy", Georgia, serif;
-  font-size: 3.5mm;
+  font-size: 9.9pt;
   font-weight: 700;
   margin: 0 0 0.5mm 0;
   color: #1a202c;
@@ -269,7 +269,7 @@
   justify-content: center;
   color: #eeeeee;
   font-weight: bold;
-  font-size: 1.8mm;
+  font-size: 5.1pt;
   border-radius: 50%;
   background-color: #666;
 }
@@ -277,7 +277,7 @@
 .character-ability {
   font-family:
     "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial, sans-serif;
-  font-size: 3.1mm;
+  font-size: 8.8pt;
   line-height: 1.2;
   margin: 0;
   color: #4d8000;
@@ -290,7 +290,7 @@
 }
 
 .appearance-compact .sheet-header span {
-  font-size: 13mm;
+  font-size: 36.9pt;
 }
 
 .appearance-compact .script-logo {
@@ -300,11 +300,11 @@
 
 /* Super-compact appearance */
 .appearance-super-compact .character-ability {
-  font-size: 2.7mm;
+  font-size: 7.7pt;
 }
 
 .appearance-super-compact .character-name {
-  font-size: 3.2mm;
+  font-size: 9.1pt;
 }
 
 .appearance-super-compact .character-icon,
@@ -318,7 +318,7 @@
 }
 
 .appearance-super-compact .sheet-header span {
-  font-size: 12mm;
+  font-size: 34pt;
 }
 
 .appearance-super-compact .script-logo {
@@ -328,15 +328,15 @@
 
 /* Mega-compact appearance */
 .appearance-mega-compact .character-ability {
-  font-size: 2.4mm;
+  font-size: 6.8pt;
 }
 
 .appearance-mega-compact .character-name {
-  font-size: 2.8mm;
+  font-size: 7.9pt;
 }
 
 .appearance-mega-compact .sheet-header span {
-  font-size: 11mm;
+  font-size: 31.2pt;
 }
 
 .appearance-mega-compact .character-icon,
@@ -353,7 +353,7 @@
 .appearance-mega-compact .inline-jinx-icon-placeholder {
   width: 4mm;
   height: 4mm;
-  font-size: 1.3mm;
+  font-size: 3.7pt;
 }
 
 .appearance-mega-compact .script-logo {
@@ -364,13 +364,13 @@
 .sheet-footer {
   text-align: center;
   font-family: "Goudy Oldstyle", "Goudy", Georgia, serif;
-  font-size: 3.5mm;
+  font-size: 9.9pt;
   color: #b34d00;
   opacity: 0.7;
 }
 
 .asterisk {
-  font-size: 5mm;
+  font-size: 14.2pt;
 }
 
 .ccc-logo {
@@ -387,14 +387,14 @@
   bottom: 3mm;
   right: 3mm;
   font-family: "Goudy Oldstyle", "Goudy", Georgia, serif;
-  font-size: 3.2mm;
+  font-size: 9.1pt;
   color: #b34d00;
   opacity: 0.6;
   text-align: right;
   padding: var(--print-bleed);
 }
 .author-credit p {
-  font-size: 2.5mm;
+  font-size: 7.1pt;
   margin: 0;
 }
 
@@ -464,12 +464,12 @@
   justify-content: center;
   color: #eeeeee;
   font-weight: bold;
-  font-size: 2mm;
+  font-size: 5.7pt;
 }
 
 .jinx-divider {
   font-family: "Dumbledor", serif;
-  font-size: 4.6mm;
+  font-size: 13pt;
   color: #1a202c;
   line-height: 3.5mm;
   margin: 0 0.5mm;
@@ -478,7 +478,7 @@
 .jinx-text {
   font-family:
     "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial, sans-serif;
-  font-size: 2.6mm;
+  font-size: 7.4pt;
   line-height: 1.2;
   margin: 0;
   color: #b34d00;
@@ -495,7 +495,7 @@
 
 .loric-name {
   font-family: "Goudy Old Style";
-  font-size: 3mm;
+  font-size: 8.5pt;
   padding-top: 0;
 }
 
