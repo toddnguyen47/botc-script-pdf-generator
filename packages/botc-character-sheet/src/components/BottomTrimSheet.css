@@ -6,7 +6,7 @@
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  color: #4d8000;
+  color: #b85b21;
 }
 
 .bottom-trim-sheet .sheet-content {
@@ -34,7 +34,7 @@
     Georgia,
     serif;
   font-size: 9.1pt;
-  color: #4d8000;
+  color: #b85b21;
   opacity: 0.6;
   text-align: right;
   padding-bottom: 3mm;
