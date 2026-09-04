@@ -54,7 +54,7 @@ export const TITLE_FONT_DEFAULTS: Record<
     marginTop: -1,
     marginBottom: 0,
   },
-  "Dumbledor": {
+  Dumbledor: {
     letterSpacing: -0.2,
     wordSpacing: 0,
     lineHeight: 11,

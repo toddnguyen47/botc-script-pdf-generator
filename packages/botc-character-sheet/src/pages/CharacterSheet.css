@@ -53,7 +53,7 @@
 }
 
 .sidebar-label {
-  font-size: 9.9pt;
+  font-size: 9.8pt;
   font-weight: 600;
   letter-spacing: 0.5mm;
   color: #eeeeee;
@@ -130,7 +130,7 @@
 
 .sheet-author {
   font-family: "Goudy Oldstyle", "Goudy", Georgia, serif;
-  font-size: 9.9pt;
+  font-size: 9.8pt;
   font-weight: bold;
   text-align: center;
   margin: -5mm 0 3mm 0;
@@ -237,7 +237,7 @@
 
 .character-name {
   font-family: "Goudy Oldstyle", "Goudy", Georgia, serif;
-  font-size: 9.9pt;
+  font-size: 9.8pt;
   font-weight: 700;
   margin: 0 0 0.5mm 0;
   color: #1a202c;
@@ -365,7 +365,7 @@
   margin-top: 3mm;
   text-align: center;
   font-family: "Goudy Oldstyle", "Goudy", Georgia, serif;
-  font-size: 9.9pt;
+  font-size: 9.8pt;
   color: #b34d00;
   opacity: 0.7;
 
