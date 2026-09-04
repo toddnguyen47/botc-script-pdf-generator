@@ -34,9 +34,9 @@ export function CharacterSheetOptions({
         value={options.appearance}
         options={[
           { value: "normal", label: "Normal" },
-          { value: "compact", label: "Small" },
-          { value: "super-compact", label: "Smaller" },
-          { value: "mega-compact", label: "Smallest" },
+          { value: "compact", label: "Compact" },
+          { value: "super-compact", label: "Super Compact" },
+          { value: "mega-compact", label: "Mega Compact" },
         ]}
         onChange={(value) =>
           onOptionChange("appearance", value as AppearanceLevel)
