@@ -31,6 +31,7 @@ export function useOverflowDetection({
 }: UseOverflowDetectionProps) {
   const lastCheckedAppearanceRef = useRef<Appearance | null>(null);
   const lastCheckedDimensionsRef = useRef<PageDimensions | null>(null);
+  const lastCheckedScriptName = useRef<String | null | undefined>(null);
   const isAdjustingRef = useRef(false);
 
   // Reset detection when script changes
@@ -42,6 +43,11 @@ export function useOverflowDetection({
 
   useEffect(() => {
     if (!script) return;
+
+    if (lastCheckedScriptName.current !== script.metadata?.name) {
+      lastCheckedScriptName.current = script.metadata?.name;
+      setOptions((prev) => ({ ...prev, appearance: "normal" }));
+    }
 
     // Debounce to allow DOM to settle after appearance changes
     const timeoutId = setTimeout(() => {

@@ -362,11 +362,16 @@
 }
 
 .sheet-footer {
+  margin-top: 3mm;
   text-align: center;
   font-family: "Goudy Oldstyle", "Goudy", Georgia, serif;
   font-size: 9.9pt;
   color: #b34d00;
   opacity: 0.7;
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
 }
 
 .asterisk {
@@ -374,25 +379,32 @@
 }
 
 .ccc-logo {
-  position: absolute;
-  bottom: 3mm;
+  /* position: absolute; */
+  /* bottom: 3mm; */
   /* left: 3mm; */
-  height: 14mm;
+  height: 9mm;
   /* margin-left: 3mm; */
-  padding: var(--print-bleed);
+  /* padding: var(--print-bleed); */
+  justify-self: start;
+}
+
+.not-first-night {
+  justify-self: center;
 }
 
 .author-credit {
-  position: absolute;
-  bottom: 3mm;
-  right: 3mm;
+  /* position: absolute; */
+  /* bottom: 3mm; */
+  /* right: 3mm; */
   font-family: "Goudy Oldstyle", "Goudy", Georgia, serif;
   font-size: 9.1pt;
   color: #b34d00;
   opacity: 0.6;
   text-align: right;
-  padding: var(--print-bleed);
+  /* padding: var(--print-bleed); */
+  justify-self: end;
 }
+
 .author-credit p {
   font-size: 7.1pt;
   margin: 0;
