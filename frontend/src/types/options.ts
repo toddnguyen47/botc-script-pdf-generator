@@ -54,6 +54,14 @@ export const TITLE_FONT_DEFAULTS: Record<
     marginTop: -1,
     marginBottom: 0,
   },
+  "Dumbledor": {
+    letterSpacing: -0.2,
+    wordSpacing: 0,
+    lineHeight: 11,
+    backLineHeight: 23,
+    marginTop: -2,
+    marginBottom: 0,
+  },
   "Utm Agin": {
     letterSpacing: -0.6,
     wordSpacing: 0,

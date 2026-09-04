@@ -5,6 +5,7 @@ const TITLE_FONT_OPTIONS = [
   { value: "Alice in Wonderland", label: "Alice in Wonderland" },
   { value: "Anglican", label: "Anglican" },
   { value: "Canterbury Regular", label: "Canterbury" },
+  { value: "Dumbledor", label: "Dumbledor" },
   { value: "Utm Agin", label: "Utm Agin" },
   { value: "Waters Gothic", label: "Waters Gothic" },
 ];
