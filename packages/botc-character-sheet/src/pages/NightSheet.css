@@ -87,7 +87,8 @@
   height: 7mm;
   object-fit: contain;
   flex-shrink: 0;
-  scale: calc(2 * var(--icon-scale, 1));
+  /* scale: calc(2 * var(--icon-scale, 1)); */
+  scale: 2;
   margin-right: 3mm;
 }
 
