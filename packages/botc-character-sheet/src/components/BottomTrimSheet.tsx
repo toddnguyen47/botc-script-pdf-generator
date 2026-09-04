@@ -1,9 +1,5 @@
 import { ComponentChildren } from "preact";
-import {
-  normalizeColors,
-  createGradient,
-  createOverlayBackground,
-} from "../utils/colours";
+import { normalizeColors, createGradient } from "../utils/colours";
 import "./BottomTrimSheet.css";
 import { PrintablePage } from "./PrintablePage";
 import { ScriptOptions } from "../types";
@@ -42,23 +38,25 @@ export const BottomTrimSheet = ({
           className="character-sheet-background"
           // src="/images/parchment_texture_a4_lightened.jpg"
         ></img>
-        <div className="sheet-content">{children}</div>
-        <div className="spacer"></div>
-        <div className="info-footer-container">
-          <img
-            className="info-ccc-logo"
-            src="/images/ccc-parchment.png"
-            alt="Community Created Content"
-          />
-          <div className="info-author-credit">
-            <p>© Steven Medway bloodontheclocktower.com</p>
-            <p>Script template by John Forster ravenswoodstudio.xyz</p>
-          </div>
-          <div className="info-footer-background"></div>
-          {/* <div
+        <div className="sheet-content">
+          {children}
+          <div className="spacer"></div>
+          <div className="info-footer-container">
+            <img
+              className="info-ccc-logo"
+              src="/images/ccc-parchment.png"
+              alt="Community Created Content"
+            />
+            <div className="info-author-credit">
+              <p>© Steven Medway bloodontheclocktower.com</p>
+              <p>Script template by John Forster ravenswoodstudio.xyz</p>
+            </div>
+            {/* <div className="info-footer-background"></div> */}
+            {/* <div
             className="info-footer-overlay"
             style={{ background: overlayBackground }}
           ></div> */}
+          </div>
         </div>
       </div>
     </PrintablePage>

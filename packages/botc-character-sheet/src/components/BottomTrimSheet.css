@@ -10,20 +10,25 @@
 }
 
 .bottom-trim-sheet .sheet-content {
-  padding: 10mm;
+  padding-top: 8mm;
+  padding-left: 8mm;
+  padding-right: 8mm;
   gap: 5mm;
+  flex: 1;
 }
 
 .spacer {
-  flex: 1 0 0px;
+  flex: 1;
 }
 
 .info-ccc-logo {
-  position: absolute;
-  left: 3mm;
-  margin-left: 3mm;
+  /* position: absolute; */
+  /* left: 3mm; */
+  /* margin-left: 3mm; */
   /* top: -50%; */
+  /* padding-left: 3mm; */
   height: 9mm;
+  justify-self: start;
 }
 
 .info-author-credit {
@@ -37,20 +42,26 @@
   color: #b85b21;
   opacity: 0.6;
   text-align: right;
-  padding-bottom: 3mm;
+  /* padding-bottom: 3mm; */
   padding-right: 3mm;
-  position: absolute;
-  right: 0;
+  /* position: absolute; */
+  /* right: 0; */
   /* top: -50%; */
 }
 
 .info-author-credit p {
   font-size: 7.1pt;
   margin: 0;
+  justify-self: end;
 }
 
 .info-footer-container {
-  position: relative;
+  /* position: relative; */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  margin-top: 2.5mm;
+  margin-bottom: 2.5mm;
 }
 
 .info-footer-background {
