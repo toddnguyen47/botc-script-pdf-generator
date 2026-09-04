@@ -25,12 +25,12 @@ export function CharacterSection({
   inlineJinxIcons,
   iconUrlTemplate,
 }: CharacterSectionProps) {
-  // const justifyContent =
-  //   characters.length > BALANCE_POINT
-  //     ? "space-between"
-  //     : characters.length % 2 === 0
-  //       ? "space-around"
-  //       : "flex-start";
+  const justifyContent =
+    characters.length > BALANCE_POINT
+      ? "space-between"
+      : characters.length % 2 === 0
+        ? "space-around"
+        : "flex-start";
 
   const midpoint = calculateMidpoint(characters);
 
@@ -40,8 +40,7 @@ export function CharacterSection({
         {title}
       </h2>
       <div className="character-list">
-        {/* <div className="character-column" style={{ justifyContent }}> */}
-        <div className="character-column">
+        <div className="character-column" style={{ justifyContent }}>
           {characters.slice(0, midpoint).map((char) => (
             <CharacterCard
               key={char.id}
@@ -57,8 +56,7 @@ export function CharacterSection({
             />
           ))}
         </div>
-        {/* <div className="character-column" style={{ justifyContent }}> */}
-        <div className="character-column">
+        <div className="character-column" style={{ justifyContent }}>
           {characters.slice(midpoint, characters.length).map((char) => (
             <CharacterCard
               key={char.id}
