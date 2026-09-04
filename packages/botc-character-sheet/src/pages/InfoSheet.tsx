@@ -40,12 +40,12 @@ export const InfoSheet = ({
           {displayNightOrder && !!firstNightOrder?.length && (
             <>
               <h4 className="info-sheet-section-title">First Night</h4>
-              <div class="info-sheet-section">
+              <div className="info-sheet-section">
                 <div className="icon-row">
                   {firstNightOrder.map((item) => (
                     <img
                       src={getImageSrc(item, iconUrlTemplate)}
-                      class="icon"
+                      className="icon"
                     ></img>
                   ))}
                 </div>
@@ -55,12 +55,12 @@ export const InfoSheet = ({
           {displayNightOrder && !!otherNightOrder?.length && (
             <>
               <h4 className="info-sheet-section-title">Other Nights</h4>
-              <div class="info-sheet-section">
+              <div className="info-sheet-section">
                 <div className="icon-row">
                   {otherNightOrder.map((item) => (
                     <img
                       src={getImageSrc(item, iconUrlTemplate)}
-                      class="icon"
+                      className="icon"
                     ></img>
                   ))}
                 </div>
@@ -71,10 +71,14 @@ export const InfoSheet = ({
           {!!fabledOrLoric?.length && (
             <>
               <h4 className="info-sheet-section-title">Fabled & Loric</h4>
-              <div class="info-sheet-section">
+              <div className="info-sheet-section">
                 {fabledOrLoric?.map((entry) => (
                   <div className="info-fabled-loric-entry">
-                    <img src={entry.image} alt={entry.name} class="icon"></img>
+                    <img
+                      src={entry.image}
+                      alt={entry.name}
+                      className="icon"
+                    ></img>
                     <div className="info-fabled-loric-text">
                       <p className="info-fabled-loric-name">{entry.name}</p>
                       <p className="info-fabled-loric-note">{entry.note}</p>
@@ -97,18 +101,18 @@ export const InfoSheet = ({
           {!!jinxes?.length && (
             <>
               <h4 className="info-sheet-section-title">Jinxes</h4>
-              <div class="info-sheet-section">
+              <div className="info-sheet-section">
                 {jinxes?.map((jinx) => (
                   <div className="info-jinx-entry">
                     <img
                       src={getImageSrc(jinx.characters[0], iconUrlTemplate)}
                       alt={jinx.text}
-                      class="icon"
+                      className="icon"
                     ></img>
                     <img
                       src={getImageSrc(jinx.characters[1], iconUrlTemplate)}
                       alt={jinx.text}
-                      class="icon"
+                      className="icon"
                     ></img>
                     <div className="info-jinx-text">
                       <p className="info-jinx-name">
@@ -127,13 +131,13 @@ export const InfoSheet = ({
               <h4 className="info-sheet-section-title">
                 Recommended Travellers
               </h4>
-              <div class="info-sheet-section">
+              <div className="info-sheet-section">
                 {travellers?.map((entry) => (
                   <div className="info-fabled-loric-entry">
                     <img
                       src={getImageSrc(entry, iconUrlTemplate)}
                       alt={entry.name}
-                      class="icon"
+                      className="icon"
                     ></img>
                     <div className="info-fabled-loric-text">
                       <p className="info-fabled-loric-name">{entry.name}</p>
