@@ -25,7 +25,7 @@
     calc(var(--title-margin-bottom)) -7mm;
   padding: 7mm 7mm 0mm 7mm;
 
-  max-width: 50%;
+  max-width: 80%;
   text-align: center;
   letter-spacing: var(--title-letter-spacing);
   word-spacing: var(--title-word-spacing);
