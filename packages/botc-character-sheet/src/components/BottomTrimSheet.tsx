@@ -17,11 +17,16 @@ export const BottomTrimSheet = ({
   const colors = normalizeColors(color);
   const gradient = createGradient(colors, 20);
   // const overlayBackground = createOverlayBackground(color, 180);
+  const appearanceClass =
+    options.appearance !== "normal" ? `appearance-${options.appearance}` : "";
+  const sheetClassName = ["bottom-trim-sheet", appearanceClass]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <PrintablePage dimensions={dimensions}>
       <div
-        className="bottom-trim-sheet"
+        className={sheetClassName}
         style={{
           transform: includeMargins ? "scale(0.952)" : undefined,
           "--header-gradient": gradient,
