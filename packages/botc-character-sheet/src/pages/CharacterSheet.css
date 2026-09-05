@@ -362,8 +362,8 @@
 }
 
 .sheet-footer {
-  margin-top: 2.5mm;
-  margin-bottom: 2.5mm;
+  padding-top: 2.5mm;
+  padding-bottom: 2.5mm;
   text-align: center;
   font-family: "Goudy Oldstyle", "Goudy", Georgia, serif;
   font-size: 9.8pt;
