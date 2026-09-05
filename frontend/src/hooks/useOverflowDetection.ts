@@ -4,8 +4,7 @@ import type {
   ParsedScript,
   PageDimensions,
 } from "botc-character-sheet";
-
-type Appearance = "normal" | "compact" | "super-compact" | "mega-compact";
+import { AppearanceLevel } from "botc-character-sheet";
 
 interface UseOverflowDetectionProps {
   options: ScriptOptions;
@@ -13,11 +12,11 @@ interface UseOverflowDetectionProps {
   script: ParsedScript | null;
 }
 
-const APPEARANCE_LEVELS: Appearance[] = [
-  "normal",
-  "compact",
-  "super-compact",
-  "mega-compact",
+const APPEARANCE_LEVELS: AppearanceLevel[] = [
+  AppearanceLevel.Normal,
+  AppearanceLevel.Compact,
+  AppearanceLevel.SuperCompact,
+  AppearanceLevel.MegaCompact,
 ];
 
 /**
@@ -29,7 +28,7 @@ export function useOverflowDetection({
   setOptions,
   script,
 }: UseOverflowDetectionProps) {
-  const lastCheckedAppearanceRef = useRef<Appearance | null>(null);
+  const lastCheckedAppearanceRef = useRef<AppearanceLevel | null>(null);
   const lastCheckedDimensionsRef = useRef<PageDimensions | null>(null);
   const lastCheckedScriptKey = useRef<String | null | undefined>(null);
   const isAdjustingRef = useRef(false);
@@ -45,10 +44,9 @@ export function useOverflowDetection({
     if (!script) return;
 
     const scriptKey = getScriptKey(script);
-    console.log(scriptKey);
     if (lastCheckedScriptKey.current !== scriptKey) {
       lastCheckedScriptKey.current = scriptKey;
-      setOptions((prev) => ({ ...prev, appearance: "normal" }));
+      setOptions((prev) => ({ ...prev, appearance: AppearanceLevel.Normal }));
     }
 
     // Debounce to allow DOM to settle after appearance changes

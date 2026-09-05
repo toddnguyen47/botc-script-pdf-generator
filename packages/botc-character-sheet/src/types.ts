@@ -49,6 +49,13 @@ export interface TitleStyle {
   customFontUrl: string;
 }
 
+export enum AppearanceLevel {
+  Normal = "normal",
+  Compact = "compact",
+  SuperCompact = "super-compact",
+  MegaCompact = "mega-compact",
+}
+
 export interface ScriptOptions {
   color: string | string[];
   logo: string;
@@ -60,7 +67,7 @@ export interface ScriptOptions {
   showSwirls: boolean;
   includeMargins: boolean;
   solidTitle: boolean;
-  appearance: "normal" | "compact" | "super-compact" | "mega-compact";
+  appearance: AppearanceLevel;
   overleaf: "backingSheet" | "infoSheet" | "none";
   showNightSheet: boolean;
   iconScale: number;

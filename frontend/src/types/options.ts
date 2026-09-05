@@ -1,10 +1,5 @@
 import { ScriptOptions, TitleStyle } from "botc-character-sheet";
 
-export type AppearanceLevel =
-  | "normal"
-  | "compact"
-  | "super-compact"
-  | "mega-compact";
 export type OverleafType = "none" | "backingSheet" | "infoSheet";
 export type PaperType = "A4" | "Letter";
 

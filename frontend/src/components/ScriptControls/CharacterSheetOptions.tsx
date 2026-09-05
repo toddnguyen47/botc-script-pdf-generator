@@ -1,6 +1,7 @@
 import { ScriptOptions } from "botc-character-sheet";
 import { Toggle, Select, Slider } from "../ui";
-import { AppearanceLevel, OverleafType } from "../../types/options";
+import { OverleafType } from "../../types/options";
+import { AppearanceLevel } from "botc-character-sheet";
 
 export type InlineJinxIconsMode = "none" | "primary" | "both";
 
@@ -33,10 +34,10 @@ export function CharacterSheetOptions({
         label="Sizing:"
         value={options.appearance}
         options={[
-          { value: "normal", label: "Normal" },
-          { value: "compact", label: "Compact" },
-          { value: "super-compact", label: "Super Compact" },
-          { value: "mega-compact", label: "Mega Compact" },
+          { value: AppearanceLevel.Normal, label: "Normal" },
+          { value: AppearanceLevel.Compact, label: "Compact" },
+          { value: AppearanceLevel.SuperCompact, label: "Super Compact" },
+          { value: AppearanceLevel.MegaCompact, label: "Mega Compact" },
         ]}
         onChange={(value) =>
           onOptionChange("appearance", value as AppearanceLevel)

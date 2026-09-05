@@ -30,7 +30,12 @@ import {
 import { mergeAndValidateOptions } from "./utils/optionsValidation";
 import type { ValidationIssue } from "./types/validation";
 import "./app.css";
-import { FancyDoc, ScriptOptions, TeensyDoc } from "botc-character-sheet";
+import {
+  FancyDoc,
+  ScriptOptions,
+  TeensyDoc,
+  AppearanceLevel,
+} from "botc-character-sheet";
 
 // Check if we're in view mode (URL pattern: /view/:id)
 function getViewModeId(): string | null {
@@ -188,16 +193,18 @@ function EditMode() {
   }, [rawScript, options, updateActiveScript]);
 
   // Auto-adjust icon scale when appearance changes
+  const iconScales: Record<AppearanceLevel, number> = {
+    [AppearanceLevel.Normal]: 1.7,
+    [AppearanceLevel.Compact]: 1.6,
+    [AppearanceLevel.SuperCompact]: 1.5,
+    [AppearanceLevel.MegaCompact]: 1.4,
+  };
+
   useEffect(() => {
-    if (options.appearance === "compact") {
-      setOptions((prev) => ({ ...prev, iconScale: 1.6 }));
-    } else if (options.appearance === "super-compact") {
-      setOptions((prev) => ({ ...prev, iconScale: 1.5 }));
-    } else if (options.appearance === "mega-compact") {
-      setOptions((prev) => ({ ...prev, iconScale: 1.4 }));
-    } else {
-      setOptions((prev) => ({ ...prev, iconScale: 1.7 }));
-    }
+    setOptions((prev) => ({
+      ...prev,
+      iconScale: iconScales[options.appearance],
+    }));
   }, [options.appearance]);
 
   // Auto-update title style defaults when title font changes
