@@ -31,7 +31,7 @@ export function useOverflowDetection({
 }: UseOverflowDetectionProps) {
   const lastCheckedAppearanceRef = useRef<Appearance | null>(null);
   const lastCheckedDimensionsRef = useRef<PageDimensions | null>(null);
-  const lastCheckedScriptName = useRef<String | null | undefined>(null);
+  const lastCheckedScriptKey = useRef<String | null | undefined>(null);
   const isAdjustingRef = useRef(false);
 
   // Reset detection when script changes
@@ -44,8 +44,10 @@ export function useOverflowDetection({
   useEffect(() => {
     if (!script) return;
 
-    if (lastCheckedScriptName.current !== script.metadata?.name) {
-      lastCheckedScriptName.current = script.metadata?.name;
+    const scriptKey = getScriptKey(script);
+    console.log(scriptKey);
+    if (lastCheckedScriptKey.current !== scriptKey) {
+      lastCheckedScriptKey.current = scriptKey;
       setOptions((prev) => ({ ...prev, appearance: "normal" }));
     }
 
@@ -99,4 +101,14 @@ export function useOverflowDetection({
 
     return () => clearTimeout(timeoutId);
   }, [options.appearance, script, setOptions, options.dimensions]);
+}
+
+function getScriptKey(script: ParsedScript | null): String {
+  if (script === null || script.metadata === null) {
+    return "";
+  }
+  return JSON.stringify({
+    name: script.metadata.name,
+    author: script.metadata.author ?? "",
+  });
 }
