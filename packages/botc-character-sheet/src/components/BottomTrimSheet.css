@@ -63,8 +63,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
-  padding-top: 2.5mm;
-  padding-bottom: 2.5mm;
+  padding-top: 3mm;
 }
 
 .info-footer-background {
