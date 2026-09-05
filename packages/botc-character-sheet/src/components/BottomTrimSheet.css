@@ -9,12 +9,15 @@
   color: #b85b21;
 }
 
-.bottom-trim-sheet .sheet-content {
-  padding-top: 8mm;
-  padding-left: 8mm;
-  padding-right: 8mm;
-  gap: 5mm;
+.bottom-trim-sheet .sheet-container {
+  padding: calc(5mm + var(--print-bleed)) calc(5mm + var(--print-bleed))
+    calc(3mm + var(--print-bleed)) calc(5mm + var(--print-bleed));
   flex: 1;
+  display: flex;
+}
+
+.bottom-trim-sheet .sheet-content {
+  gap: 5mm;
 }
 
 .spacer {
