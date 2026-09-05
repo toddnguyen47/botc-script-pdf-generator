@@ -105,7 +105,6 @@ export function CharacterSheet({
           className="character-sheet-background"
           // src="/images/parchment_texture_a4_lightened.jpg"
         ></img>
-        <Sidebar />
         <div className="sheet-container">
           <div className="sheet-content">
             <Header
@@ -232,18 +231,5 @@ function Header({
       </h1>
       {author && <h2 className="sheet-author">by {author}</h2>}
     </>
-  );
-}
-
-function Sidebar() {
-  // const overlayBackground = createOverlayBackground(color, 180);
-  return (
-    <div className="sidebar-container">
-      <div className="sidebar-background"></div>
-      {/* <div
-        className="sidebar-overlay"
-        style={{ background: overlayBackground }}
-      ></div> */}
-    </div>
   );
 }
