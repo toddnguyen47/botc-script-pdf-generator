@@ -202,6 +202,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 2.5mm;
 }
 
 .character-card {
@@ -209,7 +210,7 @@
   align-items: center;
   gap: 2.5mm;
   break-inside: avoid;
-  margin-bottom: 2.5mm;
+  /* margin-bottom: 2.5mm; */
 }
 
 .character-info {
@@ -284,15 +285,15 @@
   font-family:
     "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial, sans-serif;
   font-size: 8.8pt;
-  line-height: 1.2;
+  /* line-height: 1.2; */
   margin: 0;
   color: #b85b21;
   display: inline-block;
 }
 
 /* Compact appearance */
-.appearance-compact .character-card {
-  margin-bottom: 1mm;
+.appearance-compact .character-column {
+  gap: 1.4mm;
 }
 
 .appearance-compact .sheet-header span {
@@ -319,8 +320,8 @@
   max-height: 12mm;
 }
 
-.appearance-super-compact .character-card {
-  margin-bottom: 0.5mm;
+.appearance-super-compact .character-column {
+  gap: 1.2mm;
 }
 
 .appearance-super-compact .sheet-header span {
@@ -351,8 +352,8 @@
   max-height: 11mm;
 }
 
-.appearance-mega-compact .character-card {
-  margin-bottom: 0.3mm;
+.appearance-mega-compact .character-column {
+  gap: 1mm;
 }
 
 .appearance-mega-compact .inline-jinx-icon,
