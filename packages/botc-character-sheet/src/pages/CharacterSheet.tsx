@@ -106,70 +106,75 @@ export function CharacterSheet({
           // src="/images/parchment_texture_a4_lightened.jpg"
         ></img>
         <Sidebar color={color} />
-        <div className="sheet-content">
-          <Header
-            showSwirls={showSwirls}
-            showTitle={showTitle}
-            title={title}
-            author={author}
-            logo={showLogo ? logo : undefined}
-            solidHeader={solidTitle}
-          />
-
-          <div className="characters-grid">
-            {sections.map((section, i) => (
-              <>
-                <CharacterSection
-                  key={section.key}
-                  title={section.title.toUpperCase()}
-                  characters={section.chars}
-                  charNameColor={section.color}
-                  jinxes={jinxes}
-                  allCharacters={[
-                    ...characters.townsfolk,
-                    ...characters.outsider,
-                    ...characters.minion,
-                    ...characters.demon,
-                  ]}
-                  inlineJinxIcons={inlineJinxIcons}
-                  iconUrlTemplate={iconUrlTemplate}
-                />
-                {i < sections.length - 1 && (
-                  <img src="/images/divider.png" className="section-divider" />
-                )}
-              </>
-            ))}
-            {(jinxes.length > 0 || fabledOrLoric.length > 0) && (
-              <>
-                <img src="/images/divider.png" className="section-divider" />
-                <JinxesAndSpecial
-                  fabledAndLoric={fabledOrLoric}
-                  jinxes={jinxes}
-                  allCharacters={[
-                    ...characters.townsfolk,
-                    ...characters.outsider,
-                    ...characters.minion,
-                    ...characters.demon,
-                  ]}
-                  bootleggerRules={bootleggerRules}
-                  iconUrlTemplate={iconUrlTemplate}
-                />
-              </>
-            )}
-          </div>
-
-          <div className="sheet-footer">
-            <img
-              className="ccc-logo"
-              src="/images/ccc-parchment.png"
-              alt="Community Created Content"
+        <div className="sheet-container">
+          <div className="sheet-content">
+            <Header
+              showSwirls={showSwirls}
+              showTitle={showTitle}
+              title={title}
+              author={author}
+              logo={showLogo ? logo : undefined}
+              solidHeader={solidTitle}
             />
-            <div className="not-first-night">
-              <span className="asterisk">*</span>Not the first night
+
+            <div className="characters-grid">
+              {sections.map((section, i) => (
+                <>
+                  <CharacterSection
+                    key={section.key}
+                    title={section.title.toUpperCase()}
+                    characters={section.chars}
+                    charNameColor={section.color}
+                    jinxes={jinxes}
+                    allCharacters={[
+                      ...characters.townsfolk,
+                      ...characters.outsider,
+                      ...characters.minion,
+                      ...characters.demon,
+                    ]}
+                    inlineJinxIcons={inlineJinxIcons}
+                    iconUrlTemplate={iconUrlTemplate}
+                  />
+                  {i < sections.length - 1 && (
+                    <img
+                      src="/images/divider.png"
+                      className="section-divider"
+                    />
+                  )}
+                </>
+              ))}
+              {(jinxes.length > 0 || fabledOrLoric.length > 0) && (
+                <>
+                  <img src="/images/divider.png" className="section-divider" />
+                  <JinxesAndSpecial
+                    fabledAndLoric={fabledOrLoric}
+                    jinxes={jinxes}
+                    allCharacters={[
+                      ...characters.townsfolk,
+                      ...characters.outsider,
+                      ...characters.minion,
+                      ...characters.demon,
+                    ]}
+                    bootleggerRules={bootleggerRules}
+                    iconUrlTemplate={iconUrlTemplate}
+                  />
+                </>
+              )}
             </div>
-            <div className="author-credit">
-              <p>© Steven Medway bloodontheclocktower.com</p>
-              <p>Script template by John Forster ravenswoodstudio.xyz</p>
+
+            <div className="sheet-footer">
+              <img
+                className="ccc-logo"
+                src="/images/ccc-parchment.png"
+                alt="Community Created Content"
+              />
+              <div className="not-first-night">
+                <span className="asterisk">*</span>Not the first night
+              </div>
+              <div className="author-credit">
+                <p>© Steven Medway bloodontheclocktower.com</p>
+                <p>Script template by John Forster ravenswoodstudio.xyz</p>
+              </div>
             </div>
           </div>
         </div>

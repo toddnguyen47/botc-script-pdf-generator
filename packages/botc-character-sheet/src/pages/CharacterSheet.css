@@ -60,13 +60,17 @@
   text-shadow: 0.3mm 0.3mm 0.5mm rgba(0, 0, 0, 0.3);
 }
 
-.sheet-content {
+.sheet-container {
   position: relative;
   padding: calc(5mm + var(--print-bleed)) var(--print-bleed)
     calc(3mm + var(--print-bleed)) 0;
+  min-width: 0;
+  display: flex;
+}
+
+.sheet-content {
   display: flex;
   flex-direction: column;
-  min-width: 0;
 }
 
 .character-column-spacer {
