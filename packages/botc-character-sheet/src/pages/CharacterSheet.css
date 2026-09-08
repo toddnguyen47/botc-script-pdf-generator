@@ -430,6 +430,14 @@
   margin-top: 1mm;
 }
 
+.jinxes-section .section-title {
+  text-orientation: upright;
+  writing-mode: horizontal-tb;
+  letter-spacing: 0.6mm;
+  line-height: 1;
+  margin: 0;
+}
+
 .jinxes-list {
   margin-left: 8mm;
   display: flex;
