@@ -151,7 +151,6 @@
 .character-section {
   display: flex;
   break-inside: avoid;
-  min-height: 20mm;
 }
 
 .section-title {
