@@ -35,13 +35,13 @@
 .night-sheet-order {
   display: flex;
   flex-direction: column;
-  gap: 1mm;
+  gap: 1.5mm;
 }
 
 .night-sheet-entry {
   display: flex;
   align-items: center;
-  min-height: 9mm;
+  /* min-height: 9mm; */
 }
 
 .reminder-name {
@@ -88,12 +88,12 @@
   object-fit: contain;
   flex-shrink: 0;
   /* scale: calc(2 * var(--icon-scale, 1)); */
-  scale: 2;
+  scale: 1.6;
   margin-right: 3mm;
 }
 
 .night-sheet-entry > img.marker-icon {
-  scale: 2;
+  scale: 1.6;
 }
 
 .reminder-icon {
