@@ -61,6 +61,7 @@
 }
 
 .sheet-container {
+  --font-size-step-percentage: 0.07;
   position: relative;
   padding: calc(5mm + var(--print-bleed)) calc(5mm + var(--print-bleed))
     calc(3mm + var(--print-bleed)) var(--print-bleed);
@@ -154,6 +155,7 @@
 }
 
 .section-title {
+  --section-title-font-size: 11pt;
   font-family: "Dumbledor", serif;
   font-weight: bolder;
   /* padding: 0 calc(0.25 * var(--sidebar-width)); */
@@ -168,7 +170,7 @@
   text-orientation: upright;
   writing-mode: vertical-lr;
   letter-spacing: -0.6mm;
-  font-size: 11pt;
+  font-size: var(--section-title-font-size);
   font-weight: bolder;
   line-height: 2;
 
@@ -242,8 +244,9 @@
 }
 
 .character-name {
+  --character-name-font-size: 9.4pt;
   font-family: "PT Serif", "Goudy Old Style", "Goudy", Georgia, serif;
-  font-size: 9.4pt;
+  font-size: var(--character-name-font-size);
   font-weight: 700;
   margin: 0 0 0.5mm 0;
   color: #1a202c;
@@ -281,10 +284,11 @@
 }
 
 .character-ability {
+  --character-ability-font-size: 8.8pt;
   font-family:
     "Figtree", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial,
     sans-serif;
-  font-size: 8.8pt;
+  font-size: var(--character-ability-font-size);
   margin: 0;
   color: #b85b21;
   display: inline-block;
@@ -304,13 +308,44 @@
   max-height: 21mm;
 }
 
+.appearance-compact .character-name {
+  font-size: calc(
+    var(--character-name-font-size) * (1 - var(--font-size-step-percentage))
+  );
+}
+
+.appearance-compact .character-ability {
+  font-size: calc(
+    var(--character-ability-font-size) * (1 - var(--font-size-step-percentage))
+  );
+}
+
+.appearance-compact .section-title {
+  font-size: calc(
+    var(--section-title-font-size) * (1 - (var(--font-size-step-percentage)))
+  );
+}
+
 /* Super-compact appearance */
 .appearance-super-compact .character-ability {
-  font-size: 7.7pt;
+  font-size: calc(
+    var(--character-ability-font-size) *
+      (1 - (var(--font-size-step-percentage) * 2))
+  );
 }
 
 .appearance-super-compact .character-name {
-  font-size: 8.7pt;
+  font-size: calc(
+    var(--character-name-font-size) *
+      (1 - (var(--font-size-step-percentage) * 2))
+  );
+}
+
+.appearance-super-compact .section-title {
+  font-size: calc(
+    var(--section-title-font-size) *
+      (1 - (var(--font-size-step-percentage) * 2))
+  );
 }
 
 .appearance-super-compact .character-icon,
@@ -334,11 +369,24 @@
 
 /* Mega-compact appearance */
 .appearance-mega-compact .character-ability {
-  font-size: 6.8pt;
+  font-size: calc(
+    var(--character-ability-font-size) *
+      (1 - (var(--font-size-step-percentage) * 3))
+  );
 }
 
 .appearance-mega-compact .character-name {
-  font-size: 7.5pt;
+  font-size: calc(
+    var(--character-name-font-size) *
+      (1 - (var(--font-size-step-percentage) * 3))
+  );
+}
+
+.appearance-mega-compact .section-title {
+  font-size: calc(
+    var(--section-title-font-size) *
+      (1 - (var(--font-size-step-percentage) * 3))
+  );
 }
 
 .appearance-mega-compact .sheet-header span {
