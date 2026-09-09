@@ -57,7 +57,7 @@
 }
 
 .night-sheet-entry .reminder-name {
-  width: 25%; /* 2/12 */
+  width: 20%;
   padding-right: 1mm;
 }
 
@@ -70,9 +70,9 @@
 }
 
 .night-sheet-entry .reminder-text {
-  width: 75%; /* 9/12 */
   border-left: 1px solid #b85b21;
   padding-left: 3mm;
+  flex: 1;
 }
 
 .night-sheet-entry p {
