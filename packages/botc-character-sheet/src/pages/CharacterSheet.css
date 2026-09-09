@@ -133,7 +133,7 @@
 }
 
 .sheet-author {
-  font-family: "Goudy Oldstyle", "Goudy", Georgia, serif;
+  font-family: "Goudy Old Style", "Goudy", Georgia, serif;
   font-size: 9.8pt;
   font-weight: bold;
   text-align: center;
@@ -242,7 +242,7 @@
 }
 
 .character-name {
-  font-family: "PT Serif", "Goudy Oldstyle", "Goudy", Georgia, serif;
+  font-family: "PT Serif", "Goudy Old Style", "Goudy", Georgia, serif;
   font-size: 9.8pt;
   font-weight: 700;
   margin: 0 0 0.5mm 0;
@@ -371,7 +371,7 @@
   padding-top: 3mm;
   padding-left: calc(5mm + var(--print-bleed));
   text-align: center;
-  font-family: "Goudy Oldstyle", "Goudy", Georgia, serif;
+  font-family: "Goudy Old Style", "Goudy", Georgia, serif;
   font-size: 9.8pt;
   color: #b34d00;
   opacity: 0.7;
@@ -403,7 +403,7 @@
   /* position: absolute; */
   /* bottom: 3mm; */
   /* right: 3mm; */
-  font-family: "Goudy Oldstyle", "Goudy", Georgia, serif;
+  font-family: "Goudy Old Style", "Goudy", Georgia, serif;
   font-size: 9.1pt;
   color: #b34d00;
   opacity: 0.6;
