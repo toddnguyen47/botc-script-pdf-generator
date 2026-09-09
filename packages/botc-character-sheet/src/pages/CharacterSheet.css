@@ -242,8 +242,8 @@
 }
 
 .character-name {
-  font-family: "Goudy Oldstyle", "Goudy", Georgia, serif;
-  font-size: 9.8pt;
+  font-family: "PT Serif", "Goudy Oldstyle", "Goudy", Georgia, serif;
+  font-size: 9.4pt;
   font-weight: 700;
   margin: 0 0 0.5mm 0;
   color: #1a202c;
@@ -282,7 +282,8 @@
 
 .character-ability {
   font-family:
-    "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial, sans-serif;
+    "Figtree", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial,
+    sans-serif;
   font-size: 8.8pt;
   margin: 0;
   color: #b85b21;
@@ -309,7 +310,7 @@
 }
 
 .appearance-super-compact .character-name {
-  font-size: 9.1pt;
+  font-size: 8.7pt;
 }
 
 .appearance-super-compact .character-icon,
@@ -337,7 +338,7 @@
 }
 
 .appearance-mega-compact .character-name {
-  font-size: 7.9pt;
+  font-size: 7.5pt;
 }
 
 .appearance-mega-compact .sheet-header span {
@@ -419,8 +420,8 @@
 .setup-ability {
   display: inline-block; /* Keep it together */
   white-space: normal; /* Allow internal wrapping if it's long */
-  font-family:
-    "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial, sans-serif;
+  /* font-family:
+    "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial, sans-serif; */
 }
 
 .jinxes-section {

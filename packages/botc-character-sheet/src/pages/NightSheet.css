@@ -46,13 +46,14 @@
 
 .reminder-name {
   font-family:
+    "PT Serif",
     "Goudy Old Style",
     Goudy Oldstyle,
     Goudy,
     Georgia,
     serif;
   font-weight: 700;
-  font-size: 9.8pt;
+  font-size: 9pt;
 }
 
 .night-sheet-entry .reminder-name {
@@ -62,7 +63,8 @@
 
 .reminder-text {
   font-family:
-    "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial, sans-serif;
+    "Figtree", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial,
+    sans-serif;
   font-size: 8.5pt;
   line-height: 1.16;
 }
@@ -77,10 +79,10 @@
   margin: 0;
 }
 
-.night-sheet-entry p strong,
+/* .night-sheet-entry p strong,
 .night-sheet-entry .reminder-text strong {
   font-family: "PT Sans Bold";
-}
+} */
 
 .night-sheet-entry > img {
   width: 7mm;

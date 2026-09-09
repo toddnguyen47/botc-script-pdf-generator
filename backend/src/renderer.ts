@@ -103,42 +103,6 @@ function getFontFaces(assetBase: string): string {
       font-family: 'Goudy Old Style';
       src: url("${assetBase}/fonts/GoudyOldStyle/GoudyOldStyle.ttf");
     }
-    @font-face {
-      font-family: 'Asap Condensed';
-      src: url("${assetBase}/fonts/AsapCondensed/AsapCondensed-Regular.ttf");
-    }
-    @font-face {
-      font-family: 'Asap Condensed Bold';
-      src: url("${assetBase}/fonts/AsapCondensed/AsapCondensed-Bold.ttf");
-    }
-    @font-face {
-      font-family: 'Spline Sans';
-      src: url("${assetBase}/fonts/Spline_Sans/SplineSans-Regular.ttf");
-    }
-    @font-face {
-      font-family: 'Spline Sans Medium';
-      src: url("${assetBase}/fonts/Spline_Sans/SplineSans-Medium.ttf");
-    }
-    @font-face {
-      font-family: 'Spline Sans Bold';
-      src: url("${assetBase}/fonts/Spline_Sans/SplineSans-Bold.ttf");
-    }
-    @font-face {
-      font-family: 'PT Sans';
-      src: url("${assetBase}/fonts/PT/PT_Sans/PTSans-Regular.ttf");
-    }
-    @font-face {
-      font-family: 'PT Sans Bold';
-      src: url("${assetBase}/fonts/PT/PT_Sans/PTSans-Bold.ttf");
-    }
-    @font-face {
-      font-family: 'PT Serif';
-      src: url("${assetBase}/fonts/PT/PT_Serif/PTSerif-Regular.ttf");
-    }
-    @font-face {
-      font-family: 'PT Serif Bold';
-      src: url("${assetBase}/fonts/PT/PT_Serif/PTSerif-Bold.ttf");
-    }
   `;
 }
 
