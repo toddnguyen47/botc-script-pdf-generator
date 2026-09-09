@@ -46,12 +46,7 @@
 
 .reminder-name {
   font-family:
-    "PT Serif",
-    "Goudy Old Style",
-    Goudy Oldstyle,
-    Goudy,
-    Georgia,
-    serif;
+    "PT Serif", "Goudy Oldstyle", "Goudy", Georgia, serif;
   font-weight: 700;
   font-size: 9pt;
 }

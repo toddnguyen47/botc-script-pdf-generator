@@ -116,7 +116,7 @@ function CharacterCard({
         />
       </div>
       <div className="character-info">
-        <h3 className="character-name" style={{ color: color }}>
+        <div className="character-name" style={{ color: color }}>
           <span
             style={{
               backgroundColor: `color-mix(in srgb, #FFFF00 40%, white)`,
@@ -140,7 +140,7 @@ function CharacterCard({
               })}
             </span>
           )}
-        </h3>
+        </div>
         <p className="character-ability" style={{ color: color }}>
           {renderAbility(character.ability)}
         </p>
