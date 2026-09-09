@@ -242,8 +242,8 @@
 }
 
 .character-name {
-  font-family: "Crimson Text", "Goudy Old Style", "Goudy", Georgia, serif;
-  font-size: 9.8pt;
+  font-family: "PT Serif", "Goudy Old Style", "Goudy", Georgia, serif;
+  font-size: 9.4pt;
   font-weight: 700;
   margin: 0 0 0.5mm 0;
   color: #1a202c;
@@ -310,7 +310,7 @@
 }
 
 .appearance-super-compact .character-name {
-  font-size: 9.1pt;
+  font-size: 8.7pt;
 }
 
 .appearance-super-compact .character-icon,
@@ -338,7 +338,7 @@
 }
 
 .appearance-mega-compact .character-name {
-  font-size: 7.9pt;
+  font-size: 7.5pt;
 }
 
 .appearance-mega-compact .sheet-header span {
