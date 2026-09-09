@@ -79,17 +79,18 @@
 } */
 
 .night-sheet-entry > img {
+  --night-sheet-entry-img-scale: 1.7;
   width: 7mm;
   height: 7mm;
   object-fit: contain;
   flex-shrink: 0;
   /* scale: calc(2 * var(--icon-scale, 1)); */
-  scale: 1.6;
+  scale: var(--night-sheet-entry-img-scale);
   margin-right: 3mm;
 }
 
 .night-sheet-entry > img.marker-icon {
-  scale: 1.6;
+  scale: var(--night-sheet-entry-img-scale);
 }
 
 .reminder-icon {
