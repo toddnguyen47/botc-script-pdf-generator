@@ -59,7 +59,7 @@
   font-family:
     "Figtree", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial,
     sans-serif;
-  font-size: 8.5pt;
+  font-size: 9pt;
   line-height: 1.16;
 }
 
@@ -79,14 +79,14 @@
 } */
 
 .night-sheet-entry > img {
-  --night-sheet-entry-img-scale: 1.7;
+  --night-sheet-entry-img-scale: 1.8;
   width: 7mm;
   height: 7mm;
   object-fit: contain;
   flex-shrink: 0;
   /* scale: calc(2 * var(--icon-scale, 1)); */
   scale: var(--night-sheet-entry-img-scale);
-  margin-right: 3mm;
+  margin-right: 4mm;
 }
 
 .night-sheet-entry > img.marker-icon {
