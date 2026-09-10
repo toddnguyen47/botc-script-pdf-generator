@@ -31,5 +31,3 @@ CLAUDE.md
 api/*.js
 
 frontend/public/fonts/LHF_Unlovable.ttf
-
-.pre-commit-config.yaml
