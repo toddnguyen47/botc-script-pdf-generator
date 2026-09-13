@@ -167,7 +167,7 @@
   font-family: "Dumbledor", serif;
   font-weight: bolder;
   /* padding: 0 calc(0.25 * var(--sidebar-width)); */
-  margin-left: 2mm;
+  /* margin-left: 2mm; */
   margin-right: 4mm;
   color: #000000;
   /* margin: -2mm 0 -2mm calc(-1 * var(--sidebar-width)); */
