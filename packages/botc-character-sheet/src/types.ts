@@ -40,6 +40,7 @@ export interface NightOrders {
 
 export interface TitleStyle {
   font: string;
+  fontSize: number;
   letterSpacing: number;
   wordSpacing: number;
   lineHeight: number;

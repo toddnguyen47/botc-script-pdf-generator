@@ -92,6 +92,7 @@ export function CharacterSheet({
             "--header-gradient": gradient,
             "--sidebar-width": options.teensy ? "10mm" : "15mm",
             "--title-font": options.titleStyle.font,
+            "--title-font-size": `${options.titleStyle.fontSize}pt`,
             "--title-letter-spacing": `${options.titleStyle.letterSpacing}mm`,
             "--title-word-spacing": `${options.titleStyle.wordSpacing}mm`,
             "--title-line-height": `${options.titleStyle.lineHeight}mm`,

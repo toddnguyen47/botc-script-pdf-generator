@@ -30,6 +30,7 @@ export const TITLE_FONT_DEFAULTS: Record<
   Omit<TitleStyle, "font" | "customFontUrl">
 > = {
   "Alice in Wonderland": {
+    fontSize: 32,
     letterSpacing: -0.6,
     wordSpacing: 0,
     lineHeight: 11,
@@ -38,6 +39,7 @@ export const TITLE_FONT_DEFAULTS: Record<
     marginBottom: 0,
   },
   Anglican: {
+    fontSize: 32,
     letterSpacing: -0.2,
     wordSpacing: 0,
     lineHeight: 11,
@@ -46,6 +48,7 @@ export const TITLE_FONT_DEFAULTS: Record<
     marginBottom: 0,
   },
   "Canterbury Regular": {
+    fontSize: 32,
     letterSpacing: -0.6,
     wordSpacing: 0,
     lineHeight: 11,
@@ -54,6 +57,7 @@ export const TITLE_FONT_DEFAULTS: Record<
     marginBottom: 0,
   },
   Dumbledor: {
+    fontSize: 32,
     letterSpacing: -0.2,
     wordSpacing: 0,
     lineHeight: 11,
@@ -62,6 +66,7 @@ export const TITLE_FONT_DEFAULTS: Record<
     marginBottom: 0,
   },
   "Utm Agin": {
+    fontSize: 32,
     letterSpacing: -0.6,
     wordSpacing: 0,
     lineHeight: 11,
@@ -70,6 +75,7 @@ export const TITLE_FONT_DEFAULTS: Record<
     marginBottom: 2,
   },
   "Waters Gothic": {
+    fontSize: 32,
     letterSpacing: 0,
     wordSpacing: 0,
     lineHeight: 17,
@@ -102,6 +108,7 @@ export const DEFAULT_OPTIONS: ScriptOptions = {
   iconUrlTemplate: "/images/icons/{id}.webp",
   titleStyle: {
     font: "Utm Agin",
+    fontSize: 32,
     letterSpacing: -0.6,
     wordSpacing: 0,
     lineHeight: 11,

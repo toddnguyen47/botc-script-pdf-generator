@@ -33,6 +33,27 @@ export function FontOptions({
       <div>
         <div className="form-control">
           <label className="form-control-label">
+            <span className="form-control-text">Title Font Size (in pt)</span>
+            <input
+              type="number"
+              min="1"
+              step="0.1"
+              value={titleStyle.fontSize}
+              placeholder="Title Font Size"
+              onInput={(e) =>
+                onTitleStyleChange(
+                  "fontSize",
+                  parseFloat((e.target as HTMLInputElement).value) || 0,
+                )
+              }
+              className="text-input"
+            />
+          </label>
+        </div>
+      </div>
+      <div>
+        <div className="form-control">
+          <label className="form-control-label">
             <span className="form-control-text">Custom Font URL</span>
             <input
               type="text"
