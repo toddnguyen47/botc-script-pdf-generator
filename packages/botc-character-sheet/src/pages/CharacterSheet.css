@@ -66,7 +66,9 @@
   position: relative;
   /* padding: calc(5mm + var(--print-bleed)) calc(5mm + var(--print-bleed))
     calc(3mm + var(--print-bleed)) var(--print-bleed); */
-  padding: calc(3mm + var(--print-bleed, 1mm));
+  padding: calc(5mm + var(--print-bleed, 1mm))
+    calc(3mm + var(--print-bleed, 1mm)) calc(3mm + var(--print-bleed, 1mm))
+    calc(3mm + var(--print-bleed, 1mm));
   min-width: 0;
   display: flex;
 }
@@ -147,7 +149,7 @@
   font-weight: bold;
   text-align: center;
   /* margin: -5mm 0 3mm 0; */
-  margin-bottom: 3mm;
+  margin-bottom: 5mm;
   color: #333;
 }
 
@@ -522,6 +524,8 @@
 
 .sheet-footer-container .section-title {
   text-align: start;
+  color: #b34d00;
+  letter-spacing: -0.2mm;
 }
 
 /* .jinxes-section .section-title {
