@@ -63,8 +63,9 @@
 .sheet-container {
   --font-size-step-percentage: 0.06;
   position: relative;
-  padding: calc(5mm + var(--print-bleed)) calc(5mm + var(--print-bleed))
-    calc(3mm + var(--print-bleed)) var(--print-bleed);
+  /* padding: calc(5mm + var(--print-bleed)) calc(5mm + var(--print-bleed))
+    calc(3mm + var(--print-bleed)) var(--print-bleed); */
+  padding: calc(3mm + var(--print-bleed, 1mm));
   min-width: 0;
   display: flex;
 }
@@ -85,16 +86,18 @@
 
 .sheet-header {
   text-align: center;
-  margin: 0 0 4mm 0;
-  padding: 0 10mm;
+  /* margin: 0 0 4mm 0;
+  padding: 0 10mm; */
   display: flex;
   align-items: center;
   justify-content: center;
   width: fit-content;
   align-self: center;
+  gap: 3mm;
 }
 
 .sheet-header span {
+  --min-sheet-header-span-font-size: 32pt;
   font-weight: lighter;
   letter-spacing: var(--title-letter-spacing);
   filter: drop-shadow(2px 0px 0px #cb8b);
@@ -109,10 +112,14 @@
   -webkit-text-fill-color: transparent;
   font-family: var(--title-font), serif;
   font-weight: 100;
-  font-size: 39.7pt;
-  padding: 4mm 8mm;
+  /* font-size: 39.7pt; */
+  font-size: calc(
+    var(--min-sheet-header-span-font-size, 1) *
+      (1 + var(--font-size-step-percentage) * 3)
+  );
+  /* padding: 4mm 8mm;
   margin-left: -8mm;
-  margin-right: -8mm;
+  margin-right: -8mm; */
   mix-blend-mode: multiply;
 }
 
@@ -134,11 +141,12 @@
 }
 
 .sheet-author {
-  font-family: "Goudy Old Style", "Goudy", Georgia, serif;
-  font-size: 9.8pt;
+  font-family: "PT Serif", "Goudy Old Style", "Goudy", Georgia, serif;
+  font-size: 10pt;
   font-weight: bold;
   text-align: center;
-  margin: -5mm 0 3mm 0;
+  /* margin: -5mm 0 3mm 0; */
+  margin-bottom: 3mm;
   color: #333;
 }
 
@@ -267,17 +275,17 @@
   display: inline-flex;
   gap: 0.5mm;
   align-items: center;
-  margin-left: 1mm;
-  margin-top: -1mm;
+  margin-left: 2mm;
+  /* margin-top: -1mm; */
 }
 
 .inline-jinx-icon,
 .inline-jinx-icon-placeholder {
-  width: 5mm;
-  height: 5mm;
+  width: 3mm;
+  height: 3mm;
   object-fit: contain;
   filter: drop-shadow(0.5px 0.5px 0.5px #0004);
-  scale: var(--icon-scale, 1);
+  scale: calc(2 * var(--icon-scale, 1));
 }
 
 .inline-jinx-icon-placeholder {
@@ -311,7 +319,11 @@
 }
 
 .appearance-compact .sheet-header span {
-  font-size: 36.9pt;
+  /* font-size: 36.9pt; */
+  font-size: calc(
+    var(--min-sheet-header-span-font-size, 1) *
+      (1 + var(--font-size-step-percentage) * 2)
+  );
 }
 
 .appearance-compact .script-logo {
@@ -366,7 +378,11 @@
 }
 
 .appearance-super-compact .sheet-header span {
-  font-size: 34pt;
+  /* font-size: 34pt; */
+  font-size: calc(
+    var(--min-sheet-header-span-font-size, 1) *
+      (1 + var(--font-size-step-percentage) * 1)
+  );
 }
 
 .appearance-super-compact .script-logo {
@@ -395,7 +411,8 @@
 }
 
 .appearance-mega-compact .sheet-header span {
-  font-size: 31.2pt;
+  /* font-size: 31.2pt; */
+  font-size: var(--min-sheet-header-span-font-size, 1);
 }
 
 /* .appearance-mega-compact .character-icon,
@@ -424,8 +441,8 @@
   padding-top: 3mm;
   padding-left: calc(5mm + var(--print-bleed));
   text-align: center;
-  font-family: "Goudy Old Style", "Goudy", Georgia, serif;
-  font-size: 9.8pt;
+  font-family: "PT Serif", "Goudy Old Style", "Goudy", Georgia, serif;
+  font-size: 9pt;
   color: #b34d00;
   opacity: 0.7;
 
@@ -535,7 +552,7 @@
   width: 3.5mm;
   height: 3.5mm;
   object-fit: contain;
-  scale: var(--icon-scale, 1);
+  scale: calc(1.8 * var(--icon-scale, 1));
 }
 
 .jinx-icon-placeholder {
@@ -560,7 +577,7 @@
     "Figtree", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial,
     sans-serif;
   font-size: 7.4pt;
-  margin: 0;
+  margin: 0 0 0 1mm;
   color: #b34d00;
   padding-top: 0.5mm;
 }

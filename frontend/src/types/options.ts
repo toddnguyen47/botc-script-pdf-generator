@@ -1,4 +1,8 @@
-import { ScriptOptions, TitleStyle } from "botc-character-sheet";
+import {
+  ScriptOptions,
+  TitleStyle,
+  AppearanceLevel,
+} from "botc-character-sheet";
 
 export type OverleafType = "none" | "backingSheet" | "infoSheet";
 export type PaperType = "A4" | "Letter";
@@ -63,12 +67,12 @@ export const TITLE_FONT_DEFAULTS: Record<
     lineHeight: 11,
     backLineHeight: 23,
     marginTop: -2,
-    marginBottom: 0,
+    marginBottom: 2,
   },
   "Waters Gothic": {
     letterSpacing: 0,
     wordSpacing: 0,
-    lineHeight: 12.5,
+    lineHeight: 17,
     backLineHeight: 28,
     marginTop: 0,
     marginBottom: -3,
@@ -86,7 +90,7 @@ export const DEFAULT_OPTIONS: ScriptOptions = {
   showSwirls: true,
   includeMargins: false,
   solidTitle: false,
-  appearance: "normal",
+  appearance: AppearanceLevel.Normal,
   overleaf: "backingSheet",
   showNightSheet: true,
   iconScale: 1.7,
