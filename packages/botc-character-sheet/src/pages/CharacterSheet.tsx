@@ -96,7 +96,7 @@ export function CharacterSheet({
             "--title-line-height": `${options.titleStyle.lineHeight}mm`,
             "--title-margin-top": `${options.titleStyle.marginTop}mm`,
             "--title-margin-bottom": `${options.titleStyle.marginBottom}mm`,
-            "--icon-scale": (iconScale / 1.7).toString(),
+            "--icon-scale": iconScale.toString(),
             transform: includeMargins ? "scale(0.952)" : undefined,
           } as CSSProperties
         }

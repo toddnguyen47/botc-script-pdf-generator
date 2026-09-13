@@ -61,7 +61,7 @@
 }
 
 .sheet-container {
-  --font-size-step-percentage: 0.07;
+  --font-size-step-percentage: 0.06;
   position: relative;
   padding: calc(5mm + var(--print-bleed)) calc(5mm + var(--print-bleed))
     calc(3mm + var(--print-bleed)) var(--print-bleed);
@@ -155,12 +155,12 @@
 }
 
 .section-title {
-  --section-title-font-size: 11pt;
+  --min-section-title-font-size: 9pt;
   font-family: "Dumbledor", serif;
   font-weight: bolder;
   /* padding: 0 calc(0.25 * var(--sidebar-width)); */
   margin-left: 2mm;
-  margin-right: 3mm;
+  margin-right: 4mm;
   color: #000000;
   /* margin: -2mm 0 -2mm calc(-1 * var(--sidebar-width)); */
   /* min-width: var(--sidebar-width); */
@@ -170,7 +170,10 @@
   text-orientation: upright;
   writing-mode: vertical-lr;
   letter-spacing: -0.6mm;
-  font-size: var(--section-title-font-size);
+  font-size: calc(
+    var(--min-section-title-font-size) *
+      (1 + var(--font-size-step-percentage) * 3)
+  );
   font-weight: bolder;
   line-height: 2;
 
@@ -194,8 +197,8 @@
 .character-list {
   flex: 1 1 0px;
   display: flex;
-  margin-left: 5mm;
-  gap: 5mm;
+  /* margin-left: 5mm; */
+  gap: 4mm;
 }
 
 .character-column {
@@ -227,11 +230,13 @@
 
 .character-icon,
 .character-icon-placeholder {
-  width: 13mm;
-  max-height: 13mm;
+  /* width: 13mm; */
+  /* max-height: 13mm; */
+  width: 9mm;
+  max-height: 9mm;
   object-fit: contain;
   filter: drop-shadow(1px 1px 2px #0004);
-  scale: calc(1.7 * var(--icon-scale, 1));
+  scale: var(--icon-scale, 1);
 }
 
 .character-icon-placeholder {
@@ -244,9 +249,12 @@
 }
 
 .character-name {
-  --character-name-font-size: 9.4pt;
+  --min-character-name-font-size: 9pt;
   font-family: "PT Serif", "Goudy Old Style", "Goudy", Georgia, serif;
-  font-size: var(--character-name-font-size);
+  font-size: calc(
+    var(--min-character-name-font-size) *
+      (1 + (var(--font-size-step-percentage) * 3))
+  );
   font-weight: 700;
   margin: 0 0 0.5mm 0;
   color: #1a202c;
@@ -269,7 +277,7 @@
   height: 5mm;
   object-fit: contain;
   filter: drop-shadow(0.5px 0.5px 0.5px #0004);
-  scale: calc(1.7 * var(--icon-scale, 1));
+  scale: var(--icon-scale, 1);
 }
 
 .inline-jinx-icon-placeholder {
@@ -284,11 +292,14 @@
 }
 
 .character-ability {
-  --character-ability-font-size: 8.8pt;
+  --min-character-ability-font-size: 8pt;
   font-family:
     "Figtree", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial,
     sans-serif;
-  font-size: var(--character-ability-font-size);
+  font-size: calc(
+    var(--min-character-ability-font-size) *
+      (1 + (var(--font-size-step-percentage) * 3))
+  );
   margin: 0;
   color: #b85b21;
   display: inline-block;
@@ -308,51 +319,47 @@
   max-height: 21mm;
 }
 
-.appearance-compact .character-name {
+.appearance-compact .character-ability {
   font-size: calc(
-    var(--character-name-font-size) * (1 - var(--font-size-step-percentage))
+    var(--min-character-ability-font-size) *
+      (1 + (var(--font-size-step-percentage) * 2))
   );
 }
 
-.appearance-compact .character-ability {
+.appearance-compact .character-name {
   font-size: calc(
-    var(--character-ability-font-size) * (1 - var(--font-size-step-percentage))
+    var(--min-character-name-font-size) *
+      (1 + (var(--font-size-step-percentage) * 2))
   );
 }
 
 .appearance-compact .section-title {
   font-size: calc(
-    var(--section-title-font-size) * (1 - (var(--font-size-step-percentage)))
+    var(--min-section-title-font-size) *
+      (1 + var(--font-size-step-percentage) * 2)
   );
 }
 
 /* Super-compact appearance */
 .appearance-super-compact .character-ability {
   font-size: calc(
-    var(--character-ability-font-size) *
-      (1 - (var(--font-size-step-percentage) * 2))
+    var(--min-character-ability-font-size) *
+      (1 + (var(--font-size-step-percentage) * 1))
   );
 }
 
 .appearance-super-compact .character-name {
   font-size: calc(
-    var(--character-name-font-size) *
-      (1 - (var(--font-size-step-percentage) * 2))
+    var(--min-character-name-font-size) *
+      (1 + (var(--font-size-step-percentage) * 1))
   );
 }
 
-.appearance-super-compact .section-title {
-  font-size: calc(
-    var(--section-title-font-size) *
-      (1 - (var(--font-size-step-percentage) * 2))
-  );
-}
-
-.appearance-super-compact .character-icon,
+/* .appearance-super-compact .character-icon,
 .appearance-super-compact .character-icon-placeholder {
   width: 12mm;
   max-height: 12mm;
-}
+} */
 
 .appearance-super-compact .character-column {
   gap: 1.2mm;
@@ -367,48 +374,46 @@
   max-height: 19.5mm;
 }
 
+.appearance-super-compact .section-title {
+  font-size: calc(
+    var(--min-section-title-font-size) *
+      (1 + var(--font-size-step-percentage) * 1)
+  );
+}
+
 /* Mega-compact appearance */
 .appearance-mega-compact .character-ability {
-  font-size: calc(
-    var(--character-ability-font-size) *
-      (1 - (var(--font-size-step-percentage) * 3))
-  );
+  font-size: var(--min-character-ability-font-size);
 }
 
 .appearance-mega-compact .character-name {
-  font-size: calc(
-    var(--character-name-font-size) *
-      (1 - (var(--font-size-step-percentage) * 3))
-  );
+  font-size: var(--min-character-name-font-size);
 }
 
 .appearance-mega-compact .section-title {
-  font-size: calc(
-    var(--section-title-font-size) *
-      (1 - (var(--font-size-step-percentage) * 3))
-  );
+  font-size: var(--min-section-title-font-size);
 }
 
 .appearance-mega-compact .sheet-header span {
   font-size: 31.2pt;
 }
 
-.appearance-mega-compact .character-icon,
+/* .appearance-mega-compact .character-icon,
 .appearance-mega-compact .character-icon-placeholder {
   width: 11mm;
   max-height: 11mm;
-}
+} */
 
 .appearance-mega-compact .character-column {
   gap: 1mm;
 }
 
-.appearance-mega-compact .inline-jinx-icon,
+/* .appearance-mega-compact .inline-jinx-icon,
 .appearance-mega-compact .inline-jinx-icon-placeholder {
   width: 4mm;
   height: 4mm;
   font-size: 3.7pt;
-}
+} */
 
 .appearance-mega-compact .script-logo {
   max-width: 29mm;
@@ -475,7 +480,6 @@
 .jinxes-section {
   display: flex;
   break-inside: avoid;
-  margin-top: 1mm;
 }
 
 .jinxes-section .section-title {
@@ -484,6 +488,7 @@
   letter-spacing: 0.6mm;
   line-height: 1;
   margin: 0;
+  align-self: center;
 }
 
 .jinxes-list {
@@ -530,7 +535,7 @@
   width: 3.5mm;
   height: 3.5mm;
   object-fit: contain;
-  scale: calc(2.8 * var(--icon-scale, 1));
+  scale: var(--icon-scale, 1);
 }
 
 .jinx-icon-placeholder {
