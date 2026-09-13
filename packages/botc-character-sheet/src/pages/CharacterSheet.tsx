@@ -154,7 +154,7 @@ export function CharacterSheet({
 
             <div className="sheet-footer-container">
               {jinxesOrLoricExists && (
-                <div className="section-title">JINXES</div>
+                <div className="section-title">J L F</div>
               )}
 
               <div className="sheet-footer-item-container">
