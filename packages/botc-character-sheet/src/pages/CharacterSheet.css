@@ -62,6 +62,7 @@
 
 .sheet-container {
   --font-size-step-percentage: 0.06;
+  --section-dividier-gap: 2mm;
   position: relative;
   /* padding: calc(5mm + var(--print-bleed)) calc(5mm + var(--print-bleed))
     calc(3mm + var(--print-bleed)) var(--print-bleed); */
@@ -153,7 +154,7 @@
 .characters-grid {
   display: flex;
   flex-direction: column;
-  gap: 2.5mm;
+  gap: var(--section-dividier-gap);
   flex: 1;
 }
 
@@ -200,6 +201,11 @@
 
   filter: brightness(0) saturate(100%) invert(87%) sepia(13%) saturate(430%)
     hue-rotate(335deg) brightness(105%) contrast(88%);
+}
+
+.section-divider-solo {
+  margin-top: var(--section-dividier-gap);
+  margin-bottom: var(--section-dividier-gap);
 }
 
 .character-list {
@@ -437,6 +443,17 @@
   max-height: 18mm;
 }
 
+.sheet-footer-container {
+  display: flex;
+  flex: 1;
+}
+
+.sheet-footer-item-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 .sheet-footer {
   padding-top: 3mm;
   padding-left: calc(5mm + var(--print-bleed));
@@ -449,6 +466,10 @@
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
+}
+
+.sheet-footer-spacer {
+  flex: 1;
 }
 
 .asterisk {
@@ -499,17 +520,21 @@
   break-inside: avoid;
 }
 
-.jinxes-section .section-title {
+.sheet-footer-container .section-title {
+  text-align: start;
+}
+
+/* .jinxes-section .section-title {
   text-orientation: upright;
   writing-mode: horizontal-tb;
   letter-spacing: 0.6mm;
   line-height: 1;
   margin: 0;
   align-self: center;
-}
+} */
 
 .jinxes-list {
-  margin-left: 8mm;
+  /* margin-left: 8mm; */
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -517,7 +542,7 @@
 
 .jinxes-two-columns {
   flex-direction: row;
-  gap: 5mm;
+  gap: 3mm;
 }
 
 .jinx-column {
@@ -576,7 +601,7 @@
   font-family:
     "Figtree", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial,
     sans-serif;
-  font-size: 7.4pt;
+  font-size: 7.5pt;
   margin: 0 0 0 1mm;
   color: #b34d00;
   padding-top: 0.5mm;
@@ -591,11 +616,12 @@
 }
 
 .loric-name {
-  font-family: "Goudy Old Style";
-  font-size: 8.5pt;
+  font-family: "PT Serif", "Goudy Old Style", serif;
+  font-size: 8pt;
   padding-top: 0;
+  font-weight: bold;
 }
 
 .loric-spacer {
-  min-width: 4mm;
+  min-width: 2mm;
 }

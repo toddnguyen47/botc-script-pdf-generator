@@ -120,8 +120,6 @@ export function JinxesAndSpecial({
 
   return (
     <div className="jinxes-section">
-      <div className="section-title">JINXES</div>
-
       {rightColumn ? (
         <div className="jinxes-list jinxes-two-columns">
           <div className="jinx-column">{...leftColumn}</div>

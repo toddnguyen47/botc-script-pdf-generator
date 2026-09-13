@@ -80,6 +80,7 @@ export function CharacterSheet({
   const sheetClassName = ["character-sheet", appearanceClass]
     .filter(Boolean)
     .join(" ");
+  const jinxesOrLoricExists = jinxes.length > 0 || fabledOrLoric.length > 0;
 
   return (
     <PrintablePage dimensions={dimensions}>
@@ -142,37 +143,54 @@ export function CharacterSheet({
                   )}
                 </>
               ))}
-              {(jinxes.length > 0 || fabledOrLoric.length > 0) && (
-                <>
-                  <img src="/images/divider.png" className="section-divider" />
-                  <JinxesAndSpecial
-                    fabledAndLoric={fabledOrLoric}
-                    jinxes={jinxes}
-                    allCharacters={[
-                      ...characters.townsfolk,
-                      ...characters.outsider,
-                      ...characters.minion,
-                      ...characters.demon,
-                    ]}
-                    bootleggerRules={bootleggerRules}
-                    iconUrlTemplate={iconUrlTemplate}
-                  />
-                </>
-              )}
             </div>
 
-            <div className="sheet-footer">
+            {jinxesOrLoricExists && (
               <img
-                className="ccc-logo"
-                src="/images/ccc-parchment.png"
-                alt="Community Created Content"
+                src="/images/divider.png"
+                className="section-divider section-divider-solo"
               />
-              <div className="not-first-night">
-                <span className="asterisk">*</span>Not the first night
-              </div>
-              <div className="author-credit">
-                <p>© Steven Medway bloodontheclocktower.com</p>
-                <p>Script template by John Forster ravenswoodstudio.xyz</p>
+            )}
+
+            <div className="sheet-footer-container">
+              {jinxesOrLoricExists && (
+                <div className="section-title">JINXES</div>
+              )}
+
+              <div className="sheet-footer-item-container">
+                {jinxesOrLoricExists && (
+                  <>
+                    <JinxesAndSpecial
+                      fabledAndLoric={fabledOrLoric}
+                      jinxes={jinxes}
+                      allCharacters={[
+                        ...characters.townsfolk,
+                        ...characters.outsider,
+                        ...characters.minion,
+                        ...characters.demon,
+                      ]}
+                      bootleggerRules={bootleggerRules}
+                      iconUrlTemplate={iconUrlTemplate}
+                    />
+                  </>
+                )}
+
+                <div className="sheet-footer-spacer"></div>
+
+                <div className="sheet-footer">
+                  <img
+                    className="ccc-logo"
+                    src="/images/ccc-parchment.png"
+                    alt="Community Created Content"
+                  />
+                  <div className="not-first-night">
+                    <span className="asterisk">*</span>Not the first night
+                  </div>
+                  <div className="author-credit">
+                    <p>© Steven Medway bloodontheclocktower.com</p>
+                    <p>Script template by John Forster ravenswoodstudio.xyz</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
