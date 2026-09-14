@@ -270,21 +270,6 @@
   font-size: 17pt;
 }
 
-.character-name {
-  --min-character-name-font-size: 9pt;
-  font-family: "PT Serif", "Goudy Old Style", "Goudy", Georgia, serif;
-  font-size: calc(
-    var(--min-character-name-font-size) *
-      (1 + (var(--font-size-step-percentage) * 3))
-  );
-  font-weight: 700;
-  margin: 0 0 0.5mm 0;
-  color: #1a202c;
-  display: flex;
-  align-items: center;
-  gap: 1mm;
-}
-
 .inline-jinx-icons {
   display: inline-flex;
   gap: 0.5mm;
@@ -311,6 +296,21 @@
   font-size: 5.1pt;
   border-radius: 50%;
   background-color: #666;
+}
+
+.character-name {
+  --min-character-name-font-size: 8.5pt;
+  font-family: "PT Serif", "Goudy Old Style", "Goudy", Georgia, serif;
+  font-size: calc(
+    var(--min-character-name-font-size) *
+      (1 + (var(--font-size-step-percentage) * 3))
+  );
+  font-weight: 700;
+  margin: 0 0 0.5mm 0;
+  color: #1a202c;
+  display: flex;
+  align-items: center;
+  gap: 1mm;
 }
 
 .character-ability {
