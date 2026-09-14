@@ -615,3 +615,7 @@
 .loric-spacer {
   min-width: 2mm;
 }
+
+.custom-hidden {
+  visibility: hidden;
+}

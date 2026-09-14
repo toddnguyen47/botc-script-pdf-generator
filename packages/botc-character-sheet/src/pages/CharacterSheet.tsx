@@ -154,8 +154,11 @@ export function CharacterSheet({
             )}
 
             <div className="sheet-footer-container">
-              {jinxesOrLoricExists && (
+              {jinxesOrLoricExists ? (
                 <div className="section-title">J L F</div>
+              ) : (
+                // Need at least one character for section-title CSS to take effect
+                <div className="section-title custom-hidden">J</div>
               )}
 
               <div className="sheet-footer-item-container">
