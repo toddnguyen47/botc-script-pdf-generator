@@ -132,10 +132,8 @@
 }
 
 .script-logo {
-  /* max-width: 35mm; */
-  /* max-height: 23mm; */
-  max-width: 24.5mm;
-  max-height: 16.1mm;
+  max-width: 35mm;
+  max-height: 23mm;
   margin-right: 1mm;
   margin-top: -2mm;
   margin-bottom: -2mm;
