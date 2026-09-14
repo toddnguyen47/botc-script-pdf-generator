@@ -144,8 +144,8 @@ export function ScriptControls({
 
                   onOptionChange("titleStyle", {
                     ...options.titleStyle,
-                    [key]: value,
                     ...(defaults ?? {}),
+                    [key]: value,
                   });
                 }}
               />
