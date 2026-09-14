@@ -70,6 +70,11 @@ export function useScriptParsing() {
       }),
     };
 
+    const rawScript: Script = [
+      ...(sanitized.metadata ? [sanitized.metadata] : []),
+      ...sanitized.characters,
+    ];
+    setRawScript(rawScript);
     setScript(sanitized);
     setNightOrdersState(calculateNightOrders(sanitized));
     return sanitized;
