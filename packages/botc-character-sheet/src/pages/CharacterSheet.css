@@ -132,8 +132,10 @@
 }
 
 .script-logo {
-  max-width: 35mm;
-  max-height: 23mm;
+  /* max-width: 35mm; */
+  /* max-height: 23mm; */
+  max-width: 24.5mm;
+  max-height: 16.1mm;
   margin-right: 1mm;
   margin-top: -2mm;
   margin-bottom: -2mm;
@@ -445,7 +447,7 @@
 
 .sheet-footer {
   padding-top: 3mm;
-  padding-left: calc(5mm + var(--print-bleed));
+  /* padding-left: calc(5mm + var(--print-bleed)); */
   text-align: center;
   font-family: "PT Serif", "Goudy Old Style", "Goudy", Georgia, serif;
   font-size: 9pt;
