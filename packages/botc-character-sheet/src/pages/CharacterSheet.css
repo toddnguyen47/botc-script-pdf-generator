@@ -62,7 +62,7 @@
 
 .sheet-container {
   --font-size-step-percentage: 0.06;
-  --section-dividier-gap: 2mm;
+  --section-divider-gap: 2mm;
   position: relative;
   /* padding: calc(5mm + var(--print-bleed)) calc(5mm + var(--print-bleed))
     calc(3mm + var(--print-bleed)) var(--print-bleed); */
@@ -162,7 +162,7 @@
 .characters-grid {
   display: flex;
   flex-direction: column;
-  gap: var(--section-dividier-gap);
+  gap: var(--section-divider-gap);
   flex: 1;
 }
 
@@ -212,8 +212,8 @@
 }
 
 .section-divider-solo {
-  margin-top: var(--section-dividier-gap);
-  margin-bottom: var(--section-dividier-gap);
+  margin-top: var(--section-divider-gap);
+  margin-bottom: var(--section-divider-gap);
 }
 
 .character-list {
