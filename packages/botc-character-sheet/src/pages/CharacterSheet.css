@@ -134,13 +134,19 @@
 .script-logo {
   /* max-width: 35mm;
   max-height: 23mm; */
-  --min-script-logo-scale: 1.88;
-  max-width: 15.22mm;
-  max-height: 10mm;
+  --min-script-logo-scale: 2.3;
+  --min-script-logo-margin-lr: 3.5mm;
+  --min-script-logo-margin-steps: 0.5mm;
+  max-width: 12.17mm;
+  max-height: 8mm;
   scale: calc(
     var(--min-script-logo-scale) * (1 + var(--font-size-step-percentage) * 3)
   );
-  margin: -2mm 2mm -2mm 2mm;
+  margin: -2mm
+    calc(
+      var(--min-script-logo-margin-lr) +
+        (var(--min-script-logo-margin-steps) * 3)
+    );
 }
 
 .sheet-author {
@@ -336,6 +342,11 @@
   scale: calc(
     var(--min-script-logo-scale) * (1 + var(--font-size-step-percentage) * 2)
   );
+  margin: -2mm
+    calc(
+      var(--min-script-logo-margin-lr) +
+        (var(--min-script-logo-margin-steps) * 2)
+    );
 }
 
 .appearance-compact .character-ability {
@@ -394,6 +405,11 @@
   scale: calc(
     var(--min-script-logo-scale) * (1 + var(--font-size-step-percentage) * 1)
   );
+  margin: -2mm
+    calc(
+      var(--min-script-logo-margin-lr) +
+        (var(--min-script-logo-margin-steps) * 1)
+    );
 }
 
 .appearance-super-compact .section-title {
@@ -441,6 +457,7 @@
   /* max-width: 29mm;
   max-height: 18mm; */
   scale: var(--min-script-logo-scale);
+  margin: -2mm var(--min-script-logo-margin-lr);
 }
 
 .sheet-footer-container {
