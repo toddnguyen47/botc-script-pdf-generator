@@ -22,11 +22,7 @@ import { Changelog } from "./components/Changelog";
 import { MobileControlsToggle } from "./components/MobileControlsToggle";
 import { SavedScriptsPanel } from "./components/SavedScriptsPanel";
 import { ViewMode } from "./components/ViewMode";
-import {
-  randomColor,
-  TITLE_FONT_DEFAULTS,
-  DEFAULT_OPTIONS,
-} from "./types/options";
+import { randomColor, DEFAULT_OPTIONS } from "./types/options";
 import { mergeAndValidateOptions } from "./utils/optionsValidation";
 import type { ValidationIssue } from "./types/validation";
 import "./app.css";
@@ -206,20 +202,6 @@ function EditMode() {
       iconScale: iconScales[options.appearance],
     }));
   }, [options.appearance]);
-
-  // Auto-update title style defaults when title font changes
-  useEffect(() => {
-    const defaults = TITLE_FONT_DEFAULTS[options.titleStyle.font];
-    if (defaults) {
-      setOptions((prev) => ({
-        ...prev,
-        titleStyle: {
-          ...prev.titleStyle,
-          ...defaults,
-        },
-      }));
-    }
-  }, [options.titleStyle.font]);
 
   const updateOption = <K extends keyof ScriptOptions>(
     key: K,

@@ -10,6 +10,7 @@ import { PrintOptions } from "./PrintOptions";
 import { ActionButtons } from "./ActionButtons";
 import { ScriptIssues } from "./ScriptIssues";
 import { ScriptEditor } from "../ScriptEditor";
+import { TITLE_FONT_DEFAULTS } from "../../types/options";
 
 interface ScriptControlsProps {
   hasScript: boolean;
@@ -135,12 +136,18 @@ export function ScriptControls({
             <CollapsibleSection title="Font" defaultOpen={false}>
               <FontOptions
                 titleStyle={options.titleStyle}
-                onTitleStyleChange={(key, value) =>
+                onTitleStyleChange={(key, value) => {
+                  const defaults =
+                    key === "font"
+                      ? TITLE_FONT_DEFAULTS[String(value)]
+                      : undefined;
+
                   onOptionChange("titleStyle", {
                     ...options.titleStyle,
                     [key]: value,
-                  })
-                }
+                    ...(defaults ?? {}),
+                  });
+                }}
               />
             </CollapsibleSection>
 
