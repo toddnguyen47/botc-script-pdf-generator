@@ -132,11 +132,15 @@
 }
 
 .script-logo {
-  max-width: 35mm;
-  max-height: 23mm;
-  margin-right: 1mm;
-  margin-top: -2mm;
-  margin-bottom: -2mm;
+  /* max-width: 35mm;
+  max-height: 23mm; */
+  --min-script-logo-scale: 1.88;
+  max-width: 15.22mm;
+  max-height: 10mm;
+  scale: calc(
+    var(--min-script-logo-scale) * (1 + var(--font-size-step-percentage) * 3)
+  );
+  margin: -2mm 2mm -2mm 2mm;
 }
 
 .sheet-author {
@@ -327,8 +331,11 @@
 } */
 
 .appearance-compact .script-logo {
-  max-width: 33mm;
-  max-height: 21mm;
+  /* max-width: 33mm;
+  max-height: 21mm; */
+  scale: calc(
+    var(--min-script-logo-scale) * (1 + var(--font-size-step-percentage) * 2)
+  );
 }
 
 .appearance-compact .character-ability {
@@ -382,8 +389,11 @@
 } */
 
 .appearance-super-compact .script-logo {
-  max-width: 31mm;
-  max-height: 19.5mm;
+  /* max-width: 31mm;
+  max-height: 19.5mm; */
+  scale: calc(
+    var(--min-script-logo-scale) * (1 + var(--font-size-step-percentage) * 1)
+  );
 }
 
 .appearance-super-compact .section-title {
@@ -428,8 +438,9 @@
 } */
 
 .appearance-mega-compact .script-logo {
-  max-width: 29mm;
-  max-height: 18mm;
+  /* max-width: 29mm;
+  max-height: 18mm; */
+  scale: var(--min-script-logo-scale);
 }
 
 .sheet-footer-container {
