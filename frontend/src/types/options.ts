@@ -80,7 +80,7 @@ export const TITLE_FONT_DEFAULTS: Record<
     wordSpacing: 0,
     lineHeight: 17,
     backLineHeight: 28,
-    marginTop: 0,
+    marginTop: -2,
     marginBottom: -3,
   },
 };
