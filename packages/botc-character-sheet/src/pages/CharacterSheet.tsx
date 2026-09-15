@@ -136,34 +136,36 @@ export function CharacterSheet({
                     inlineJinxIcons={inlineJinxIcons}
                     iconUrlTemplate={iconUrlTemplate}
                   />
-                  {i < sections.length - 1 && (
+                  {/* {i < sections.length - 1 && (
                     <img
                       src="/images/divider.png"
                       className="section-divider"
                     />
-                  )}
+                  )} */}
                 </>
               ))}
             </div>
 
-            {jinxesOrLoricExists && (
+            {/* {jinxesOrLoricExists && (
               <img
                 src="/images/divider.png"
                 className="section-divider section-divider-solo"
               />
-            )}
+            )} */}
 
             <div className="sheet-footer-container">
-              {jinxesOrLoricExists ? (
+              {/* {jinxesOrLoricExists ? (
                 <div className="section-title">J L F</div>
               ) : (
                 // Need at least one character for section-title CSS to take effect
                 <div className="section-title custom-hidden">J</div>
-              )}
-
+              )} */}
               <div className="sheet-footer-item-container">
                 {jinxesOrLoricExists && (
                   <>
+                    <div class="section-title-horizontal">
+                      <span>Jinxes / Loric / Fabled</span>
+                    </div>
                     <JinxesAndSpecial
                       fabledAndLoric={fabledOrLoric}
                       jinxes={jinxes}

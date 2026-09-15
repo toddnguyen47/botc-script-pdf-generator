@@ -36,8 +36,11 @@ export function CharacterSection({
 
   return (
     <div className="character-section">
-      <div className="section-title" style={{ color: charNameColor }}>
+      {/* <div className="section-title" style={{ color: charNameColor }}>
         {title}
+      </div> */}
+      <div class="section-title-horizontal" style={{ color: charNameColor }}>
+        <span>{title}</span>
       </div>
       <div className="character-list">
         <div className="character-column" style={{ justifyContent }}>
