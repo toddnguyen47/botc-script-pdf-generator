@@ -1,2 +1,5 @@
 copy_script.sh
 botc-scripts/
+
+# Python
+.venv

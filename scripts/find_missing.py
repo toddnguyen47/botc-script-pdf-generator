@@ -83,9 +83,7 @@ def main():
     # --------------------------------------------------------------
 
     script_roles = {
-        role
-        for role in script
-        if isinstance(role, str) and role in role_info
+        role for role in script if isinstance(role, str) and role in role_info
     }
 
     # --------------------------------------------------------------
@@ -115,19 +113,18 @@ def main():
     # These remain available for manual intervention.
     # --------------------------------------------------------------
 
-    available = {
-        team: []
-        for team in ALLOWED_TEAMS
-    }
+    available = {team: [] for team in ALLOWED_TEAMS}
 
     # Blank is a special Townsfolk/Outsider role.
     #
     # It has 3 reminder tokens and can replace any
     # Townsfolk/Outsider role with 0-3 reminders.
-    available["townsfolk"].append({
-        "name": "Blank",
-        "numberOfReminders": 3,
-    })
+    available["townsfolk"].append(
+        {
+            "name": "Blank",
+            "numberOfReminders": 3,
+        }
+    )
 
     for role in roles:
         if not isinstance(role, dict):
@@ -136,15 +133,13 @@ def main():
         role_id = role.get("id")
         team = role.get("team")
 
-        if (
-            role_id in base
-            and role_id in role_info
-            and role_id not in script_roles
-        ):
-            available[team].append({
-                "name": role["name"],
-                "numberOfReminders": len(role.get("reminders", [])),
-            })
+        if role_id in base and role_id in role_info and role_id not in script_roles:
+            available[team].append(
+                {
+                    "name": role["name"],
+                    "numberOfReminders": len(role.get("reminders", [])),
+                }
+            )
 
     # --------------------------------------------------------------
     # Build possibleReplacements.
@@ -179,19 +174,22 @@ def main():
                 if available_role["name"] == "Blank":
                     continue
 
-                if (
-                    available_role["numberOfReminders"]
-                    == missing_reminders
-                ):
+                missing_reminders_leq_1 = (
+                    missing_reminders <= 1
+                    and available_role["numberOfReminders"] == missing_reminders
+                )
+                missing_reminders_g_1 = (
+                    missing_reminders > 1
+                    and available_role["numberOfReminders"] >= missing_reminders
+                )
+
+                if missing_reminders_leq_1 or missing_reminders_g_1:
                     suggestions.append(available_role["name"])
 
         # Blank is a last resort.
         #
         # It does NOT need the same number of reminders.
-        if (
-            missing_team in {"townsfolk", "outsider"}
-            and missing_reminders <= 3
-        ):
+        if missing_team in {"townsfolk", "outsider"} and missing_reminders <= 3:
             suggestions.append("Blank")
 
         # Remove duplicates while preserving order.
