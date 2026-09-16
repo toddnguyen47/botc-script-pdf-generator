@@ -2,14 +2,14 @@ import argparse
 import json
 
 
-ALLOWED_TEAMS = ("townsfolk", "outsider", "minion", "demon")
+ALLOWED_TEAMS = ("townsfolk", "outsider", "minion", "demon", "traveller")
 ALLOWED_TEAM_SET = set(ALLOWED_TEAMS)
 
 TEAM_GROUPS = {
-    "townsfolk": ("townsfolk", "outsider"),
-    "outsider": ("outsider", "townsfolk"),
-    "minion": ("minion", "demon"),
-    "demon": ("demon", "minion"),
+    "townsfolk": ("townsfolk", "outsider", "traveller"),
+    "outsider": ("outsider", "townsfolk", "traveller"),
+    "minion": ("minion", "demon", "traveller"),
+    "demon": ("demon", "minion", "traveller"),
 }
 
 
