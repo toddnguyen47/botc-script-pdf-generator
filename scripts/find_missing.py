@@ -2,8 +2,10 @@ import argparse
 import json
 
 
-ALLOWED_TEAMS = ("townsfolk", "outsider", "minion", "demon", "traveller")
-ALLOWED_TEAM_SET = set(ALLOWED_TEAMS)
+ALLOWED_TEAMS_TO_REPLACE_SET = set(["townsfolk", "outsider", "minion", "demon"])
+ALLOWED_TEAMS_REPLACEMENTS_SET = set(
+    ["townsfolk", "outsider", "minion", "demon", "traveller"]
+)
 
 TEAM_GROUPS = {
     "townsfolk": ("townsfolk", "outsider", "traveller"),
@@ -74,7 +76,7 @@ def main():
             isinstance(role, dict)
             and "id" in role
             and "name" in role
-            and role.get("team") in ALLOWED_TEAM_SET
+            and role.get("team") in ALLOWED_TEAMS_REPLACEMENTS_SET
         )
     }
 
@@ -103,7 +105,7 @@ def main():
             isinstance(role, dict)
             and role["id"] in script_roles
             and role["id"] not in base
-            and role.get("team") in ALLOWED_TEAM_SET
+            and role.get("team") in ALLOWED_TEAMS_TO_REPLACE_SET
         )
     ]
 
@@ -113,7 +115,7 @@ def main():
     # These remain available for manual intervention.
     # --------------------------------------------------------------
 
-    available = {team: [] for team in ALLOWED_TEAMS}
+    available = {team: [] for team in ALLOWED_TEAMS_REPLACEMENTS_SET}
 
     # Blank is a special Townsfolk/Outsider role.
     #
