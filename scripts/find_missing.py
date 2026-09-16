@@ -2,9 +2,9 @@ import argparse
 import json
 
 
-ALLOWED_TEAMS_TO_REPLACE_SET = set(["townsfolk", "outsider", "minion", "demon"])
+ALLOWED_TEAMS_TO_REPLACE_SET = set(("townsfolk", "outsider", "minion", "demon"))
 ALLOWED_TEAMS_REPLACEMENTS_SET = set(
-    ["townsfolk", "outsider", "minion", "demon", "traveller"]
+    ("townsfolk", "outsider", "minion", "demon", "traveller")
 )
 
 TEAM_GROUPS = {
@@ -85,7 +85,11 @@ def main():
     # --------------------------------------------------------------
 
     script_roles = {
-        role for role in script if isinstance(role, str) and role in role_info
+        role
+        for role in script
+        if isinstance(role, str)
+        and role in role_info
+        and role_info[role].get("team") in ALLOWED_TEAMS_TO_REPLACE_SET
     }
 
     # --------------------------------------------------------------
@@ -255,7 +259,7 @@ def main():
     }
 
     with open(args.output, "w", encoding="utf-8") as f:
-        json.dump(output, f, indent=2, ensure_ascii=False)
+        json.dump(output, f, indent=4, ensure_ascii=False)
         f.write("\n")
 
     print(f"Found {len(missing_roles)} missing roles.")
