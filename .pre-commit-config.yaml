@@ -13,9 +13,9 @@ repos:
       - id: check-shebang-scripts-are-executable
       - id: check-merge-conflict
       - id: check-symlinks
-  - repo: https://github.com/toddnguyen47/pre-commit-hooks
-    rev: v1.6.2
-    hooks:
-      - id: prettify-json
-        args: ["--indent", "2"] # defaults to indenting with 2 spaces
-        types: ["json"]
+      #   - repo: https://github.com/toddnguyen47/pre-commit-hooks
+      #     rev: v1.6.2
+      #     hooks:
+      #       - id: prettify-json
+      #         args: ["--indent", "2"] # defaults to indenting with 2 spaces
+      #         types: ["json"]
