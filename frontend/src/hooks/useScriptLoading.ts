@@ -13,7 +13,7 @@ export function useScriptLoading(
   loadCharacterTokenReplacement: (
     json: CharacterReplacementData,
     parsedScript: ParsedScript,
-  ) => ParsedScript,
+  ) => Promise<ParsedScript>,
   setError: (error: string | null) => void,
   onLoad?: (json: Script, parsed: ParsedScript) => void,
 ) {
@@ -150,14 +150,12 @@ export function useScriptLoading(
   };
 
   const handleTokenReplacementUpload = (event: Event) => {
-    const handler = (json: any) => {
+    const handler = async (json: any) => {
       if (alreadyParsedScript == null) {
         console.error("No parsed script yet. Upload a script first");
       } else {
-        const parsedScriptWithReplacementTokens = loadCharacterTokenReplacement(
-          json,
-          alreadyParsedScript,
-        );
+        const parsedScriptWithReplacementTokens =
+          await loadCharacterTokenReplacement(json, alreadyParsedScript);
         onLoad?.(json, parsedScriptWithReplacementTokens);
       }
     };

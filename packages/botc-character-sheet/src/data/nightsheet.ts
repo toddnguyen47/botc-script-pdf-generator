@@ -3,28 +3,46 @@ type Nightsheet = {
   otherNight: string[];
 };
 
-let firstNightOrder: string[] = [];
-let otherNightOrder: string[] = [];
-
 const JSON_URL = "https://release.botc.app/resources/data/nightsheet.json";
+const CACHE_DURATION = 15 * 60 * 1000;
 
-export async function loadNightsheet(): Promise<void> {
-  const response = await fetch(JSON_URL);
+let nightsheet: Nightsheet | null = null;
+let cachedAt = 0;
+let loading: Promise<Nightsheet> | null = null;
 
-  if (!response.ok) {
-    throw new Error(`Failed to load nightsheet: ${response.status}`);
+async function loadNightsheet(): Promise<Nightsheet> {
+  if (nightsheet !== null && Date.now() - cachedAt < CACHE_DURATION) {
+    return nightsheet;
   }
 
-  const nightsheet = (await response.json()) as Nightsheet;
+  if (!loading) {
+    loading = fetch(JSON_URL)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to load nightsheet: ${response.status}`);
+        }
 
-  firstNightOrder = nightsheet.firstNight;
-  otherNightOrder = nightsheet.otherNight;
+        return response.json() as Promise<Nightsheet>;
+      })
+      .then((data) => {
+        nightsheet = data;
+        cachedAt = Date.now();
+        return data;
+      })
+      .finally(() => {
+        loading = null;
+      });
+  }
+
+  return loading;
 }
 
-export function getFirstNightOrder(): string[] {
-  return firstNightOrder;
+export async function getFirstNightOrder(): Promise<string[]> {
+  const data = await loadNightsheet();
+  return data.firstNight;
 }
 
-export function getOtherNightOrder(): string[] {
-  return otherNightOrder;
+export async function getOtherNightOrder(): Promise<string[]> {
+  const data = await loadNightsheet();
+  return data.otherNight;
 }

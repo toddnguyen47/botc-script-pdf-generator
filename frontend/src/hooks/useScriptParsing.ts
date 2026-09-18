@@ -44,16 +44,16 @@ export function useScriptParsing() {
     setIssues(newIssues);
     setScriptText(JSON.stringify(json, null, 2));
     setIsScriptSorted(checkIfSorted(json));
-    setNightOrdersState(calculateNightOrders(sanitized));
+    setNightOrdersState(await calculateNightOrders(sanitized));
     setError(null);
 
     return sanitized; // Return parsed script for color loading
   };
 
-  const loadCharacterTokenReplacement = (
+  const loadCharacterTokenReplacement = async (
     json: CharacterReplacementData,
     parsedScript: ParsedScript,
-  ): ParsedScript => {
+  ): Promise<ParsedScript> => {
     // Need to make a copy so preact renders it.
     const sanitized = {
       ...parsedScript,
@@ -76,7 +76,7 @@ export function useScriptParsing() {
     ];
     setRawScript(rawScript);
     setScript(sanitized);
-    setNightOrdersState(calculateNightOrders(sanitized));
+    setNightOrdersState(await calculateNightOrders(sanitized));
     return sanitized;
   };
 
@@ -99,7 +99,7 @@ export function useScriptParsing() {
         setScript(sanitized);
         setIssues(newIssues);
         setIsScriptSorted(checkIfSorted(json));
-        setNightOrdersState(calculateNightOrders(sanitized));
+        setNightOrdersState(await calculateNightOrders(sanitized));
         setError(null);
       } catch (err) {
         console.error(err);
@@ -125,7 +125,7 @@ export function useScriptParsing() {
       setIssues(newIssues);
       setScriptText(JSON.stringify(sorted, null, 2));
       setIsScriptSorted(true);
-      setNightOrdersState(calculateNightOrders(sanitized));
+      setNightOrdersState(await calculateNightOrders(sanitized));
       setError(null);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to sort script");

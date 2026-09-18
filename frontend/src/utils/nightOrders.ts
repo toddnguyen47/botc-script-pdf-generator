@@ -58,13 +58,15 @@ const getPosition = (
   return Infinity; // Characters without night actions go to the end
 };
 
-const buildNightOrder = (
+const buildNightOrder = async (
   characters: NightOrderEntry[],
   nightType: "firstNight" | "otherNight",
   rawCharMap: RawCharMap,
-): NightOrderEntry[] => {
+): Promise<NightOrderEntry[]> => {
   const orderList =
-    nightType === "firstNight" ? getFirstNightOrder() : getOtherNightOrder();
+    nightType === "firstNight"
+      ? await getFirstNightOrder()
+      : await getOtherNightOrder();
 
   // Filter characters that have actions for this night
   const activeChars = characters.filter((char) => {
@@ -88,26 +90,32 @@ const buildNightOrder = (
   return charsAndMarkers;
 };
 
-export const calculateNightOrders = (
+export const calculateNightOrders = async (
   parsedScript: ParsedScript,
-): NightOrders => {
+): Promise<NightOrders> => {
   const rawCharMap = createRawCharMap(parsedScript.characters);
 
   const first = parsedScript.metadata?.firstNight?.length
-    ? parseNightOrder(parsedScript.metadata.firstNight, parsedScript.characters)
-    : buildNightOrder(parsedScript.characters, "firstNight", rawCharMap);
+    ? await parseNightOrder(
+        parsedScript.metadata.firstNight,
+        parsedScript.characters,
+      )
+    : await buildNightOrder(parsedScript.characters, "firstNight", rawCharMap);
 
   const other = parsedScript.metadata?.otherNight?.length
-    ? parseNightOrder(parsedScript.metadata.otherNight, parsedScript.characters)
-    : buildNightOrder(parsedScript.characters, "otherNight", rawCharMap);
+    ? await parseNightOrder(
+        parsedScript.metadata.otherNight,
+        parsedScript.characters,
+      )
+    : await buildNightOrder(parsedScript.characters, "otherNight", rawCharMap);
 
   return { first, other };
 };
 
-const parseNightOrder = (
+const parseNightOrder = async (
   nightOrder: string[],
   characters: ScriptCharacter[],
-): NightOrderEntry[] => {
+): Promise<NightOrderEntry[]> => {
   let nightOrderEntries: NightOrderEntry[] = [];
   for (const entry of nightOrder) {
     const foundChar = characters.find(

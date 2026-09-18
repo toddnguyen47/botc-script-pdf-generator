@@ -50,7 +50,7 @@ export function ViewMode({ scriptId }: ViewModeProps) {
         setScript(sanitized);
         setOptions(mergedOptions);
         setIssues([...optionsIssues, ...scriptIssues]);
-        setNightOrders(calculateNightOrders(sanitized));
+        setNightOrders(await calculateNightOrders(sanitized));
       } catch (err) {
         console.error("Failed to load shared script:", err);
         setError(

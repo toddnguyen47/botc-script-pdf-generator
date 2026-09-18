@@ -23,8 +23,4 @@ export { AppearanceLevel } from "./types";
 export { darken, parseRgb, rgbString } from "./utils/colours";
 export { getRole } from "./data/roles";
 export { loadJinxes, getJinxes } from "./data/jinxes";
-export {
-  loadNightsheet,
-  getFirstNightOrder,
-  getOtherNightOrder,
-} from "./data/nightsheet";
+export { getFirstNightOrder, getOtherNightOrder } from "./data/nightsheet";
