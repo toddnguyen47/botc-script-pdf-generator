@@ -1,11 +1,12 @@
 import { render } from "preact";
 import { App } from "./app";
 import { ErrorBoundary } from "./components/ErrorBoundary";
-import { loadRoles, loadNightsheet } from "botc-character-sheet";
+import { loadRoles, loadNightsheet, loadJinxes } from "botc-character-sheet";
 
 async function main() {
   await loadRoles();
   await loadNightsheet();
+  await loadJinxes();
 
   // Refresh every 15 minutes
   setInterval(
@@ -15,6 +16,9 @@ async function main() {
       });
       loadNightsheet().catch((error) => {
         console.error("Failed to refresh nightsheet:", error);
+      });
+      loadJinxes().catch((error) => {
+        console.error("Failed to refresh jinxes:", error);
       });
     },
     15 * 60 * 1000,

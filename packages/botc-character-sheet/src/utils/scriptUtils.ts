@@ -1,6 +1,6 @@
 import { ScriptCharacter } from "botc-script-checker";
 import { ResolvedCharacter, GroupedCharacters, Jinx } from "../types";
-import { JINXES } from "../data/jinxes";
+import { getJinxes } from "../data/jinxes";
 
 export function groupCharactersByTeam(
   characters: ResolvedCharacter[],
@@ -34,7 +34,7 @@ export function findJinxes(
   const applicableJinxes: Jinx[] = [];
 
   // Add global jinxes from official jinxes data
-  for (const jinx of JINXES) {
+  for (const jinx of getJinxes()) {
     const [char1, char2] = jinx.characters;
     if (characterIds.has(char1) && characterIds.has(char2)) {
       // If useOldJinxes is true and oldJinx exists, use it instead

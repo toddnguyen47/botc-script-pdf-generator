@@ -22,7 +22,7 @@ export type {
 export { AppearanceLevel } from "./types";
 export { darken, parseRgb, rgbString } from "./utils/colours";
 export { loadRoles, getRole } from "./data/roles";
-export { JINXES } from "./data/jinxes";
+export { loadJinxes, getJinxes } from "./data/jinxes";
 export {
   loadNightsheet,
   getFirstNightOrder,
