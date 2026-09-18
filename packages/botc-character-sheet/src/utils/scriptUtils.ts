@@ -106,11 +106,15 @@ export function resolveIconUrl(
     return null;
   }
 
+  // If fabled or loric, we do not need alignment
+  if (character.team === "fabled" || character.team === "loric") {
+    template = template.replace("_{alignment}", "");
+  }
+
   return template
     .replace("{edition}", character.edition)
     .replace("{id}", character.id)
-    .replace("{alignment}", defaultAlignment[character.team])
-    .replace(`_${STR_PLEASE_REPLACE_ME}`, "");
+    .replace("{alignment}", getDefaultAlignment(character));
 }
 
 export function getGenericIconUrl(team: string): string {
@@ -189,14 +193,12 @@ export function getJinxedCharacters(
   return allCharacters.filter((char) => jinxedCharacterIds.includes(char.id));
 }
 
-const STR_PLEASE_REPLACE_ME = "{STR_PLEASE_REPLACE_ME}";
-
-const defaultAlignment: Record<string, string> = {
-  townsfolk: "g",
-  outsider: "g",
-  minion: "e",
-  demon: "e",
-  traveller: "n",
-  fabled: STR_PLEASE_REPLACE_ME,
-  loric: STR_PLEASE_REPLACE_ME,
-};
+function getDefaultAlignment(character: ResolvedCharacter): string {
+  const team = character.team;
+  if (team === "townsfolk" || team === "outsider") {
+    return "g";
+  } else if (team === "minion" || team === "demon") {
+    return "e";
+  }
+  return "n";
+}
