@@ -1,4 +1,3 @@
-import rolesJson from "./roles.json";
 import type { ResolvedCharacter } from "../types";
 
 export type OfficialRole = {
@@ -14,10 +13,24 @@ export type OfficialRole = {
   flavor?: string;
 };
 
-export const ROLES_BY_ID: Record<string, ResolvedCharacter> =
-  Object.fromEntries(
-    (rolesJson as OfficialRole[]).map((role) => [
-      role.id,
-      role as unknown as ResolvedCharacter,
-    ]),
+const JSON_URL = "https://release.botc.app/resources/data/roles.json";
+
+let rolesById: Record<string, ResolvedCharacter> = {};
+
+export async function loadRoles(): Promise<void> {
+  const response = await fetch(JSON_URL);
+
+  if (!response.ok) {
+    throw new Error(`Failed to load roles: ${response.status}`);
+  }
+
+  const rolesJson = (await response.json()) as OfficialRole[];
+
+  rolesById = Object.fromEntries(
+    rolesJson.map((role) => [role.id, role as unknown as ResolvedCharacter]),
   );
+}
+
+export function getRole(id: string): ResolvedCharacter | null {
+  return rolesById[id] ?? null;
+}
