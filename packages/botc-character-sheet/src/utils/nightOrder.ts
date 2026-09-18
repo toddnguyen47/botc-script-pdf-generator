@@ -18,6 +18,6 @@ export function getImageSrc(
   } else if (Array.isArray(entry.image) && entry.image.length) {
     return entry.image[0];
   } else if (iconUrlTemplate) {
-    return resolveIconUrl(iconUrlTemplate, entry.id) ?? undefined;
+    return resolveIconUrl(iconUrlTemplate, entry) ?? undefined;
   }
 }

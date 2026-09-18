@@ -98,13 +98,23 @@ export function findJinxes(
   return applicableJinxes;
 }
 
-export function resolveIconUrl(template: string, id: string): string | null {
-  if (!template) return null;
-  return template.replace("{id}", id);
+export function resolveIconUrl(
+  template: string,
+  character: ResolvedCharacter,
+): string | null {
+  if (!template || character.edition === undefined) {
+    return null;
+  }
+
+  return template
+    .replace("{edition}", character.edition)
+    .replace("{id}", character.id)
+    .replace("{alignment}", defaultAlignment[character.team])
+    .replace(`_${STR_PLEASE_REPLACE_ME}`, "");
 }
 
 export function getGenericIconUrl(team: string): string {
-  return `/images/icons/generic_${team}.webp`;
+  return `https://release.botc.app/resources/characters/generic/${team}.webp`;
 }
 
 export const getImageUrl = (
@@ -120,7 +130,7 @@ export const getImageUrl = (
   }
   // Fall back to icon URL template
   if (iconUrlTemplate) {
-    return resolveIconUrl(iconUrlTemplate, character.id);
+    return resolveIconUrl(iconUrlTemplate, character);
   }
   return null;
 };
@@ -178,3 +188,15 @@ export function getJinxedCharacters(
 
   return allCharacters.filter((char) => jinxedCharacterIds.includes(char.id));
 }
+
+const STR_PLEASE_REPLACE_ME = "{STR_PLEASE_REPLACE_ME}";
+
+const defaultAlignment: Record<string, string> = {
+  townsfolk: "g",
+  outsider: "g",
+  minion: "e",
+  demon: "e",
+  traveller: "n",
+  fabled: STR_PLEASE_REPLACE_ME,
+  loric: STR_PLEASE_REPLACE_ME,
+};

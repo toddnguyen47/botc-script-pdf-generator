@@ -105,7 +105,8 @@ export const DEFAULT_OPTIONS: ScriptOptions = {
   displayPlayerCounts: true,
   numberOfCharacterSheets: 1,
   inlineJinxIcons: "primary",
-  iconUrlTemplate: "/images/icons/{id}.webp",
+  iconUrlTemplate:
+    "https://release.botc.app/resources/characters/{edition}/{id}_{alignment}.webp",
   titleStyle: {
     font: "Utm Agin",
     fontSize: 32,
