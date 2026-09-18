@@ -1,5 +1,5 @@
 import { CharacterSheet } from "./pages/CharacterSheet";
-import { ParsedScript, ScriptOptions, NightOrders } from "./types";
+import { ParsedScript, ScriptOptions, NightOrders, Jinx } from "./types";
 import { getFabledOrLoric } from "./utils/fabledOrLoric";
 import {
   groupCharactersByTeam,
@@ -11,6 +11,7 @@ import { SheetBack } from "./pages/SheetBack";
 
 import "./TeensyDoc.css";
 import { NightSheet } from "./pages/NightSheet";
+import { useEffect, useState } from "preact/hooks";
 
 type TeensyDocProps = {
   script: ParsedScript;
@@ -32,14 +33,29 @@ export const TeensyDoc = ({
       }
     : rawOptions;
 
+  const [jinxes, setJinxes] = useState<Jinx[] | null>(null);
+
+  useEffect(() => {
+    async function load() {
+      const innerJinxes = await findJinxes(
+        script.characters,
+        options.useOldJinxes,
+      );
+      setJinxes(innerJinxes);
+    }
+
+    load();
+  }, [script.characters, options.useOldJinxes]);
+
+  if (jinxes === null) {
+    return <div>Loading...</div>;
+  }
+
   const numberOfSheets =
     options.numberOfCharacterSheets + (options.numberOfCharacterSheets % 2); // Round up to even number
 
   const groupedCharacters = groupCharactersByTeam(script.characters);
 
-  const jinxes = options.showJinxes
-    ? findJinxes(script.characters, options.useOldJinxes)
-    : [];
   const resolvedJinxes = resolveJinxCharacters(jinxes, script.characters);
 
   const fabledAndLoric = getFabledOrLoric(
@@ -84,7 +100,7 @@ export const TeensyDoc = ({
                   />
                 )}
                 {/* If there is only one more back sheet to display, and
-                    the user wants to show a night sheet, include the second 
+                    the user wants to show a night sheet, include the second
                     side of the night sheet in this pair */}
                 {options.overleaf !== "none" &&
                   i + 1 === options.numberOfCharacterSheets &&
@@ -102,7 +118,7 @@ export const TeensyDoc = ({
                 {options.overleaf === "backingSheet" && (
                   <>
                     {/* If there is only one more back sheet to display, and
-                        the user wants to show a night sheet, include the 
+                        the user wants to show a night sheet, include the
                         second side of the night sheet in this pair */}
                     {i + 1 === options.numberOfCharacterSheets &&
                       options.showNightSheet && (
@@ -131,7 +147,7 @@ export const TeensyDoc = ({
                 {options.overleaf === "infoSheet" && (
                   <>
                     {/* If there is only one more info sheet to display, and
-                    the user wants to show a night sheet, include the second 
+                    the user wants to show a night sheet, include the second
                     side of the night sheet in this pair */}
                     {i + 1 === options.numberOfCharacterSheets &&
                       options.showNightSheet && (

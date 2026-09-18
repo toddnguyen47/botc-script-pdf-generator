@@ -26,15 +26,16 @@ export function groupCharactersByTeam(
   return grouped;
 }
 
-export function findJinxes(
+export async function findJinxes(
   characters: ResolvedCharacter[],
   useOldJinxes = false,
-): Jinx[] {
+): Promise<Jinx[]> {
   const characterIds = new Set(characters.map((c) => c.id.toLowerCase()));
   const applicableJinxes: Jinx[] = [];
+  const jinxes = await getJinxes();
 
   // Add global jinxes from official jinxes data
-  for (const jinx of getJinxes()) {
+  for (const jinx of jinxes) {
     const [char1, char2] = jinx.characters;
     if (characterIds.has(char1) && characterIds.has(char2)) {
       // If useOldJinxes is true and oldJinx exists, use it instead

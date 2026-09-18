@@ -1,7 +1,7 @@
 import { CharacterSheet } from "./pages/CharacterSheet";
 import { NightSheet } from "./pages/NightSheet";
 import { SheetBack } from "./pages/SheetBack";
-import { NightOrders, ParsedScript, ScriptOptions } from "./types";
+import { Jinx, NightOrders, ParsedScript, ScriptOptions } from "./types";
 import { getFabledOrLoric } from "./utils/fabledOrLoric";
 import {
   groupCharactersByTeam,
@@ -10,6 +10,7 @@ import {
 } from "./utils/scriptUtils";
 import "./FancyDoc.css";
 import { InfoSheet } from "./pages/InfoSheet";
+import { useEffect, useState } from "preact/hooks";
 
 export type FancyDocProps = {
   script: ParsedScript;
@@ -31,10 +32,25 @@ export function FancyDoc({
       }
     : rawOptions;
 
+  const [jinxes, setJinxes] = useState<Jinx[] | null>(null);
+
+  useEffect(() => {
+    async function load() {
+      const innerJinxes = await findJinxes(
+        script.characters,
+        options.useOldJinxes,
+      );
+      setJinxes(innerJinxes);
+    }
+
+    load();
+  }, [script.characters, options.useOldJinxes]);
+
+  if (jinxes === null) {
+    return <div>Loading...</div>;
+  }
+
   const groupedCharacters = groupCharactersByTeam(script.characters);
-  const jinxes = options.showJinxes
-    ? findJinxes(script.characters, options.useOldJinxes)
-    : [];
   const resolvedJinxes = resolveJinxCharacters(jinxes, script.characters);
   const fabledAndLoric = getFabledOrLoric(
     script.characters,

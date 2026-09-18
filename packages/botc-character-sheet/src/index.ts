@@ -22,5 +22,5 @@ export type {
 export { AppearanceLevel } from "./types";
 export { darken, parseRgb, rgbString } from "./utils/colours";
 export { getRole } from "./data/roles";
-export { loadJinxes, getJinxes } from "./data/jinxes";
+export { getJinxes } from "./data/jinxes";
 export { getFirstNightOrder, getOtherNightOrder } from "./data/nightsheet";
