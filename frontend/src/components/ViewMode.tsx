@@ -43,7 +43,7 @@ export function ViewMode({ scriptId }: ViewModeProps) {
         }
 
         const { script: sanitized, issues: scriptIssues } = sanitizeScript(
-          parseScript(data.rawScript),
+          await parseScript(data.rawScript),
         );
         const { options: mergedOptions, issues: optionsIssues } =
           mergeAndValidateOptions(data.options);

@@ -21,7 +21,7 @@ export type {
 } from "./types";
 export { AppearanceLevel } from "./types";
 export { darken, parseRgb, rgbString } from "./utils/colours";
-export { loadRoles, getRole } from "./data/roles";
+export { getRole } from "./data/roles";
 export { loadJinxes, getJinxes } from "./data/jinxes";
 export {
   loadNightsheet,

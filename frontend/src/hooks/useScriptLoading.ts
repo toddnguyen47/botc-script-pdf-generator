@@ -9,7 +9,7 @@ import { loadScript as loadSharedScript } from "../utils/scriptStorage";
 import JSON5 from "json5";
 
 export function useScriptLoading(
-  loadScript: (json: Script) => ParsedScript,
+  loadScript: (json: Script) => Promise<ParsedScript>,
   loadCharacterTokenReplacement: (
     json: CharacterReplacementData,
     parsedScript: ParsedScript,
@@ -185,8 +185,8 @@ export function useScriptLoading(
     reader.readAsText(file);
   };
 
-  const _loadScript = (json: any) => {
-    const parsed = loadScript(json);
+  const _loadScript = async (json: any) => {
+    const parsed = await loadScript(json);
     onLoad?.(json, parsed);
     setAlreadyParsedScript(parsed);
   };

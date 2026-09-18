@@ -14,10 +14,13 @@ export type OfficialRole = {
 };
 
 const JSON_URL = "https://release.botc.app/resources/data/roles.json";
+const CACHE_DURATION = 15 * 60 * 1000;
 
 let rolesById: Record<string, ResolvedCharacter> = {};
+let cachedAt = 0;
+let loading: Promise<void> | null = null;
 
-export async function loadRoles(): Promise<void> {
+async function loadRoles(): Promise<void> {
   const response = await fetch(JSON_URL);
 
   if (!response.ok) {
@@ -29,8 +32,22 @@ export async function loadRoles(): Promise<void> {
   rolesById = Object.fromEntries(
     rolesJson.map((role) => [role.id, role as unknown as ResolvedCharacter]),
   );
+
+  cachedAt = Date.now();
 }
 
-export function getRole(id: string): ResolvedCharacter | null {
+export async function getRole(id: string): Promise<ResolvedCharacter | null> {
+  const cacheExpired = Date.now() - cachedAt >= CACHE_DURATION;
+
+  if (cacheExpired) {
+    if (!loading) {
+      loading = loadRoles().finally(() => {
+        loading = null;
+      });
+    }
+
+    await loading;
+  }
+
   return rolesById[id] ?? null;
 }

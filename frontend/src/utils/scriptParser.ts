@@ -2,7 +2,7 @@ import { ParsedScript, ResolvedCharacter, getRole } from "botc-character-sheet";
 import { toTitleCase } from "./stringUtils";
 import { ScriptMetadata, Script, ScriptCharacter } from "botc-script-checker";
 
-export function parseScript(json: unknown): ParsedScript {
+export async function parseScript(json: unknown): Promise<ParsedScript> {
   if (!Array.isArray(json)) {
     throw new Error("Script must be an array");
   }
@@ -14,7 +14,7 @@ export function parseScript(json: unknown): ParsedScript {
   for (const element of script) {
     if (typeof element === "string") {
       // Official character ID
-      const resolved = resolveOfficialCharacter(element);
+      const resolved = await resolveOfficialCharacter(element);
       if (resolved) {
         characters.push(resolved);
       }
@@ -30,7 +30,7 @@ export function parseScript(json: unknown): ParsedScript {
         } else {
           // Possibly old format or official character object — preserve any inline firstNight/otherNight override.
           const id = (element as { id: string }).id;
-          const resolved = resolveOfficialCharacter(id);
+          const resolved = await resolveOfficialCharacter(id);
           if (resolved) {
             const raw = element as {
               firstNight?: unknown;
@@ -57,14 +57,16 @@ export function parseScript(json: unknown): ParsedScript {
     (c) => typeof c.id === "string" && c.id.toLowerCase() === "bootlegger",
   );
   if (metadata?.bootlegger?.length && !bootleggerInCharacters) {
-    const bootleggerChar = resolveOfficialCharacter("bootlegger");
+    const bootleggerChar = await resolveOfficialCharacter("bootlegger");
     bootleggerChar && characters.push(bootleggerChar);
   }
 
   return { metadata, characters };
 }
 
-function resolveOfficialCharacter(id: string): ResolvedCharacter | null {
+async function resolveOfficialCharacter(
+  id: string,
+): Promise<ResolvedCharacter | null> {
   const lowerId = id.toLowerCase().replace("_", "");
   const char = getRole(lowerId);
 

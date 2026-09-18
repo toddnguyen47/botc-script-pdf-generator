@@ -35,10 +35,10 @@ export function useScriptParsing() {
     }
   };
 
-  const loadScript = (json: Script) => {
+  const loadScript = async (json: Script) => {
     setRawScript(json);
     const { script: sanitized, issues: newIssues } = sanitizeScript(
-      parseScript(json),
+      await parseScript(json),
     );
     setScript(sanitized);
     setIssues(newIssues);
@@ -89,12 +89,12 @@ export function useScriptParsing() {
     }
 
     // Debounce parsing to avoid expensive operations on every keystroke
-    parseTimeoutRef.current = setTimeout(() => {
+    parseTimeoutRef.current = setTimeout(async () => {
       try {
         const json = JSON5.parse(newText);
         setRawScript(json);
         const { script: sanitized, issues: newIssues } = sanitizeScript(
-          parseScript(json),
+          await parseScript(json),
         );
         setScript(sanitized);
         setIssues(newIssues);
@@ -112,14 +112,14 @@ export function useScriptParsing() {
     }, 300);
   };
 
-  const handleSort = () => {
+  const handleSort = async () => {
     if (!rawScript) return;
 
     try {
       const sorted = sortScript(rawScript);
       setRawScript(sorted);
       const { script: sanitized, issues: newIssues } = sanitizeScript(
-        parseScript(sorted),
+        await parseScript(sorted),
       );
       setScript(sanitized);
       setIssues(newIssues);
