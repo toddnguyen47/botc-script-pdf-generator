@@ -1,11 +1,30 @@
-import nightsheetJson from "./nightsheet.json";
-
 type Nightsheet = {
   firstNight: string[];
   otherNight: string[];
 };
 
-const nightsheet = nightsheetJson as Nightsheet;
+let firstNightOrder: string[] = [];
+let otherNightOrder: string[] = [];
 
-export const FIRST_NIGHT_ORDER: string[] = nightsheet.firstNight;
-export const OTHER_NIGHT_ORDER: string[] = nightsheet.otherNight;
+const JSON_URL = "https://release.botc.app/resources/data/nightsheet.json";
+
+export async function loadNightsheet(): Promise<void> {
+  const response = await fetch(JSON_URL);
+
+  if (!response.ok) {
+    throw new Error(`Failed to load nightsheet: ${response.status}`);
+  }
+
+  const nightsheet = (await response.json()) as Nightsheet;
+
+  firstNightOrder = nightsheet.firstNight;
+  otherNightOrder = nightsheet.otherNight;
+}
+
+export function getFirstNightOrder(): string[] {
+  return firstNightOrder;
+}
+
+export function getOtherNightOrder(): string[] {
+  return otherNightOrder;
+}

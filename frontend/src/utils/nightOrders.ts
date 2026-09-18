@@ -3,8 +3,8 @@ import {
   NightOrderEntry,
   NightOrders,
   ParsedScript,
-  FIRST_NIGHT_ORDER,
-  OTHER_NIGHT_ORDER,
+  getFirstNightOrder,
+  getOtherNightOrder,
 } from "botc-character-sheet";
 
 type RawCharMap = Map<string, { firstNight?: number; otherNight?: number }>;
@@ -64,7 +64,7 @@ const buildNightOrder = (
   rawCharMap: RawCharMap,
 ): NightOrderEntry[] => {
   const orderList =
-    nightType === "firstNight" ? FIRST_NIGHT_ORDER : OTHER_NIGHT_ORDER;
+    nightType === "firstNight" ? getFirstNightOrder() : getOtherNightOrder();
 
   // Filter characters that have actions for this night
   const activeChars = characters.filter((char) => {
