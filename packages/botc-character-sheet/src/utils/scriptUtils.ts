@@ -1,3 +1,4 @@
+import { QueryClient } from "@tanstack/query-core";
 import { ScriptCharacter } from "botc-script-checker";
 import { ResolvedCharacter, GroupedCharacters, Jinx } from "../types";
 import { getJinxes } from "../data/jinxes";
@@ -193,6 +194,8 @@ export function getJinxedCharacters(
 
   return allCharacters.filter((char) => jinxedCharacterIds.includes(char.id));
 }
+
+export const queryClient = new QueryClient();
 
 function getDefaultAlignment(character: ResolvedCharacter): string {
   const team = character.team;

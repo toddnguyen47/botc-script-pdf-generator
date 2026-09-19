@@ -1,4 +1,6 @@
+import { queryOptions, useQuery } from "@tanstack/react-query";
 import type { ResolvedCharacter } from "../types";
+import { queryClient } from "../utils/scriptUtils";
 
 export type OfficialRole = {
   id: string;
@@ -14,40 +16,35 @@ export type OfficialRole = {
 };
 
 const JSON_URL = "https://release.botc.app/resources/data/roles.json";
-const CACHE_DURATION = 15 * 60 * 1000;
 
-let rolesById: Record<string, ResolvedCharacter> = {};
-let cachedAt = 0;
-let loading: Promise<void> | null = null;
+const rolesQuery = queryOptions({
+  queryKey: ["roles"],
+  queryFn: loadRoles,
+  staleTime: 15 * 60 * 1000,
+});
 
-async function loadRoles(): Promise<void> {
+async function loadRoles(): Promise<ResolvedCharacter[]> {
   const response = await fetch(JSON_URL);
 
   if (!response.ok) {
     throw new Error(`Failed to load roles: ${response.status}`);
   }
 
-  const rolesJson = (await response.json()) as OfficialRole[];
+  const roles = (await response.json()) as OfficialRole[];
 
-  rolesById = Object.fromEntries(
-    rolesJson.map((role) => [role.id, role as unknown as ResolvedCharacter]),
-  );
+  return roles as unknown as ResolvedCharacter[];
+}
 
-  cachedAt = Date.now();
+export function useRoles() {
+  return useQuery(rolesQuery);
+}
+
+export async function getRoles(): Promise<ResolvedCharacter[]> {
+  return queryClient.query(rolesQuery);
 }
 
 export async function getRole(id: string): Promise<ResolvedCharacter | null> {
-  const cacheExpired = Date.now() - cachedAt >= CACHE_DURATION;
+  const roles = await getRoles();
 
-  if (cacheExpired) {
-    if (!loading) {
-      loading = loadRoles().finally(() => {
-        loading = null;
-      });
-    }
-
-    await loading;
-  }
-
-  return rolesById[id] ?? null;
+  return roles.find((role) => role.id === id) ?? null;
 }

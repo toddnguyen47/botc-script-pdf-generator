@@ -68,7 +68,7 @@ async function resolveOfficialCharacter(
   id: string,
 ): Promise<ResolvedCharacter | null> {
   const lowerId = id.toLowerCase().replace("_", "");
-  const char = getRole(lowerId);
+  const char = await getRole(lowerId);
 
   if (!char) {
     console.warn(`Character not found: ${id}`);
