@@ -1,10 +1,10 @@
 import { useState, useEffect } from "preact/hooks";
+import { lazy } from "preact/compat";
 import type {
   ScriptOptions,
   ParsedScript,
   NightOrders,
 } from "botc-character-sheet";
-import { FancyDoc, TeensyDoc } from "botc-character-sheet";
 import { DEFAULT_OPTIONS } from "../types/options";
 import type { ValidationIssue } from "../types/validation";
 import { loadScript as loadSharedScript } from "../utils/scriptStorage";
@@ -14,6 +14,16 @@ import { mergeAndValidateOptions } from "../utils/optionsValidation";
 import { calculateNightOrders } from "../utils/nightOrders";
 import { useMobilePreviewScale } from "../hooks/useMobileControls";
 import { ScriptIssues } from "./ScriptControls/ScriptIssues";
+const FancyDoc = lazy(() =>
+  import("botc-character-sheet/FancyDoc").then((module) => ({
+    default: module.FancyDoc,
+  })),
+);
+const TeensyDoc = lazy(() =>
+  import("botc-character-sheet/TeensyDoc").then((module) => ({
+    default: module.TeensyDoc,
+  })),
+);
 
 interface ViewModeProps {
   scriptId: string;

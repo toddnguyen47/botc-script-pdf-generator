@@ -10,7 +10,15 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-    "./style.css": "./dist/style.css"
+    "./style.css": "./dist/style.css",
+    "./FancyDoc": {
+      "import": "./dist/FancyDoc.js",
+      "types": "./dist/FancyDoc.d.ts"
+    },
+    "./TeensyDoc": {
+      "import": "./dist/TeensyDoc.js",
+      "types": "./dist/TeensyDoc.d.ts"
+    }
   },
   "files": [
     "dist"

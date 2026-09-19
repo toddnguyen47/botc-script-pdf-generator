@@ -8,9 +8,13 @@ export default defineConfig({
   plugins: [preact(), tscPlugin()],
   build: {
     lib: {
-      entry: resolve(__dirname, "src/index.ts"),
+      entry: {
+        index: resolve(__dirname, "src/index.ts"),
+        FancyDoc: resolve(__dirname, "src/FancyDoc.tsx"),
+        TeensyDoc: resolve(__dirname, "src/TeensyDoc.tsx"),
+      },
       name: "CharacterSheet",
-      fileName: "index",
+      fileName: (_format, entryName) => `${entryName}.js`,
       formats: ["es"],
     },
     rollupOptions: {

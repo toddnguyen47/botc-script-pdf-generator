@@ -1,4 +1,5 @@
 import { useState, useEffect } from "preact/hooks";
+import { lazy } from "preact/compat";
 import "botc-character-sheet/style.css";
 import { logUsage } from "./utils/logger";
 import type { Script } from "botc-script-checker";
@@ -26,12 +27,18 @@ import { randomColor, DEFAULT_OPTIONS } from "./types/options";
 import { mergeAndValidateOptions } from "./utils/optionsValidation";
 import type { ValidationIssue } from "./types/validation";
 import "./app.css";
-import {
-  FancyDoc,
-  ScriptOptions,
-  TeensyDoc,
-  AppearanceLevel,
-} from "botc-character-sheet";
+import { ScriptOptions, AppearanceLevel } from "botc-character-sheet";
+
+const FancyDoc = lazy(() =>
+  import("botc-character-sheet/FancyDoc").then((module) => ({
+    default: module.FancyDoc,
+  })),
+);
+const TeensyDoc = lazy(() =>
+  import("botc-character-sheet/TeensyDoc").then((module) => ({
+    default: module.TeensyDoc,
+  })),
+);
 
 // Check if we're in view mode (URL pattern: /view/:id)
 function getViewModeId(): string | null {

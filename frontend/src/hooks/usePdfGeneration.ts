@@ -5,7 +5,7 @@ import {
   ParsedScript,
   ScriptOptions,
 } from "botc-character-sheet";
-import { PDFDocument } from "pdf-lib";
+const { PDFDocument } = await import("pdf-lib");
 import { downloadBlob } from "../utils/downloadFile";
 
 export function usePdfGeneration() {

@@ -1,14 +1,23 @@
 import { h } from "preact";
+import { lazy } from "preact/compat";
 import { render } from "preact-render-to-string";
 import {
   ParsedScript,
-  FancyDoc,
   NightOrderEntry,
   ScriptOptions,
-  TeensyDoc,
 } from "botc-character-sheet";
 import { readFileSync } from "fs";
 import { join } from "path";
+const FancyDoc = lazy(() =>
+  import("botc-character-sheet/FancyDoc").then((module) => ({
+    default: module.FancyDoc,
+  })),
+);
+const TeensyDoc = lazy(() =>
+  import("botc-character-sheet/TeensyDoc").then((module) => ({
+    default: module.TeensyDoc,
+  })),
+);
 
 // Default asset base URL for production
 const DEFAULT_ASSET_BASE = "https://fancy.ravenswoodstudio.xyz";
