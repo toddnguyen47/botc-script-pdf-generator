@@ -1,5 +1,5 @@
 import { useState, useEffect } from "preact/hooks";
-import { lazy } from "preact/compat";
+import { lazy, Suspense } from "preact/compat";
 import "botc-character-sheet/style.css";
 import { logUsage } from "./utils/logger";
 import type { Script } from "botc-script-checker";
@@ -406,28 +406,32 @@ function EditMode() {
 
         {script && options.teensy && (
           <div className="preview-section teensy-preview">
-            <TeensyDoc
-              script={script}
-              options={{
-                ...options,
-                dimensions: {
-                  ...options.dimensions,
-                  width: options.dimensions.height / 2,
-                  height: options.dimensions.width,
-                },
-              }}
-              nightOrders={nightOrders}
-            />
+            <Suspense fallback={<div>Loading document...</div>}>
+              <TeensyDoc
+                script={script}
+                options={{
+                  ...options,
+                  dimensions: {
+                    ...options.dimensions,
+                    width: options.dimensions.height / 2,
+                    height: options.dimensions.width,
+                  },
+                }}
+                nightOrders={nightOrders}
+              />
+            </Suspense>
           </div>
         )}
 
         {script && !options.teensy && (
           <div className="preview-section">
-            <FancyDoc
-              script={script}
-              options={options}
-              nightOrders={nightOrders}
-            />
+            <Suspense fallback={<div>Loading document...</div>}>
+              <FancyDoc
+                script={script}
+                options={options}
+                nightOrders={nightOrders}
+              />
+            </Suspense>
           </div>
         )}
 
