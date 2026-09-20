@@ -1,7 +1,5 @@
-import { QueryClient } from "@tanstack/query-core";
 import { ScriptCharacter } from "botc-script-checker";
 import { ResolvedCharacter, GroupedCharacters, Jinx } from "../types";
-import { getJinxes } from "../data/jinxes";
 
 export function groupCharactersByTeam(
   characters: ResolvedCharacter[],
@@ -27,13 +25,13 @@ export function groupCharactersByTeam(
   return grouped;
 }
 
-export async function findJinxes(
+export function findJinxes(
   characters: ResolvedCharacter[],
+  jinxes: Jinx[],
   useOldJinxes = false,
-): Promise<Jinx[]> {
+): Jinx[] {
   const characterIds = new Set(characters.map((c) => c.id.toLowerCase()));
   const applicableJinxes: Jinx[] = [];
-  const jinxes = await getJinxes();
 
   // Add global jinxes from official jinxes data
   for (const jinx of jinxes) {
@@ -194,8 +192,6 @@ export function getJinxedCharacters(
 
   return allCharacters.filter((char) => jinxedCharacterIds.includes(char.id));
 }
-
-export const queryClient = new QueryClient();
 
 function getDefaultAlignment(character: ResolvedCharacter): string {
   const team = character.team;

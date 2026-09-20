@@ -1,7 +1,7 @@
 import { CharacterSheet } from "./pages/CharacterSheet";
 import { NightSheet } from "./pages/NightSheet";
 import { SheetBack } from "./pages/SheetBack";
-import { Jinx, NightOrders, ParsedScript, ScriptOptions } from "./types";
+import { NightOrders, ParsedScript, ScriptOptions } from "./types";
 import { getFabledOrLoric } from "./utils/fabledOrLoric";
 import {
   groupCharactersByTeam,
@@ -10,7 +10,9 @@ import {
 } from "./utils/scriptUtils";
 import "./FancyDoc.css";
 import { InfoSheet } from "./pages/InfoSheet";
-import { useEffect, useState } from "preact/hooks";
+import { useMemo } from "preact/hooks";
+import { useJinxes } from "./data/jinxes";
+import { QueryProvider } from "./utils/queryProvider";
 
 export type FancyDocProps = {
   script: ParsedScript;
@@ -18,7 +20,15 @@ export type FancyDocProps = {
   nightOrders: NightOrders;
 };
 
-export function FancyDoc({
+export function FancyDoc(props: FancyDocProps) {
+  return (
+    <QueryProvider>
+      <FancyDocContent {...props} />
+    </QueryProvider>
+  );
+}
+
+function FancyDocContent({
   script,
   options: rawOptions,
   nightOrders,
@@ -32,21 +42,15 @@ export function FancyDoc({
       }
     : rawOptions;
 
-  const [jinxes, setJinxes] = useState<Jinx[] | null>(null);
+  const { data: allJinxes, isLoading } = useJinxes();
 
-  useEffect(() => {
-    async function load() {
-      const innerJinxes = await findJinxes(
-        script.characters,
-        options.useOldJinxes,
-      );
-      setJinxes(innerJinxes);
-    }
+  const jinxes = useMemo(() => {
+    if (!allJinxes) return [];
 
-    load();
-  }, [script.characters, options.useOldJinxes]);
+    return findJinxes(script.characters, allJinxes, options.useOldJinxes);
+  }, [script.characters, allJinxes, options.useOldJinxes]);
 
-  if (jinxes === null) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 

@@ -1,5 +1,5 @@
 import { CharacterSheet } from "./pages/CharacterSheet";
-import { ParsedScript, ScriptOptions, NightOrders, Jinx } from "./types";
+import { ParsedScript, ScriptOptions, NightOrders } from "./types";
 import { getFabledOrLoric } from "./utils/fabledOrLoric";
 import {
   groupCharactersByTeam,
@@ -11,7 +11,9 @@ import { SheetBack } from "./pages/SheetBack";
 
 import "./TeensyDoc.css";
 import { NightSheet } from "./pages/NightSheet";
-import { useEffect, useState } from "preact/hooks";
+import { useJinxes } from "./data/jinxes";
+import { useMemo } from "preact/hooks";
+import { QueryProvider } from "./utils/queryProvider";
 
 type TeensyDocProps = {
   script: ParsedScript;
@@ -19,11 +21,19 @@ type TeensyDocProps = {
   nightOrders: NightOrders;
 };
 
-export const TeensyDoc = ({
+export const TeensyDoc = (props: TeensyDocProps) => {
+  return (
+    <QueryProvider>
+      <TeensyDocContent {...props} />
+    </QueryProvider>
+  );
+};
+
+function TeensyDocContent({
   script,
   options: rawOptions,
   nightOrders,
-}: TeensyDocProps) => {
+}: TeensyDocProps) {
   // If a custom font URL is provided, inject a @font-face and override titleStyle.font
   const hasCustomFont = !!rawOptions.titleStyle.customFontUrl;
   const options = hasCustomFont
@@ -33,21 +43,15 @@ export const TeensyDoc = ({
       }
     : rawOptions;
 
-  const [jinxes, setJinxes] = useState<Jinx[] | null>(null);
+  const { data: allJinxes, isLoading } = useJinxes();
 
-  useEffect(() => {
-    async function load() {
-      const innerJinxes = await findJinxes(
-        script.characters,
-        options.useOldJinxes,
-      );
-      setJinxes(innerJinxes);
-    }
+  const jinxes = useMemo(() => {
+    if (!allJinxes) return [];
 
-    load();
-  }, [script.characters, options.useOldJinxes]);
+    return findJinxes(script.characters, allJinxes, options.useOldJinxes);
+  }, [script.characters, allJinxes, options.useOldJinxes]);
 
-  if (jinxes === null) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 
@@ -203,4 +207,4 @@ export const TeensyDoc = ({
         )}
     </div>
   );
-};
+}

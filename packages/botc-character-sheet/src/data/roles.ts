@@ -1,6 +1,6 @@
 import { queryOptions, useQuery } from "@tanstack/react-query";
 import type { ResolvedCharacter } from "../types";
-import { queryClient } from "../utils/scriptUtils";
+import { queryClient } from "../utils/queryProvider";
 
 export type OfficialRole = {
   id: string;

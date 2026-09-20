@@ -1,3 +1,6 @@
+import { useQuery } from "@tanstack/react-query";
+import { queryClient } from "../utils/queryProvider";
+
 import type { Jinx } from "../types";
 
 type OfficialJinxEntry = {
@@ -6,46 +9,34 @@ type OfficialJinxEntry = {
 };
 
 const JSON_URL = "https://release.botc.app/resources/data/jinxes.json";
-const CACHE_DURATION = 15 * 60 * 1000;
-
-let jinxes: Jinx[] | null = null;
-let cachedAt = 0;
-let loading: Promise<Jinx[]> | null = null;
 
 async function loadJinxes(): Promise<Jinx[]> {
-  if (jinxes !== null && Date.now() - cachedAt < CACHE_DURATION) {
-    return jinxes;
+  const response = await fetch(JSON_URL);
+
+  if (!response.ok) {
+    throw new Error(`Failed to load jinxes: ${response.status}`);
   }
 
-  if (!loading) {
-    loading = fetch(JSON_URL)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Failed to load jinxes: ${response.status}`);
-        }
+  const jinxesJson = (await response.json()) as OfficialJinxEntry[];
 
-        return response.json() as Promise<OfficialJinxEntry[]>;
-      })
-      .then((jinxesJson) => {
-        jinxes = jinxesJson.flatMap(({ id: char1, jinx }) =>
-          jinx.map(({ id: char2, reason }) => ({
-            characters: [char1, char2] as [string, string],
-            jinx: reason,
-          })),
-        );
+  return jinxesJson.flatMap(({ id: char1, jinx }) =>
+    jinx.map(({ id: char2, reason }) => ({
+      characters: [char1, char2] as [string, string],
+      jinx: reason,
+    })),
+  );
+}
 
-        cachedAt = Date.now();
+const jinxesQuery = {
+  queryKey: ["jinxes"],
+  queryFn: loadJinxes,
+  staleTime: 15 * 60 * 1000,
+};
 
-        return jinxes;
-      })
-      .finally(() => {
-        loading = null;
-      });
-  }
-
-  return loading;
+export function useJinxes() {
+  return useQuery(jinxesQuery);
 }
 
 export async function getJinxes(): Promise<Jinx[]> {
-  return loadJinxes();
+  return queryClient.query(jinxesQuery);
 }

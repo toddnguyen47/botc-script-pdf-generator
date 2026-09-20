@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { queryClient } from "../utils/scriptUtils";
+import { queryClient } from "../utils/queryProvider";
 
 export type Nightsheet = {
   firstNight: string[];
@@ -18,18 +18,18 @@ async function loadNightsheet(): Promise<Nightsheet> {
   return response.json() as Promise<Nightsheet>;
 }
 
+const nightsheetQuery = {
+  queryKey: ["nightsheet"],
+  queryFn: loadNightsheet,
+  staleTime: 15 * 60 * 1000,
+};
+
 export function useNightsheet() {
-  return useQuery({
-    queryKey: ["nightsheet"],
-    queryFn: loadNightsheet,
-  });
+  return useQuery(nightsheetQuery);
 }
 
 export async function getNightsheet(): Promise<Nightsheet> {
-  return queryClient.query({
-    queryKey: ["nightsheet"],
-    queryFn: loadNightsheet,
-  });
+  return queryClient.query(nightsheetQuery);
 }
 
 export async function getFirstNightOrder(): Promise<string[]> {
