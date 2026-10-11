@@ -2,10 +2,20 @@ import argparse
 import json
 
 
-ALLOWED_TEAMS_TO_REPLACE_SET = set(("townsfolk", "outsider", "minion", "demon"))
-ALLOWED_TEAMS_REPLACEMENTS_SET = set(
-    ("townsfolk", "outsider", "minion", "demon", "traveller")
-)
+ALLOWED_TEAMS_TO_REPLACE_SET = {
+    "townsfolk",
+    "outsider",
+    "minion",
+    "demon",
+}
+
+ALLOWED_TEAMS_REPLACEMENTS_SET = {
+    "townsfolk",
+    "outsider",
+    "minion",
+    "demon",
+    "traveller",
+}
 
 TEAM_GROUPS = {
     "townsfolk": ("townsfolk", "outsider", "traveller"),
@@ -13,6 +23,12 @@ TEAM_GROUPS = {
     "minion": ("minion", "demon", "traveller"),
     "demon": ("demon", "minion", "traveller"),
 }
+
+
+def get_number_of_reminders(role):
+    return len(role.get("reminders", [])) + len(
+        role.get("remindersGlobal", [])
+    )
 
 
 def main():
@@ -43,10 +59,7 @@ def main():
 
     args = parser.parse_args()
 
-    # --------------------------------------------------------------
-    # Read files
-    # --------------------------------------------------------------
-
+    # Read files.
     with open(args.base, "r", encoding="utf-8") as f:
         base = json.load(f)
 
@@ -56,20 +69,13 @@ def main():
     with open(args.roles, "r", encoding="utf-8") as f:
         roles = json.load(f)
 
-    # --------------------------------------------------------------
     # Build role lookup.
-    #
-    # roles.json is the source of truth for:
-    #   - name
-    #   - team
-    #   - reminder count
-    # --------------------------------------------------------------
-
+    # roles.json is the source of truth for name, team, and reminder count.
     role_info = {
         role["id"]: {
             "name": role["name"],
             "team": role["team"],
-            "numberOfReminders": len(role.get("reminders", [])),
+            "numberOfReminders": get_number_of_reminders(role),
         }
         for role in roles
         if (
@@ -80,57 +86,34 @@ def main():
         )
     }
 
-    # --------------------------------------------------------------
     # Get allowed role IDs from the script.
-    # --------------------------------------------------------------
-
     script_roles = {
         role
         for role in script
-        if isinstance(role, str)
-        and role in role_info
-        and role_info[role].get("team") in ALLOWED_TEAMS_TO_REPLACE_SET
+        if (
+            isinstance(role, str)
+            and role in role_info
+            and role_info[role]["team"] in ALLOWED_TEAMS_TO_REPLACE_SET
+        )
     }
 
-    # --------------------------------------------------------------
-    # Find roles that:
-    #
-    #   1. Are in the script
-    #   2. Are an allowed team
-    #   3. Are NOT in base
-    #
-    # Keep roles.json ordering.
-    # --------------------------------------------------------------
-
+    # Find roles that are in the script, belong to an allowed team,
+    # and are not in the base. Preserve roles.json ordering.
     missing_roles = [
         role["id"]
         for role in roles
         if (
             isinstance(role, dict)
-            and role["id"] in script_roles
+            and role.get("id") in script_roles
             and role["id"] not in base
             and role.get("team") in ALLOWED_TEAMS_TO_REPLACE_SET
         )
     ]
 
-    # --------------------------------------------------------------
-    # Build available roles.
-    #
-    # These remain available for manual intervention.
-    # --------------------------------------------------------------
-
-    available = {team: [] for team in ALLOWED_TEAMS_REPLACEMENTS_SET}
-
-    # Blank is a special Townsfolk/Outsider role.
-    #
-    # It has 3 reminder tokens and can replace any
-    # Townsfolk/Outsider role with 0-3 reminders.
-    available["townsfolk"].append(
-        {
-            "name": "Blank",
-            "numberOfReminders": 3,
-        }
-    )
+    # Build available roles for manual intervention.
+    available = {
+        team: [] for team in ALLOWED_TEAMS_REPLACEMENTS_SET
+    }
 
     for role in roles:
         if not isinstance(role, dict):
@@ -139,36 +122,23 @@ def main():
         role_id = role.get("id")
         team = role.get("team")
 
-        if role_id in base and role_id in role_info and role_id not in script_roles:
+        if (
+            role_id in base
+            and role_id in role_info
+            and role_id not in script_roles
+        ):
             available[team].append(
                 {
                     "name": role["name"],
-                    "numberOfReminders": len(role.get("reminders", [])),
+                    "numberOfReminders": get_number_of_reminders(role),
                 }
             )
 
-    # --------------------------------------------------------------
-    # Build possibleReplacements.
-    #
-    # Structure:
-    #
-    # "Noble": {
-    #     "numberOfReminders": 2,
-    #     "available": [
-    #         "Innkeeper",
-    #         "Lunatic",
-    #         "Blank"
-    #     ]
-    # }
-    #
-    # possibleReplacements contains ALL possible available roles.
-    # --------------------------------------------------------------
-
+    # Build possible replacements.
     can_replace = {}
 
     for role_id in missing_roles:
         missing_role = role_info[role_id]
-
         missing_team = missing_role["team"]
         missing_reminders = missing_role["numberOfReminders"]
 
@@ -177,26 +147,18 @@ def main():
         # Normal available roles, ordered by team preference.
         for preferred_team in TEAM_GROUPS[missing_team]:
             for available_role in available[preferred_team]:
-                if available_role["name"] == "Blank":
-                    continue
+                available_reminders = available_role["numberOfReminders"]
 
-                missing_reminders_leq_1 = (
+                reminders_match = (
                     missing_reminders <= 1
-                    and available_role["numberOfReminders"] == missing_reminders
-                )
-                missing_reminders_g_1 = (
+                    and available_reminders == missing_reminders
+                ) or (
                     missing_reminders > 1
-                    and available_role["numberOfReminders"] >= missing_reminders
+                    and available_reminders >= missing_reminders
                 )
 
-                if missing_reminders_leq_1 or missing_reminders_g_1:
+                if reminders_match:
                     suggestions.append(available_role["name"])
-
-        # Blank is a last resort.
-        #
-        # It does NOT need the same number of reminders.
-        if missing_team in {"townsfolk", "outsider"} and missing_reminders <= 3:
-            suggestions.append("Blank")
 
         # Remove duplicates while preserving order.
         suggestions = list(dict.fromkeys(suggestions))
@@ -209,26 +171,19 @@ def main():
             "available": suggestions,
         }
 
-    # --------------------------------------------------------------
     # Build automatic replacements.
-    #
-    # Choose ONE available role for each missing role.
-    #
-    # An available role can only be used once.
-    # --------------------------------------------------------------
-
+    # Each available role can only be used once.
     replacements = {}
     used_available = set()
 
     for role_id in missing_roles:
         missing_role = role_info[role_id]
         missing_name = missing_role["name"]
-
         suggestions = can_replace[missing_name]["available"]
 
         replacement = None
 
-        # Go through suggestions in their priority order.
+        # Choose the first unused suggestion in priority order.
         for suggestion in suggestions:
             if suggestion == "NEED A REPLACEMENT":
                 continue
@@ -243,15 +198,7 @@ def main():
             replacements[missing_name] = replacement
             used_available.add(replacement)
 
-    # --------------------------------------------------------------
-    # Write output.
-    #
-    # Order:
-    #   1. replacements
-    #   2. possibleReplacements
-    #   3. available
-    # --------------------------------------------------------------
-
+    # Write output in the desired order.
     output = {
         "replacements": replacements,
         "possibleReplacements": can_replace,
