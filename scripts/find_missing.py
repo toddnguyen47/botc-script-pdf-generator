@@ -149,13 +149,16 @@ def main():
             for available_role in available[preferred_team]:
                 available_reminders = available_role["numberOfReminders"]
 
-                reminders_match = (
-                    missing_reminders <= 1
-                    and available_reminders == missing_reminders
-                ) or (
-                    missing_reminders > 1
-                    and available_reminders >= missing_reminders
-                )
+                if missing_team == "demon":
+                    reminders_match = available_reminders >= missing_reminders
+                else:
+                    reminders_match = (
+                        missing_reminders <= 1
+                        and available_reminders == missing_reminders
+                    ) or (
+                        missing_reminders > 1
+                        and available_reminders >= missing_reminders
+                    )
 
                 if reminders_match:
                     suggestions.append(available_role["name"])
