@@ -235,16 +235,19 @@ function Header({
         )} */}
 
         {logo && <img className="script-logo" src={logo}></img>}
-        {showTitle && (
-          <span
-            style={{
-              mixBlendMode: solidHeader ? "normal" : "multiply",
-            }}
-          >
-            {title}
-          </span>
-        )}
-        {author && <span> - by {author}</span>}
+        <div
+          className="sheet-header-text"
+          style={{
+            mixBlendMode: solidHeader ? "normal" : "multiply",
+          }}
+        >
+          {showTitle && <span>{title}</span>}
+          {author && (
+            <>
+              <span className="sheet-author">- by {author}</span>
+            </>
+          )}
+        </div>
         {/* {showSwirls && (
           <img
             src="/images/black-swirl-divider.png"

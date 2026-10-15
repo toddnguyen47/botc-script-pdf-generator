@@ -169,15 +169,26 @@
     );
 }
 
-.sheet-author {
-  font-family: "PT Serif", "Goudy Old Style", "Goudy", Georgia, serif;
-  font-size: 10pt;
-  font-weight: bold;
-  text-align: center;
-  /* margin: -5mm 0 3mm 0; */
-  margin-bottom: 5mm;
-  color: #333;
+/* .sheet-author { */
+/* font-family: "PT Serif", "Goudy Old Style", "Goudy", Georgia, serif; */
+/* font-size: 10pt; */
+/* font-weight: bold; */
+/* text-align: center; */
+/* margin: -5mm 0 3mm 0; */
+/* margin-bottom: 5mm; */
+/* color: #333; */
+/* } */
+
+.sheet-header-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5mm;
 }
+
+/* .sheet-header-text .sheet-author {
+  font-size: calc(var(--title-font-size) * 0.6);
+} */
 
 .characters-grid {
   display: flex;
