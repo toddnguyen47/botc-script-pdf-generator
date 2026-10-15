@@ -97,6 +97,7 @@
   width: fit-content;
   align-self: center;
   gap: 3mm;
+  margin-bottom: 5mm;
 }
 
 .sheet-header span {
@@ -123,7 +124,8 @@
 }
 
 .swirl-divider {
-  width: 35mm;
+  /* width: 35mm; */
+  width: 10mm;
   mix-blend-mode: soft-light;
 }
 

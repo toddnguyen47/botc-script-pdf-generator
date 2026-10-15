@@ -244,6 +244,7 @@ function Header({
             {title}
           </span>
         )}
+        {author && <span> - by {author}</span>}
         {showSwirls && (
           <img
             src="/images/black-swirl-divider.png"
@@ -251,7 +252,7 @@ function Header({
           ></img>
         )}
       </div>
-      {author && <div className="sheet-author">by {author}</div>}
+      {/* {author && <div className="sheet-author">by {author}</div>} */}
     </>
   );
 }
