@@ -62,11 +62,11 @@ export function CharacterSheetOptions({
         onChange={(value) => onOptionChange("showTitle", value)}
       />
 
-      <Toggle
+      {/* <Toggle
         label="Show Swirls"
         checked={options.showSwirls}
         onChange={(value) => onOptionChange("showSwirls", value)}
-      />
+      /> */}
 
       <Toggle
         label="Show Jinxes"

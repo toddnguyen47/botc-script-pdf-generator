@@ -227,12 +227,12 @@ function Header({
   return (
     <>
       <div className="sheet-header">
-        {showSwirls && (
+        {/* {showSwirls && (
           <img
             src="/images/black-swirl-divider.png"
             className="swirl-divider"
           ></img>
-        )}
+        )} */}
 
         {logo && <img className="script-logo" src={logo}></img>}
         {showTitle && (
@@ -245,12 +245,12 @@ function Header({
           </span>
         )}
         {author && <span> - by {author}</span>}
-        {showSwirls && (
+        {/* {showSwirls && (
           <img
             src="/images/black-swirl-divider.png"
             className="swirl-divider flip"
           ></img>
-        )}
+        )} */}
       </div>
       {/* {author && <div className="sheet-author">by {author}</div>} */}
     </>
