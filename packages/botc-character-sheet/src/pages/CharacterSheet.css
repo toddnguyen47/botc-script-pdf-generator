@@ -292,7 +292,7 @@
 
 .inline-jinx-icons {
   display: inline-flex;
-  gap: 0.5mm;
+  gap: 3mm;
   align-items: center;
   margin-left: 2mm;
   /* margin-top: -1mm; */
@@ -615,7 +615,7 @@
   width: 3.5mm;
   height: 3.5mm;
   object-fit: contain;
-  scale: calc(1.8 * var(--icon-scale, 1));
+  scale: calc(1.6 * var(--icon-scale, 1));
 }
 
 .jinx-icon-placeholder {
