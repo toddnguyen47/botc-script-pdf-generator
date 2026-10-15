@@ -87,17 +87,35 @@
   align-items: center;
 }
 
-.sheet-header {
+/* .sheet-header {
   text-align: center;
-  /* margin: 0 0 4mm 0;
-  padding: 0 10mm; */
+  margin: 0 0 4mm 0;
+  padding: 0 10mm;
+  margin-bottom: 5mm;
   display: flex;
   align-items: center;
   justify-content: center;
   width: fit-content;
   align-self: center;
   gap: 3mm;
-  margin-bottom: 5mm;
+} */
+
+.sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3mm;
+
+  width: 100%;
+  margin-bottom: 3mm;
+  text-align: center;
+}
+
+.sheet-header::before,
+.sheet-header::after {
+  content: "";
+  flex: 1;
+  border-top: 1.5px solid #b85b21;
 }
 
 .sheet-header span {
