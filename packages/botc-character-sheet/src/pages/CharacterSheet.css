@@ -111,12 +111,12 @@
   text-align: center;
 }
 
-.sheet-header::before,
+/* .sheet-header::before,
 .sheet-header::after {
   content: "";
   flex: 1;
   border-top: 1.5px solid #b85b21;
-}
+} */
 
 .sheet-header span {
   font-weight: lighter;
