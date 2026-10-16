@@ -61,7 +61,9 @@
 }
 
 .sheet-container {
-  --font-size-step-percentage: 0.06;
+  --font-size-step-percentage: calc(
+    var(--character-sheet-font-size-step-percent) / 100
+  );
   --section-divider-gap: 2mm;
   position: relative;
   /* padding: calc(5mm + var(--print-bleed)) calc(5mm + var(--print-bleed))

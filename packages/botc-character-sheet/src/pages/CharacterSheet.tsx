@@ -99,6 +99,8 @@ export function CharacterSheet({
             "--title-margin-top": `${options.titleStyle.marginTop}mm`,
             "--title-margin-bottom": `${options.titleStyle.marginBottom}mm`,
             "--icon-scale": iconScale.toString(),
+            "--character-sheet-font-size-step-percent":
+              options.characterSheetFontSizeStepPercent,
             transform: includeMargins ? "scale(0.952)" : undefined,
           } as CSSProperties
         }

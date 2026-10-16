@@ -81,6 +81,7 @@ export interface ScriptOptions {
   titleStyle: TitleStyle;
   dimensions: PageDimensions;
   teensy: boolean;
+  characterSheetFontSizeStepPercent: number;
 }
 
 export interface ParsedScript {

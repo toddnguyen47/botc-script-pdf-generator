@@ -46,7 +46,11 @@ export function useOverflowDetection({
     const scriptKey = getScriptKey(script);
     if (lastCheckedScriptKey.current !== scriptKey) {
       lastCheckedScriptKey.current = scriptKey;
-      setOptions((prev) => ({ ...prev, appearance: AppearanceLevel.Normal }));
+      setOptions((prev) => ({
+        ...prev,
+        appearance: AppearanceLevel.Normal,
+        characterSheetFontSizeStepPercent: 6,
+      }));
     }
 
     // Debounce to allow DOM to settle after appearance changes

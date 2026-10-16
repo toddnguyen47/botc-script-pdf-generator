@@ -108,6 +108,29 @@ export function CharacterSheetOptions({
         displayValue={options.iconScale.toFixed(1)}
         onChange={(value) => onOptionChange("iconScale", value)}
       />
+
+      <div>
+        <div className="form-control">
+          <label className="form-control-label">
+            <span className="form-control-text">Font Size Step Percent</span>
+            <input
+              type="number"
+              min="1"
+              max="10"
+              step="0.1"
+              value={options.characterSheetFontSizeStepPercent}
+              placeholder="Font Size Step Percent"
+              onChange={(val) =>
+                onOptionChange(
+                  "characterSheetFontSizeStepPercent",
+                  Number(val.currentTarget.value),
+                )
+              }
+              className="text-input"
+            />
+          </label>
+        </div>
+      </div>
     </>
   );
 }
