@@ -17,7 +17,7 @@ export function getFabledOrLoric(
 
   const getImage = (char: ResolvedCharacter) =>
     (Array.isArray(char.image) ? char.image[0] : char.image) ??
-    (iconUrlTemplate ? resolveIconUrl(iconUrlTemplate, char.id) : undefined) ??
+    (iconUrlTemplate ? resolveIconUrl(iconUrlTemplate, char) : undefined) ??
     undefined;
 
   const output = [

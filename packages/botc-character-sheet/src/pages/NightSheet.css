@@ -6,7 +6,7 @@
 
 .night-sheet-heading .night-title {
   font-family: Dumbledor;
-  font-size: 7mm;
+  font-size: 19.8pt;
   margin: 0;
 }
 
@@ -19,13 +19,13 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  font-size: 11mm;
+  font-size: 31.2pt;
   line-height: var(--title-line-height);
   margin: calc(-7mm + var(--title-margin-top)) -7mm
     calc(var(--title-margin-bottom)) -7mm;
-  padding: 7mm;
+  padding: 7mm 7mm 0mm 7mm;
 
-  max-width: 50%;
+  max-width: 80%;
   text-align: center;
   letter-spacing: var(--title-letter-spacing);
   word-spacing: var(--title-word-spacing);
@@ -35,50 +35,62 @@
 .night-sheet-order {
   display: flex;
   flex-direction: column;
-  gap: 1mm;
+  gap: 1.7mm;
 }
 
 .night-sheet-entry {
   display: flex;
   align-items: center;
-  min-height: 10mm;
+  /* min-height: 9mm; */
 }
 
 .reminder-name {
-  font-family:
-    Goudy Old Style,
-    Goudy Oldstyle,
-    Goudy,
-    Georgia,
-    serif;
+  font-family: "PT Serif", "Goudy Old Style", "Goudy", Georgia, serif;
   font-weight: 700;
-  font-size: 3.3mm;
+  font-size: 8.5pt;
+}
+
+.night-sheet-entry .reminder-name {
+  width: 20%;
+  padding-right: 1mm;
 }
 
 .reminder-text {
-  font-family: "Trade Gothic";
-  font-size: 3mm;
+  font-family:
+    "Figtree", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial,
+    sans-serif;
+  font-size: 9pt;
+  line-height: 1.16;
+}
+
+.night-sheet-entry .reminder-text {
+  border-left: 1px solid #b85b21;
+  padding-left: 3mm;
+  flex: 1;
 }
 
 .night-sheet-entry p {
   margin: 0;
 }
 
-.night-sheet-entry p strong {
-  font-family: Trade Gothic Bold;
-}
+/* .night-sheet-entry p strong,
+.night-sheet-entry .reminder-text strong {
+  font-family: "PT Sans Bold";
+} */
 
 .night-sheet-entry > img {
+  --night-sheet-entry-img-scale: 1.8;
   width: 7mm;
   height: 7mm;
   object-fit: contain;
   flex-shrink: 0;
-  scale: calc(2 * var(--icon-scale, 1));
-  margin-right: 3mm;
+  /* scale: calc(2 * var(--icon-scale, 1)); */
+  scale: var(--night-sheet-entry-img-scale);
+  margin-right: 4mm;
 }
 
 .night-sheet-entry > img.marker-icon {
-  scale: 2;
+  scale: var(--night-sheet-entry-img-scale);
 }
 
 .reminder-icon {

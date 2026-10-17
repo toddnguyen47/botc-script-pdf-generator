@@ -40,6 +40,7 @@ export interface NightOrders {
 
 export interface TitleStyle {
   font: string;
+  fontSize: number;
   letterSpacing: number;
   wordSpacing: number;
   lineHeight: number;
@@ -47,6 +48,13 @@ export interface TitleStyle {
   marginTop: number;
   marginBottom: number;
   customFontUrl: string;
+}
+
+export enum AppearanceLevel {
+  Normal = "normal",
+  Compact = "compact",
+  SuperCompact = "super-compact",
+  MegaCompact = "mega-compact",
 }
 
 export interface ScriptOptions {
@@ -60,7 +68,7 @@ export interface ScriptOptions {
   showSwirls: boolean;
   includeMargins: boolean;
   solidTitle: boolean;
-  appearance: "normal" | "compact" | "super-compact" | "mega-compact";
+  appearance: AppearanceLevel;
   overleaf: "backingSheet" | "infoSheet" | "none";
   showNightSheet: boolean;
   iconScale: number;
@@ -73,11 +81,16 @@ export interface ScriptOptions {
   titleStyle: TitleStyle;
   dimensions: PageDimensions;
   teensy: boolean;
+  characterSheetFontSizeStepPercent: number;
 }
 
 export interface ParsedScript {
   metadata: ScriptMetadata | null;
   characters: ScriptCharacter[];
+}
+
+export interface CharacterReplacementData {
+  replacements: CharacterReplacement;
 }
 
 export type NetworkPayload = {
@@ -93,3 +106,5 @@ export type PageDimensions = {
   margin: number;
   bleed: number;
 };
+
+export type CharacterReplacement = Record<string, string>;

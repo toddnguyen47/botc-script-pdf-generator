@@ -1,9 +1,5 @@
 import { ComponentChildren } from "preact";
-import {
-  normalizeColors,
-  createGradient,
-  createOverlayBackground,
-} from "../utils/colours";
+import { normalizeColors, createGradient } from "../utils/colours";
 import "./BottomTrimSheet.css";
 import { PrintablePage } from "./PrintablePage";
 import { ScriptOptions } from "../types";
@@ -20,7 +16,7 @@ export const BottomTrimSheet = ({
   const { color, includeMargins, dimensions } = options;
   const colors = normalizeColors(color);
   const gradient = createGradient(colors, 20);
-  const overlayBackground = createOverlayBackground(color, 180);
+  // const overlayBackground = createOverlayBackground(color, 180);
 
   return (
     <PrintablePage dimensions={dimensions}>
@@ -35,30 +31,34 @@ export const BottomTrimSheet = ({
           "--title-line-height": `${options.titleStyle.lineHeight}mm`,
           "--title-margin-top": `${options.titleStyle.marginTop}mm`,
           "--title-margin-bottom": `${options.titleStyle.marginBottom}mm`,
-          "--icon-scale": (options.iconScale / 1.7).toString(),
+          "--icon-scale": options.iconScale.toString(),
         }}
       >
         <img
           className="character-sheet-background"
-          src="/images/parchment_texture_a4_lightened.jpg"
+          // src="/images/parchment_texture_a4_lightened.jpg"
         ></img>
-        <div className="sheet-content">{children}</div>
-        <div className="spacer"></div>
-        <div className="info-footer-container">
-          <img
-            className="info-ccc-logo"
-            src="/images/ccc-parchment.png"
-            alt="Community Created Content"
-          />
-          <div className="info-author-credit">
-            <p>© Steven Medway bloodontheclocktower.com</p>
-            <p>Script template by John Forster ravenswoodstudio.xyz</p>
-          </div>
-          <div className="info-footer-background"></div>
-          <div
+        <div className="sheet-container">
+          <div className="sheet-content">
+            {children}
+            <div className="spacer"></div>
+            <div className="info-footer-container">
+              <img
+                className="info-ccc-logo"
+                src="/images/ccc-parchment.png"
+                alt="Community Created Content"
+              />
+              <div className="info-author-credit">
+                <p>© Steven Medway bloodontheclocktower.com</p>
+                <p>Script template by John Forster ravenswoodstudio.xyz</p>
+              </div>
+              {/* <div className="info-footer-background"></div> */}
+              {/* <div
             className="info-footer-overlay"
             style={{ background: overlayBackground }}
-          ></div>
+          ></div> */}
+            </div>
+          </div>
         </div>
       </div>
     </PrintablePage>

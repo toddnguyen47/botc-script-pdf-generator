@@ -78,7 +78,11 @@ export const NightSheetEntry = (props: NightSheetEntryProps) => {
   }
 
   const replaceReminders = (str: string) =>
-    str.split(":reminder:").map((u, i) => (i % 2 === 0 ? u : <ReminderIcon />));
+    str
+      .split(/(:reminder:)/)
+      .map((part, i) =>
+        part === ":reminder:" ? <ReminderIcon key={i} /> : part,
+      );
 
   const renderText = (text: string) => {
     const withBold = text
@@ -93,11 +97,11 @@ export const NightSheetEntry = (props: NightSheetEntryProps) => {
   return (
     <div className="night-sheet-entry">
       <img src={src} className={isMarker ? "marker-icon" : undefined}></img>
-      <div className="night-sheet-entry-text">
-        <p className="reminder-name" style={{ color: colour }}>
-          {name}
-        </p>
-        <p className="reminder-text">{renderText(reminderText)}</p>
+      <div className="reminder-name" style={{ color: colour }}>
+        {name}
+      </div>
+      <div className="reminder-text" style={{ color: colour }}>
+        {renderText(reminderText)}
       </div>
     </div>
   );

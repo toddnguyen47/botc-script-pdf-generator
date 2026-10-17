@@ -23,7 +23,7 @@ export function PdfModal({
         {isLoading && (
           <>
             <div className="modal-spinner"></div>
-            <h2 className="modal-title">Generating Script PDF</h2>
+            <h2 className="modal-title">Generating Script HTML</h2>
             <p className="modal-text">This may take a minute...</p>
           </>
         )}
@@ -44,7 +44,7 @@ export function PdfModal({
               />
             </svg>
             <h2 className="modal-title">Script Ready!</h2>
-            <p className="modal-text">Script successfully PDFerised</p>
+            <p className="modal-text">Script successfully HTMLerised</p>
 
             <div className="pdf-preview-container">
               <iframe
@@ -59,7 +59,7 @@ export function PdfModal({
                 onClick={onDownload}
                 className="modal-button modal-button-primary"
               >
-                Download PDF
+                Download HTML
               </button>
               <button
                 onClick={onClose}

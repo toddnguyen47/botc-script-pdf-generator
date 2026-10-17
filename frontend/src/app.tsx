@@ -22,15 +22,16 @@ import { Changelog } from "./components/Changelog";
 import { MobileControlsToggle } from "./components/MobileControlsToggle";
 import { SavedScriptsPanel } from "./components/SavedScriptsPanel";
 import { ViewMode } from "./components/ViewMode";
-import {
-  randomColor,
-  TITLE_FONT_DEFAULTS,
-  DEFAULT_OPTIONS,
-} from "./types/options";
+import { randomColor, DEFAULT_OPTIONS } from "./types/options";
 import { mergeAndValidateOptions } from "./utils/optionsValidation";
 import type { ValidationIssue } from "./types/validation";
 import "./app.css";
-import { FancyDoc, ScriptOptions, TeensyDoc } from "botc-character-sheet";
+import {
+  FancyDoc,
+  ScriptOptions,
+  TeensyDoc,
+  AppearanceLevel,
+} from "botc-character-sheet";
 
 // Check if we're in view mode (URL pattern: /view/:id)
 function getViewModeId(): string | null {
@@ -78,6 +79,7 @@ function EditMode() {
     handleScriptTextChange,
     handleFileUpload,
     handlePasteButtonClick,
+    handleTokenReplacementUpload,
     handleSort,
     handleSaveScript,
     updateScriptMetadata,
@@ -187,31 +189,19 @@ function EditMode() {
   }, [rawScript, options, updateActiveScript]);
 
   // Auto-adjust icon scale when appearance changes
-  useEffect(() => {
-    if (options.appearance === "compact") {
-      setOptions((prev) => ({ ...prev, iconScale: 1.6 }));
-    } else if (options.appearance === "super-compact") {
-      setOptions((prev) => ({ ...prev, iconScale: 1.5 }));
-    } else if (options.appearance === "mega-compact") {
-      setOptions((prev) => ({ ...prev, iconScale: 1.4 }));
-    } else {
-      setOptions((prev) => ({ ...prev, iconScale: 1.7 }));
-    }
-  }, [options.appearance]);
+  const iconScales: Record<AppearanceLevel, number> = {
+    [AppearanceLevel.Normal]: 1.7,
+    [AppearanceLevel.Compact]: 1.6,
+    [AppearanceLevel.SuperCompact]: 1.5,
+    [AppearanceLevel.MegaCompact]: 1.4,
+  };
 
-  // Auto-update title style defaults when title font changes
   useEffect(() => {
-    const defaults = TITLE_FONT_DEFAULTS[options.titleStyle.font];
-    if (defaults) {
-      setOptions((prev) => ({
-        ...prev,
-        titleStyle: {
-          ...prev.titleStyle,
-          ...defaults,
-        },
-      }));
-    }
-  }, [options.titleStyle.font]);
+    setOptions((prev) => ({
+      ...prev,
+      iconScale: iconScales[options.appearance],
+    }));
+  }, [options.appearance]);
 
   const updateOption = <K extends keyof ScriptOptions>(
     key: K,
@@ -383,6 +373,7 @@ function EditMode() {
               onSave={handleSaveScript}
               onFileUpload={handleFileUpload}
               onPasteButtonClick={handlePasteButtonClick}
+              onTokenReplacementUpload={handleTokenReplacementUpload}
               onLoadExample={handleLoadExample}
               onLoadExampleTeensyville={handleLoadExampleTeensyville}
               onColorChange={handleColorChange}

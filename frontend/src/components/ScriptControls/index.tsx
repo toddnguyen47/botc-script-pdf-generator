@@ -10,6 +10,7 @@ import { PrintOptions } from "./PrintOptions";
 import { ActionButtons } from "./ActionButtons";
 import { ScriptIssues } from "./ScriptIssues";
 import { ScriptEditor } from "../ScriptEditor";
+import { TITLE_FONT_DEFAULTS } from "../../types/options";
 
 interface ScriptControlsProps {
   hasScript: boolean;
@@ -19,6 +20,7 @@ interface ScriptControlsProps {
   error: string | null;
   onFileUpload: (event: Event) => void;
   onPasteButtonClick: () => void;
+  onTokenReplacementUpload: (event: Event) => void;
   onLoadExample: () => void;
   onLoadExampleTeensyville: () => void;
   onColorChange: (color: string | string[]) => void;
@@ -55,6 +57,7 @@ export function ScriptControls({
   issues,
   onFileUpload,
   onPasteButtonClick,
+  onTokenReplacementUpload,
   onLoadExample,
   onLoadExampleTeensyville,
   onColorChange,
@@ -88,6 +91,7 @@ export function ScriptControls({
           hasScript={hasScript}
           onFileUpload={onFileUpload}
           onPasteButtonClick={onPasteButtonClick}
+          onTokenReplacementUpload={onTokenReplacementUpload}
           onLoadExample={onLoadExample}
           onLoadExampleTeensyville={onLoadExampleTeensyville}
         />
@@ -132,12 +136,18 @@ export function ScriptControls({
             <CollapsibleSection title="Font" defaultOpen={false}>
               <FontOptions
                 titleStyle={options.titleStyle}
-                onTitleStyleChange={(key, value) =>
+                onTitleStyleChange={(key, value) => {
+                  const defaults =
+                    key === "font"
+                      ? TITLE_FONT_DEFAULTS[String(value)]
+                      : undefined;
+
                   onOptionChange("titleStyle", {
                     ...options.titleStyle,
+                    ...(defaults ?? {}),
                     [key]: value,
-                  })
-                }
+                  });
+                }}
               />
             </CollapsibleSection>
 

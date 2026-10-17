@@ -17,7 +17,9 @@ export type {
   ParsedScript,
   NetworkPayload,
   PageDimensions,
+  CharacterReplacementData,
 } from "./types";
+export { AppearanceLevel } from "./types";
 export { darken, parseRgb, rgbString } from "./utils/colours";
 export { ROLES_BY_ID } from "./data/roles";
 export { JINXES } from "./data/jinxes";

@@ -3,7 +3,11 @@ import { parseScript } from "../utils/scriptParser";
 import { sanitizeScript } from "../utils/scriptValidation";
 import { sortScript } from "botc-script-checker";
 import type { Script } from "botc-script-checker";
-import { NightOrders, ParsedScript } from "botc-character-sheet";
+import {
+  NightOrders,
+  ParsedScript,
+  CharacterReplacementData,
+} from "botc-character-sheet";
 import { calculateNightOrders } from "../utils/nightOrders";
 import { downloadBlob } from "../utils/downloadFile";
 import type { ValidationIssue } from "../types/validation";
@@ -44,6 +48,36 @@ export function useScriptParsing() {
     setError(null);
 
     return sanitized; // Return parsed script for color loading
+  };
+
+  const loadCharacterTokenReplacement = (
+    json: CharacterReplacementData,
+    parsedScript: ParsedScript,
+  ): ParsedScript => {
+    // Need to make a copy so preact renders it.
+    const sanitized = {
+      ...parsedScript,
+      characters: parsedScript.characters.map((character) => {
+        if (character.name in json.replacements) {
+          const newName = `${character.name} (${json.replacements[character.name]} token)`;
+          // Need to make a new object
+          return {
+            ...character,
+            name: newName,
+          };
+        }
+        return character;
+      }),
+    };
+
+    const rawScript: Script = [
+      ...(sanitized.metadata ? [sanitized.metadata] : []),
+      ...sanitized.characters,
+    ];
+    setRawScript(rawScript);
+    setScript(sanitized);
+    setNightOrdersState(calculateNightOrders(sanitized));
+    return sanitized;
   };
 
   const handleScriptTextChange = (newText: string) => {
@@ -134,6 +168,7 @@ export function useScriptParsing() {
     isScriptSorted,
     nightOrders: nightOrdersState,
     loadScript,
+    loadCharacterTokenReplacement,
     handleScriptTextChange,
     handleSort,
     updateScriptMetadata,

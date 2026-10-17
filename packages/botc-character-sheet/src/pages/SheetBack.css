@@ -31,7 +31,7 @@
   font-family: var(--title-font), serif;
   mix-blend-mode: normal;
   font-weight: 100;
-  font-size: 30mm;
+  font-size: 85pt;
   color: #ae9d7f;
   text-wrap: wrap;
   z-index: 1;
@@ -59,7 +59,7 @@
 }
 
 .sheet-backing h1 .ampersand {
-  font-size: 45mm;
+  font-size: 127.6pt;
   line-height: 30mm;
   vertical-align: -5mm;
 }
@@ -86,7 +86,7 @@
 
 .minor-word {
   padding: 0 8mm;
-  font-size: 15mm;
+  font-size: 42.5pt;
   word-spacing: -6mm;
   display: flex;
 }

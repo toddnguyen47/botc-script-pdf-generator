@@ -14,7 +14,7 @@
   margin: 0;
   flex-shrink: 0;
   color: #222;
-  font-size: 5mm;
+  font-size: 14.2pt;
 }
 
 .night-order:not(:last-child) {
@@ -41,10 +41,10 @@
   height: 6mm;
   object-fit: contain;
   box-sizing: border-box;
-  scale: calc(2.1 * var(--icon-scale, 1));
+  scale: calc(1.2 * var(--icon-scale, 1));
   filter: drop-shadow(0px 0px 2px #2224);
 }
 
 .icon.marker-icon {
-  scale: 2.1;
+  scale: calc(1.2 * var(--icon-scale, 1));
 }

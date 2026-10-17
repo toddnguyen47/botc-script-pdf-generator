@@ -1,6 +1,7 @@
 import { ScriptOptions } from "botc-character-sheet";
 import { Toggle, Select, Slider } from "../ui";
-import { AppearanceLevel, OverleafType } from "../../types/options";
+import { OverleafType } from "../../types/options";
+import { AppearanceLevel } from "botc-character-sheet";
 
 export type InlineJinxIconsMode = "none" | "primary" | "both";
 
@@ -33,10 +34,10 @@ export function CharacterSheetOptions({
         label="Sizing:"
         value={options.appearance}
         options={[
-          { value: "normal", label: "Normal" },
-          { value: "compact", label: "Small" },
-          { value: "super-compact", label: "Smaller" },
-          { value: "mega-compact", label: "Smallest" },
+          { value: AppearanceLevel.Normal, label: "Normal" },
+          { value: AppearanceLevel.Compact, label: "Compact" },
+          { value: AppearanceLevel.SuperCompact, label: "Super Compact" },
+          { value: AppearanceLevel.MegaCompact, label: "Mega Compact" },
         ]}
         onChange={(value) =>
           onOptionChange("appearance", value as AppearanceLevel)
@@ -61,11 +62,11 @@ export function CharacterSheetOptions({
         onChange={(value) => onOptionChange("showTitle", value)}
       />
 
-      <Toggle
+      {/* <Toggle
         label="Show Swirls"
         checked={options.showSwirls}
         onChange={(value) => onOptionChange("showSwirls", value)}
-      />
+      /> */}
 
       <Toggle
         label="Show Jinxes"
@@ -107,6 +108,29 @@ export function CharacterSheetOptions({
         displayValue={options.iconScale.toFixed(1)}
         onChange={(value) => onOptionChange("iconScale", value)}
       />
+
+      <div>
+        <div className="form-control">
+          <label className="form-control-label">
+            <span className="form-control-text">Font Size Step Percent</span>
+            <input
+              type="number"
+              min="1"
+              max="10"
+              step="0.1"
+              value={options.characterSheetFontSizeStepPercent}
+              placeholder="Font Size Step Percent"
+              onChange={(val) =>
+                onOptionChange(
+                  "characterSheetFontSizeStepPercent",
+                  Number(val.currentTarget.value),
+                )
+              }
+              className="text-input"
+            />
+          </label>
+        </div>
+      </div>
     </>
   );
 }

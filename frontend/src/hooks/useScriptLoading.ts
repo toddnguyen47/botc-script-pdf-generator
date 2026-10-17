@@ -1,17 +1,27 @@
 import { useState, useEffect } from "preact/hooks";
 import type { Script } from "botc-script-checker";
-import type { ParsedScript, ScriptOptions } from "botc-character-sheet";
+import type {
+  ParsedScript,
+  ScriptOptions,
+  CharacterReplacementData,
+} from "botc-character-sheet";
 import { loadScript as loadSharedScript } from "../utils/scriptStorage";
 import JSON5 from "json5";
 
 export function useScriptLoading(
   loadScript: (json: Script) => ParsedScript,
+  loadCharacterTokenReplacement: (
+    json: CharacterReplacementData,
+    parsedScript: ParsedScript,
+  ) => ParsedScript,
   setError: (error: string | null) => void,
   onLoad?: (json: Script, parsed: ParsedScript) => void,
 ) {
   const [sharedOptions, setSharedOptions] = useState<ScriptOptions | null>(
     null,
   );
+  const [alreadyParsedScript, setAlreadyParsedScript] =
+    useState<ParsedScript | null>(null);
 
   // Load script from URL query parameter or localStorage on mount
   useEffect(() => {
@@ -25,8 +35,7 @@ export function useScriptLoading(
       try {
         const decoded = decodeURIComponent(scriptParam);
         const json = JSON5.parse(decoded);
-        const parsed = loadScript(json);
-        onLoad?.(json, parsed);
+        _loadScript(json);
       } catch (err) {
         console.error("Failed to load script from URL:", err);
         setError(
@@ -46,8 +55,7 @@ export function useScriptLoading(
         })
         .then((text) => {
           const json = JSON5.parse(text);
-          const parsed = loadScript(json);
-          onLoad?.(json, parsed);
+          _loadScript(json);
         })
         .catch((err) => {
           console.error("Failed to fetch script from URL:", err);
@@ -65,8 +73,7 @@ export function useScriptLoading(
             setError("Shared script not found");
             return;
           }
-          const parsed = loadScript(data.rawScript);
-          onLoad?.(data.rawScript, parsed);
+          _loadScript(data.rawScript);
           setSharedOptions(data.options);
         })
         .catch((err) => {
@@ -81,8 +88,7 @@ export function useScriptLoading(
       if (saved) {
         try {
           const json = JSON5.parse(saved);
-          const parsed = loadScript(json);
-          onLoad?.(json, parsed);
+          _loadScript(json);
         } catch {
           /* ignore corrupt data */
         }
@@ -94,8 +100,7 @@ export function useScriptLoading(
   const tryLoadFromText = (text: string): boolean => {
     try {
       const json = JSON5.parse(text);
-      const parsed = loadScript(json);
-      onLoad?.(json, parsed);
+      _loadScript(json);
       return true;
     } catch (err) {
       return false;
@@ -138,6 +143,31 @@ export function useScriptLoading(
   };
 
   const handleFileUpload = (event: Event) => {
+    const handler = (json: any) => {
+      _loadScript(json);
+    };
+    _handleJsonFileUpload(event, handler);
+  };
+
+  const handleTokenReplacementUpload = (event: Event) => {
+    const handler = (json: any) => {
+      if (alreadyParsedScript == null) {
+        console.error("No parsed script yet. Upload a script first");
+      } else {
+        const parsedScriptWithReplacementTokens = loadCharacterTokenReplacement(
+          json,
+          alreadyParsedScript,
+        );
+        onLoad?.(json, parsedScriptWithReplacementTokens);
+      }
+    };
+    _handleJsonFileUpload(event, handler);
+  };
+
+  const _handleJsonFileUpload = (
+    event: Event,
+    handleJson: (json: any) => void,
+  ) => {
     const target = event.target as HTMLInputElement;
     const file = target.files?.[0];
 
@@ -147,8 +177,7 @@ export function useScriptLoading(
     reader.onload = (e) => {
       try {
         const json = JSON5.parse(e.target?.result as string);
-        const parsed = loadScript(json);
-        onLoad?.(json, parsed);
+        handleJson(json);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to parse JSON");
       }
@@ -156,5 +185,16 @@ export function useScriptLoading(
     reader.readAsText(file);
   };
 
-  return { sharedOptions, handleFileUpload, handlePasteButtonClick };
+  const _loadScript = (json: any) => {
+    const parsed = loadScript(json);
+    onLoad?.(json, parsed);
+    setAlreadyParsedScript(parsed);
+  };
+
+  return {
+    sharedOptions,
+    handleFileUpload,
+    handlePasteButtonClick,
+    handleTokenReplacementUpload,
+  };
 }

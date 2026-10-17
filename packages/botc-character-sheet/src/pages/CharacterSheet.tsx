@@ -3,7 +3,7 @@ import {
   teamColours,
   normalizeColors,
   createGradient,
-  createOverlayBackground,
+  // createOverlayBackground,
 } from "../utils/colours";
 import "./CharacterSheet.css";
 import { GroupedCharacters, Jinx, ScriptOptions } from "../types";
@@ -80,6 +80,7 @@ export function CharacterSheet({
   const sheetClassName = ["character-sheet", appearanceClass]
     .filter(Boolean)
     .join(" ");
+  const jinxesOrLoricExists = jinxes.length > 0 || fabledOrLoric.length > 0;
 
   return (
     <PrintablePage dimensions={dimensions}>
@@ -91,84 +92,113 @@ export function CharacterSheet({
             "--header-gradient": gradient,
             "--sidebar-width": options.teensy ? "10mm" : "15mm",
             "--title-font": options.titleStyle.font,
+            "--title-font-size": `${options.titleStyle.fontSize}pt`,
             "--title-letter-spacing": `${options.titleStyle.letterSpacing}mm`,
             "--title-word-spacing": `${options.titleStyle.wordSpacing}mm`,
             "--title-line-height": `${options.titleStyle.lineHeight}mm`,
             "--title-margin-top": `${options.titleStyle.marginTop}mm`,
             "--title-margin-bottom": `${options.titleStyle.marginBottom}mm`,
-            "--icon-scale": (iconScale / 1.7).toString(),
+            "--icon-scale": iconScale.toString(),
+            "--character-sheet-font-size-step-percent":
+              options.characterSheetFontSizeStepPercent,
             transform: includeMargins ? "scale(0.952)" : undefined,
           } as CSSProperties
         }
       >
         <img
           className="character-sheet-background"
-          src="/images/parchment_texture_a4_lightened.jpg"
+          // src="/images/parchment_texture_a4_lightened.jpg"
         ></img>
-        <Sidebar color={color} />
-        <div className="sheet-content">
-          <Header
-            showSwirls={showSwirls}
-            showTitle={showTitle}
-            title={title}
-            author={author}
-            logo={showLogo ? logo : undefined}
-            solidHeader={solidTitle}
-          />
+        <div className="sheet-container">
+          <div className="sheet-content">
+            <Header
+              showSwirls={showSwirls}
+              showTitle={showTitle}
+              title={title}
+              author={author}
+              logo={showLogo ? logo : undefined}
+              solidHeader={solidTitle}
+            />
 
-          <div className="characters-grid">
-            {sections.map((section, i) => (
-              <>
-                <CharacterSection
-                  key={section.key}
-                  title={section.title.toUpperCase()}
-                  characters={section.chars}
-                  charNameColor={section.color}
-                  jinxes={jinxes}
-                  allCharacters={[
-                    ...characters.townsfolk,
-                    ...characters.outsider,
-                    ...characters.minion,
-                    ...characters.demon,
-                  ]}
-                  inlineJinxIcons={inlineJinxIcons}
-                  iconUrlTemplate={iconUrlTemplate}
-                />
-                {i < sections.length - 1 && (
-                  <img src="/images/divider.png" className="section-divider" />
-                )}
-              </>
-            ))}
-            {(jinxes.length > 0 || fabledOrLoric.length > 0) && (
-              <>
-                <img src="/images/divider.png" className="section-divider" />
-                <JinxesAndSpecial
-                  fabledAndLoric={fabledOrLoric}
-                  jinxes={jinxes}
-                  allCharacters={[
-                    ...characters.townsfolk,
-                    ...characters.outsider,
-                    ...characters.minion,
-                    ...characters.demon,
-                  ]}
-                  bootleggerRules={bootleggerRules}
-                  iconUrlTemplate={iconUrlTemplate}
-                />
-              </>
+            <div className="characters-grid">
+              {sections.map((section, i) => (
+                <>
+                  <CharacterSection
+                    key={section.key}
+                    title={section.title.toUpperCase()}
+                    characters={section.chars}
+                    charNameColor={section.color}
+                    jinxes={jinxes}
+                    allCharacters={[
+                      ...characters.townsfolk,
+                      ...characters.outsider,
+                      ...characters.minion,
+                      ...characters.demon,
+                    ]}
+                    inlineJinxIcons={inlineJinxIcons}
+                    iconUrlTemplate={iconUrlTemplate}
+                  />
+                  {i < sections.length - 1 && (
+                    <img
+                      src="/images/divider.png"
+                      className="section-divider"
+                    />
+                  )}
+                </>
+              ))}
+            </div>
+
+            {jinxesOrLoricExists && (
+              <img
+                src="/images/divider.png"
+                className="section-divider section-divider-solo"
+              />
             )}
-          </div>
 
-          <div className="sheet-footer">
-            <span className="asterisk">*</span>Not the first night
-          </div>
-          <img
-            className="ccc-logo"
-            src="/images/ccc-parchment.png"
-            alt="Community Created Content"
-          />
-          <div className="author-credit">
-            <p>© Steven Medway bloodontheclocktower.com</p>
-            <p>Script template by John Forster ravenswoodstudio.xyz</p>
+            <div className="sheet-footer-container">
+              {jinxesOrLoricExists ? (
+                <div className="section-title">J L F</div>
+              ) : (
+                // Need at least one character for section-title CSS to take effect
+                <div className="section-title custom-hidden">J</div>
+              )}
+
+              <div className="sheet-footer-item-container">
+                {jinxesOrLoricExists && (
+                  <>
+                    <JinxesAndSpecial
+                      fabledAndLoric={fabledOrLoric}
+                      jinxes={jinxes}
+                      allCharacters={[
+                        ...characters.townsfolk,
+                        ...characters.outsider,
+                        ...characters.minion,
+                        ...characters.demon,
+                      ]}
+                      bootleggerRules={bootleggerRules}
+                      iconUrlTemplate={iconUrlTemplate}
+                    />
+                  </>
+                )}
+
+                <div className="sheet-footer-spacer"></div>
+
+                <div className="sheet-footer">
+                  <img
+                    className="ccc-logo"
+                    src="/images/ccc-parchment.png"
+                    alt="Community Created Content"
+                  />
+                  <div className="not-first-night">
+                    <span className="asterisk">*</span>Not the first night
+                  </div>
+                  <div className="author-credit">
+                    <p>© Steven Medway bloodontheclocktower.com</p>
+                    <p>Script template by John Forster ravenswoodstudio.xyz</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>{" "}
@@ -198,45 +228,36 @@ function Header({
 
   return (
     <>
-      <h1 className="sheet-header">
-        {showSwirls && (
+      <div className="sheet-header">
+        {/* {showSwirls && (
           <img
             src="/images/black-swirl-divider.png"
             className="swirl-divider"
           ></img>
-        )}
+        )} */}
 
         {logo && <img className="script-logo" src={logo}></img>}
-        {showTitle && (
-          <span
-            style={{
-              mixBlendMode: solidHeader ? "normal" : "multiply",
-            }}
-          >
-            {title}
-          </span>
-        )}
-        {showSwirls && (
+        <div
+          className="sheet-header-text"
+          style={{
+            mixBlendMode: solidHeader ? "normal" : "multiply",
+          }}
+        >
+          {showTitle && <span>{title}</span>}
+          {author && (
+            <>
+              <span className="sheet-author">- by {author}</span>
+            </>
+          )}
+        </div>
+        {/* {showSwirls && (
           <img
             src="/images/black-swirl-divider.png"
             className="swirl-divider flip"
           ></img>
-        )}
-      </h1>
-      {author && <h2 className="sheet-author">by {author}</h2>}
+        )} */}
+      </div>
+      {/* {author && <div className="sheet-author">by {author}</div>} */}
     </>
-  );
-}
-
-function Sidebar({ color }: { color: string | string[] }) {
-  const overlayBackground = createOverlayBackground(color, 180);
-  return (
-    <div className="sidebar-container">
-      <div className="sidebar-background"></div>
-      <div
-        className="sidebar-overlay"
-        style={{ background: overlayBackground }}
-      ></div>
-    </div>
   );
 }

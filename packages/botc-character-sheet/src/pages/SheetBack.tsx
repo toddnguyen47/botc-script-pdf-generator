@@ -49,12 +49,14 @@ export const SheetBack = ({
           "--title-line-height": `${options.titleStyle.backLineHeight}mm`,
           "--title-margin-top": `${options.titleStyle.marginTop}mm`,
           "--title-margin-bottom": `${options.titleStyle.marginBottom}mm`,
-          "--icon-scale": (options.iconScale / 1.7).toString(),
+          "--icon-scale": options.iconScale.toString(),
         }}
       >
         <div className="sheet-background">
           <div className="title-container">
-            <h1>{renderTitle()}</h1>
+            <div>
+              <h1>{renderTitle()}</h1>
+            </div>
           </div>
         </div>
 

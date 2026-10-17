@@ -5,6 +5,7 @@ const TITLE_FONT_OPTIONS = [
   { value: "Alice in Wonderland", label: "Alice in Wonderland" },
   { value: "Anglican", label: "Anglican" },
   { value: "Canterbury Regular", label: "Canterbury" },
+  { value: "Dumbledor", label: "Dumbledor" },
   { value: "Utm Agin", label: "Utm Agin" },
   { value: "Waters Gothic", label: "Waters Gothic" },
 ];
@@ -29,6 +30,27 @@ export function FontOptions({
         options={TITLE_FONT_OPTIONS}
         onChange={(value) => onTitleStyleChange("font", value)}
       />
+      <div>
+        <div className="form-control">
+          <label className="form-control-label">
+            <span className="form-control-text">Title Font Size (in pt)</span>
+            <input
+              type="number"
+              min="1"
+              step="0.1"
+              value={titleStyle.fontSize}
+              placeholder="Title Font Size"
+              onInput={(e) =>
+                onTitleStyleChange(
+                  "fontSize",
+                  parseFloat((e.target as HTMLInputElement).value) || 0,
+                )
+              }
+              className="text-input"
+            />
+          </label>
+        </div>
+      </div>
       <div>
         <div className="form-control">
           <label className="form-control-label">

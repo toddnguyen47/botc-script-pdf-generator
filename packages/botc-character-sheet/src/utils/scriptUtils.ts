@@ -98,9 +98,20 @@ export function findJinxes(
   return applicableJinxes;
 }
 
-export function resolveIconUrl(template: string, id: string): string | null {
+export function resolveIconUrl(
+  template: string,
+  character: ResolvedCharacter,
+): string | null {
   if (!template) return null;
-  return template.replace("{id}", id);
+  const iconTemplate = template + TEMPLATE_ICONS;
+  const defaultAlignment = getDefaultAlignment(character);
+  let iconUrl = iconTemplate
+    .replace("{edition}", character.edition ?? "")
+    .replace("{id}", character.id);
+  if (defaultAlignment !== "") {
+    iconUrl = iconUrl + "_" + defaultAlignment;
+  }
+  return iconUrl + TEMPLATE_EXTENSION;
 }
 
 export function getGenericIconUrl(team: string): string {
@@ -120,7 +131,7 @@ export const getImageUrl = (
   }
   // Fall back to icon URL template
   if (iconUrlTemplate) {
-    return resolveIconUrl(iconUrlTemplate, character.id);
+    return resolveIconUrl(iconUrlTemplate, character);
   }
   return null;
 };
@@ -177,4 +188,23 @@ export function getJinxedCharacters(
   });
 
   return allCharacters.filter((char) => jinxedCharacterIds.includes(char.id));
+}
+
+const DEFAULT_ALIGNMENT: Record<string, string> = {
+  townsfolk: "g",
+  outsider: "g",
+  minion: "e",
+  demon: "e",
+};
+
+const TEMPLATE_ICONS = "{edition}/{id}";
+const TEMPLATE_EXTENSION = ".webp";
+
+function getDefaultAlignment(character: ResolvedCharacter): string {
+  const team = character.team.toLocaleLowerCase();
+  if (team in DEFAULT_ALIGNMENT) {
+    return DEFAULT_ALIGNMENT[team];
+  } else {
+    return "";
+  }
 }

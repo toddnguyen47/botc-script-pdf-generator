@@ -11,25 +11,25 @@ export const NightOrderPanel = (props: NightOrderPanelProps) => {
   const firstNightOrder = props.nightOrders.first;
   const otherNightOrder = props.nightOrders.other;
   return (
-    <div class="night-orders-container">
-      <div class="night-order">
+    <div className="night-orders-container">
+      <div className="night-order">
         <p>First Night:</p>
-        <div class="icon-row">
+        <div className="icon-row">
           {firstNightOrder.map((item) => (
             <img
               src={getImageSrc(item, props.iconUrlTemplate)}
-              class={typeof item === "string" ? "icon marker-icon" : "icon"}
+              className={typeof item === "string" ? "icon marker-icon" : "icon"}
             ></img>
           ))}
         </div>
       </div>
-      <div class="night-order">
+      <div className="night-order">
         <p>Other Nights:</p>
-        <div class="icon-row">
+        <div className="icon-row">
           {otherNightOrder.map((item) => (
             <img
               src={getImageSrc(item, props.iconUrlTemplate)}
-              class={typeof item === "string" ? "icon marker-icon" : "icon"}
+              className={typeof item === "string" ? "icon marker-icon" : "icon"}
             ></img>
           ))}
         </div>

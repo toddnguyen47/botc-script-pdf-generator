@@ -36,7 +36,9 @@ export function CharacterSection({
 
   return (
     <div className="character-section">
-      <h2 className="section-title">{title}</h2>
+      <div className="section-title" style={{ color: charNameColor }}>
+        {title}
+      </div>
       <div className="character-list">
         <div className="character-column" style={{ justifyContent }}>
           {characters.slice(0, midpoint).map((char) => (
@@ -114,8 +116,14 @@ function CharacterCard({
         />
       </div>
       <div className="character-info">
-        <h3 className="character-name" style={{ color: color }}>
-          {character.name}
+        <div className="character-name" style={{ color: color }}>
+          <span
+            style={{
+              backgroundColor: `color-mix(in srgb, #FFFF00 40%, white)`,
+            }}
+          >
+            {character.name}
+          </span>
           {jinxedCharacters.length > 0 && (
             <span className="inline-jinx-icons">
               {jinxedCharacters.map((jinxedChar) => {
@@ -132,8 +140,10 @@ function CharacterCard({
               })}
             </span>
           )}
-        </h3>
-        <p className="character-ability">{renderAbility(character.ability)}</p>
+        </div>
+        <p className="character-ability" style={{ color: color }}>
+          {renderAbility(character.ability)}
+        </p>
       </div>
     </div>
   );

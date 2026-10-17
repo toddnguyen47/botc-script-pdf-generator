@@ -4,8 +4,7 @@ import type {
   ParsedScript,
   PageDimensions,
 } from "botc-character-sheet";
-
-type Appearance = "normal" | "compact" | "super-compact" | "mega-compact";
+import { AppearanceLevel } from "botc-character-sheet";
 
 interface UseOverflowDetectionProps {
   options: ScriptOptions;
@@ -13,11 +12,11 @@ interface UseOverflowDetectionProps {
   script: ParsedScript | null;
 }
 
-const APPEARANCE_LEVELS: Appearance[] = [
-  "normal",
-  "compact",
-  "super-compact",
-  "mega-compact",
+const APPEARANCE_LEVELS: AppearanceLevel[] = [
+  AppearanceLevel.Normal,
+  AppearanceLevel.Compact,
+  AppearanceLevel.SuperCompact,
+  AppearanceLevel.MegaCompact,
 ];
 
 /**
@@ -29,8 +28,9 @@ export function useOverflowDetection({
   setOptions,
   script,
 }: UseOverflowDetectionProps) {
-  const lastCheckedAppearanceRef = useRef<Appearance | null>(null);
+  const lastCheckedAppearanceRef = useRef<AppearanceLevel | null>(null);
   const lastCheckedDimensionsRef = useRef<PageDimensions | null>(null);
+  const lastCheckedScriptKey = useRef<String | null | undefined>(null);
   const isAdjustingRef = useRef(false);
 
   // Reset detection when script changes
@@ -42,6 +42,16 @@ export function useOverflowDetection({
 
   useEffect(() => {
     if (!script) return;
+
+    const scriptKey = getScriptKey(script);
+    if (lastCheckedScriptKey.current !== scriptKey) {
+      lastCheckedScriptKey.current = scriptKey;
+      setOptions((prev) => ({
+        ...prev,
+        appearance: AppearanceLevel.Normal,
+        characterSheetFontSizeStepPercent: 6,
+      }));
+    }
 
     // Debounce to allow DOM to settle after appearance changes
     const timeoutId = setTimeout(() => {
@@ -93,4 +103,14 @@ export function useOverflowDetection({
 
     return () => clearTimeout(timeoutId);
   }, [options.appearance, script, setOptions, options.dimensions]);
+}
+
+function getScriptKey(script: ParsedScript | null): String {
+  if (script === null || script.metadata === null) {
+    return "";
+  }
+  return JSON.stringify({
+    name: script.metadata.name,
+    author: script.metadata.author ?? "",
+  });
 }
