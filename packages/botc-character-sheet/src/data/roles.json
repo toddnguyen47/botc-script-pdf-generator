@@ -357,7 +357,7 @@
     "edition": "bmr",
     "team": "townsfolk",
     "otherNightReminder": "The Innkeeper chooses 2 players. :reminder: :reminder: :reminder:",
-    "reminders": ["Safe", "Drunk"],
+    "reminders": ["Safe", "Safe", "Drunk"],
     "setup": false,
     "ability": "Each night*, choose 2 players: they can't die tonight, but 1 is drunk until dusk.",
     "flavor": "Come inside, fair traveller, and rest your weary bones. Drink and be merry, for the legions of the Dark One shall not harass thee tonight."
