@@ -1,3 +1,12 @@
+"""
+usage:
+uv run find_missing.py \
+    --base base3_with_travelers.json \
+    --roles ../packages/botc-character-sheet/src/data/roles.json \
+    --output botc-scripts/replacements.json \
+    --script botc-scripts/No\ Roles\ Barred_1_0_1.json
+"""
+
 import argparse
 import json
 

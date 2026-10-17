@@ -140,6 +140,14 @@ close supervision for:
 All LLM-generated code was reviewed and modified by the developer before being
 committed.
 
+## Python scripts
+
+If need be, there are Python scripts in the [scripts](scripts/) folder. How to use instructions are in the script itself.
+
+- `css_convert_font_size_mm_to_pt.py`: Convert font sizes from mm to pt, which is more precise.
+- `download_data_json.py`: Download roles.json, jinxes.json, and nightsheet.json.
+- `find_missing.py`: If you need to find possible token replacements. The replacements will only be taken from the base 3 scripts.
+
 ## License
 
 This project is for personal use only. Blood on the Clocktower is a trademark of
