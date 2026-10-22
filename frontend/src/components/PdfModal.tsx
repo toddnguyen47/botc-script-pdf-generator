@@ -23,7 +23,7 @@ export function PdfModal({
         {isLoading && (
           <>
             <div className="modal-spinner"></div>
-            <h2 className="modal-title">Generating Script HTML</h2>
+            <h2 className="modal-title">Generating Script Zip</h2>
             <p className="modal-text">This may take a minute...</p>
           </>
         )}
@@ -59,7 +59,7 @@ export function PdfModal({
                 onClick={onDownload}
                 className="modal-button modal-button-primary"
               >
-                Download HTML
+                Download Zip
               </button>
               <button
                 onClick={onClose}

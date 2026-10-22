@@ -36,7 +36,6 @@ export function usePdfGeneration() {
 
     try {
       const apiUrl = import.meta.env.VITE_PDF_API_URL || "";
-      console.log(apiUrl);
       const response = await fetch(`${apiUrl}/api/generate-pdf`, {
         method: "POST",
         headers: {
@@ -67,7 +66,7 @@ export function usePdfGeneration() {
 
   const downloadPDF = (scriptName?: string) => {
     if (!pdfBlob) return;
-    downloadBlob(pdfBlob, `${scriptName || "script"}.html`);
+    downloadBlob(pdfBlob, `${scriptName || "script"}.zip`);
   };
 
   const closePdfModal = () => {
