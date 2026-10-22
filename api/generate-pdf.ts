@@ -1,5 +1,4 @@
 import { renderCharacterSheet } from "../backend/src/renderer";
-import { gzipSync } from "node:zlib";
 import JSZip from "jszip";
 import {
   getBrowser,

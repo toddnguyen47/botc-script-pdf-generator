@@ -7,6 +7,7 @@ import {
 } from "botc-character-sheet";
 import { PDFDocument } from "pdf-lib";
 import { downloadBlob } from "../utils/downloadFile";
+import JSZip from "jszip";
 
 export function usePdfGeneration() {
   const [showPdfModal, setShowPdfModal] = useState(false);
@@ -48,11 +49,22 @@ export function usePdfGeneration() {
       if (!response.ok) {
         throw new Error(`Failed to generate PDF: ${response.statusText}`);
       }
-
       const blob = await response.blob();
-      const duplicatedBlob = await duplicatePages(blob, options);
-      const url = URL.createObjectURL(duplicatedBlob);
-      setPdfBlob(duplicatedBlob);
+      const zippedFiles = await unzipAll(blob);
+      const newZip = new JSZip();
+
+      for (const [filename, blob] of Object.entries(zippedFiles)) {
+        if (filename.toLocaleLowerCase().endsWith(".html")) {
+          newZip.file(filename, blob);
+        } else if (filename.toLocaleLowerCase().endsWith(".pdf")) {
+          const addedPageBlob = await possiblyAddExtraPages(blob, options);
+          setPdfBlob(addedPageBlob);
+          newZip.file(filename, addedPageBlob);
+        }
+      }
+
+      const zippedFile = await newZip.generateAsync({ type: "blob" });
+      const url = URL.createObjectURL(zippedFile);
       setPdfUrl(url);
       setPdfLoading(false);
     } catch (error) {
@@ -92,7 +104,7 @@ export function usePdfGeneration() {
   };
 }
 
-async function duplicatePages(
+async function possiblyAddExtraPages(
   blob: Blob,
   options: ScriptOptions,
 ): Promise<Blob> {
@@ -120,4 +132,19 @@ async function duplicatePages(
   const buffer = new ArrayBuffer(modifiedBytes.byteLength);
   new Uint8Array(buffer).set(modifiedBytes);
   return new Blob([buffer], { type: "application/pdf" });
+}
+
+async function unzipAll(blob: Blob): Promise<Record<string, Blob>> {
+  const zip = await JSZip.loadAsync(blob);
+  const files: Record<string, Blob> = {};
+
+  await Promise.all(
+    Object.values(zip.files).map(async (file) => {
+      if (file.dir) return;
+
+      files[file.name] = await file.async("blob");
+    }),
+  );
+
+  return files;
 }
