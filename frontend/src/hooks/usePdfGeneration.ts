@@ -11,8 +11,8 @@ import JSZip from "jszip";
 
 export function usePdfGeneration() {
   const [showPdfModal, setShowPdfModal] = useState(false);
-  const [pdfBlob, setPdfBlob] = useState<Blob | null>(null);
-  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+  const [scriptHtmlUrl, setScriptHtmlUrl] = useState<string | null>(null)
+  const [zippedBlob, setZippedBlob] = useState<Blob | null>(null);
   const [pdfLoading, setPdfLoading] = useState(false);
   const [pdfError, setPdfError] = useState<string | null>(null);
 
@@ -24,8 +24,8 @@ export function usePdfGeneration() {
     // Show modal and reset state
     setShowPdfModal(true);
     setPdfLoading(true);
-    setPdfBlob(null);
-    setPdfUrl(null);
+    setScriptHtmlUrl(null);
+    setZippedBlob(null);
     setPdfError(null);
 
     const payload: NetworkPayload = {
@@ -56,16 +56,19 @@ export function usePdfGeneration() {
       for (const [filename, blob] of Object.entries(zippedFiles)) {
         if (filename.toLocaleLowerCase().endsWith(".html")) {
           newZip.file(filename, blob);
+          const blobWithType = new Blob([blob], {
+            type: "text/html",
+          });
+          const url = URL.createObjectURL(blobWithType);
+          setScriptHtmlUrl(url);
         } else if (filename.toLocaleLowerCase().endsWith(".pdf")) {
           const addedPageBlob = await possiblyAddExtraPages(blob, options);
-          setPdfBlob(addedPageBlob);
           newZip.file(filename, addedPageBlob);
         }
       }
 
       const zippedFile = await newZip.generateAsync({ type: "blob" });
-      const url = URL.createObjectURL(zippedFile);
-      setPdfUrl(url);
+      setZippedBlob(zippedFile);
       setPdfLoading(false);
     } catch (error) {
       console.error("Error generating PDF:", error);
@@ -77,26 +80,26 @@ export function usePdfGeneration() {
   };
 
   const downloadPDF = (scriptName?: string) => {
-    if (!pdfBlob) return;
-    downloadBlob(pdfBlob, `${scriptName || "script"}.zip`);
+    if (!zippedBlob) return;
+    downloadBlob(zippedBlob, `${scriptName || "script"}.zip`);
   };
 
   const closePdfModal = () => {
     setShowPdfModal(false);
-    setPdfBlob(null);
+    setZippedBlob(null);
     setPdfError(null);
 
     // Clean up the blob URL
-    if (pdfUrl) {
-      URL.revokeObjectURL(pdfUrl);
-      setPdfUrl(null);
+    if (scriptHtmlUrl) {
+      URL.revokeObjectURL(scriptHtmlUrl);
+      setScriptHtmlUrl(null);
     }
   };
 
   return {
     showPdfModal,
     pdfLoading,
-    pdfUrl,
+    scriptHtmlUrl,
     pdfError,
     generatePDF,
     downloadPDF,
