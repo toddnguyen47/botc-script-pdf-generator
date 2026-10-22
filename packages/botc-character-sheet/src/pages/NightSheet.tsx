@@ -1,4 +1,9 @@
-import { NightMarker, NightOrderEntry, ScriptOptions } from "../types";
+import {
+  COLOR_DARK_GRAY,
+  NightMarker,
+  NightOrderEntry,
+  ScriptOptions,
+} from "../types";
 import { getImageSrc } from "../utils/nightOrder";
 import "./NightSheet.css";
 import { teamColours } from "../utils/colours";
@@ -31,6 +36,7 @@ export const NightSheet = ({
                 entry={reminder}
                 night="first"
                 iconUrlTemplate={options.iconUrlTemplate}
+                useDarkGrayForAbilityText={options.useDarkGrayForAbilityText}
               />
             ))}
           </div>
@@ -48,6 +54,7 @@ export const NightSheet = ({
                 entry={reminder}
                 night="other"
                 iconUrlTemplate={options.iconUrlTemplate}
+                useDarkGrayForAbilityText={options.useDarkGrayForAbilityText}
               />
             ))}
           </div>
@@ -61,6 +68,7 @@ type NightSheetEntryProps = {
   entry: NightOrderEntry;
   night: "first" | "other";
   iconUrlTemplate?: string;
+  useDarkGrayForAbilityText: boolean;
 };
 
 const ReminderIcon = () => (
@@ -70,8 +78,6 @@ const ReminderIcon = () => (
 export const NightSheetEntry = (props: NightSheetEntryProps) => {
   const src = getImageSrc(props.entry, props.iconUrlTemplate);
   const { reminderText, name } = getReminderText(props.entry, props.night);
-  const colour =
-    typeof props.entry === "string" ? "#222" : teamColours[props.entry.team];
   if (!reminderText) {
     console.warn("No reminder text found for:", props.entry);
     return <></>;
@@ -94,13 +100,29 @@ export const NightSheetEntry = (props: NightSheetEntryProps) => {
 
   const isMarker = typeof props.entry === "string";
 
+  const color =
+    typeof props.entry === "string"
+      ? COLOR_DARK_GRAY
+      : teamColours[props.entry.team];
+  const reminderTextColor = props.useDarkGrayForAbilityText
+    ? COLOR_DARK_GRAY
+    : color;
+
   return (
     <div className="night-sheet-entry">
       <img src={src} className={isMarker ? "marker-icon" : undefined}></img>
-      <div className="reminder-name" style={{ color: colour }}>
+      <div className="reminder-name" style={{ color: color }}>
         {name}
       </div>
-      <div className="reminder-text" style={{ color: colour }}>
+      <div
+        className="reminder-text"
+        style={{
+          color: reminderTextColor,
+          ...(props.useDarkGrayForAbilityText
+            ? { borderLeft: `1px solid ${COLOR_DARK_GRAY}` }
+            : {}),
+        }}
+      >
         {renderText(reminderText)}
       </div>
     </div>

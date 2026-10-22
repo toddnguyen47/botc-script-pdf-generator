@@ -2,7 +2,7 @@ import { ComponentChildren } from "preact";
 import { normalizeColors, createGradient } from "../utils/colours";
 import "./BottomTrimSheet.css";
 import { PrintablePage } from "./PrintablePage";
-import { ScriptOptions } from "../types";
+import { COLOR_DARK_GRAY, ScriptOptions } from "../types";
 
 export type BottomTrimSheetProps = {
   options: ScriptOptions;
@@ -32,6 +32,9 @@ export const BottomTrimSheet = ({
           "--title-margin-top": `${options.titleStyle.marginTop}mm`,
           "--title-margin-bottom": `${options.titleStyle.marginBottom}mm`,
           "--icon-scale": options.iconScale.toString(),
+          ...(options.useDarkGrayForAbilityText && {
+            color: COLOR_DARK_GRAY,
+          }),
         }}
       >
         <img

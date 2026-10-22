@@ -15,7 +15,8 @@
     "build:packages": "bun run --cwd packages/botc-character-sheet build",
     "build:frontend": "bun run --cwd frontend build",
     "typecheck": "bun run --cwd frontend typecheck && bun run --cwd backend typecheck",
-    "lint": "bun run prettier . --write"
+    "lint": "bun run prettier . --write",
+    "format:small": "bun run prettier --write \"**/*.{json,css,ts,tsx}\""
   },
   "devDependencies": {
     "concurrently": "^9.1.2",

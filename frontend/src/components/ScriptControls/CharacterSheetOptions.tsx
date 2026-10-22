@@ -74,6 +74,12 @@ export function CharacterSheetOptions({
         onChange={(value) => onOptionChange("showJinxes", value)}
       />
 
+      <Toggle
+        label="Use Dark Gray for Ability Text"
+        checked={options.useDarkGrayForAbilityText}
+        onChange={(value) => onOptionChange("useDarkGrayForAbilityText", value)}
+      />
+
       <Select
         label="Inline Jinx Icons:"
         value={options.inlineJinxIcons}

@@ -1,4 +1,4 @@
-import { ResolvedCharacter, Jinx } from "../types";
+import { ResolvedCharacter, Jinx, COLOR_DARK_GRAY } from "../types";
 import {
   getJinxedCharacters,
   getImageUrl,
@@ -8,6 +8,7 @@ import {
 interface CharacterSectionProps {
   title: string;
   characters: ResolvedCharacter[];
+  useDarkGrayForAbilityText: boolean;
   charNameColor: string;
   jinxes: Jinx[];
   allCharacters: ResolvedCharacter[];
@@ -20,6 +21,7 @@ export function CharacterSection({
   title,
   characters,
   charNameColor,
+  useDarkGrayForAbilityText,
   jinxes,
   allCharacters: allChars,
   inlineJinxIcons,
@@ -53,6 +55,7 @@ export function CharacterSection({
                 allChars,
                 inlineJinxIcons,
               )}
+              useDarkGrayForAbilityText={useDarkGrayForAbilityText}
             />
           ))}
         </div>
@@ -69,6 +72,7 @@ export function CharacterSection({
                 allChars,
                 inlineJinxIcons,
               )}
+              useDarkGrayForAbilityText={useDarkGrayForAbilityText}
             />
           ))}
         </div>
@@ -81,12 +85,15 @@ interface CharacterCardProps {
   color: string;
   jinxedCharacters: ResolvedCharacter[];
   iconUrlTemplate?: string;
+  useDarkGrayForAbilityText: boolean;
 }
+
 function CharacterCard({
   character,
   color,
   jinxedCharacters,
   iconUrlTemplate,
+  useDarkGrayForAbilityText,
 }: CharacterCardProps) {
   const renderAbility = (ability: string) => {
     // Match square brackets at the end of the ability
@@ -106,6 +113,8 @@ function CharacterCard({
   };
 
   const imageUrl = getImageUrl(character, iconUrlTemplate);
+  const abilityTextColor = useDarkGrayForAbilityText ? COLOR_DARK_GRAY : color;
+
   return (
     <div className="character-card">
       <div className="character-icon-wrapper">
@@ -119,7 +128,9 @@ function CharacterCard({
         <div className="character-name" style={{ color: color }}>
           <span
             style={{
-              backgroundColor: `color-mix(in srgb, #FFFF00 40%, white)`,
+              ...(!useDarkGrayForAbilityText && {
+                backgroundColor: "color-mix(in srgb, #FFFF00 40%, white)",
+              }),
             }}
           >
             {character.name}
@@ -141,13 +152,14 @@ function CharacterCard({
             </span>
           )}
         </div>
-        <p className="character-ability" style={{ color: color }}>
+        <p className="character-ability" style={{ color: abilityTextColor }}>
           {renderAbility(character.ability)}
         </p>
       </div>
     </div>
   );
 }
+
 function calculateMidpoint(characters: ResolvedCharacter[]): number {
   const midpoint = Math.ceil(characters.length / 2);
 

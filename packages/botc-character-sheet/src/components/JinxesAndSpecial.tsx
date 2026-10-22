@@ -1,4 +1,4 @@
-import { Jinx, ResolvedCharacter } from "../types";
+import { COLOR_DARK_GRAY, Jinx, ResolvedCharacter } from "../types";
 import { FabledOrLoric } from "../utils/fabledOrLoric";
 import { getImageUrl, getGenericIconUrl } from "../utils/scriptUtils";
 
@@ -8,6 +8,7 @@ interface JinxesSectionProps {
   fabledAndLoric: FabledOrLoric[];
   bootleggerRules: string[];
   iconUrlTemplate?: string;
+  useDarkGrayForAbilityText: boolean;
 }
 
 export function JinxesAndSpecial({
@@ -16,6 +17,7 @@ export function JinxesAndSpecial({
   fabledAndLoric,
   bootleggerRules,
   iconUrlTemplate,
+  useDarkGrayForAbilityText,
 }: JinxesSectionProps) {
   // Create a map for quick character lookup
   const characterMap = new Map(
@@ -48,6 +50,7 @@ export function JinxesAndSpecial({
         jinx={jinx}
         charMap={characterMap}
         iconUrlTemplate={iconUrlTemplate}
+        useDarkGrayForAbilityText={useDarkGrayForAbilityText}
       />
     ));
     rightColumn = fabledAndLoric.map((fl, i) => (
@@ -66,6 +69,7 @@ export function JinxesAndSpecial({
           jinx={jinx}
           charMap={characterMap}
           iconUrlTemplate={iconUrlTemplate}
+          useDarkGrayForAbilityText={useDarkGrayForAbilityText}
         />
       ));
     rightColumn = jinxes
@@ -76,6 +80,7 @@ export function JinxesAndSpecial({
           jinx={jinx}
           charMap={characterMap}
           iconUrlTemplate={iconUrlTemplate}
+          useDarkGrayForAbilityText={useDarkGrayForAbilityText}
         />
       ));
   } else if (hasSpecialOnly && useTwoColumns) {
@@ -104,6 +109,7 @@ export function JinxesAndSpecial({
         jinx={jinx}
         charMap={characterMap}
         iconUrlTemplate={iconUrlTemplate}
+        useDarkGrayForAbilityText={useDarkGrayForAbilityText}
       />
     ));
   } else if (hasSpecialOnly) {
@@ -136,9 +142,15 @@ type JinxItemProps = {
   charMap: Map<string, ResolvedCharacter>;
   jinx: Jinx;
   iconUrlTemplate?: string;
+  useDarkGrayForAbilityText: boolean;
 };
 
-const JinxItem = ({ charMap, jinx, iconUrlTemplate }: JinxItemProps) => {
+const JinxItem = ({
+  charMap,
+  jinx,
+  iconUrlTemplate,
+  useDarkGrayForAbilityText,
+}: JinxItemProps) => {
   const char1 = charMap.get(jinx.characters[0]);
   const char2 = charMap.get(jinx.characters[1]);
   return (
@@ -170,7 +182,16 @@ const JinxItem = ({ charMap, jinx, iconUrlTemplate }: JinxItemProps) => {
           </div>
         )}
       </div>
-      <p className="jinx-text">{jinx.jinx}</p>
+      <p
+        className="jinx-text"
+        style={{
+          ...(useDarkGrayForAbilityText && {
+            color: COLOR_DARK_GRAY,
+          }),
+        }}
+      >
+        {jinx.jinx}
+      </p>
     </div>
   );
 };
