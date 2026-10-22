@@ -37,6 +37,9 @@ export const NightSheet = ({
                 night="first"
                 iconUrlTemplate={options.iconUrlTemplate}
                 useDarkGrayForAbilityText={options.useDarkGrayForAbilityText}
+                nightSheetReminderTextAlign={
+                  options.nightSheetReminderTextAlign
+                }
               />
             ))}
           </div>
@@ -55,6 +58,9 @@ export const NightSheet = ({
                 night="other"
                 iconUrlTemplate={options.iconUrlTemplate}
                 useDarkGrayForAbilityText={options.useDarkGrayForAbilityText}
+                nightSheetReminderTextAlign={
+                  options.nightSheetReminderTextAlign
+                }
               />
             ))}
           </div>
@@ -69,6 +75,7 @@ type NightSheetEntryProps = {
   night: "first" | "other";
   iconUrlTemplate?: string;
   useDarkGrayForAbilityText: boolean;
+  nightSheetReminderTextAlign: string;
 };
 
 const ReminderIcon = () => (
@@ -111,14 +118,20 @@ export const NightSheetEntry = (props: NightSheetEntryProps) => {
   return (
     <div className="night-sheet-entry">
       <img src={src} className={isMarker ? "marker-icon" : undefined}></img>
-      <div className="reminder-name" style={{ color: color }}>
+      <div
+        className="reminder-name"
+        style={{
+          color: color,
+          textAlign: `${props.nightSheetReminderTextAlign}`,
+        }}
+      >
         {name}
       </div>
       <div
         className="reminder-text"
         style={{
           color: reminderTextColor,
-          borderLeft: `2px solid ${color}`
+          borderLeft: `2px solid ${color}`,
         }}
       >
         {renderText(reminderText)}

@@ -2,6 +2,7 @@ import { ScriptOptions } from "botc-character-sheet";
 import { Toggle, Select, Slider } from "../ui";
 import { OverleafType } from "../../types/options";
 import { AppearanceLevel } from "botc-character-sheet";
+import { NightOrderTextAlign } from "../../../../packages/botc-character-sheet/dist/types";
 
 export type InlineJinxIconsMode = "none" | "primary" | "both";
 
@@ -78,6 +79,22 @@ export function CharacterSheetOptions({
         label="Use Dark Gray for Ability Text"
         checked={options.useDarkGrayForAbilityText}
         onChange={(value) => onOptionChange("useDarkGrayForAbilityText", value)}
+      />
+
+      <Select
+        label="Text Align for Night Sheet:"
+        value={options.nightSheetReminderTextAlign}
+        options={[
+          { value: "start", label: "start" },
+          { value: "end", label: "end" },
+          { value: "center", label: "center" },
+        ]}
+        onChange={(value) =>
+          onOptionChange(
+            "nightSheetReminderTextAlign",
+            value as NightOrderTextAlign,
+          )
+        }
       />
 
       <Select

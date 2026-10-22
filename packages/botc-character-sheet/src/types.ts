@@ -57,6 +57,8 @@ export enum AppearanceLevel {
   MegaCompact = "mega-compact",
 }
 
+export type NightOrderTextAlign = "start" | "end" | "center";
+
 export interface ScriptOptions {
   color: string | string[];
   logo: string;
@@ -65,6 +67,7 @@ export interface ScriptOptions {
   showAuthor: boolean;
   showJinxes: boolean;
   useDarkGrayForAbilityText: boolean;
+  nightSheetReminderTextAlign: NightOrderTextAlign;
   useOldJinxes: boolean;
   showSwirls: boolean;
   includeMargins: boolean;
