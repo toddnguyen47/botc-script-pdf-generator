@@ -118,9 +118,7 @@ export const NightSheetEntry = (props: NightSheetEntryProps) => {
         className="reminder-text"
         style={{
           color: reminderTextColor,
-          ...(props.useDarkGrayForAbilityText
-            ? { borderLeft: `1px solid ${COLOR_DARK_GRAY}` }
-            : {}),
+          borderLeft: `2px solid ${color}`
         }}
       >
         {renderText(reminderText)}

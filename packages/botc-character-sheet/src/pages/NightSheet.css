@@ -64,7 +64,7 @@
 }
 
 .night-sheet-entry .reminder-text {
-  border-left: 1px solid #b85b21;
+  /* border-left: 1px solid #b85b21; */
   padding-left: 3mm;
   flex: 1;
 }
