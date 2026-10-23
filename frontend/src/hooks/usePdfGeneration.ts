@@ -11,7 +11,7 @@ import JSZip from "jszip";
 
 export function usePdfGeneration() {
   const [showPdfModal, setShowPdfModal] = useState(false);
-  const [scriptHtmlUrl, setScriptHtmlUrl] = useState<string | null>(null)
+  const [scriptHtmlUrl, setScriptHtmlUrl] = useState<string | null>(null);
   const [zippedBlob, setZippedBlob] = useState<Blob | null>(null);
   const [pdfLoading, setPdfLoading] = useState(false);
   const [pdfError, setPdfError] = useState<string | null>(null);

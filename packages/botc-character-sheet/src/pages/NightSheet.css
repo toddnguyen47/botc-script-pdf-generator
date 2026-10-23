@@ -5,7 +5,7 @@
 }
 
 .night-sheet-heading .night-title {
-  font-family: Dumbledor;
+  font-family: Dumbledor, serif;
   font-size: 19.8pt;
   margin: 0;
 }
@@ -77,7 +77,7 @@
 
 /* .night-sheet-entry p strong,
 .night-sheet-entry .reminder-text strong {
-  font-family: "PT Sans Bold";
+  font-family: "PT Sans Bold", sans-serif;
 } */
 
 .night-sheet-entry > img {
