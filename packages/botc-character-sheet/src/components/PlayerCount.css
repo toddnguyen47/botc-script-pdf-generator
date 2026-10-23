@@ -5,7 +5,7 @@
   box-shadow: inset 0 0 5px #000;
   display: flex;
   gap: 5mm;
-  max-width: 130mm;
+  width: fit-content;
 
   flex-direction: row;
   color: #222;
