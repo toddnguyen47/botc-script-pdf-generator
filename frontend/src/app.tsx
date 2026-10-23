@@ -90,7 +90,7 @@ function EditMode() {
   const {
     showPdfModal,
     pdfLoading,
-    scriptHtmlUrl,
+    pdfUrl,
     pdfError,
     generatePDF,
     downloadPDF,
@@ -455,7 +455,7 @@ function EditMode() {
       <PdfModal
         isOpen={showPdfModal}
         isLoading={pdfLoading}
-        scriptHtmlUrl={scriptHtmlUrl}
+        pdfUrl={pdfUrl}
         error={pdfError}
         onClose={closePdfModal}
         onDownload={handleDownloadPDF}

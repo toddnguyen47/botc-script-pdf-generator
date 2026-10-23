@@ -1,7 +1,7 @@
 interface PdfModalProps {
   isOpen: boolean;
   isLoading: boolean;
-  scriptHtmlUrl: string | null;
+  pdfUrl: string | null;
   error: string | null;
   onClose: () => void;
   onDownload: () => void;
@@ -10,7 +10,7 @@ interface PdfModalProps {
 export function PdfModal({
   isOpen,
   isLoading,
-  scriptHtmlUrl,
+  pdfUrl,
   error,
   onClose,
   onDownload,
@@ -28,7 +28,7 @@ export function PdfModal({
           </>
         )}
 
-        {!isLoading && scriptHtmlUrl && (
+        {!isLoading && pdfUrl && (
           <>
             <svg
               className="modal-success-icon"
@@ -48,7 +48,7 @@ export function PdfModal({
 
             <div className="pdf-preview-container">
               <iframe
-                src={scriptHtmlUrl}
+                src={pdfUrl}
                 className="pdf-preview"
                 title="PDF Preview"
               />
