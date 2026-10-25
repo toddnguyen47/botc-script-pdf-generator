@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "bun run --watch dev-server.ts",
     "build": "bun build ./functions/generate-pdf.ts --outdir ./api --target bun",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@sparticuz/chromium": "^143.0.4",
@@ -22,6 +24,7 @@
     "@vercel/node": "^3.0.21",
     "puppeteer": "^25.16.0",
     "typescript": "^5.3.3",
-    "vercel": "^48.6.0"
+    "vercel": "^48.6.0",
+    "vitest": "^5.0.5"
   }
 }
