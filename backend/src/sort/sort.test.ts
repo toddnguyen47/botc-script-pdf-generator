@@ -3,14 +3,7 @@ import { CharacterNameSort, SortFilter } from "./sort";
 import { ROLES_BY_ID } from "botc-character-sheet";
 
 describe("CharacterNameSort tests", () => {
-  const testee: SortFilter = new CharacterNameSort();
-
-  test("GIVEN normal constructing THEN return no further sort", () => {
-    // -- GIVEN --
-    // -- WHEN --
-    // -- THEN --
-    expect(testee.furtherSort()).toHaveLength(0);
-  });
+  const testee: SortFilter = new CharacterNameSort([]);
 
   test("GIVEN 5 names unsorted THEN it should be sorted", () => {
     // -- GIVEN --

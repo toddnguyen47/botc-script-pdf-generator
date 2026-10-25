@@ -1,11 +1,22 @@
 import { ResolvedCharacter } from "botc-character-sheet";
 
 export interface SortFilter {
+  furtherSortFilters: SortFilter[];
+
   sort(input: ResolvedCharacter[]): ResolvedCharacter[];
-  furtherSort(): SortFilter[];
+}
+
+export class AbilityTextLengthSort implements SortFilter {
+  constructor(public furtherSortFilters: []) {}
+
+  sort(input: ResolvedCharacter[]): ResolvedCharacter[] {
+    throw new Error("Method not implemented.");
+  }
 }
 
 export class CharacterNameSort implements SortFilter {
+  constructor(public furtherSortFilters: []) {}
+
   sort(input: ResolvedCharacter[]): ResolvedCharacter[] {
     return input.sort((a, b) => {
       const aName = a.name;
@@ -16,9 +27,5 @@ export class CharacterNameSort implements SortFilter {
         return aName.length - bName.length;
       }
     });
-  }
-
-  furtherSort(): SortFilter[] {
-    return [];
   }
 }
