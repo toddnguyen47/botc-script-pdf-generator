@@ -6,16 +6,16 @@ export interface SortFilter {
   sort(input: ResolvedCharacter[]): ResolvedCharacter[];
 }
 
-export class AbilityTextLengthSort implements SortFilter {
-  constructor(public furtherSortFilters: []) {}
+// export class AbilityTextLengthSort implements SortFilter {
+//   constructor(public furtherSortFilters: SortFilter[]) {}
 
-  sort(input: ResolvedCharacter[]): ResolvedCharacter[] {
-    throw new Error("Method not implemented.");
-  }
-}
+//   sort(input: ResolvedCharacter[]): ResolvedCharacter[] {
+//     const sorted
+//   }
+// }
 
 export class CharacterNameSort implements SortFilter {
-  constructor(public furtherSortFilters: []) {}
+  constructor(public furtherSortFilters: SortFilter[]) {}
 
   sort(input: ResolvedCharacter[]): ResolvedCharacter[] {
     return input.sort((a, b) => {
