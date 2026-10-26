@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from "preact/hooks";
 import { parseScript } from "../utils/scriptParser";
 import { sanitizeScript } from "../utils/scriptValidation";
-import { sortScript } from "botc-script-checker";
 import type { Script } from "botc-script-checker";
 import {
   NightOrders,
   ParsedScript,
   CharacterReplacementData,
+  sortSao,
 } from "botc-character-sheet";
 import { calculateNightOrders } from "../utils/nightOrders";
 import { downloadBlob } from "../utils/downloadFile";
@@ -28,7 +28,7 @@ export function useScriptParsing() {
 
   const checkIfSorted = (currentScript: Script): boolean => {
     try {
-      const sorted = sortScript(currentScript);
+      const sorted = sortSao(currentScript);
       return JSON.stringify(currentScript) === JSON.stringify(sorted);
     } catch {
       return true; // Assume sorted if we can't check
@@ -116,7 +116,7 @@ export function useScriptParsing() {
     if (!rawScript) return;
 
     try {
-      const sorted = sortScript(rawScript);
+      const sorted = sortSao(rawScript);
       setRawScript(sorted);
       const { script: sanitized, issues: newIssues } = sanitizeScript(
         parseScript(sorted),

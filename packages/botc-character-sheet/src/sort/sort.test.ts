@@ -3,9 +3,7 @@ import { ROLES_BY_ID } from "botc-character-sheet";
 import {
   ABILITY_TEXT_TYPES,
   filterByAbilityPhraseType,
-  filterByCharacterType,
   SaoAbilityPhrase,
-  SaoCharacterType,
   sortResolvedCharacters,
   sortSao,
 } from "./sort";
@@ -25,31 +23,35 @@ describe("sortSao tests", () => {
     // -- THEN --
     expect(sorted).not.toEqual(shuffledCharacters);
     expect(sorted).toEqual([
-      ROLES_BY_ID["clockmaker"],
-      ROLES_BY_ID["snakecharmer"],
-      ROLES_BY_ID["mathematician"],
-      ROLES_BY_ID["dreamer"],
-      ROLES_BY_ID["flowergirl"],
-      ROLES_BY_ID["towncrier"],
-      ROLES_BY_ID["oracle"],
-      ROLES_BY_ID["savant"],
-      ROLES_BY_ID["seamstress"],
-      ROLES_BY_ID["philosopher"],
-      ROLES_BY_ID["artist"],
-      ROLES_BY_ID["juggler"],
-      ROLES_BY_ID["sage"],
-      ROLES_BY_ID["sweetheart"],
-      ROLES_BY_ID["klutz"],
-      ROLES_BY_ID["barber"],
-      ROLES_BY_ID["mutant"],
-      ROLES_BY_ID["witch"],
-      ROLES_BY_ID["cerenovus"],
-      ROLES_BY_ID["pithag"],
-      ROLES_BY_ID["eviltwin"],
-      ROLES_BY_ID["nodashii"],
-      ROLES_BY_ID["vigormortis"],
-      ROLES_BY_ID["vortox"],
-      ROLES_BY_ID["fanggu"],
+      {
+        id: "_meta",
+        name: "Sects & Violet",
+      },
+      "clockmaker",
+      "snakecharmer",
+      "mathematician",
+      "dreamer",
+      "flowergirl",
+      "towncrier",
+      "oracle",
+      "savant",
+      "seamstress",
+      "philosopher",
+      "artist",
+      "juggler",
+      "sage",
+      "sweetheart",
+      "klutz",
+      "barber",
+      "mutant",
+      "witch",
+      "cerenovus",
+      "pithag",
+      "eviltwin",
+      "nodashii",
+      "vigormortis",
+      "vortox",
+      "fanggu",
     ]);
   });
 
@@ -66,31 +68,41 @@ describe("sortSao tests", () => {
     // -- THEN --
     expect(sorted).not.toEqual(shuffledCharacters);
     expect(sorted).toEqual([
-      ROLES_BY_ID["chef"],
-      ROLES_BY_ID["investigator"],
-      ROLES_BY_ID["grandmother"],
-      ROLES_BY_ID["balloonist"],
-      ROLES_BY_ID["snakecharmer"],
-      ROLES_BY_ID["dreamer"],
-      ROLES_BY_ID["fortuneteller"],
-      ROLES_BY_ID["gambler"],
-      ROLES_BY_ID["savant"],
-      ROLES_BY_ID["philosopher"],
-      ROLES_BY_ID["cannibal"],
-      ROLES_BY_ID["amnesiac"],
-      ROLES_BY_ID["ravenkeeper"],
-      ROLES_BY_ID["lunatic"],
-      ROLES_BY_ID["drunk"],
-      ROLES_BY_ID["recluse"],
-      ROLES_BY_ID["sweetheart"],
-      ROLES_BY_ID["mutant"],
-      ROLES_BY_ID["godfather"],
-      ROLES_BY_ID["cerenovus"],
-      ROLES_BY_ID["pithag"],
-      ROLES_BY_ID["widow"],
-      ROLES_BY_ID["imp"],
-      ROLES_BY_ID["vigormortis"],
-      ROLES_BY_ID["fanggu"],
+      {
+        id: "_meta",
+        name: "Catfishing",
+        author: "Emily",
+      },
+      "chef",
+      "investigator",
+      "grandmother",
+      "balloonist",
+      "snakecharmer",
+      "dreamer",
+      "fortuneteller",
+      "gambler",
+      "savant",
+      "philosopher",
+      "cannibal",
+      "amnesiac",
+      "ravenkeeper",
+      "lunatic",
+      "drunk",
+      "recluse",
+      "sweetheart",
+      "mutant",
+      "godfather",
+      "cerenovus",
+      "pithag",
+      "widow",
+      "imp",
+      "vigormortis",
+      "fanggu",
+      "barista",
+      "harlot",
+      "bonecollector",
+      "apprentice",
+      "beggar",
     ]);
   });
 
@@ -107,68 +119,36 @@ describe("sortSao tests", () => {
     // -- THEN --
     expect(sorted).not.toEqual(shuffledCharacters);
     expect(sorted).toEqual([
-      ROLES_BY_ID["noble"],
-      ROLES_BY_ID["pixie"],
-      ROLES_BY_ID["bountyhunter"],
-      ROLES_BY_ID["empath"],
-      ROLES_BY_ID["balloonist"],
-      ROLES_BY_ID["snakecharmer"],
-      ROLES_BY_ID["gossip"],
-      ROLES_BY_ID["philosopher"],
-      ROLES_BY_ID["huntsman"],
-      ROLES_BY_ID["artist"],
-      ROLES_BY_ID["alchemist"],
-      ROLES_BY_ID["amnesiac"],
-      ROLES_BY_ID["poppygrower"],
-      ROLES_BY_ID["goon"],
-      ROLES_BY_ID["drunk"],
-      ROLES_BY_ID["mutant"],
-      ROLES_BY_ID["damsel"],
-      ROLES_BY_ID["godfather"],
-      ROLES_BY_ID["poisoner"],
-      ROLES_BY_ID["fearmonger"],
-      ROLES_BY_ID["goblin"],
-      ROLES_BY_ID["boomdandy"],
-      ROLES_BY_ID["lilmonsta"],
-      ROLES_BY_ID["vortox"],
-      ROLES_BY_ID["legion"],
-    ]);
-  });
-});
-
-describe("filterByCharacterType tests", () => {
-  test("GIVEN 2 of each character type THEN sort by townsfolk, outsider, minion, and demon", () => {
-    // -- GIVEN --
-    const input = [
-      ROLES_BY_ID["washerwoman"],
-      ROLES_BY_ID["scarletwoman"],
-      ROLES_BY_ID["saint"],
-      ROLES_BY_ID["imp"],
-      ROLES_BY_ID["lilmonsta"],
-      ROLES_BY_ID["baron"],
-      ROLES_BY_ID["undertaker"],
-      ROLES_BY_ID["drunk"],
-    ];
-    // -- WHEN --
-    const filtered = filterByCharacterType(input);
-    // -- THEN --
-    expect(filtered).toEqual([
-      new SaoCharacterType("townsfolk", [
-        ROLES_BY_ID["washerwoman"],
-        ROLES_BY_ID["undertaker"],
-      ]),
-      new SaoCharacterType("outsider", [
-        ROLES_BY_ID["saint"],
-        ROLES_BY_ID["drunk"],
-      ]),
-      new SaoCharacterType("minion", [
-        ROLES_BY_ID["scarletwoman"],
-        ROLES_BY_ID["baron"],
-      ]),
-      new SaoCharacterType("demon", [
-        ROLES_BY_ID["imp"],
-        ROLES_BY_ID["lilmonsta"],
-      ]),
+      {
+        id: "_meta",
+        name: "No Rolls Barred",
+        author: "Andrew Pichot",
+      },
+      "noble",
+      "pixie",
+      "bountyhunter",
+      "empath",
+      "balloonist",
+      "snakecharmer",
+      "gossip",
+      "philosopher",
+      "huntsman",
+      "artist",
+      "alchemist",
+      "amnesiac",
+      "poppygrower",
+      "goon",
+      "drunk",
+      "mutant",
+      "damsel",
+      "godfather",
+      "poisoner",
+      "fearmonger",
+      "goblin",
+      "boomdandy",
+      "lilmonsta",
+      "vortox",
+      "legion",
     ]);
   });
 });
@@ -247,7 +227,7 @@ function getSectsAndVioletScript(): Script {
 [
   {
     "id": "_meta",
-    "name": ""
+    "name": "Sects & Violet"
   },
   "clockmaker",
   "snakecharmer",
@@ -275,7 +255,7 @@ function getSectsAndVioletScript(): Script {
   "vortox",
   "fanggu"
 ]`;
-  return getCharactersFromScript(input);
+  return JSON.parse(input);
 }
 
 function getCatfishingScript(): Script {
@@ -317,7 +297,7 @@ function getCatfishingScript(): Script {
   "apprentice",
   "beggar"
 ]`;
-  return getCharactersFromScript(input);
+  return JSON.parse(input);
 }
 
 function getNoRollsBarredScript(): Script {
@@ -354,14 +334,7 @@ function getNoRollsBarredScript(): Script {
   "vortox",
   "legion"
 ]`;
-  return getCharactersFromScript(input);
-}
-
-function getCharactersFromScript(jsonString: string): Script {
-  const strings = JSON.parse(jsonString) as string[];
-  return strings
-    .filter((id): id is string => typeof id === "string")
-    .map((id) => ROLES_BY_ID[id]);
+  return JSON.parse(input);
 }
 
 // Reusable generic shuffle function <T> works for any type of array

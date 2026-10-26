@@ -3,55 +3,37 @@
  * Obtained from https://bloodontheclocktower.com/blogs/news/sort-order-sao-update
  */
 
-import { Script, ScriptCharacter, ScriptElement } from "botc-script-checker";
+import { OfficialCharacterID, Script } from "botc-script-checker";
+import { ROLES_BY_ID } from "../data/roles";
+import { ResolvedCharacter } from "../types";
+import { groupCharactersByTeam } from "../utils/scriptUtils";
 
 export function sortSao(input: Script): Script {
-  const scriptCharactersInput = input.filter(isScriptCharacter);
+  const inputResolvedChaaracters = input
+    .filter((elem) => typeof elem === "string")
+    .map((elem) => ROLES_BY_ID[elem]);
 
-  // 1. Sort by character type
-  return filterByCharacterType(scriptCharactersInput).flatMap(
-    ({ characters }) =>
-      // 2. Sort by ability phrase
-      filterByAbilityPhraseType(characters)
-        .filter(({ characters }) => characters.length > 0)
-        // 3. For each ability type, sort them
-        .flatMap(({ characters }) => sortResolvedCharacters(characters)),
-  );
-}
+  const result: Script = input.filter((elem) => typeof elem !== "string");
 
-export function filterByCharacterType(
-  input: ScriptCharacter[],
-): SaoCharacterType[] {
-  const townsfolk: ScriptCharacter[] = [];
-  const outsiders: ScriptCharacter[] = [];
-  const minions: ScriptCharacter[] = [];
-  const demons: ScriptCharacter[] = [];
-  input.forEach((resolvedCharacter) => {
-    switch (resolvedCharacter.team) {
-      case "townsfolk":
-        townsfolk.push(resolvedCharacter);
-        break;
-      case "outsider":
-        outsiders.push(resolvedCharacter);
-        break;
-      case "minion":
-        minions.push(resolvedCharacter);
-        break;
-      case "demon":
-        demons.push(resolvedCharacter);
-        break;
-    }
-  });
-  return [
-    new SaoCharacterType("townsfolk", townsfolk),
-    new SaoCharacterType("outsider", outsiders),
-    new SaoCharacterType("minion", minions),
-    new SaoCharacterType("demon", demons),
-  ];
+  const groupedCharacters = groupCharactersByTeam(inputResolvedChaaracters);
+
+  const handlePerGroup = (resolvedCharacters: ResolvedCharacter[]) => {
+    sortGroupedCharacters(resolvedCharacters).forEach((id) => result.push(id));
+  };
+
+  handlePerGroup(groupedCharacters.townsfolk);
+  handlePerGroup(groupedCharacters.outsider);
+  handlePerGroup(groupedCharacters.minion);
+  handlePerGroup(groupedCharacters.demon);
+  handlePerGroup(groupedCharacters.traveller);
+  handlePerGroup(groupedCharacters.fabled);
+  handlePerGroup(groupedCharacters.loric);
+
+  return result;
 }
 
 export function filterByAbilityPhraseType(
-  input: ScriptCharacter[],
+  input: ResolvedCharacter[],
 ): SaoAbilityPhrase[] {
   const result: SaoAbilityPhrase[] = ABILITY_TEXT_TYPES.map(
     (phrase) => new SaoAbilityPhrase(phrase, []),
@@ -69,32 +51,12 @@ export function filterByAbilityPhraseType(
 }
 
 export function sortResolvedCharacters(
-  input: ScriptCharacter[],
-): ScriptCharacter[] {
+  input: ResolvedCharacter[],
+): ResolvedCharacter[] {
   return input.sort((a, b) => {
     // Sort by abiltiy length first
     return sortByAbilityLength(a, b);
   });
-}
-
-function sortByAbilityLength(a: ScriptCharacter, b: ScriptCharacter): number {
-  const abilityLengthA = a.ability.length;
-  const abilityLengthB = b.ability.length;
-  if (abilityLengthA === abilityLengthB) {
-    return sortByName(a, b);
-  } else {
-    return abilityLengthA - abilityLengthB;
-  }
-}
-
-function sortByName(a: ScriptCharacter, b: ScriptCharacter): number {
-  const aName = a.name;
-  const bName = b.name;
-  if (aName === bName) {
-    return aName.localeCompare(bName);
-  } else {
-    return aName.length - bName.length;
-  }
 }
 
 export const ABILITY_TEXT_TYPES: string[] = [
@@ -145,22 +107,47 @@ export const ABILITY_TEXT_TYPES: string[] = [
   "Minions", // 38
 ];
 
-export class SaoCharacterType {
-  constructor(
-    public readonly characterType: string,
-    public readonly characters: ScriptCharacter[],
-  ) {}
-}
-
 export class SaoAbilityPhrase {
   constructor(
     public readonly phrase: string,
-    public readonly characters: ScriptCharacter[],
+    public readonly characters: ResolvedCharacter[],
   ) {}
 }
 
+function sortGroupedCharacters(
+  resolvedCharacters: ResolvedCharacter[],
+): OfficialCharacterID[] {
+  return filterByAbilityPhraseType(resolvedCharacters)
+    .filter(({ characters }) => characters.length > 0)
+    .flatMap(({ characters }) => sortResolvedCharacters(characters))
+    .map((character) => character.id);
+}
+
+function sortByAbilityLength(
+  a: ResolvedCharacter,
+  b: ResolvedCharacter,
+): number {
+  const abilityLengthA = a.ability.length;
+  const abilityLengthB = b.ability.length;
+  if (abilityLengthA === abilityLengthB) {
+    return sortByName(a, b);
+  } else {
+    return abilityLengthA - abilityLengthB;
+  }
+}
+
+function sortByName(a: ResolvedCharacter, b: ResolvedCharacter): number {
+  const aName = a.name;
+  const bName = b.name;
+  if (aName === bName) {
+    return aName.localeCompare(bName);
+  } else {
+    return aName.length - bName.length;
+  }
+}
+
 function getAppropriateAbilityPhraseType(
-  resolvedCharacter: ScriptCharacter,
+  resolvedCharacter: ResolvedCharacter,
   indexRange: number[],
 ): number | undefined {
   const abilityTokens = splitIntoTokens(resolvedCharacter.ability);
@@ -212,14 +199,4 @@ function containsAbilityPhrase(
  */
 function splitIntoTokens(input: string): string[] {
   return input.split(/(\s+|,)/).filter((token) => token.trim() !== "");
-}
-
-function isScriptCharacter(value: ScriptElement): value is ScriptCharacter {
-  return (
-    typeof value === "object" &&
-    value !== null &&
-    "ability" in value &&
-    "name" in value &&
-    "team" in value
-  );
 }
