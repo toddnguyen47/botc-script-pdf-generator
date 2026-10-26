@@ -1,7 +1,12 @@
 import { CharacterSheet } from "./pages/CharacterSheet";
 import { NightSheet } from "./pages/NightSheet";
 import { SheetBack } from "./pages/SheetBack";
-import { NightOrders, ParsedScript, ScriptOptions } from "./types";
+import {
+  CharacterReplacement,
+  NightOrders,
+  ParsedScript,
+  ScriptOptions,
+} from "./types";
 import { getFabledOrLoric } from "./utils/fabledOrLoric";
 import {
   groupCharactersByTeam,
@@ -15,12 +20,14 @@ export type FancyDocProps = {
   script: ParsedScript;
   options: ScriptOptions;
   nightOrders: NightOrders;
+  characterReplacement: CharacterReplacement;
 };
 
 export function FancyDoc({
   script,
   options: rawOptions,
   nightOrders,
+  characterReplacement,
 }: FancyDocProps) {
   // If a custom font URL is provided, inject a @font-face and override titleStyle.font
   const hasCustomFont = !!rawOptions.titleStyle.customFontUrl;
@@ -58,6 +65,7 @@ export function FancyDoc({
               fabledOrLoric={fabledAndLoric}
               bootleggerRules={script.metadata?.bootlegger}
               options={options}
+              characterReplacement={characterReplacement}
             />
             <div style="break-after:page;"></div>
 

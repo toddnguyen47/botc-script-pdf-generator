@@ -75,6 +75,7 @@ function EditMode() {
     isScriptSorted,
     nightOrders,
     sharedOptions,
+    characterNameReplacement,
     loadScript,
     handleScriptTextChange,
     handleFileUpload,
@@ -410,6 +411,7 @@ function EditMode() {
                 },
               }}
               nightOrders={nightOrders}
+              characterReplacement={characterNameReplacement}
             />
           </div>
         )}
@@ -420,6 +422,7 @@ function EditMode() {
               script={script}
               options={options}
               nightOrders={nightOrders}
+              characterReplacement={characterNameReplacement}
             />
           </div>
         )}

@@ -6,7 +6,12 @@ import {
   // createOverlayBackground,
 } from "../utils/colours";
 import "./CharacterSheet.css";
-import { GroupedCharacters, Jinx, ScriptOptions } from "../types";
+import {
+  CharacterReplacement,
+  GroupedCharacters,
+  Jinx,
+  ScriptOptions,
+} from "../types";
 import { FabledOrLoric } from "../utils/fabledOrLoric";
 import { JinxesAndSpecial } from "../components/JinxesAndSpecial";
 import { CharacterSection } from "./CharacterSection";
@@ -20,6 +25,7 @@ interface CharacterSheetProps {
   fabledOrLoric?: FabledOrLoric[];
   bootleggerRules?: string[];
   options: ScriptOptions;
+  characterReplacement: CharacterReplacement;
 }
 
 export function CharacterSheet({
@@ -30,6 +36,7 @@ export function CharacterSheet({
   fabledOrLoric = [],
   bootleggerRules = [],
   options,
+  characterReplacement,
 }: CharacterSheetProps) {
   const {
     color,
@@ -140,6 +147,7 @@ export function CharacterSheet({
                     ]}
                     inlineJinxIcons={inlineJinxIcons}
                     iconUrlTemplate={iconUrlTemplate}
+                    characterReplacement={characterReplacement}
                   />
                   {i < sections.length - 1 && (
                     <img

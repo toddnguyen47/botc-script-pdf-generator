@@ -93,6 +93,9 @@ export interface ParsedScript {
   characters: ScriptCharacter[];
 }
 
+/**
+ * TODO: RENAME THIS TO JUST NAME
+ */
 export interface CharacterReplacementData {
   replacements: CharacterReplacement;
 }

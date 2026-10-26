@@ -1,4 +1,9 @@
-import { ResolvedCharacter, Jinx, COLOR_DARK_GRAY } from "../types";
+import {
+  ResolvedCharacter,
+  Jinx,
+  COLOR_DARK_GRAY,
+  CharacterReplacement,
+} from "../types";
 import {
   getJinxedCharacters,
   getImageUrl,
@@ -14,6 +19,7 @@ interface CharacterSectionProps {
   allCharacters: ResolvedCharacter[];
   inlineJinxIcons: "none" | "primary" | "both";
   iconUrlTemplate?: string;
+  characterReplacement: CharacterReplacement;
 }
 // Threshold to switch from evenly spaced to space-between layout
 const BALANCE_POINT = 8;
@@ -26,6 +32,7 @@ export function CharacterSection({
   allCharacters: allChars,
   inlineJinxIcons,
   iconUrlTemplate,
+  characterReplacement,
 }: CharacterSectionProps) {
   const justifyContent =
     characters.length > BALANCE_POINT
@@ -56,6 +63,7 @@ export function CharacterSection({
                 inlineJinxIcons,
               )}
               useDarkGrayForAbilityText={useDarkGrayForAbilityText}
+              characterReplacement={characterReplacement}
             />
           ))}
         </div>
@@ -73,6 +81,7 @@ export function CharacterSection({
                 inlineJinxIcons,
               )}
               useDarkGrayForAbilityText={useDarkGrayForAbilityText}
+              characterReplacement={characterReplacement}
             />
           ))}
         </div>
@@ -86,6 +95,7 @@ interface CharacterCardProps {
   jinxedCharacters: ResolvedCharacter[];
   iconUrlTemplate?: string;
   useDarkGrayForAbilityText: boolean;
+  characterReplacement: CharacterReplacement;
 }
 
 function CharacterCard({
@@ -94,6 +104,7 @@ function CharacterCard({
   jinxedCharacters,
   iconUrlTemplate,
   useDarkGrayForAbilityText,
+  characterReplacement,
 }: CharacterCardProps) {
   const renderAbility = (ability: string) => {
     // Match square brackets at the end of the ability
@@ -114,13 +125,17 @@ function CharacterCard({
 
   const imageUrl = getImageUrl(character, iconUrlTemplate);
   const abilityTextColor = useDarkGrayForAbilityText ? COLOR_DARK_GRAY : color;
+  let characterName = character.name;
+  if (characterName in characterReplacement) {
+    characterName = `${characterName} (${characterReplacement[characterName]} token)`;
+  }
 
   return (
     <div className="character-card">
       <div className="character-icon-wrapper">
         <img
           src={imageUrl ?? getGenericIconUrl(character.team)}
-          alt={character.name}
+          alt={characterName}
           className="character-icon"
         />
       </div>
@@ -133,7 +148,7 @@ function CharacterCard({
               }),
             }}
           >
-            {character.name}
+            {characterName}
           </span>
           {jinxedCharacters.length > 0 && (
             <span className="inline-jinx-icons">

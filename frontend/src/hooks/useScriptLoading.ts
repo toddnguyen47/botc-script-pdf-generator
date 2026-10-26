@@ -1,19 +1,16 @@
 import { useState, useEffect } from "preact/hooks";
 import type { Script } from "botc-script-checker";
 import type {
+  CharacterReplacementData,
   ParsedScript,
   ScriptOptions,
-  CharacterReplacementData,
 } from "botc-character-sheet";
 import { loadScript as loadSharedScript } from "../utils/scriptStorage";
 import JSON5 from "json5";
 
 export function useScriptLoading(
   loadScript: (json: Script) => ParsedScript,
-  loadCharacterTokenReplacement: (
-    json: CharacterReplacementData,
-    parsedScript: ParsedScript,
-  ) => ParsedScript,
+  loadCharacterReplacementData: (json: CharacterReplacementData) => void,
   setError: (error: string | null) => void,
   onLoad?: (json: Script, parsed: ParsedScript) => void,
 ) {
@@ -150,15 +147,12 @@ export function useScriptLoading(
   };
 
   const handleTokenReplacementUpload = (event: Event) => {
+    // TODO: what do i return lol
     const handler = (json: any) => {
       if (alreadyParsedScript == null) {
         console.error("No parsed script yet. Upload a script first");
       } else {
-        const parsedScriptWithReplacementTokens = loadCharacterTokenReplacement(
-          json,
-          alreadyParsedScript,
-        );
-        onLoad?.(json, parsedScriptWithReplacementTokens);
+        loadCharacterReplacementData(json);
       }
     };
     _handleJsonFileUpload(event, handler);
