@@ -1,54 +1,25 @@
 import { describe, expect, test } from "vitest";
-import { AbilityTextLengthSort, CharacterNameSort, SortFilter } from "./sort";
 import { ROLES_BY_ID } from "botc-character-sheet";
+import { sortResolvedCharacters } from "./sort";
 
-describe("AbilityTextLengthSort tests", () => {
-  const characterNameSort: SortFilter = new CharacterNameSort([]);
-  const testee: SortFilter = new AbilityTextLengthSort([characterNameSort])
-
-  test("GIVEN 5 names unsorted THEN it should be sorted", () => {
-    // -- GIVEN --
-    const input = [
-      ROLES_BY_ID["dreamer"],
-      ROLES_BY_ID["washerwoman"],
-      ROLES_BY_ID["librarian"],
-      ROLES_BY_ID["chef"],
-      ROLES_BY_ID["monk"],
-    ];
-    // -- WHEN --
-    const sorted = testee.sort(input);
-    // -- THEN --
-    expect(sorted).toEqual([
-      ROLES_BY_ID["chef"],
-      ROLES_BY_ID["monk"],
-      ROLES_BY_ID["dreamer"],
-      ROLES_BY_ID["librarian"],
-      ROLES_BY_ID["washerwoman"],
-    ]);
-  });
-});
-
-describe("CharacterNameSort tests", () => {
-  const testee: SortFilter = new CharacterNameSort([]);
+describe("sort tests", () => {
 
   test("GIVEN 5 names unsorted THEN it should be sorted", () => {
     // -- GIVEN --
     const input = [
-      ROLES_BY_ID["dreamer"],
       ROLES_BY_ID["washerwoman"],
       ROLES_BY_ID["librarian"],
       ROLES_BY_ID["chef"],
-      ROLES_BY_ID["monk"],
+      ROLES_BY_ID["investigator"],
     ];
     // -- WHEN --
-    const sorted = testee.sort(input);
+    const sorted = sortResolvedCharacters(input);
     // -- THEN --
     expect(sorted).toEqual([
       ROLES_BY_ID["chef"],
-      ROLES_BY_ID["monk"],
-      ROLES_BY_ID["dreamer"],
-      ROLES_BY_ID["librarian"],
+      ROLES_BY_ID["investigator"],
       ROLES_BY_ID["washerwoman"],
+      ROLES_BY_ID["librarian"],
     ]);
   });
 });

@@ -1,31 +1,28 @@
 import { ResolvedCharacter } from "botc-character-sheet";
 
-export interface SortFilter {
-  furtherSortFilters: SortFilter[];
-
-  sort(input: ResolvedCharacter[]): ResolvedCharacter[];
+export function sortResolvedCharacters(input: ResolvedCharacter[]): ResolvedCharacter[] {
+  return input.sort((a, b) => {
+    // Sort by abiltiy length first
+    return sortByAbilityLength(a, b);
+  });
 }
 
-// export class AbilityTextLengthSort implements SortFilter {
-//   constructor(public furtherSortFilters: SortFilter[]) {}
+function sortByAbilityLength(a: ResolvedCharacter, b: ResolvedCharacter): number {
+  const abilityLengthA = a.ability.length;
+  const abilityLengthB = b.ability.length;
+  if (abilityLengthA === abilityLengthB) {
+    return sortByName(a, b);
+  } else {
+    return abilityLengthA - abilityLengthB;
+  }
+}
 
-//   sort(input: ResolvedCharacter[]): ResolvedCharacter[] {
-//     const sorted
-//   }
-// }
-
-export class CharacterNameSort implements SortFilter {
-  constructor(public furtherSortFilters: SortFilter[]) {}
-
-  sort(input: ResolvedCharacter[]): ResolvedCharacter[] {
-    return input.sort((a, b) => {
-      const aName = a.name;
-      const bName = b.name;
-      if (aName === bName) {
-        return aName.localeCompare(bName);
-      } else {
-        return aName.length - bName.length;
-      }
-    });
+function sortByName(a: ResolvedCharacter, b: ResolvedCharacter): number {
+  const aName = a.name;
+  const bName = b.name;
+  if (aName === bName) {
+    return aName.localeCompare(bName);
+  } else {
+    return aName.length - bName.length;
   }
 }
