@@ -50,17 +50,18 @@ export function filterByCharacterType(
 
 export function filterByAbilityPhraseType(
   input: ResolvedCharacter[],
-): ResolvedCharacter[][] {
-  const result: ResolvedCharacter[][] = Array.from(
-    { length: ABILITY_TEXT_TYPES.length + 1 },
-    () => [],
+): SaoAbilityPhrase[] {
+  const result: SaoAbilityPhrase[] = ABILITY_TEXT_TYPES.map(
+    (phrase) => new SaoAbilityPhrase(phrase, []),
   );
+  // Adding a last element for any other ability type
+  result.push(new SaoAbilityPhrase("", []));
   input.forEach((elem) => {
     let indexRange: number[] = [...Array(ABILITY_TEXT_TYPES.length).keys()];
     const abilityPhraseType = getAppropriateAbilityPhraseType(elem, indexRange);
     typeof abilityPhraseType === "number"
-      ? result[abilityPhraseType].push(elem)
-      : result[ABILITY_TEXT_TYPES.length].push(elem);
+      ? result[abilityPhraseType].characters.push(elem)
+      : result[ABILITY_TEXT_TYPES.length].characters.push(elem);
   });
   return result;
 }
@@ -97,7 +98,7 @@ function sortByName(a: ResolvedCharacter, b: ResolvedCharacter): number {
   }
 }
 
-const ABILITY_TEXT_TYPES: string[] = [
+export const ABILITY_TEXT_TYPES: string[] = [
   "You start knowing", // 0
   "At night", // 1
   "Each dusk*", // 2
@@ -203,6 +204,13 @@ function splitIntoTokens(input: string): string[] {
 export class SaoCharacterType {
   constructor(
     public readonly characterType: string,
+    public readonly characters: ResolvedCharacter[],
+  ) {}
+}
+
+export class SaoAbilityPhrase {
+  constructor(
+    public readonly phrase: string,
     public readonly characters: ResolvedCharacter[],
   ) {}
 }

@@ -1,8 +1,10 @@
 import { describe, expect, test } from "vitest";
 import { ResolvedCharacter, ROLES_BY_ID } from "botc-character-sheet";
 import {
+  ABILITY_TEXT_TYPES,
   filterByAbilityPhraseType,
   filterByCharacterType,
+  SaoAbilityPhrase,
   SaoCharacterType,
   sortResolvedCharacters,
   sortSao,
@@ -105,26 +107,29 @@ describe("filterByAbilityPhraseType tests", () => {
     //   ),
     // );
     // -- THEN --
-    expect(filtered[0]).toEqual([
-      ROLES_BY_ID["washerwoman"],
-      ROLES_BY_ID["chef"],
-    ]);
-    expect(filtered[3]).toEqual([ROLES_BY_ID["fortuneteller"]]);
-    expect(filtered[4]).toEqual([
-      ROLES_BY_ID["undertaker"],
-      ROLES_BY_ID["monk"],
-    ]);
-    expect(filtered[8]).toEqual([ROLES_BY_ID["slayer"]]);
-    expect(filtered[30]).toEqual([ROLES_BY_ID["mayor"]]);
-  });
-
-  test("GIVEN just fortune teller THEN sort it into index 3", () => {
-    // -- GIVEN --
-    const input = [ROLES_BY_ID["fortuneteller"]];
-    // -- WHEN --
-    const filtered = filterByAbilityPhraseType(input);
-    // -- THEN --
-    expect(filtered[3]).toEqual([ROLES_BY_ID["fortuneteller"]]);
+    expect(filtered[0]).toEqual(
+      new SaoAbilityPhrase(ABILITY_TEXT_TYPES[0], [
+        ROLES_BY_ID["washerwoman"],
+        ROLES_BY_ID["chef"],
+      ]),
+    );
+    expect(filtered[3]).toEqual(
+      new SaoAbilityPhrase(ABILITY_TEXT_TYPES[3], [
+        ROLES_BY_ID["fortuneteller"],
+      ]),
+    );
+    expect(filtered[4]).toEqual(
+      new SaoAbilityPhrase(ABILITY_TEXT_TYPES[4], [
+        ROLES_BY_ID["undertaker"],
+        ROLES_BY_ID["monk"],
+      ]),
+    );
+    expect(filtered[8]).toEqual(
+      new SaoAbilityPhrase(ABILITY_TEXT_TYPES[8], [ROLES_BY_ID["slayer"]]),
+    );
+    expect(filtered[30]).toEqual(
+      new SaoAbilityPhrase(ABILITY_TEXT_TYPES[30], [ROLES_BY_ID["mayor"]]),
+    );
   });
 });
 
