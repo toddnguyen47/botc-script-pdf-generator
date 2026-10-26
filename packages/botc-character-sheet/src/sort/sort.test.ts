@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { ResolvedCharacter, ROLES_BY_ID } from "botc-character-sheet";
+import { ROLES_BY_ID } from "botc-character-sheet";
 import {
   ABILITY_TEXT_TYPES,
   filterByAbilityPhraseType,
@@ -9,6 +9,7 @@ import {
   sortResolvedCharacters,
   sortSao,
 } from "./sort";
+import { Script } from "botc-script-checker";
 
 describe("sortSao tests", () => {
   test("GIVEN Sects & Violet unsorted THEN sort properly", () => {
@@ -241,7 +242,7 @@ describe("sort tests", () => {
   });
 });
 
-function getSectsAndVioletScript(): ResolvedCharacter[] {
+function getSectsAndVioletScript(): Script {
   const input = `
 [
   {
@@ -277,7 +278,7 @@ function getSectsAndVioletScript(): ResolvedCharacter[] {
   return getCharactersFromScript(input);
 }
 
-function getCatfishingScript(): ResolvedCharacter[] {
+function getCatfishingScript(): Script {
   const input = `
 [
   {
@@ -319,7 +320,7 @@ function getCatfishingScript(): ResolvedCharacter[] {
   return getCharactersFromScript(input);
 }
 
-function getNoRollsBarredScript(): ResolvedCharacter[] {
+function getNoRollsBarredScript(): Script {
   const input = `
 [
   {
@@ -356,7 +357,7 @@ function getNoRollsBarredScript(): ResolvedCharacter[] {
   return getCharactersFromScript(input);
 }
 
-function getCharactersFromScript(jsonString: string): ResolvedCharacter[] {
+function getCharactersFromScript(jsonString: string): Script {
   const strings = JSON.parse(jsonString) as string[];
   return strings
     .filter((id): id is string => typeof id === "string")

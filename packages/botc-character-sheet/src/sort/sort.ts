@@ -3,26 +3,29 @@
  * Obtained from https://bloodontheclocktower.com/blogs/news/sort-order-sao-update
  */
 
-import { ResolvedCharacter } from "botc-character-sheet";
+import { Script, ScriptCharacter, ScriptElement } from "botc-script-checker";
 
-export function sortSao(input: ResolvedCharacter[]): ResolvedCharacter[] {
+export function sortSao(input: Script): Script {
+  const scriptCharactersInput = input.filter(isScriptCharacter);
+
   // 1. Sort by character type
-  return filterByCharacterType(input).flatMap(({ characters }) =>
-    // 2. Sort by ability phrase
-    filterByAbilityPhraseType(characters)
-      .filter(({ characters }) => characters.length > 0)
-      // 3. For each ability type, sort them
-      .flatMap(({ characters }) => sortResolvedCharacters(characters)),
+  return filterByCharacterType(scriptCharactersInput).flatMap(
+    ({ characters }) =>
+      // 2. Sort by ability phrase
+      filterByAbilityPhraseType(characters)
+        .filter(({ characters }) => characters.length > 0)
+        // 3. For each ability type, sort them
+        .flatMap(({ characters }) => sortResolvedCharacters(characters)),
   );
 }
 
 export function filterByCharacterType(
-  input: ResolvedCharacter[],
+  input: ScriptCharacter[],
 ): SaoCharacterType[] {
-  const townsfolk: ResolvedCharacter[] = [];
-  const outsiders: ResolvedCharacter[] = [];
-  const minions: ResolvedCharacter[] = [];
-  const demons: ResolvedCharacter[] = [];
+  const townsfolk: ScriptCharacter[] = [];
+  const outsiders: ScriptCharacter[] = [];
+  const minions: ScriptCharacter[] = [];
+  const demons: ScriptCharacter[] = [];
   input.forEach((resolvedCharacter) => {
     switch (resolvedCharacter.team) {
       case "townsfolk":
@@ -48,7 +51,7 @@ export function filterByCharacterType(
 }
 
 export function filterByAbilityPhraseType(
-  input: ResolvedCharacter[],
+  input: ScriptCharacter[],
 ): SaoAbilityPhrase[] {
   const result: SaoAbilityPhrase[] = ABILITY_TEXT_TYPES.map(
     (phrase) => new SaoAbilityPhrase(phrase, []),
@@ -66,18 +69,15 @@ export function filterByAbilityPhraseType(
 }
 
 export function sortResolvedCharacters(
-  input: ResolvedCharacter[],
-): ResolvedCharacter[] {
+  input: ScriptCharacter[],
+): ScriptCharacter[] {
   return input.sort((a, b) => {
     // Sort by abiltiy length first
     return sortByAbilityLength(a, b);
   });
 }
 
-function sortByAbilityLength(
-  a: ResolvedCharacter,
-  b: ResolvedCharacter,
-): number {
+function sortByAbilityLength(a: ScriptCharacter, b: ScriptCharacter): number {
   const abilityLengthA = a.ability.length;
   const abilityLengthB = b.ability.length;
   if (abilityLengthA === abilityLengthB) {
@@ -87,7 +87,7 @@ function sortByAbilityLength(
   }
 }
 
-function sortByName(a: ResolvedCharacter, b: ResolvedCharacter): number {
+function sortByName(a: ScriptCharacter, b: ScriptCharacter): number {
   const aName = a.name;
   const bName = b.name;
   if (aName === bName) {
@@ -145,8 +145,22 @@ export const ABILITY_TEXT_TYPES: string[] = [
   "Minions", // 38
 ];
 
+export class SaoCharacterType {
+  constructor(
+    public readonly characterType: string,
+    public readonly characters: ScriptCharacter[],
+  ) {}
+}
+
+export class SaoAbilityPhrase {
+  constructor(
+    public readonly phrase: string,
+    public readonly characters: ScriptCharacter[],
+  ) {}
+}
+
 function getAppropriateAbilityPhraseType(
-  resolvedCharacter: ResolvedCharacter,
+  resolvedCharacter: ScriptCharacter,
   indexRange: number[],
 ): number | undefined {
   const abilityTokens = splitIntoTokens(resolvedCharacter.ability);
@@ -200,16 +214,12 @@ function splitIntoTokens(input: string): string[] {
   return input.split(/(\s+|,)/).filter((token) => token.trim() !== "");
 }
 
-export class SaoCharacterType {
-  constructor(
-    public readonly characterType: string,
-    public readonly characters: ResolvedCharacter[],
-  ) {}
-}
-
-export class SaoAbilityPhrase {
-  constructor(
-    public readonly phrase: string,
-    public readonly characters: ResolvedCharacter[],
-  ) {}
+function isScriptCharacter(value: ScriptElement): value is ScriptCharacter {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "ability" in value &&
+    "name" in value &&
+    "team" in value
+  );
 }
