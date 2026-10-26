@@ -14,6 +14,10 @@ describe("sortSao tests", () => {
   test("GIVEN Sects & Violet unsorted THEN sort properly", () => {
     // -- GIVEN --
     const characters = getSectsAndVioletScript();
+    [characters[0], characters[characters.length - 1]] = [
+      characters[characters.length - 1],
+      characters[0],
+    ];
     const shuffledCharacters = shuffleArray(characters);
     // -- WHEN --
     const sorted = sortSao(shuffledCharacters);
@@ -45,6 +49,88 @@ describe("sortSao tests", () => {
       ROLES_BY_ID["vigormortis"],
       ROLES_BY_ID["vortox"],
       ROLES_BY_ID["fanggu"],
+    ]);
+  });
+
+  test("GIVEN Catfishing unsorted THEN sort properly", () => {
+    // -- GIVEN --
+    const characters = getCatfishingScript();
+    [characters[0], characters[characters.length - 1]] = [
+      characters[characters.length - 1],
+      characters[0],
+    ];
+    const shuffledCharacters = shuffleArray(characters);
+    // -- WHEN --
+    const sorted = sortSao(shuffledCharacters);
+    // -- THEN --
+    expect(sorted).not.toEqual(shuffledCharacters);
+    expect(sorted).toEqual([
+      ROLES_BY_ID["chef"],
+      ROLES_BY_ID["investigator"],
+      ROLES_BY_ID["grandmother"],
+      ROLES_BY_ID["balloonist"],
+      ROLES_BY_ID["snakecharmer"],
+      ROLES_BY_ID["dreamer"],
+      ROLES_BY_ID["fortuneteller"],
+      ROLES_BY_ID["gambler"],
+      ROLES_BY_ID["savant"],
+      ROLES_BY_ID["philosopher"],
+      ROLES_BY_ID["cannibal"],
+      ROLES_BY_ID["amnesiac"],
+      ROLES_BY_ID["ravenkeeper"],
+      ROLES_BY_ID["lunatic"],
+      ROLES_BY_ID["drunk"],
+      ROLES_BY_ID["recluse"],
+      ROLES_BY_ID["sweetheart"],
+      ROLES_BY_ID["mutant"],
+      ROLES_BY_ID["godfather"],
+      ROLES_BY_ID["cerenovus"],
+      ROLES_BY_ID["pithag"],
+      ROLES_BY_ID["widow"],
+      ROLES_BY_ID["imp"],
+      ROLES_BY_ID["vigormortis"],
+      ROLES_BY_ID["fanggu"],
+    ]);
+  });
+
+  test("GIVEN No Rolls Barred unsorted THEN sort properly", () => {
+    // -- GIVEN --
+    const characters = getNoRollsBarredScript();
+    [characters[0], characters[characters.length - 1]] = [
+      characters[characters.length - 1],
+      characters[0],
+    ];
+    const shuffledCharacters = shuffleArray(characters);
+    // -- WHEN --
+    const sorted = sortSao(shuffledCharacters);
+    // -- THEN --
+    expect(sorted).not.toEqual(shuffledCharacters);
+    expect(sorted).toEqual([
+      ROLES_BY_ID["noble"],
+      ROLES_BY_ID["pixie"],
+      ROLES_BY_ID["bountyhunter"],
+      ROLES_BY_ID["empath"],
+      ROLES_BY_ID["balloonist"],
+      ROLES_BY_ID["snakecharmer"],
+      ROLES_BY_ID["gossip"],
+      ROLES_BY_ID["philosopher"],
+      ROLES_BY_ID["huntsman"],
+      ROLES_BY_ID["artist"],
+      ROLES_BY_ID["alchemist"],
+      ROLES_BY_ID["amnesiac"],
+      ROLES_BY_ID["poppygrower"],
+      ROLES_BY_ID["goon"],
+      ROLES_BY_ID["drunk"],
+      ROLES_BY_ID["mutant"],
+      ROLES_BY_ID["damsel"],
+      ROLES_BY_ID["godfather"],
+      ROLES_BY_ID["poisoner"],
+      ROLES_BY_ID["fearmonger"],
+      ROLES_BY_ID["goblin"],
+      ROLES_BY_ID["boomdandy"],
+      ROLES_BY_ID["lilmonsta"],
+      ROLES_BY_ID["vortox"],
+      ROLES_BY_ID["legion"],
     ]);
   });
 });
@@ -156,7 +242,8 @@ describe("sort tests", () => {
 });
 
 function getSectsAndVioletScript(): ResolvedCharacter[] {
-  const input = `[
+  const input = `
+[
   {
     "id": "_meta",
     "name": ""
@@ -186,6 +273,85 @@ function getSectsAndVioletScript(): ResolvedCharacter[] {
   "vigormortis",
   "vortox",
   "fanggu"
+]`;
+  return getCharactersFromScript(input);
+}
+
+function getCatfishingScript(): ResolvedCharacter[] {
+  const input = `
+[
+  {
+    "id": "_meta",
+    "name": "Catfishing",
+    "author": "Emily"
+  },
+  "chef",
+  "investigator",
+  "grandmother",
+  "balloonist",
+  "snakecharmer",
+  "dreamer",
+  "fortuneteller",
+  "gambler",
+  "savant",
+  "philosopher",
+  "cannibal",
+  "amnesiac",
+  "ravenkeeper",
+  "lunatic",
+  "drunk",
+  "recluse",
+  "sweetheart",
+  "mutant",
+  "godfather",
+  "cerenovus",
+  "pithag",
+  "widow",
+  "imp",
+  "vigormortis",
+  "fanggu",
+  "barista",
+  "harlot",
+  "bonecollector",
+  "apprentice",
+  "beggar"
+]`;
+  return getCharactersFromScript(input);
+}
+
+function getNoRollsBarredScript(): ResolvedCharacter[] {
+  const input = `
+[
+  {
+    "id": "_meta",
+    "name": "No Rolls Barred",
+    "author": "Andrew Pichot"
+  },
+  "noble",
+  "pixie",
+  "bountyhunter",
+  "empath",
+  "balloonist",
+  "snakecharmer",
+  "gossip",
+  "philosopher",
+  "huntsman",
+  "artist",
+  "alchemist",
+  "amnesiac",
+  "poppygrower",
+  "goon",
+  "drunk",
+  "mutant",
+  "damsel",
+  "godfather",
+  "poisoner",
+  "fearmonger",
+  "goblin",
+  "boomdandy",
+  "lilmonsta",
+  "vortox",
+  "legion"
 ]`;
   return getCharactersFromScript(input);
 }
