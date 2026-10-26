@@ -18,33 +18,34 @@ describe("sortSao tests", () => {
     // -- WHEN --
     const sorted = sortSao(shuffledCharacters);
     // -- THEN --
-    // expect(sorted).toEqual([
-    //   ROLES_BY_ID["clockmaker"],
-    //   ROLES_BY_ID["snakecharmer"],
-    //   ROLES_BY_ID["mathematician"],
-    //   ROLES_BY_ID["dreamer"],
-    //   ROLES_BY_ID["flowergirl"],
-    //   ROLES_BY_ID["towncrier"],
-    //   ROLES_BY_ID["oracle"],
-    //   ROLES_BY_ID["savant"],
-    //   ROLES_BY_ID["seamstress"],
-    //   ROLES_BY_ID["philosopher"],
-    //   ROLES_BY_ID["artist"],
-    //   ROLES_BY_ID["juggler"],
-    //   ROLES_BY_ID["sage"],
-    //   ROLES_BY_ID["sweetheart"],
-    //   ROLES_BY_ID["klutz"],
-    //   ROLES_BY_ID["barber"],
-    //   ROLES_BY_ID["mutant"],
-    //   ROLES_BY_ID["witch"],
-    //   ROLES_BY_ID["cerenovus"],
-    //   ROLES_BY_ID["pithag"],
-    //   ROLES_BY_ID["eviltwin"],
-    //   ROLES_BY_ID["nodashii"],
-    //   ROLES_BY_ID["vigormortis"],
-    //   ROLES_BY_ID["vortox"],
-    //   ROLES_BY_ID["fanggu"],
-    // ]);
+    expect(sorted).not.toEqual(shuffledCharacters);
+    expect(sorted).toEqual([
+      ROLES_BY_ID["clockmaker"],
+      ROLES_BY_ID["snakecharmer"],
+      ROLES_BY_ID["mathematician"],
+      ROLES_BY_ID["dreamer"],
+      ROLES_BY_ID["flowergirl"],
+      ROLES_BY_ID["towncrier"],
+      ROLES_BY_ID["oracle"],
+      ROLES_BY_ID["savant"],
+      ROLES_BY_ID["seamstress"],
+      ROLES_BY_ID["philosopher"],
+      ROLES_BY_ID["artist"],
+      ROLES_BY_ID["juggler"],
+      ROLES_BY_ID["sage"],
+      ROLES_BY_ID["sweetheart"],
+      ROLES_BY_ID["klutz"],
+      ROLES_BY_ID["barber"],
+      ROLES_BY_ID["mutant"],
+      ROLES_BY_ID["witch"],
+      ROLES_BY_ID["cerenovus"],
+      ROLES_BY_ID["pithag"],
+      ROLES_BY_ID["eviltwin"],
+      ROLES_BY_ID["nodashii"],
+      ROLES_BY_ID["vigormortis"],
+      ROLES_BY_ID["vortox"],
+      ROLES_BY_ID["fanggu"],
+    ]);
   });
 });
 
@@ -186,7 +187,11 @@ function getSectsAndVioletScript(): ResolvedCharacter[] {
   "vortox",
   "fanggu"
 ]`;
-  const strings = JSON.parse(input) as string[];
+  return getCharactersFromScript(input);
+}
+
+function getCharactersFromScript(jsonString: string): ResolvedCharacter[] {
+  const strings = JSON.parse(jsonString) as string[];
   return strings
     .filter((id): id is string => typeof id === "string")
     .map((id) => ROLES_BY_ID[id]);

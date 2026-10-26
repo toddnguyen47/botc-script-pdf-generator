@@ -6,30 +6,14 @@
 import { ResolvedCharacter } from "botc-character-sheet";
 
 export function sortSao(input: ResolvedCharacter[]): ResolvedCharacter[] {
-  // 1. Sort by character type first
-  const filteredByCharacterTypes = filterByCharacterType(input);
-
-  // 2. Now sort by ability "phrases"
-  const filteredByAbilityPhrases = filteredByCharacterTypes
-    .map((saoCharacterType) =>
-      filterByAbilityPhraseType(saoCharacterType.characters),
-    )
-    .map((saoCharacterTypes) =>
-      saoCharacterTypes.filter(
-        (saoCharacterType) => saoCharacterType.characters.length !== 0,
-      ),
-    );
-
-  // 3. For each ability type, sort them then add to result
-  const result: ResolvedCharacter[] = [];
-  filteredByAbilityPhrases.forEach((saoAbilityPhrases) =>
-    saoAbilityPhrases.forEach((saoAbilityPhrase) => {
-      sortResolvedCharacters(saoAbilityPhrase.characters);
-      saoAbilityPhrase.characters.forEach(character => result.push(character));
-    }),
+  // 1. Sort by character type
+  return filterByCharacterType(input).flatMap(({ characters }) =>
+    // 2. Sort by ability phrase
+    filterByAbilityPhraseType(characters)
+      .filter(({ characters }) => characters.length > 0)
+      // 3. For each ability type, sort them
+      .flatMap(({ characters }) => sortResolvedCharacters(characters)),
   );
-
-  return result;
 }
 
 export function filterByCharacterType(
