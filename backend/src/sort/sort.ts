@@ -1,8 +1,25 @@
+/**
+ * Blood on the Clocktower SAO (The Sort Order) sorting.
+ * Obtained from https://bloodontheclocktower.com/blogs/news/sort-order-sao-update
+ */
+
 import { ResolvedCharacter } from "botc-character-sheet";
+
+export function sortSao(input: ResolvedCharacter[]): ResolvedCharacter[] {
+  // // 1. Sort by character type first
+  // const sortedByCharacterTypes = filterByCharacterType(input);
+
+  // // 2. Now sort by ability "phrases"
+  // const sortedByAbilityPhrases = sortedByCharacterTypes.map(characterType => filterByAbilityPhraseType(characterType));
+
+  // console.log(sortedByAbilityPhrases);
+
+  return [];
+}
 
 export function filterByCharacterType(
   input: ResolvedCharacter[],
-): ResolvedCharacter[][] {
+): SaoCharacterType[] {
   const townsfolk: ResolvedCharacter[] = [];
   const outsiders: ResolvedCharacter[] = [];
   const minions: ResolvedCharacter[] = [];
@@ -23,7 +40,12 @@ export function filterByCharacterType(
         break;
     }
   });
-  return [townsfolk, outsiders, minions, demons];
+  return [
+    new SaoCharacterType("townsfolk", townsfolk),
+    new SaoCharacterType("outsider", outsiders),
+    new SaoCharacterType("minion", minions),
+    new SaoCharacterType("demon", demons),
+  ];
 }
 
 export function filterByAbilityPhraseType(
@@ -75,9 +97,6 @@ function sortByName(a: ResolvedCharacter, b: ResolvedCharacter): number {
   }
 }
 
-/**
- * Obtained from https://bloodontheclocktower.com/blogs/news/sort-order-sao-update
- */
 const ABILITY_TEXT_TYPES: string[] = [
   "You start knowing", // 0
   "At night", // 1
@@ -179,4 +198,11 @@ function containsAbilityPhrase(
  */
 function splitIntoTokens(input: string): string[] {
   return input.split(/(\s+|,)/).filter((token) => token.trim() !== "");
+}
+
+export class SaoCharacterType {
+  constructor(
+    public readonly characterType: string,
+    public readonly characters: ResolvedCharacter[],
+  ) {}
 }
