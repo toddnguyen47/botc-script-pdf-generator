@@ -304,7 +304,7 @@ function EditMode() {
     if (script) {
       logUsage(script, { method: "generate", options });
     }
-    generatePDF(script, options, nightOrders);
+    generatePDF(script, options, nightOrders, characterNameReplacement);
   };
 
   const handleGenerateImages = () => {
@@ -312,7 +312,7 @@ function EditMode() {
     if (script) {
       logUsage(script, { method: "image", options });
     }
-    generateImages(script, options, nightOrders);
+    generateImages(script, options, nightOrders, characterNameReplacement);
   };
 
   const handleShareScript = () => {

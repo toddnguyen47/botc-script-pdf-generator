@@ -9,6 +9,7 @@ import {
 } from "botc-character-sheet";
 import { readFileSync } from "fs";
 import { join } from "path";
+import { CharacterReplacement } from "../../packages/botc-character-sheet/dist/types";
 
 // Default asset base URL for production
 const DEFAULT_ASSET_BASE = "https://fancy.ravenswoodstudio.xyz";
@@ -115,6 +116,7 @@ export function renderCharacterSheet(
   script: ParsedScript,
   options: ScriptOptions,
   nightOrders: NightOrders,
+  characterReplacement: CharacterReplacement,
   requestOrigin?: string,
 ): string {
   const assetBase = getAssetBase(requestOrigin);
@@ -132,6 +134,7 @@ export function renderCharacterSheet(
         options: { ...options, dimensions },
         script,
         nightOrders,
+        characterReplacement,
       }),
     );
   } else {
@@ -140,6 +143,7 @@ export function renderCharacterSheet(
         options: { ...options, numberOfCharacterSheets: 1 },
         script,
         nightOrders,
+        characterReplacement,
       }),
     );
   }

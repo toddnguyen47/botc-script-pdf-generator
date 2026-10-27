@@ -105,6 +105,7 @@ export type NetworkPayload = {
   options: ScriptOptions;
   nightOrders: NightOrders;
   filename: string;
+  characterReplacement: CharacterReplacement;
 };
 
 export type PageDimensions = {
