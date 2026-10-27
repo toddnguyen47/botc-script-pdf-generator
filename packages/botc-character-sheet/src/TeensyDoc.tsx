@@ -1,5 +1,10 @@
 import { CharacterSheet } from "./pages/CharacterSheet";
-import { ParsedScript, ScriptOptions, NightOrders } from "./types";
+import {
+  ParsedScript,
+  ScriptOptions,
+  NightOrders,
+  CharacterNameReplacement,
+} from "./types";
 import { getFabledOrLoric } from "./utils/fabledOrLoric";
 import {
   groupCharactersByTeam,
@@ -16,12 +21,14 @@ type TeensyDocProps = {
   script: ParsedScript;
   options: ScriptOptions;
   nightOrders: NightOrders;
+  characterNameReplacement: CharacterNameReplacement;
 };
 
 export const TeensyDoc = ({
   script,
   options: rawOptions,
   nightOrders,
+  characterNameReplacement,
 }: TeensyDocProps) => {
   // If a custom font URL is provided, inject a @font-face and override titleStyle.font
   const hasCustomFont = !!rawOptions.titleStyle.customFontUrl;
@@ -69,6 +76,7 @@ export const TeensyDoc = ({
                   fabledOrLoric={fabledAndLoric}
                   bootleggerRules={script.metadata?.bootlegger}
                   options={options}
+                  characterNameReplacement={characterNameReplacement}
                 />
                 {i + 1 !== options.numberOfCharacterSheets && (
                   <CharacterSheet
@@ -81,10 +89,11 @@ export const TeensyDoc = ({
                     fabledOrLoric={fabledAndLoric}
                     bootleggerRules={script.metadata?.bootlegger}
                     options={options}
+                    characterNameReplacement={characterNameReplacement}
                   />
                 )}
                 {/* If there is only one more back sheet to display, and
-                    the user wants to show a night sheet, include the second 
+                    the user wants to show a night sheet, include the second
                     side of the night sheet in this pair */}
                 {options.overleaf !== "none" &&
                   i + 1 === options.numberOfCharacterSheets &&
@@ -94,6 +103,7 @@ export const TeensyDoc = ({
                       firstNightOrder={nightOrders.first}
                       otherNightOrder={undefined}
                       options={options}
+                      characterNameReplacement={characterNameReplacement}
                     />
                   )}
               </div>
@@ -102,7 +112,7 @@ export const TeensyDoc = ({
                 {options.overleaf === "backingSheet" && (
                   <>
                     {/* If there is only one more back sheet to display, and
-                        the user wants to show a night sheet, include the 
+                        the user wants to show a night sheet, include the
                         second side of the night sheet in this pair */}
                     {i + 1 === options.numberOfCharacterSheets &&
                       options.showNightSheet && (
@@ -111,6 +121,7 @@ export const TeensyDoc = ({
                           firstNightOrder={undefined}
                           otherNightOrder={nightOrders.other}
                           options={options}
+                          characterNameReplacement={characterNameReplacement}
                         />
                       )}
                     <SheetBack
@@ -131,7 +142,7 @@ export const TeensyDoc = ({
                 {options.overleaf === "infoSheet" && (
                   <>
                     {/* If there is only one more info sheet to display, and
-                    the user wants to show a night sheet, include the second 
+                    the user wants to show a night sheet, include the second
                     side of the night sheet in this pair */}
                     {i + 1 === options.numberOfCharacterSheets &&
                       options.showNightSheet && (
@@ -140,6 +151,7 @@ export const TeensyDoc = ({
                           firstNightOrder={undefined}
                           otherNightOrder={nightOrders.other}
                           options={options}
+                          characterNameReplacement={characterNameReplacement}
                         />
                       )}
                     <InfoSheet
@@ -182,6 +194,7 @@ export const TeensyDoc = ({
               firstNightOrder={nightOrders.first}
               otherNightOrder={nightOrders.other}
               options={options}
+              characterNameReplacement={characterNameReplacement}
             />
           </div>
         )}

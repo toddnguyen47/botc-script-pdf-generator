@@ -13,13 +13,20 @@ import {
 export default {
   async fetch(request: Request): Promise<Response> {
     return handleApiRequest(request, async (body, origin) => {
-      const { script, options, filename, nightOrders } = body;
+      const {
+        script,
+        options,
+        filename,
+        nightOrders,
+        characterNameReplacement,
+      } = body;
 
       // Generate HTML with the character sheet
       const html = renderCharacterSheet(
         script,
         options,
         nightOrders || { first: [], other: [] },
+        characterNameReplacement,
         origin || undefined,
       );
 
@@ -70,9 +77,11 @@ async function generatePdf(
   });
 
   // Set content and wait for fonts/images to load
-  await page.setContent(html, {
-    waitUntil: ["networkidle0", "load"],
-  });
+  // 1. Injected HTML is parsed immediately
+  await page.setContent(html, { waitUntil: "load" });
+
+  // 2. Explicitly wait for any external images/CSS/fonts to settle
+  await page.waitForNetworkIdle({ idleTime: 500, concurrency: 0 });
 
   const format =
     options.dimensions.height === 297 && options.dimensions.width === 210

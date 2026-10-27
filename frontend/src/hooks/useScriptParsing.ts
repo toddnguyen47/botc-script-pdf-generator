@@ -1,17 +1,16 @@
 import { useState, useEffect, useRef } from "preact/hooks";
 import { parseScript } from "../utils/scriptParser";
 import { sanitizeScript } from "../utils/scriptValidation";
-import { sortScript } from "botc-script-checker";
 import type { Script } from "botc-script-checker";
-import {
-  NightOrders,
-  ParsedScript,
-  CharacterReplacementData,
-} from "botc-character-sheet";
+import { NightOrders, ParsedScript, sortSao } from "botc-character-sheet";
 import { calculateNightOrders } from "../utils/nightOrders";
 import { downloadBlob } from "../utils/downloadFile";
 import type { ValidationIssue } from "../types/validation";
 import JSON5 from "json5";
+import {
+  CharacterNameReplacement,
+  CharacterNameReplacementData,
+} from "../../../packages/botc-character-sheet/dist/types";
 
 export function useScriptParsing() {
   const [script, setScript] = useState<ParsedScript | null>(null);
@@ -25,10 +24,12 @@ export function useScriptParsing() {
     other: [],
   });
   const parseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [characterNameReplacement, setCharacterNameReplacement] =
+    useState<CharacterNameReplacement>({});
 
   const checkIfSorted = (currentScript: Script): boolean => {
     try {
-      const sorted = sortScript(currentScript);
+      const sorted = sortSao(currentScript);
       return JSON.stringify(currentScript) === JSON.stringify(sorted);
     } catch {
       return true; // Assume sorted if we can't check
@@ -48,36 +49,6 @@ export function useScriptParsing() {
     setError(null);
 
     return sanitized; // Return parsed script for color loading
-  };
-
-  const loadCharacterTokenReplacement = (
-    json: CharacterReplacementData,
-    parsedScript: ParsedScript,
-  ): ParsedScript => {
-    // Need to make a copy so preact renders it.
-    const sanitized = {
-      ...parsedScript,
-      characters: parsedScript.characters.map((character) => {
-        if (character.name in json.replacements) {
-          const newName = `${character.name} (${json.replacements[character.name]} token)`;
-          // Need to make a new object
-          return {
-            ...character,
-            name: newName,
-          };
-        }
-        return character;
-      }),
-    };
-
-    const rawScript: Script = [
-      ...(sanitized.metadata ? [sanitized.metadata] : []),
-      ...sanitized.characters,
-    ];
-    setRawScript(rawScript);
-    setScript(sanitized);
-    setNightOrdersState(calculateNightOrders(sanitized));
-    return sanitized;
   };
 
   const handleScriptTextChange = (newText: string) => {
@@ -116,7 +87,7 @@ export function useScriptParsing() {
     if (!rawScript) return;
 
     try {
-      const sorted = sortScript(rawScript);
+      const sorted = sortSao(rawScript);
       setRawScript(sorted);
       const { script: sanitized, issues: newIssues } = sanitizeScript(
         parseScript(sorted),
@@ -149,6 +120,16 @@ export function useScriptParsing() {
     downloadBlob(blob, filename);
   };
 
+  const handleCharacterNameReplaceData = (
+    characterNameReplacementData: CharacterNameReplacementData,
+  ) => {
+    setCharacterNameReplacement(characterNameReplacementData.replacements);
+    localStorage.setItem(
+      "characterNameReplacementData",
+      JSON.stringify(characterNameReplacementData),
+    );
+  };
+
   // Cleanup parse timeout on unmount
   useEffect(() => {
     return () => {
@@ -168,10 +149,11 @@ export function useScriptParsing() {
     isScriptSorted,
     nightOrders: nightOrdersState,
     loadScript,
-    loadCharacterTokenReplacement,
     handleScriptTextChange,
     handleSort,
     updateScriptMetadata,
     handleSaveScript,
+    characterNameReplacement,
+    handleCharacterNameReplaceData,
   };
 }

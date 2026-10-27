@@ -1,19 +1,18 @@
 import { useState, useEffect } from "preact/hooks";
 import type { Script } from "botc-script-checker";
 import type {
+  CharacterNameReplacementData,
   ParsedScript,
   ScriptOptions,
-  CharacterReplacementData,
 } from "botc-character-sheet";
 import { loadScript as loadSharedScript } from "../utils/scriptStorage";
 import JSON5 from "json5";
 
 export function useScriptLoading(
   loadScript: (json: Script) => ParsedScript,
-  loadCharacterTokenReplacement: (
-    json: CharacterReplacementData,
-    parsedScript: ParsedScript,
-  ) => ParsedScript,
+  loadCharacterNameReplacementData: (
+    json: CharacterNameReplacementData,
+  ) => void,
   setError: (error: string | null) => void,
   onLoad?: (json: Script, parsed: ParsedScript) => void,
 ) {
@@ -93,6 +92,15 @@ export function useScriptLoading(
           /* ignore corrupt data */
         }
       }
+
+      const characterNameReplacementData = localStorage.getItem(
+        "characterNameReplacementData",
+      );
+      if (characterNameReplacementData) {
+        loadCharacterNameReplacementData(
+          JSON.parse(characterNameReplacementData),
+        );
+      }
     }
   }, []);
 
@@ -145,6 +153,7 @@ export function useScriptLoading(
   const handleFileUpload = (event: Event) => {
     const handler = (json: any) => {
       _loadScript(json);
+      _resetCharacterNameReplacementData();
     };
     _handleJsonFileUpload(event, handler);
   };
@@ -154,11 +163,7 @@ export function useScriptLoading(
       if (alreadyParsedScript == null) {
         console.error("No parsed script yet. Upload a script first");
       } else {
-        const parsedScriptWithReplacementTokens = loadCharacterTokenReplacement(
-          json,
-          alreadyParsedScript,
-        );
-        onLoad?.(json, parsedScriptWithReplacementTokens);
+        loadCharacterNameReplacementData(json);
       }
     };
     _handleJsonFileUpload(event, handler);
@@ -189,6 +194,11 @@ export function useScriptLoading(
     const parsed = loadScript(json);
     onLoad?.(json, parsed);
     setAlreadyParsedScript(parsed);
+  };
+
+  const _resetCharacterNameReplacementData = () => {
+    localStorage.removeItem("characterNameReplacementData");
+    loadCharacterNameReplacementData({ replacements: {} });
   };
 
   return {

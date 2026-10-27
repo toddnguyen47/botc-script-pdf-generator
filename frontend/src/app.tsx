@@ -75,6 +75,7 @@ function EditMode() {
     isScriptSorted,
     nightOrders,
     sharedOptions,
+    characterNameReplacement,
     loadScript,
     handleScriptTextChange,
     handleFileUpload,
@@ -303,7 +304,7 @@ function EditMode() {
     if (script) {
       logUsage(script, { method: "generate", options });
     }
-    generatePDF(script, options, nightOrders);
+    generatePDF(script, options, nightOrders, characterNameReplacement);
   };
 
   const handleGenerateImages = () => {
@@ -311,7 +312,7 @@ function EditMode() {
     if (script) {
       logUsage(script, { method: "image", options });
     }
-    generateImages(script, options, nightOrders);
+    generateImages(script, options, nightOrders, characterNameReplacement);
   };
 
   const handleShareScript = () => {
@@ -410,6 +411,7 @@ function EditMode() {
                 },
               }}
               nightOrders={nightOrders}
+              characterNameReplacement={characterNameReplacement}
             />
           </div>
         )}
@@ -420,6 +422,7 @@ function EditMode() {
               script={script}
               options={options}
               nightOrders={nightOrders}
+              characterNameReplacement={characterNameReplacement}
             />
           </div>
         )}

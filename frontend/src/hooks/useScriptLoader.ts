@@ -94,7 +94,7 @@ export function useScriptLoader(
   useScriptPersistence(parsing.rawScript, parsing.script?.metadata?.name);
   const loading = useScriptLoading(
     parsing.loadScript,
-    parsing.loadCharacterTokenReplacement,
+    parsing.handleCharacterNameReplaceData,
     parsing.setError,
     onLoad,
   );
@@ -108,6 +108,7 @@ export function useScriptLoader(
     isScriptSorted: parsing.isScriptSorted,
     nightOrders: parsing.nightOrders,
     sharedOptions: loading.sharedOptions,
+    characterNameReplacement: parsing.characterNameReplacement,
     loadScript: parsing.loadScript,
     handleScriptTextChange: parsing.handleScriptTextChange,
     handleFileUpload: loading.handleFileUpload,

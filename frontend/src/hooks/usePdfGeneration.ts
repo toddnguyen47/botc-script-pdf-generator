@@ -8,6 +8,7 @@ import {
 import { PDFDocument } from "pdf-lib";
 import { downloadBlob } from "../utils/downloadFile";
 import JSZip from "jszip";
+import { CharacterNameReplacement } from "../../../packages/botc-character-sheet/dist/types";
 
 export function usePdfGeneration() {
   const [showPdfModal, setShowPdfModal] = useState(false);
@@ -20,6 +21,7 @@ export function usePdfGeneration() {
     script: ParsedScript,
     options: ScriptOptions,
     nightOrders: NightOrders,
+    characterNameReplacement: CharacterNameReplacement,
   ) => {
     // Show modal and reset state
     setShowPdfModal(true);
@@ -33,6 +35,7 @@ export function usePdfGeneration() {
       options,
       nightOrders,
       filename: `${script.metadata?.name || "script"}.pdf`,
+      characterNameReplacement,
     };
 
     try {
