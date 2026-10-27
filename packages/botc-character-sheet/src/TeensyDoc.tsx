@@ -103,6 +103,7 @@ export const TeensyDoc = ({
                       firstNightOrder={nightOrders.first}
                       otherNightOrder={undefined}
                       options={options}
+                      characterReplacement={characterReplacement}
                     />
                   )}
               </div>
@@ -120,6 +121,7 @@ export const TeensyDoc = ({
                           firstNightOrder={undefined}
                           otherNightOrder={nightOrders.other}
                           options={options}
+                          characterReplacement={characterReplacement}
                         />
                       )}
                     <SheetBack
@@ -149,6 +151,7 @@ export const TeensyDoc = ({
                           firstNightOrder={undefined}
                           otherNightOrder={nightOrders.other}
                           options={options}
+                          characterReplacement={characterReplacement}
                         />
                       )}
                     <InfoSheet
@@ -191,6 +194,7 @@ export const TeensyDoc = ({
               firstNightOrder={nightOrders.first}
               otherNightOrder={nightOrders.other}
               options={options}
+              characterReplacement={characterReplacement}
             />
           </div>
         )}

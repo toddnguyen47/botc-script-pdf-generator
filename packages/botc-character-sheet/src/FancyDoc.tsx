@@ -105,6 +105,7 @@ export function FancyDoc({
             firstNightOrder={nightOrders.first}
             otherNightOrder={nightOrders.other}
             options={options}
+            characterReplacement={characterReplacement}
           />
         </>
       )}
