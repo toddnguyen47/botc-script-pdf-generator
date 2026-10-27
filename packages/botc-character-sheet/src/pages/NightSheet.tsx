@@ -1,5 +1,5 @@
 import {
-  CharacterReplacement,
+  CharacterNameReplacement,
   COLOR_DARK_GRAY,
   NightMarker,
   NightOrderEntry,
@@ -15,7 +15,7 @@ export type NightSheetProps = {
   firstNightOrder?: NightOrderEntry[];
   otherNightOrder?: NightOrderEntry[];
   options: ScriptOptions;
-  characterReplacement: CharacterReplacement;
+  characterNameReplacement: CharacterNameReplacement;
 };
 
 export const NightSheet = ({
@@ -23,7 +23,7 @@ export const NightSheet = ({
   firstNightOrder,
   otherNightOrder,
   options,
-  characterReplacement,
+  characterNameReplacement,
 }: NightSheetProps) => {
   return (
     <>
@@ -43,7 +43,7 @@ export const NightSheet = ({
                 nightSheetReminderTextAlign={
                   options.nightSheetReminderTextAlign
                 }
-                characterReplacement={characterReplacement}
+                characterNameReplacement={characterNameReplacement}
               />
             ))}
           </div>
@@ -65,7 +65,7 @@ export const NightSheet = ({
                 nightSheetReminderTextAlign={
                   options.nightSheetReminderTextAlign
                 }
-                characterReplacement={characterReplacement}
+                characterNameReplacement={characterNameReplacement}
               />
             ))}
           </div>
@@ -81,7 +81,7 @@ type NightSheetEntryProps = {
   iconUrlTemplate?: string;
   useDarkGrayForAbilityText: boolean;
   nightSheetReminderTextAlign: string;
-  characterReplacement: CharacterReplacement;
+  characterNameReplacement: CharacterNameReplacement;
 };
 
 const ReminderIcon = () => (
@@ -93,7 +93,7 @@ export const NightSheetEntry = (props: NightSheetEntryProps) => {
   const { reminderText, name } = getReminderText(
     props.entry,
     props.night,
-    props.characterReplacement,
+    props.characterNameReplacement,
   );
   if (!reminderText) {
     console.warn("No reminder text found for:", props.entry);
@@ -153,15 +153,15 @@ export const NightSheetEntry = (props: NightSheetEntryProps) => {
 const getReminderText = (
   entry: NightOrderEntry,
   night: "first" | "other",
-  characterReplacement: CharacterReplacement,
+  characterNameReplacement: CharacterNameReplacement,
 ) => {
   if (typeof entry === "object") {
     const reminderText =
       night === "first" ? entry.firstNightReminder : entry.otherNightReminder;
     const rawName = entry.name;
     const name =
-      rawName in characterReplacement
-        ? `${rawName} (${characterReplacement[rawName]} token)`
+      rawName in characterNameReplacement
+        ? `${rawName} (${characterNameReplacement[rawName]} token)`
         : rawName;
     return { reminderText, name };
   } else {
@@ -170,8 +170,8 @@ const getReminderText = (
       night === "first" ? reminder.first : (reminder.other ?? "");
     const rawName = reminder.name;
     const name =
-      rawName in characterReplacement
-        ? `${rawName} (${characterReplacement[rawName]} token)`
+      rawName in characterNameReplacement
+        ? `${rawName} (${characterNameReplacement[rawName]} token)`
         : rawName;
     return { reminderText, name };
   }

@@ -17,7 +17,7 @@ export type {
   ParsedScript,
   NetworkPayload,
   PageDimensions,
-  CharacterReplacementData,
+  CharacterNameReplacementData as CharacterNameReplacementData,
 } from "./types";
 export { AppearanceLevel } from "./types";
 export { darken, parseRgb, rgbString } from "./utils/colours";

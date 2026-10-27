@@ -411,7 +411,7 @@ function EditMode() {
                 },
               }}
               nightOrders={nightOrders}
-              characterReplacement={characterNameReplacement}
+              characterNameReplacement={characterNameReplacement}
             />
           </div>
         )}
@@ -422,7 +422,7 @@ function EditMode() {
               script={script}
               options={options}
               nightOrders={nightOrders}
-              characterReplacement={characterNameReplacement}
+              characterNameReplacement={characterNameReplacement}
             />
           </div>
         )}

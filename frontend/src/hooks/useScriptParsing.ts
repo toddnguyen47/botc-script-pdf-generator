@@ -8,8 +8,8 @@ import { downloadBlob } from "../utils/downloadFile";
 import type { ValidationIssue } from "../types/validation";
 import JSON5 from "json5";
 import {
-  CharacterReplacement,
-  CharacterReplacementData,
+  CharacterNameReplacement,
+  CharacterNameReplacementData,
 } from "../../../packages/botc-character-sheet/dist/types";
 
 export function useScriptParsing() {
@@ -25,7 +25,7 @@ export function useScriptParsing() {
   });
   const parseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [characterNameReplacement, setCharacterNameReplacement] =
-    useState<CharacterReplacement>({});
+    useState<CharacterNameReplacement>({});
 
   const checkIfSorted = (currentScript: Script): boolean => {
     try {
@@ -121,7 +121,7 @@ export function useScriptParsing() {
   };
 
   const handleCharacterNameReplaceData = (
-    characterNameReplacementData: CharacterReplacementData,
+    characterNameReplacementData: CharacterNameReplacementData,
   ) => {
     setCharacterNameReplacement(characterNameReplacementData.replacements);
     localStorage.setItem(

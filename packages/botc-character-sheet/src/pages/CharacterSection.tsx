@@ -2,7 +2,7 @@ import {
   ResolvedCharacter,
   Jinx,
   COLOR_DARK_GRAY,
-  CharacterReplacement,
+  CharacterNameReplacement,
 } from "../types";
 import {
   getJinxedCharacters,
@@ -19,7 +19,7 @@ interface CharacterSectionProps {
   allCharacters: ResolvedCharacter[];
   inlineJinxIcons: "none" | "primary" | "both";
   iconUrlTemplate?: string;
-  characterReplacement: CharacterReplacement;
+  characterNameReplacement: CharacterNameReplacement;
 }
 // Threshold to switch from evenly spaced to space-between layout
 const BALANCE_POINT = 8;
@@ -32,7 +32,7 @@ export function CharacterSection({
   allCharacters: allChars,
   inlineJinxIcons,
   iconUrlTemplate,
-  characterReplacement,
+  characterNameReplacement,
 }: CharacterSectionProps) {
   const justifyContent =
     characters.length > BALANCE_POINT
@@ -63,7 +63,7 @@ export function CharacterSection({
                 inlineJinxIcons,
               )}
               useDarkGrayForAbilityText={useDarkGrayForAbilityText}
-              characterReplacement={characterReplacement}
+              characterNameReplacement={characterNameReplacement}
             />
           ))}
         </div>
@@ -81,7 +81,7 @@ export function CharacterSection({
                 inlineJinxIcons,
               )}
               useDarkGrayForAbilityText={useDarkGrayForAbilityText}
-              characterReplacement={characterReplacement}
+              characterNameReplacement={characterNameReplacement}
             />
           ))}
         </div>
@@ -95,7 +95,7 @@ interface CharacterCardProps {
   jinxedCharacters: ResolvedCharacter[];
   iconUrlTemplate?: string;
   useDarkGrayForAbilityText: boolean;
-  characterReplacement: CharacterReplacement;
+  characterNameReplacement: CharacterNameReplacement;
 }
 
 function CharacterCard({
@@ -104,7 +104,7 @@ function CharacterCard({
   jinxedCharacters,
   iconUrlTemplate,
   useDarkGrayForAbilityText,
-  characterReplacement = {},
+  characterNameReplacement = {},
 }: CharacterCardProps) {
   const renderAbility = (ability: string) => {
     // Match square brackets at the end of the ability
@@ -126,8 +126,8 @@ function CharacterCard({
   const imageUrl = getImageUrl(character, iconUrlTemplate);
   const abilityTextColor = useDarkGrayForAbilityText ? COLOR_DARK_GRAY : color;
   let characterName = character.name;
-  if (characterName in characterReplacement) {
-    characterName = `${characterName} (${characterReplacement[characterName]} token)`;
+  if (characterName in characterNameReplacement) {
+    characterName = `${characterName} (${characterNameReplacement[characterName]} token)`;
   }
 
   return (

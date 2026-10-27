@@ -13,15 +13,20 @@ import {
 export default {
   async fetch(request: Request): Promise<Response> {
     return handleApiRequest(request, async (body, origin) => {
-      const { script, options, filename, nightOrders, characterReplacement } =
-        body;
+      const {
+        script,
+        options,
+        filename,
+        nightOrders,
+        characterNameReplacement,
+      } = body;
 
       // Generate HTML with the character sheet
       const html = renderCharacterSheet(
         script,
         options,
         nightOrders || { first: [], other: [] },
-        characterReplacement,
+        characterNameReplacement,
         origin || undefined,
       );
 

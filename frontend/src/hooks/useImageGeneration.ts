@@ -5,7 +5,7 @@ import {
   ParsedScript,
   ScriptOptions,
 } from "botc-character-sheet";
-import { CharacterReplacement } from "../../../packages/botc-character-sheet/dist/types";
+import { CharacterNameReplacement } from "../../../packages/botc-character-sheet/dist/types";
 
 interface ImageResponse {
   characterSheet: string | null;
@@ -25,7 +25,7 @@ export function useImageGeneration() {
     script: ParsedScript,
     options: ScriptOptions,
     nightOrders: NightOrders,
-    characterReplacement: CharacterReplacement,
+    characterNameReplacement: CharacterNameReplacement,
   ) => {
     // Show modal and reset state
     setShowImageModal(true);
@@ -39,7 +39,7 @@ export function useImageGeneration() {
       options,
       nightOrders,
       filename: `${script.metadata?.name || "script"}.png`,
-      characterReplacement,
+      characterNameReplacement,
     };
 
     try {

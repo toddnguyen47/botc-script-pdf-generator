@@ -3,7 +3,7 @@ import {
   ParsedScript,
   ScriptOptions,
   NightOrders,
-  CharacterReplacement,
+  CharacterNameReplacement,
 } from "./types";
 import { getFabledOrLoric } from "./utils/fabledOrLoric";
 import {
@@ -21,14 +21,14 @@ type TeensyDocProps = {
   script: ParsedScript;
   options: ScriptOptions;
   nightOrders: NightOrders;
-  characterReplacement: CharacterReplacement;
+  characterNameReplacement: CharacterNameReplacement;
 };
 
 export const TeensyDoc = ({
   script,
   options: rawOptions,
   nightOrders,
-  characterReplacement,
+  characterNameReplacement,
 }: TeensyDocProps) => {
   // If a custom font URL is provided, inject a @font-face and override titleStyle.font
   const hasCustomFont = !!rawOptions.titleStyle.customFontUrl;
@@ -76,7 +76,7 @@ export const TeensyDoc = ({
                   fabledOrLoric={fabledAndLoric}
                   bootleggerRules={script.metadata?.bootlegger}
                   options={options}
-                  characterReplacement={characterReplacement}
+                  characterNameReplacement={characterNameReplacement}
                 />
                 {i + 1 !== options.numberOfCharacterSheets && (
                   <CharacterSheet
@@ -89,7 +89,7 @@ export const TeensyDoc = ({
                     fabledOrLoric={fabledAndLoric}
                     bootleggerRules={script.metadata?.bootlegger}
                     options={options}
-                    characterReplacement={characterReplacement}
+                    characterNameReplacement={characterNameReplacement}
                   />
                 )}
                 {/* If there is only one more back sheet to display, and
@@ -103,7 +103,7 @@ export const TeensyDoc = ({
                       firstNightOrder={nightOrders.first}
                       otherNightOrder={undefined}
                       options={options}
-                      characterReplacement={characterReplacement}
+                      characterNameReplacement={characterNameReplacement}
                     />
                   )}
               </div>
@@ -121,7 +121,7 @@ export const TeensyDoc = ({
                           firstNightOrder={undefined}
                           otherNightOrder={nightOrders.other}
                           options={options}
-                          characterReplacement={characterReplacement}
+                          characterNameReplacement={characterNameReplacement}
                         />
                       )}
                     <SheetBack
@@ -151,7 +151,7 @@ export const TeensyDoc = ({
                           firstNightOrder={undefined}
                           otherNightOrder={nightOrders.other}
                           options={options}
-                          characterReplacement={characterReplacement}
+                          characterNameReplacement={characterNameReplacement}
                         />
                       )}
                     <InfoSheet
@@ -194,7 +194,7 @@ export const TeensyDoc = ({
               firstNightOrder={nightOrders.first}
               otherNightOrder={nightOrders.other}
               options={options}
-              characterReplacement={characterReplacement}
+              characterNameReplacement={characterNameReplacement}
             />
           </div>
         )}

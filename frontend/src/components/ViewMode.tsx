@@ -120,7 +120,7 @@ export function ViewMode({ scriptId }: ViewModeProps) {
             }}
             nightOrders={nightOrders}
             // TODO: FIX
-            characterReplacement={{}}
+            characterNameReplacement={{}}
           />
         </div>
       )}
@@ -132,7 +132,7 @@ export function ViewMode({ scriptId }: ViewModeProps) {
             options={options}
             nightOrders={nightOrders}
             // TODO: FIX
-            characterReplacement={{}}
+            characterNameReplacement={{}}
           />
         </div>
       )}

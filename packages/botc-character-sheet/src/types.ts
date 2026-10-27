@@ -93,11 +93,8 @@ export interface ParsedScript {
   characters: ScriptCharacter[];
 }
 
-/**
- * TODO: RENAME THIS TO JUST NAME
- */
-export interface CharacterReplacementData {
-  replacements: CharacterReplacement;
+export interface CharacterNameReplacementData {
+  replacements: CharacterNameReplacement;
 }
 
 export type NetworkPayload = {
@@ -105,7 +102,7 @@ export type NetworkPayload = {
   options: ScriptOptions;
   nightOrders: NightOrders;
   filename: string;
-  characterReplacement: CharacterReplacement;
+  characterNameReplacement: CharacterNameReplacement;
 };
 
 export type PageDimensions = {
@@ -115,7 +112,7 @@ export type PageDimensions = {
   bleed: number;
 };
 
-export type CharacterReplacement = Record<string, string>;
+export type CharacterNameReplacement = Record<string, string>;
 
 export const COLOR_DARK_GRAY = "#222";
 export const COLOR_DARK_BROWN = "#b34d00";

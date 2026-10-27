@@ -8,7 +8,7 @@ import {
 export default {
   async fetch(request: Request): Promise<Response> {
     return handleApiRequest(request, async (body, origin) => {
-      const { script, options, nightOrders, characterReplacement } = body;
+      const { script, options, nightOrders, characterNameReplacement } = body;
 
       // Force options to render both character sheet and info sheet
       const renderOptions = {
@@ -23,7 +23,7 @@ export default {
         script,
         renderOptions,
         nightOrders || { first: [], other: [] },
-        characterReplacement,
+        characterNameReplacement,
         origin || undefined,
       );
 

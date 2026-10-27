@@ -1,7 +1,7 @@
 import { useState, useEffect } from "preact/hooks";
 import type { Script } from "botc-script-checker";
 import type {
-  CharacterReplacementData,
+  CharacterNameReplacementData,
   ParsedScript,
   ScriptOptions,
 } from "botc-character-sheet";
@@ -10,7 +10,9 @@ import JSON5 from "json5";
 
 export function useScriptLoading(
   loadScript: (json: Script) => ParsedScript,
-  loadCharacterReplacementData: (json: CharacterReplacementData) => void,
+  loadCharacterNameReplacementData: (
+    json: CharacterNameReplacementData,
+  ) => void,
   setError: (error: string | null) => void,
   onLoad?: (json: Script, parsed: ParsedScript) => void,
 ) {
@@ -95,7 +97,9 @@ export function useScriptLoading(
         "characterNameReplacementData",
       );
       if (characterNameReplacementData) {
-        loadCharacterReplacementData(JSON.parse(characterNameReplacementData));
+        loadCharacterNameReplacementData(
+          JSON.parse(characterNameReplacementData),
+        );
       }
     }
   }, []);
@@ -149,7 +153,7 @@ export function useScriptLoading(
   const handleFileUpload = (event: Event) => {
     const handler = (json: any) => {
       _loadScript(json);
-      _resetCharacterReplacementData();
+      _resetCharacterNameReplacementData();
     };
     _handleJsonFileUpload(event, handler);
   };
@@ -159,7 +163,7 @@ export function useScriptLoading(
       if (alreadyParsedScript == null) {
         console.error("No parsed script yet. Upload a script first");
       } else {
-        loadCharacterReplacementData(json);
+        loadCharacterNameReplacementData(json);
       }
     };
     _handleJsonFileUpload(event, handler);
@@ -192,9 +196,9 @@ export function useScriptLoading(
     setAlreadyParsedScript(parsed);
   };
 
-  const _resetCharacterReplacementData = () => {
+  const _resetCharacterNameReplacementData = () => {
     localStorage.removeItem("characterNameReplacementData");
-    loadCharacterReplacementData({ replacements: {} });
+    loadCharacterNameReplacementData({ replacements: {} });
   };
 
   return {

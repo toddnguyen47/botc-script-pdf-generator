@@ -2,7 +2,7 @@ import { CharacterSheet } from "./pages/CharacterSheet";
 import { NightSheet } from "./pages/NightSheet";
 import { SheetBack } from "./pages/SheetBack";
 import {
-  CharacterReplacement,
+  CharacterNameReplacement,
   NightOrders,
   ParsedScript,
   ScriptOptions,
@@ -20,14 +20,14 @@ export type FancyDocProps = {
   script: ParsedScript;
   options: ScriptOptions;
   nightOrders: NightOrders;
-  characterReplacement: CharacterReplacement;
+  characterNameReplacement: CharacterNameReplacement;
 };
 
 export function FancyDoc({
   script,
   options: rawOptions,
   nightOrders,
-  characterReplacement,
+  characterNameReplacement,
 }: FancyDocProps) {
   // If a custom font URL is provided, inject a @font-face and override titleStyle.font
   const hasCustomFont = !!rawOptions.titleStyle.customFontUrl;
@@ -65,7 +65,7 @@ export function FancyDoc({
               fabledOrLoric={fabledAndLoric}
               bootleggerRules={script.metadata?.bootlegger}
               options={options}
-              characterReplacement={characterReplacement}
+              characterNameReplacement={characterNameReplacement}
             />
             <div style="break-after:page;"></div>
 
@@ -105,7 +105,7 @@ export function FancyDoc({
             firstNightOrder={nightOrders.first}
             otherNightOrder={nightOrders.other}
             options={options}
-            characterReplacement={characterReplacement}
+            characterNameReplacement={characterNameReplacement}
           />
         </>
       )}
