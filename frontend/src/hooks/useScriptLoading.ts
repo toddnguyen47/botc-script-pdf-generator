@@ -90,6 +90,13 @@ export function useScriptLoading(
           /* ignore corrupt data */
         }
       }
+
+      const characterNameReplacementData = localStorage.getItem(
+        "characterNameReplacementData",
+      );
+      if (characterNameReplacementData) {
+        loadCharacterReplacementData(JSON.parse(characterNameReplacementData));
+      }
     }
   }, []);
 
@@ -142,12 +149,12 @@ export function useScriptLoading(
   const handleFileUpload = (event: Event) => {
     const handler = (json: any) => {
       _loadScript(json);
+      _resetCharacterReplacementData();
     };
     _handleJsonFileUpload(event, handler);
   };
 
   const handleTokenReplacementUpload = (event: Event) => {
-    // TODO: what do i return lol
     const handler = (json: any) => {
       if (alreadyParsedScript == null) {
         console.error("No parsed script yet. Upload a script first");
@@ -183,6 +190,11 @@ export function useScriptLoading(
     const parsed = loadScript(json);
     onLoad?.(json, parsed);
     setAlreadyParsedScript(parsed);
+  };
+
+  const _resetCharacterReplacementData = () => {
+    localStorage.removeItem("characterNameReplacementData");
+    loadCharacterReplacementData({ replacements: {} });
   };
 
   return {

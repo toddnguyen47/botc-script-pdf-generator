@@ -124,6 +124,10 @@ export function useScriptParsing() {
     characterNameReplacementData: CharacterReplacementData,
   ) => {
     setCharacterNameReplacement(characterNameReplacementData.replacements);
+    localStorage.setItem(
+      "characterNameReplacementData",
+      JSON.stringify(characterNameReplacementData),
+    );
   };
 
   // Cleanup parse timeout on unmount
