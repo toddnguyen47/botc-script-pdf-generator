@@ -36,7 +36,6 @@ export default {
       });
 
       // Set content and wait for fonts/images to load
-      // Set content and wait for fonts/images to load
       // 1. Injected HTML is parsed immediately
       await page.setContent(html, { waitUntil: "load" });
 
