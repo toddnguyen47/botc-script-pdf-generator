@@ -8,7 +8,7 @@ import {
 export default {
   async fetch(request: Request): Promise<Response> {
     return handleApiRequest(request, async (body, origin) => {
-      const { script, options, nightOrders } = body;
+      const { script, options, nightOrders, characterReplacement } = body;
 
       // Force options to render both character sheet and info sheet
       const renderOptions = {
@@ -23,6 +23,7 @@ export default {
         script,
         renderOptions,
         nightOrders || { first: [], other: [] },
+        characterReplacement,
         origin || undefined,
       );
 
@@ -35,9 +36,12 @@ export default {
       });
 
       // Set content and wait for fonts/images to load
-      await page.setContent(html, {
-        waitUntil: ["networkidle0", "load"],
-      });
+      // Set content and wait for fonts/images to load
+      // 1. Injected HTML is parsed immediately
+      await page.setContent(html, { waitUntil: "load" });
+
+      // 2. Explicitly wait for any external images/CSS/fonts to settle
+      await page.waitForNetworkIdle({ idleTime: 500, concurrency: 0 });
 
       // Calculate dimensions in pixels (assuming 96 DPI)
       const widthMm = options.dimensions.width;
@@ -56,10 +60,11 @@ export default {
       let characterSheetImage: Buffer | null = null;
 
       if (characterSheetElement) {
-        characterSheetImage = await characterSheetElement.screenshot({
+        const image = await characterSheetElement.screenshot({
           type: "png",
           omitBackground: false,
         });
+        characterSheetImage = Buffer.from(image);
       }
 
       // Take screenshot of info sheet (second printable page)
@@ -67,10 +72,11 @@ export default {
       let infoSheetImage: Buffer | null = null;
 
       if (printablePages.length > 1) {
-        infoSheetImage = await printablePages[1].screenshot({
+        const image = await printablePages[1].screenshot({
           type: "png",
           omitBackground: false,
         });
+        infoSheetImage = Buffer.from(image);
       }
 
       await browser.close();
