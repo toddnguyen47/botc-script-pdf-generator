@@ -119,6 +119,8 @@ export function ViewMode({ scriptId }: ViewModeProps) {
               },
             }}
             nightOrders={nightOrders}
+            // TODO: FIX
+            characterReplacement={{}}
           />
         </div>
       )}
@@ -129,6 +131,8 @@ export function ViewMode({ scriptId }: ViewModeProps) {
             script={script}
             options={options}
             nightOrders={nightOrders}
+            // TODO: FIX
+            characterReplacement={{}}
           />
         </div>
       )}

@@ -104,7 +104,7 @@ function CharacterCard({
   jinxedCharacters,
   iconUrlTemplate,
   useDarkGrayForAbilityText,
-  characterReplacement,
+  characterReplacement = {},
 }: CharacterCardProps) {
   const renderAbility = (ability: string) => {
     // Match square brackets at the end of the ability
