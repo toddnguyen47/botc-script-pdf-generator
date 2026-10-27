@@ -119,7 +119,7 @@ export function ViewMode({ scriptId }: ViewModeProps) {
               },
             }}
             nightOrders={nightOrders}
-            // TODO: FIX
+            // TODO: If I do implement view mode, I need to store and pass in character name replacement data
             characterNameReplacement={{}}
           />
         </div>
@@ -131,7 +131,7 @@ export function ViewMode({ scriptId }: ViewModeProps) {
             script={script}
             options={options}
             nightOrders={nightOrders}
-            // TODO: FIX
+            // TODO: If I do implement view mode, I need to store and pass in character name replacement data
             characterNameReplacement={{}}
           />
         </div>
