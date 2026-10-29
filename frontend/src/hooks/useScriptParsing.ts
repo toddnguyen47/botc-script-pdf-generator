@@ -27,9 +27,9 @@ export function useScriptParsing() {
   const [characterNameReplacement, setCharacterNameReplacement] =
     useState<CharacterNameReplacement>({});
 
-  const checkIfSorted = (currentScript: Script): boolean => {
+  const checkIfSorted = async (currentScript: Script): Promise<boolean> => {
     try {
-      const sorted = sortSao(currentScript);
+      const sorted = await sortSao(currentScript);
       return JSON.stringify(currentScript) === JSON.stringify(sorted);
     } catch {
       return true; // Assume sorted if we can't check
@@ -44,7 +44,7 @@ export function useScriptParsing() {
     setScript(sanitized);
     setIssues(newIssues);
     setScriptText(JSON.stringify(json, null, 2));
-    setIsScriptSorted(checkIfSorted(json));
+    checkIfSorted(json).then((sorted) => setIsScriptSorted(sorted));
     setNightOrdersState(calculateNightOrders(sanitized));
     setError(null);
 
@@ -69,7 +69,7 @@ export function useScriptParsing() {
         );
         setScript(sanitized);
         setIssues(newIssues);
-        setIsScriptSorted(checkIfSorted(json));
+        checkIfSorted(json).then((sorted) => setIsScriptSorted(sorted));
         setNightOrdersState(calculateNightOrders(sanitized));
         setError(null);
       } catch (err) {
@@ -87,17 +87,18 @@ export function useScriptParsing() {
     if (!rawScript) return;
 
     try {
-      const sorted = sortSao(rawScript);
-      setRawScript(sorted);
-      const { script: sanitized, issues: newIssues } = sanitizeScript(
-        parseScript(sorted),
-      );
-      setScript(sanitized);
-      setIssues(newIssues);
-      setScriptText(JSON.stringify(sorted, null, 2));
-      setIsScriptSorted(true);
-      setNightOrdersState(calculateNightOrders(sanitized));
-      setError(null);
+      sortSao(rawScript).then((sorted) => {
+        setRawScript(sorted);
+        const { script: sanitized, issues: newIssues } = sanitizeScript(
+          parseScript(sorted),
+        );
+        setScript(sanitized);
+        setIssues(newIssues);
+        setScriptText(JSON.stringify(sorted, null, 2));
+        setIsScriptSorted(true);
+        setNightOrdersState(calculateNightOrders(sanitized));
+        setError(null);
+      });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to sort script");
     }
