@@ -45,7 +45,7 @@ export function useScriptParsing() {
     setIssues(newIssues);
     setScriptText(JSON.stringify(json, null, 2));
     setIsScriptSorted(await checkIfSorted(json));
-    setNightOrdersState(calculateNightOrders(sanitized));
+    setNightOrdersState(await calculateNightOrders(sanitized));
     setError(null);
 
     return sanitized; // Return parsed script for color loading
@@ -70,7 +70,7 @@ export function useScriptParsing() {
         setScript(sanitized);
         setIssues(newIssues);
         setIsScriptSorted(await checkIfSorted(json));
-        setNightOrdersState(calculateNightOrders(sanitized));
+        setNightOrdersState(await calculateNightOrders(sanitized));
         setError(null);
       } catch (err) {
         console.error(err);
@@ -97,7 +97,7 @@ export function useScriptParsing() {
         setIssues(newIssues);
         setScriptText(JSON.stringify(sorted, null, 2));
         setIsScriptSorted(true);
-        setNightOrdersState(calculateNightOrders(sanitized));
+        setNightOrdersState(await calculateNightOrders(sanitized));
         setError(null);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to sort script");
