@@ -21,7 +21,7 @@ export type {
 } from "./types";
 export { AppearanceLevel } from "./types";
 export { darken, parseRgb, rgbString } from "./utils/colours";
-export { ROLES_BY_ID, getRolesAsync } from "./data/roles";
+export { getRolesAsync } from "./data/roles";
 export { JINXES } from "./data/jinxes";
 export { FIRST_NIGHT_ORDER, OTHER_NIGHT_ORDER } from "./data/nightsheet";
 export { sortSao } from "./sort/sort";
