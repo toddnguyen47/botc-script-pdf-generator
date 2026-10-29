@@ -9,7 +9,7 @@ import { loadScript as loadSharedScript } from "../utils/scriptStorage";
 import JSON5 from "json5";
 
 export function useScriptLoading(
-  loadScript: (json: Script) => ParsedScript,
+  loadScript: (json: Script) => Promise<ParsedScript>,
   loadCharacterNameReplacementData: (
     json: CharacterNameReplacementData,
   ) => void,
@@ -191,9 +191,12 @@ export function useScriptLoading(
   };
 
   const _loadScript = (json: any) => {
-    const parsed = loadScript(json);
-    onLoad?.(json, parsed);
-    setAlreadyParsedScript(parsed);
+    const handle = async () => {
+      const parsed = await loadScript(json);
+      onLoad?.(json, parsed);
+      setAlreadyParsedScript(parsed);
+    };
+    handle();
   };
 
   const _resetCharacterNameReplacementData = () => {

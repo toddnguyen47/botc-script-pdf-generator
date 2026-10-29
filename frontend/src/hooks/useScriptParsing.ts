@@ -36,15 +36,15 @@ export function useScriptParsing() {
     }
   };
 
-  const loadScript = (json: Script) => {
+  const loadScript = async (json: Script): Promise<ParsedScript> => {
     setRawScript(json);
     const { script: sanitized, issues: newIssues } = sanitizeScript(
-      parseScript(json),
+      await parseScript(json),
     );
     setScript(sanitized);
     setIssues(newIssues);
     setScriptText(JSON.stringify(json, null, 2));
-    checkIfSorted(json).then((sorted) => setIsScriptSorted(sorted));
+    setIsScriptSorted(await checkIfSorted(json));
     setNightOrdersState(calculateNightOrders(sanitized));
     setError(null);
 
@@ -60,16 +60,16 @@ export function useScriptParsing() {
     }
 
     // Debounce parsing to avoid expensive operations on every keystroke
-    parseTimeoutRef.current = setTimeout(() => {
+    parseTimeoutRef.current = setTimeout(async () => {
       try {
         const json = JSON5.parse(newText);
         setRawScript(json);
         const { script: sanitized, issues: newIssues } = sanitizeScript(
-          parseScript(json),
+          await parseScript(json),
         );
         setScript(sanitized);
         setIssues(newIssues);
-        checkIfSorted(json).then((sorted) => setIsScriptSorted(sorted));
+        setIsScriptSorted(await checkIfSorted(json));
         setNightOrdersState(calculateNightOrders(sanitized));
         setError(null);
       } catch (err) {
@@ -86,11 +86,12 @@ export function useScriptParsing() {
   const handleSort = () => {
     if (!rawScript) return;
 
-    try {
-      sortSao(rawScript).then((sorted) => {
+    const handle = async () => {
+      try {
+        const sorted = await sortSao(rawScript);
         setRawScript(sorted);
         const { script: sanitized, issues: newIssues } = sanitizeScript(
-          parseScript(sorted),
+          await parseScript(sorted),
         );
         setScript(sanitized);
         setIssues(newIssues);
@@ -98,10 +99,12 @@ export function useScriptParsing() {
         setIsScriptSorted(true);
         setNightOrdersState(calculateNightOrders(sanitized));
         setError(null);
-      });
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to sort script");
-    }
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to sort script");
+      }
+    };
+
+    handle();
   };
 
   const updateScriptMetadata = (updatedScript: Script) => {
