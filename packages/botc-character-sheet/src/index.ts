@@ -22,6 +22,6 @@ export type {
 export { AppearanceLevel } from "./types";
 export { darken, parseRgb, rgbString } from "./utils/colours";
 export { getRolesAsync } from "./data/roles";
-export { JINXES, getJinxesAsync } from "./data/jinxes";
+export { getJinxesAsync } from "./data/jinxes";
 export { getNightsheetAsync } from "./data/nightsheet";
 export { sortSao } from "./sort/sort";
