@@ -27,25 +27,25 @@ export function useScriptParsing() {
   const [characterNameReplacement, setCharacterNameReplacement] =
     useState<CharacterNameReplacement>({});
 
-  const checkIfSorted = (currentScript: Script): boolean => {
+  const checkIfSorted = async (currentScript: Script): Promise<boolean> => {
     try {
-      const sorted = sortSao(currentScript);
+      const sorted = await sortSao(currentScript);
       return JSON.stringify(currentScript) === JSON.stringify(sorted);
     } catch {
       return true; // Assume sorted if we can't check
     }
   };
 
-  const loadScript = (json: Script) => {
+  const loadScript = async (json: Script): Promise<ParsedScript> => {
     setRawScript(json);
     const { script: sanitized, issues: newIssues } = sanitizeScript(
-      parseScript(json),
+      await parseScript(json),
     );
     setScript(sanitized);
     setIssues(newIssues);
     setScriptText(JSON.stringify(json, null, 2));
-    setIsScriptSorted(checkIfSorted(json));
-    setNightOrdersState(calculateNightOrders(sanitized));
+    setIsScriptSorted(await checkIfSorted(json));
+    setNightOrdersState(await calculateNightOrders(sanitized));
     setError(null);
 
     return sanitized; // Return parsed script for color loading
@@ -60,17 +60,17 @@ export function useScriptParsing() {
     }
 
     // Debounce parsing to avoid expensive operations on every keystroke
-    parseTimeoutRef.current = setTimeout(() => {
+    parseTimeoutRef.current = setTimeout(async () => {
       try {
         const json = JSON5.parse(newText);
         setRawScript(json);
         const { script: sanitized, issues: newIssues } = sanitizeScript(
-          parseScript(json),
+          await parseScript(json),
         );
         setScript(sanitized);
         setIssues(newIssues);
-        setIsScriptSorted(checkIfSorted(json));
-        setNightOrdersState(calculateNightOrders(sanitized));
+        setIsScriptSorted(await checkIfSorted(json));
+        setNightOrdersState(await calculateNightOrders(sanitized));
         setError(null);
       } catch (err) {
         console.error(err);
@@ -86,21 +86,25 @@ export function useScriptParsing() {
   const handleSort = () => {
     if (!rawScript) return;
 
-    try {
-      const sorted = sortSao(rawScript);
-      setRawScript(sorted);
-      const { script: sanitized, issues: newIssues } = sanitizeScript(
-        parseScript(sorted),
-      );
-      setScript(sanitized);
-      setIssues(newIssues);
-      setScriptText(JSON.stringify(sorted, null, 2));
-      setIsScriptSorted(true);
-      setNightOrdersState(calculateNightOrders(sanitized));
-      setError(null);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to sort script");
-    }
+    const handle = async () => {
+      try {
+        const sorted = await sortSao(rawScript);
+        setRawScript(sorted);
+        const { script: sanitized, issues: newIssues } = sanitizeScript(
+          await parseScript(sorted),
+        );
+        setScript(sanitized);
+        setIssues(newIssues);
+        setScriptText(JSON.stringify(sorted, null, 2));
+        setIsScriptSorted(true);
+        setNightOrdersState(await calculateNightOrders(sanitized));
+        setError(null);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to sort script");
+      }
+    };
+
+    handle();
   };
 
   const updateScriptMetadata = (updatedScript: Script) => {

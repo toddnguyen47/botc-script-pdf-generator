@@ -1,6 +1,6 @@
 import { ScriptCharacter } from "botc-script-checker";
 import { ResolvedCharacter, GroupedCharacters, Jinx } from "../types";
-import { JINXES } from "../data/jinxes";
+import { getJinxesAsync } from "../data/jinxes";
 
 export function groupCharactersByTeam(
   characters: ResolvedCharacter[],
@@ -26,15 +26,16 @@ export function groupCharactersByTeam(
   return grouped;
 }
 
-export function findJinxes(
+export async function findJinxes(
   characters: ResolvedCharacter[],
   useOldJinxes = false,
-): Jinx[] {
+): Promise<Jinx[]> {
   const characterIds = new Set(characters.map((c) => c.id.toLowerCase()));
   const applicableJinxes: Jinx[] = [];
+  const jinxes = await getJinxesAsync();
 
   // Add global jinxes from official jinxes data
-  for (const jinx of JINXES) {
+  for (const jinx of jinxes) {
     const [char1, char2] = jinx.characters;
     if (characterIds.has(char1) && characterIds.has(char2)) {
       // If useOldJinxes is true and oldJinx exists, use it instead
@@ -136,6 +137,11 @@ export const getImageUrl = (
   return null;
 };
 
+export type ResolvedJinx = {
+  characters: [ScriptCharacter, ScriptCharacter];
+  text: string;
+};
+
 /**
  * Resolves each jinx's character ids to the actual characters in the
  * script, dropping any jinx that doesn't resolve to two real characters
@@ -145,7 +151,7 @@ export const getImageUrl = (
 export function resolveJinxCharacters(
   jinxes: Jinx[],
   characters: ScriptCharacter[],
-): { characters: [ScriptCharacter, ScriptCharacter]; text: string }[] {
+): ResolvedJinx[] {
   const resolved: {
     characters: [ScriptCharacter, ScriptCharacter];
     text: string;

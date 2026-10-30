@@ -4,14 +4,15 @@
  */
 
 import { OfficialCharacterID, Script } from "botc-script-checker";
-import { ROLES_BY_ID } from "../data/roles";
+import { getRolesAsync } from "../data/roles";
 import { ResolvedCharacter } from "../types";
 import { groupCharactersByTeam } from "../utils/scriptUtils";
 
-export function sortSao(input: Script): Script {
+export async function sortSao(input: Script): Promise<Script> {
+  const roles = await getRolesAsync();
   const inputResolvedChaaracters = input
     .filter((elem) => typeof elem === "string")
-    .map((elem) => ROLES_BY_ID[elem]);
+    .map((elem) => roles[elem]);
 
   const result: Script = input.filter((elem) => typeof elem !== "string");
 

@@ -70,7 +70,7 @@ function sanitizeCharacter(
   const raw = char as unknown as Record<string, unknown>;
   const isCustom = Boolean((char as ResolvedCharacter).isCustom);
 
-  // Official characters come from the trusted ROLES_BY_ID data — only
+  // Official characters come from the trusted roles data — only
   // normalize id casing defensively, no content validation needed.
   if (!isCustom) {
     return [{ ...char, id: char.id.toLowerCase() as ScriptCharacter["id"] }];

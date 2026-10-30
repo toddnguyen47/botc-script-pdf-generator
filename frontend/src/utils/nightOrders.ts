@@ -3,8 +3,7 @@ import {
   NightOrderEntry,
   NightOrders,
   ParsedScript,
-  FIRST_NIGHT_ORDER,
-  OTHER_NIGHT_ORDER,
+  getNightsheetAsync,
 } from "botc-character-sheet";
 
 type RawCharMap = Map<string, { firstNight?: number; otherNight?: number }>;
@@ -58,13 +57,14 @@ const getPosition = (
   return Infinity; // Characters without night actions go to the end
 };
 
-const buildNightOrder = (
+const buildNightOrder = async (
   characters: NightOrderEntry[],
   nightType: "firstNight" | "otherNight",
   rawCharMap: RawCharMap,
-): NightOrderEntry[] => {
+): Promise<NightOrderEntry[]> => {
+  const nightsheet = await getNightsheetAsync();
   const orderList =
-    nightType === "firstNight" ? FIRST_NIGHT_ORDER : OTHER_NIGHT_ORDER;
+    nightType === "firstNight" ? nightsheet.firstNight : nightsheet.otherNight;
 
   // Filter characters that have actions for this night
   const activeChars = characters.filter((char) => {
@@ -88,18 +88,18 @@ const buildNightOrder = (
   return charsAndMarkers;
 };
 
-export const calculateNightOrders = (
+export const calculateNightOrders = async (
   parsedScript: ParsedScript,
-): NightOrders => {
+): Promise<NightOrders> => {
   const rawCharMap = createRawCharMap(parsedScript.characters);
 
   const first = parsedScript.metadata?.firstNight?.length
     ? parseNightOrder(parsedScript.metadata.firstNight, parsedScript.characters)
-    : buildNightOrder(parsedScript.characters, "firstNight", rawCharMap);
+    : await buildNightOrder(parsedScript.characters, "firstNight", rawCharMap);
 
   const other = parsedScript.metadata?.otherNight?.length
     ? parseNightOrder(parsedScript.metadata.otherNight, parsedScript.characters)
-    : buildNightOrder(parsedScript.characters, "otherNight", rawCharMap);
+    : await buildNightOrder(parsedScript.characters, "otherNight", rawCharMap);
 
   return { first, other };
 };
