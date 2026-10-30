@@ -22,7 +22,7 @@ export function getNightsheetAsync(): Promise<Nightsheet> {
     );
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch roles: ${response.status}`);
+      throw new Error(`Failed to fetch nightsheet: ${response.status}`);
     }
 
     const nightsheetJson = await response.json();

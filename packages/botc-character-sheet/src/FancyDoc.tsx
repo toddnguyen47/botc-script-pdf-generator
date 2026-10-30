@@ -3,6 +3,7 @@ import { NightSheet } from "./pages/NightSheet";
 import { SheetBack } from "./pages/SheetBack";
 import {
   CharacterNameReplacement,
+  Jinx,
   NightOrders,
   ParsedScript,
   ScriptOptions,
@@ -12,9 +13,11 @@ import {
   groupCharactersByTeam,
   findJinxes,
   resolveJinxCharacters,
+  ResolvedJinx,
 } from "./utils/scriptUtils";
 import "./FancyDoc.css";
 import { InfoSheet } from "./pages/InfoSheet";
+import { useEffect, useState } from "preact/hooks";
 
 export type FancyDocProps = {
   script: ParsedScript;
@@ -29,6 +32,10 @@ export function FancyDoc({
   nightOrders,
   characterNameReplacement,
 }: FancyDocProps) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [jinxes, setJinxes] = useState<Jinx[]>([]);
+  const [resolvedJinxes, setResolvedJinxes] = useState<ResolvedJinx[]>([]);
+
   // If a custom font URL is provided, inject a @font-face and override titleStyle.font
   const hasCustomFont = !!rawOptions.titleStyle.customFontUrl;
   const options = hasCustomFont
@@ -38,15 +45,34 @@ export function FancyDoc({
       }
     : rawOptions;
 
+  // Load any async values
+  useEffect(() => {
+    const load = async () => {
+      const jinxes = options.showJinxes
+        ? await findJinxes(script.characters, options.useOldJinxes)
+        : [];
+      setJinxes(jinxes);
+
+      const resolvedJinxes = await resolveJinxCharacters(
+        jinxes,
+        script.characters,
+      );
+      setResolvedJinxes(resolvedJinxes);
+
+      setIsLoading(false);
+    };
+    load();
+  }, [script.characters, options.showJinxes, options.useOldJinxes]);
+
   const groupedCharacters = groupCharactersByTeam(script.characters);
-  const jinxes = options.showJinxes
-    ? findJinxes(script.characters, options.useOldJinxes)
-    : [];
-  const resolvedJinxes = resolveJinxCharacters(jinxes, script.characters);
   const fabledAndLoric = getFabledOrLoric(
     script.characters,
     options.iconUrlTemplate,
   );
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="sheet-wrapper">
