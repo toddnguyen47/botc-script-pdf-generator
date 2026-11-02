@@ -46,12 +46,13 @@ def generate_reminder(role_by_name_dict: dict, input_file: str, output_file: str
         lines = file.read().split("\n")
         for line in lines:
             if line:
-                role = role_by_name_dict[line]
-                if role:
-                    reminder_list: list = role.get("reminders")
-                    if "remindersGlobal" in role:
-                        reminder_list.extend(role.get("remindersGlobal"))
-                    new_line = f"{line}: {len(reminder_list)}, {reminder_list}"
+                input_role = line.split(":")[0]
+                role_json_object = role_by_name_dict[input_role]
+                if role_json_object:
+                    reminder_list: list = role_json_object.get("reminders")
+                    if "remindersGlobal" in role_json_object:
+                        reminder_list.extend(role_json_object.get("remindersGlobal"))
+                    new_line = f"{input_role}: {len(reminder_list)}, {reminder_list}"
                     result.append(new_line)
     if output_file:
         with open(output_file, "w") as outfile:
