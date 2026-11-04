@@ -86,6 +86,7 @@ export interface ScriptOptions {
   dimensions: PageDimensions;
   teensy: boolean;
   characterSheetFontSizeStepPercent: number;
+  nightSheetFontSizePoint: number;
 }
 
 export interface ParsedScript {

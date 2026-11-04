@@ -122,4 +122,5 @@ export const DEFAULT_OPTIONS: ScriptOptions = {
   dimensions: { width: 210, height: 297, margin: 2, bleed: 3 },
   teensy: false,
   characterSheetFontSizeStepPercent: 6,
+  nightSheetFontSizePoint: 10,
 };

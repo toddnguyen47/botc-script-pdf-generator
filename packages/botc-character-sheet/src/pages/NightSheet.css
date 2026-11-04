@@ -47,7 +47,7 @@
 .reminder-name {
   font-family: "PT Serif", "Goudy Old Style", "Goudy", Georgia, serif;
   font-weight: 700;
-  font-size: 8.5pt;
+  font-size: calc(var(--nightsheet-font-size) * 0.95);
 }
 
 .night-sheet-entry .reminder-name {
@@ -60,7 +60,7 @@
   font-family:
     "Figtree", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial,
     sans-serif;
-  font-size: 9pt;
+  font-size: var(--nightsheet-font-size);
   line-height: 1.16;
 }
 

@@ -11,6 +11,7 @@ import { ActionButtons } from "./ActionButtons";
 import { ScriptIssues } from "./ScriptIssues";
 import { ScriptEditor } from "../ScriptEditor";
 import { TITLE_FONT_DEFAULTS } from "../../types/options";
+import { NightSheetOptions } from "./NightSheetOptions";
 
 interface ScriptControlsProps {
   hasScript: boolean;
@@ -169,6 +170,13 @@ export function ScriptControls({
                 />
               </CollapsibleSection>
             )}
+
+            <CollapsibleSection title="Night Sheet" defaultOpen={false}>
+              <NightSheetOptions
+                options={options}
+                onOptionChange={onOptionChange}
+              />
+            </CollapsibleSection>
 
             <CollapsibleSection title="Print Options" defaultOpen={false}>
               <PrintOptions options={options} onOptionChange={onOptionChange} />

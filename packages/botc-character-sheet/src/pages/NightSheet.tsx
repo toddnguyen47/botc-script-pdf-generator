@@ -1,3 +1,4 @@
+import { type CSSProperties } from "preact";
 import {
   CharacterNameReplacement,
   COLOR_DARK_GRAY,
@@ -26,7 +27,13 @@ export const NightSheet = ({
   characterNameReplacement,
 }: NightSheetProps) => {
   return (
-    <>
+    <div
+      style={
+        {
+          "--nightsheet-font-size": `${options.nightSheetFontSizePoint}pt`,
+        } as CSSProperties
+      }
+    >
       {firstNightOrder && (
         <BottomTrimSheet options={options}>
           <div className="night-sheet-heading">
@@ -71,7 +78,7 @@ export const NightSheet = ({
           </div>
         </BottomTrimSheet>
       )}
-    </>
+    </div>
   );
 };
 
