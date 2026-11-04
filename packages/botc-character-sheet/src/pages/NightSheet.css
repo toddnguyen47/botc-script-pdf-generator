@@ -35,7 +35,7 @@
 .night-sheet-order {
   display: flex;
   flex-direction: column;
-  gap: 1.7mm;
+  gap: 2.0mm;
 }
 
 .night-sheet-entry {
@@ -61,7 +61,7 @@
     "Figtree", "Trade Gothic", "Trade Gothic Next", "Helvetica Neue", Arial,
     sans-serif;
   font-size: var(--nightsheet-font-size);
-  line-height: 1.16;
+  line-height: 1.15; /* To match Google Docs and Microsoft Word default line height */
 }
 
 .night-sheet-entry .reminder-text {
