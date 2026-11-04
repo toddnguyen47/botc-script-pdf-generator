@@ -28,6 +28,13 @@ def generate_argparse() -> argparse.ArgumentParser:
         help="Path role.json file",
     )
     parser.add_argument("--output-file", required=False, help="path to output file")
+    parser.add_argument(
+        "--is-sorted",
+        required=False,
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Sort the output alphabetically or not. True to sort. Defaults to true",
+    )
     return parser
 
 
@@ -40,10 +47,15 @@ def generate_role_by_name_dict(path_to_role_json: str) -> dict:
     return result
 
 
-def generate_reminder(role_by_name_dict: dict, input_file: str, output_file: str):
+def generate_reminder(
+    role_by_name_dict: dict, input_file: str, output_file: str, is_sorted: bool
+):
     result = []
     with open(input_file, "r") as file:
         lines = file.read().split("\n")
+        lines = [e for e in lines if e]
+        if is_sorted:
+            lines.sort()
         for line in lines:
             if line:
                 input_role = line.split(":")[0]
@@ -67,4 +79,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     role_by_name = generate_role_by_name_dict(args.path_role_json)
-    generate_reminder(role_by_name, args.path_to_role, args.output_file)
+    generate_reminder(role_by_name, args.path_to_role, args.output_file, args.is_sorted)
