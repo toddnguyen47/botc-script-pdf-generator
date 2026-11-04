@@ -72,7 +72,7 @@ export const TITLE_FONT_DEFAULTS: Record<
     lineHeight: 11,
     backLineHeight: 23,
     marginTop: -2,
-    marginBottom: 2,
+    marginBottom: 0,
   },
   "Waters Gothic": {
     fontSize: 28,
