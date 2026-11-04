@@ -7,12 +7,13 @@ import {
   Jinx,
 } from "./types";
 import { getFabledOrLoric } from "./utils/fabledOrLoric";
-import { groupCharactersByTeam, ResolvedJinx } from "./utils/scriptUtils";
+import { groupCharactersByTeam } from "./utils/scriptUtils";
 import { InfoSheet } from "./pages/InfoSheet";
 import { SheetBack } from "./pages/SheetBack";
 
 import "./TeensyDoc.css";
 import { NightSheet } from "./pages/NightSheet";
+import { ResolvedJinx } from "./utils/jinxUtils";
 
 type TeensyDocProps = {
   script: ParsedScript;

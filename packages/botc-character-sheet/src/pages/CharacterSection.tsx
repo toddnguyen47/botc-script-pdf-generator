@@ -4,11 +4,8 @@ import {
   COLOR_DARK_GRAY,
   CharacterNameReplacement,
 } from "../types";
-import {
-  getJinxedCharacters,
-  getImageUrl,
-  getGenericIconUrl,
-} from "../utils/scriptUtils";
+import { getJinxedCharacters } from "../utils/jinxUtils";
+import { getImageUrl, getGenericIconUrl } from "../utils/scriptUtils";
 
 interface CharacterSectionProps {
   title: string;

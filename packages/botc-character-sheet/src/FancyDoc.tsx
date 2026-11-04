@@ -9,9 +9,10 @@ import {
   ScriptOptions,
 } from "./types";
 import { getFabledOrLoric } from "./utils/fabledOrLoric";
-import { groupCharactersByTeam, ResolvedJinx } from "./utils/scriptUtils";
+import { groupCharactersByTeam } from "./utils/scriptUtils";
 import "./FancyDoc.css";
 import { InfoSheet } from "./pages/InfoSheet";
+import { ResolvedJinx } from "./utils/jinxUtils";
 
 export type FancyDocProps = {
   script: ParsedScript;

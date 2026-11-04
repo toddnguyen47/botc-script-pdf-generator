@@ -25,6 +25,5 @@ export { getRolesAsync } from "./data/roles";
 export { getJinxesAsync } from "./data/jinxes";
 export { getNightsheetAsync } from "./data/nightsheet";
 export { sortSao } from "./sort/sort";
-// TODO: MOVE THESE OUTTA UTILS MAN
-export { findJinxes, resolveJinxCharacters } from "./utils/scriptUtils";
-export type { ResolvedJinx } from "./utils/scriptUtils";
+export { findJinxes, resolveJinxCharacters } from "./utils/jinxUtils";
+export type { ResolvedJinx } from "./utils/jinxUtils";
