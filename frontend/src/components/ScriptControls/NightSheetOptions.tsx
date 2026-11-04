@@ -20,7 +20,7 @@ export function NightSheetOptions({
           <input
             type="number"
             min="8"
-            max="12"
+            max="14"
             step="0.1"
             value={options.nightSheetFontSizePoint}
             placeholder="Font Size (in points)"
