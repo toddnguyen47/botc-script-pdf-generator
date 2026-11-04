@@ -3,8 +3,15 @@ import type {
   ScriptOptions,
   ParsedScript,
   NightOrders,
+  Jinx,
+  ResolvedJinx,
 } from "botc-character-sheet";
-import { FancyDoc, TeensyDoc } from "botc-character-sheet";
+import {
+  FancyDoc,
+  findJinxes,
+  resolveJinxCharacters,
+  TeensyDoc,
+} from "botc-character-sheet";
 import { DEFAULT_OPTIONS } from "../types/options";
 import type { ValidationIssue } from "../types/validation";
 import { loadScript as loadSharedScript } from "../utils/scriptStorage";
@@ -29,6 +36,8 @@ export function ViewMode({ scriptId }: ViewModeProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [issues, setIssues] = useState<ValidationIssue[]>([]);
+  const [jinxes, setJinxes] = useState<Jinx[]>([]);
+  const [resolvedJinxes, setResolvedJinxes] = useState<ResolvedJinx[]>([]);
 
   useMobilePreviewScale(options.dimensions.width);
 
@@ -51,6 +60,19 @@ export function ViewMode({ scriptId }: ViewModeProps) {
         setOptions(mergedOptions);
         setIssues([...optionsIssues, ...scriptIssues]);
         setNightOrders(await calculateNightOrders(sanitized));
+
+        if (script !== null) {
+          const jinxes = options.showJinxes
+            ? await findJinxes(script.characters, options.useOldJinxes)
+            : [];
+          setJinxes(jinxes);
+
+          const resolvedJinxes = await resolveJinxCharacters(
+            jinxes,
+            script.characters,
+          );
+          setResolvedJinxes(resolvedJinxes);
+        }
       } catch (err) {
         console.error("Failed to load shared script:", err);
         setError(
@@ -119,6 +141,8 @@ export function ViewMode({ scriptId }: ViewModeProps) {
               },
             }}
             nightOrders={nightOrders}
+            jinxes={jinxes}
+            resolvedJinxes={resolvedJinxes}
             // TODO: If I do implement view mode, I need to store and pass in character name replacement data
             characterNameReplacement={{}}
           />
@@ -131,6 +155,8 @@ export function ViewMode({ scriptId }: ViewModeProps) {
             script={script}
             options={options}
             nightOrders={nightOrders}
+            jinxes={jinxes}
+            resolvedJinxes={resolvedJinxes}
             // TODO: If I do implement view mode, I need to store and pass in character name replacement data
             characterNameReplacement={{}}
           />

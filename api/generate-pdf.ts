@@ -22,7 +22,7 @@ export default {
       } = body;
 
       // Generate HTML with the character sheet
-      const html = renderCharacterSheet(
+      const html = await renderCharacterSheet(
         script,
         options,
         nightOrders || { first: [], other: [] },

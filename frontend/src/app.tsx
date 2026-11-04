@@ -31,6 +31,10 @@ import {
   ScriptOptions,
   TeensyDoc,
   AppearanceLevel,
+  Jinx,
+  findJinxes,
+  resolveJinxCharacters,
+  ResolvedJinx,
 } from "botc-character-sheet";
 
 // Check if we're in view mode (URL pattern: /view/:id)
@@ -65,6 +69,9 @@ function EditMode() {
   const [optionsIssues, setOptionsIssues] = useState<ValidationIssue[]>(
     initialOptions.issues,
   );
+  const [loading, setLoading] = useState(true);
+  const [jinxes, setJinxes] = useState<Jinx[]>([]);
+  const [resolvedJinxes, setResolvedJinxes] = useState<ResolvedJinx[]>([]);
 
   const {
     script,
@@ -342,6 +349,27 @@ function EditMode() {
     downloadInfoSheet(script?.metadata?.name);
   };
 
+  // Load any async values
+  useEffect(() => {
+    const load = async () => {
+      if (script !== null) {
+        const jinxes = options.showJinxes
+          ? await findJinxes(script.characters, options.useOldJinxes)
+          : [];
+        setJinxes(jinxes);
+
+        const resolvedJinxes = await resolveJinxCharacters(
+          jinxes,
+          script.characters,
+        );
+        setResolvedJinxes(resolvedJinxes);
+
+        setLoading(false);
+      }
+    };
+    load();
+  }, [script, options.showJinxes, options.useOldJinxes]);
+
   return (
     <>
       <div className="app">
@@ -398,7 +426,7 @@ function EditMode() {
           )}
         </div>
 
-        {script && options.teensy && (
+        {script && options.teensy && !loading && (
           <div className="preview-section teensy-preview">
             <TeensyDoc
               script={script}
@@ -411,17 +439,21 @@ function EditMode() {
                 },
               }}
               nightOrders={nightOrders}
+              jinxes={jinxes}
+              resolvedJinxes={resolvedJinxes}
               characterNameReplacement={characterNameReplacement}
             />
           </div>
         )}
 
-        {script && !options.teensy && (
+        {script && !options.teensy && !loading && (
           <div className="preview-section">
             <FancyDoc
               script={script}
               options={options}
               nightOrders={nightOrders}
+              jinxes={jinxes}
+              resolvedJinxes={resolvedJinxes}
               characterNameReplacement={characterNameReplacement}
             />
           </div>

@@ -6,6 +6,8 @@ import {
   NightOrderEntry,
   ScriptOptions,
   TeensyDoc,
+  findJinxes,
+  resolveJinxCharacters,
 } from "botc-character-sheet";
 import { readFileSync } from "fs";
 import { join } from "path";
@@ -112,14 +114,20 @@ export interface NightOrders {
   other: NightOrderEntry[];
 }
 
-export function renderCharacterSheet(
+export async function renderCharacterSheet(
   script: ParsedScript,
   options: ScriptOptions,
   nightOrders: NightOrders,
   characterNameReplacement: CharacterNameReplacement,
   requestOrigin?: string,
-): string {
+): Promise<string> {
   const assetBase = getAssetBase(requestOrigin);
+
+  const jinxes = options.showJinxes
+    ? await findJinxes(script.characters, options.useOldJinxes)
+    : [];
+
+  const resolvedJinxes = await resolveJinxCharacters(jinxes, script.characters);
 
   let docHTML;
   if (options.teensy) {
@@ -134,6 +142,8 @@ export function renderCharacterSheet(
         options: { ...options, dimensions },
         script,
         nightOrders,
+        jinxes,
+        resolvedJinxes,
         characterNameReplacement,
       }),
     );
@@ -143,6 +153,8 @@ export function renderCharacterSheet(
         options: { ...options, numberOfCharacterSheets: 1 },
         script,
         nightOrders,
+        jinxes,
+        resolvedJinxes,
         characterNameReplacement,
       }),
     );
