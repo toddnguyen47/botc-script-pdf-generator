@@ -27,7 +27,7 @@ export function PrintOptions({ options, onOptionChange }: PrintOptionsProps) {
     } else {
       onOptionChange("dimensions", {
         ...options.dimensions,
-        width: 216,
+        width: 215,
         height: 279,
       });
     }
