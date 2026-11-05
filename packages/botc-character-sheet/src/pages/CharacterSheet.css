@@ -496,6 +496,7 @@
 .sheet-footer-container {
   display: flex;
   flex: 1;
+  margin-top: 3mm;
 }
 
 .sheet-footer-item-container {
@@ -505,7 +506,6 @@
 }
 
 .sheet-footer {
-  padding-top: 3mm;
   /* padding-left: calc(5mm + var(--print-bleed)); */
   text-align: center;
   font-family: "PT Serif", "Goudy Old Style", "Goudy", Georgia, serif;

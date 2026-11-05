@@ -35,7 +35,7 @@
 .night-sheet-order {
   display: flex;
   flex-direction: column;
-  gap: 2.0mm;
+  gap: 2mm;
 }
 
 .night-sheet-entry {
