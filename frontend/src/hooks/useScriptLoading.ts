@@ -155,7 +155,7 @@ export function useScriptLoading(
       _loadScript(json);
       _resetCharacterNameReplacementData();
     };
-    _handleJsonFileUpload(event, handler);
+    handleJsonFileUpload(event, handler);
   };
 
   const handleTokenReplacementUpload = (event: Event) => {
@@ -166,10 +166,10 @@ export function useScriptLoading(
         loadCharacterNameReplacementData(json);
       }
     };
-    _handleJsonFileUpload(event, handler);
+    handleJsonFileUpload(event, handler);
   };
 
-  const _handleJsonFileUpload = (
+  const handleJsonFileUpload = (
     event: Event,
     handleJson: (json: any) => void,
   ) => {
@@ -206,6 +206,7 @@ export function useScriptLoading(
 
   return {
     sharedOptions,
+    handleJsonFileUpload,
     handleFileUpload,
     handlePasteButtonClick,
     handleTokenReplacementUpload,

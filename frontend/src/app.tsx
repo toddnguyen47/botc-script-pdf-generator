@@ -85,6 +85,7 @@ function EditMode() {
     characterNameReplacement,
     loadScript,
     handleScriptTextChange,
+    handleJsonFileUpload,
     handleFileUpload,
     handlePasteButtonClick,
     handleTokenReplacementUpload,
@@ -370,6 +371,18 @@ function EditMode() {
     load();
   }, [script, options.showJinxes, options.useOldJinxes]);
 
+  const handleOptionsUpload = (event: Event) => {
+    const handler = (json: Partial<typeof options>) => {
+      setOptions((prev) => ({
+        ...prev,
+        ...Object.fromEntries(
+          Object.entries(json).filter(([key]) => key in prev),
+        ),
+      }));
+    };
+    handleJsonFileUpload(event, handler);
+  };
+
   return (
     <>
       <div className="app">
@@ -403,6 +416,7 @@ function EditMode() {
               onFileUpload={handleFileUpload}
               onPasteButtonClick={handlePasteButtonClick}
               onTokenReplacementUpload={handleTokenReplacementUpload}
+              onOptionsUpload={handleOptionsUpload}
               onLoadExample={handleLoadExample}
               onLoadExampleTeensyville={handleLoadExampleTeensyville}
               onColorChange={handleColorChange}

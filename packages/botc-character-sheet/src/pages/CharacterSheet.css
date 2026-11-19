@@ -496,7 +496,6 @@
 .sheet-footer-container {
   display: flex;
   flex: 1;
-  margin-top: 3mm;
 }
 
 .sheet-footer-item-container {
@@ -512,6 +511,7 @@
   font-size: 9pt;
   color: #b34d00;
   opacity: 0.7;
+  margin-top: 3mm;
 
   display: grid;
   grid-template-columns: 1fr auto 1fr;

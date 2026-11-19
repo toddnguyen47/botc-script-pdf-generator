@@ -57,9 +57,7 @@ export function usePdfGeneration() {
       const newZip = new JSZip();
 
       for (const [filename, blob] of Object.entries(zippedFiles)) {
-        if (filename.toLocaleLowerCase().endsWith(".html")) {
-          newZip.file(filename, blob);
-        } else if (filename.toLocaleLowerCase().endsWith(".pdf")) {
+        if (filename.toLocaleLowerCase().endsWith(".pdf")) {
           const addedPageBlob = await possiblyAddExtraPages(blob, options);
           const blobWithType = new Blob([addedPageBlob], {
             type: "application/pdf",
@@ -67,6 +65,8 @@ export function usePdfGeneration() {
           const url = URL.createObjectURL(blobWithType);
           setPdfUrl(url);
           newZip.file(filename, addedPageBlob);
+        } else {
+          newZip.file(filename, blob);
         }
       }
 

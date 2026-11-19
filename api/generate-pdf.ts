@@ -9,6 +9,7 @@ import {
   ParsedScript,
   ScriptOptions,
 } from "../packages/botc-character-sheet/dist/types";
+import { json } from "stream/consumers";
 
 export default {
   async fetch(request: Request): Promise<Response> {
@@ -38,6 +39,10 @@ export default {
       const myZip = new JSZip();
       myZip.file(htmlFilename, html);
       myZip.file(htmlFilename.replace(/\.html$/i, ".pdf"), pdf);
+      myZip.file(
+        htmlFilename.replace(/\.html$/i, " options.json"),
+        JSON.stringify(options, null, 2),
+      );
       const zippedFile = await myZip.generateAsync({ type: "arraybuffer" });
       const zipName = htmlFilename.replace(/\.html$/i, ".zip");
 

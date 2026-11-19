@@ -3,6 +3,7 @@ interface UploadSectionProps {
   onFileUpload: (event: Event) => void;
   onPasteButtonClick: () => void;
   onTokenReplacementUpload: (event: Event) => void;
+  onOptionsUpload: (event: Event) => void;
   onLoadExample: () => void;
   onLoadExampleTeensyville: () => void;
 }
@@ -12,6 +13,7 @@ export function UploadSection({
   onFileUpload,
   onPasteButtonClick,
   onTokenReplacementUpload,
+  onOptionsUpload,
   onLoadExample,
   onLoadExampleTeensyville,
 }: UploadSectionProps) {
@@ -50,6 +52,17 @@ export function UploadSection({
           type="file"
           accept=".json,.json5"
           onChange={onTokenReplacementUpload}
+          className="file-input"
+        />
+
+        <label htmlFor="options-upload" className="upload-label">
+          <div>Upload Options</div>
+        </label>
+        <input
+          id="options-upload"
+          type="file"
+          accept=".json,.json5"
+          onChange={onOptionsUpload}
           className="file-input"
         />
       </div>
