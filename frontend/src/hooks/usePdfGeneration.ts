@@ -5,7 +5,7 @@ import {
   ParsedScript,
   sanitizeFilename,
   ScriptOptions,
-  CharacterNameReplacement
+  CharacterNameReplacement,
 } from "botc-character-sheet";
 import { PDFDocument } from "pdf-lib";
 import { downloadBlob } from "../utils/downloadFile";
