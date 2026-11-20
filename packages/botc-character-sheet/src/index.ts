@@ -17,7 +17,8 @@ export type {
   ParsedScript,
   NetworkPayload,
   PageDimensions,
-  CharacterNameReplacementData as CharacterNameReplacementData,
+  CharacterNameReplacement,
+  CharacterNameReplacementData,
 } from "./types";
 export { AppearanceLevel } from "./types";
 export { darken, parseRgb, rgbString } from "./utils/colours";
@@ -27,3 +28,4 @@ export { getNightsheetAsync } from "./data/nightsheet";
 export { sortSao } from "./sort/sort";
 export { findJinxes, resolveJinxCharacters } from "./utils/jinxUtils";
 export type { ResolvedJinx } from "./utils/jinxUtils";
+export { sanitizeFilename } from "./utils/scriptUtils";

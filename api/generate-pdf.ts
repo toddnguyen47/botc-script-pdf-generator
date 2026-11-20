@@ -9,9 +9,14 @@ import {
   ParsedScript,
   ScriptOptions,
 } from "../packages/botc-character-sheet/dist/types";
-import { json } from "stream/consumers";
+import { sanitizeFilename } from "../packages/botc-character-sheet/src/utils/scriptUtils";
 
 export default {
+  /**
+   * Handle /api/generate-pdf
+   * @param request input request
+   * @returns the exported zipped file
+   */
   async fetch(request: Request): Promise<Response> {
     return handleApiRequest(request, async (body, origin) => {
       const {
@@ -34,17 +39,18 @@ export default {
       const htmlFilename = filename
         ? filename.replace(/\.pdf$/i, ".html")
         : "script.html";
+      const sanitizedFilename = sanitizeFilename(htmlFilename);
 
       const pdf = await generatePdf(html, options, script);
       const myZip = new JSZip();
-      myZip.file(htmlFilename, html);
-      myZip.file(htmlFilename.replace(/\.html$/i, ".pdf"), pdf);
+      myZip.file(sanitizedFilename, html);
+      myZip.file(sanitizedFilename.replace(/\.html$/i, ".pdf"), pdf);
       myZip.file(
-        htmlFilename.replace(/\.html$/i, " options.json"),
+        sanitizedFilename.replace(/\.html$/i, " options.json"),
         JSON.stringify(options, null, 2),
       );
       const zippedFile = await myZip.generateAsync({ type: "arraybuffer" });
-      const zipName = htmlFilename.replace(/\.html$/i, ".zip");
+      const zipName = sanitizedFilename.replace(/\.html$/i, ".zip");
 
       return new Response(zippedFile, {
         status: 200,

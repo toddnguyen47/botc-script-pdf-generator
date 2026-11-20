@@ -80,3 +80,7 @@ function getDefaultAlignment(character: ResolvedCharacter): string {
     return "";
   }
 }
+
+export function sanitizeFilename(fileName: string): string {
+  return fileName.replace(/[^a-zA-Z0-9_.\- ]/g, "");
+}

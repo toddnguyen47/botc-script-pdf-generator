@@ -3,12 +3,13 @@ import {
   NetworkPayload,
   NightOrders,
   ParsedScript,
+  sanitizeFilename,
   ScriptOptions,
+  CharacterNameReplacement
 } from "botc-character-sheet";
 import { PDFDocument } from "pdf-lib";
 import { downloadBlob } from "../utils/downloadFile";
 import JSZip from "jszip";
-import { CharacterNameReplacement } from "../../../packages/botc-character-sheet/dist/types";
 
 export function usePdfGeneration() {
   const [showPdfModal, setShowPdfModal] = useState(false);
@@ -84,7 +85,9 @@ export function usePdfGeneration() {
 
   const downloadPDF = (scriptName?: string) => {
     if (!zippedBlob) return;
-    downloadBlob(zippedBlob, `${scriptName || "script"}.zip`);
+    const fileName = scriptName || "script";
+    const sanizedFileName = sanitizeFilename(fileName);
+    downloadBlob(zippedBlob, `${sanizedFileName}.zip`);
   };
 
   const closePdfModal = () => {
