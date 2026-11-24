@@ -1,4 +1,5 @@
 import { COLOR_DARK_GRAY, Jinx, ResolvedCharacter } from "../types";
+import { teamColours } from "../utils/colours";
 import { FabledOrLoric } from "../utils/fabledOrLoric";
 import { getImageUrl, getGenericIconUrl } from "../utils/scriptUtils";
 
@@ -58,6 +59,7 @@ export function JinxesAndSpecial({
         key={`rc-${i}`}
         item={fl}
         bootleggerRules={bootleggerRules}
+        useDarkGrayForAbilityText={useDarkGrayForAbilityText}
       />
     ));
   } else if (hasJinxesOnly && useTwoColumns) {
@@ -91,6 +93,7 @@ export function JinxesAndSpecial({
           key={`lc-${i}`}
           item={item}
           bootleggerRules={bootleggerRules}
+          useDarkGrayForAbilityText={useDarkGrayForAbilityText}
         />
       ));
     rightColumn = fabledAndLoric
@@ -100,6 +103,7 @@ export function JinxesAndSpecial({
           key={`rc-${i}`}
           item={item}
           bootleggerRules={bootleggerRules}
+          useDarkGrayForAbilityText={useDarkGrayForAbilityText}
         />
       ));
   } else if (hasJinxesOnly) {
@@ -118,6 +122,7 @@ export function JinxesAndSpecial({
         key={`lc-${i}`}
         item={item}
         bootleggerRules={bootleggerRules}
+        useDarkGrayForAbilityText={useDarkGrayForAbilityText}
       />
     ));
   } else {
@@ -199,9 +204,11 @@ const JinxItem = ({
 function FabledLoricItem({
   item,
   bootleggerRules,
+  useDarkGrayForAbilityText,
 }: {
   item: FabledOrLoric;
   bootleggerRules: string[];
+  useDarkGrayForAbilityText: boolean;
 }) {
   const isBootlegger = item.name.toLowerCase() === "bootlegger";
   return (
@@ -213,8 +220,24 @@ function FabledLoricItem({
         className="jinx-icon loric"
       />
       <div className="loric-text-container">
-        <p className="jinx-text loric-name">{item.name}</p>
-        <p className="jinx-text loric-text">{item.note}</p>
+        <p
+          className="jinx-text loric-name"
+          style={{
+            color: teamColours.loric,
+          }}
+        >
+          {item.name}
+        </p>
+        <p
+          className="jinx-text loric-text"
+          style={{
+            ...(useDarkGrayForAbilityText && {
+              color: COLOR_DARK_GRAY,
+            }),
+          }}
+        >
+          {item.note}
+        </p>
         {isBootlegger &&
           bootleggerRules.map((rule, i) => (
             <p key={`bootlegger-rule-${i}`} className="jinx-text loric-text">
