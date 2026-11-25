@@ -64,7 +64,7 @@
 }
 
 .teensy .info-sheet-heading .script-title {
-  /* filter: drop-shadow(.2mm .1mm 0 #222d) drop-shadow(0mm 0mm .1mm #2228); */
+  /* filter: drop-shadow(.2mm .1mm 0 #000d) drop-shadow(0mm 0mm .1mm #0008); */
   filter: drop-shadow(1px 0px 0px #cb8b);
 }
 

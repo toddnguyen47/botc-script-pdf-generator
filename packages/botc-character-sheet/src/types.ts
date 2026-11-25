@@ -66,7 +66,7 @@ export interface ScriptOptions {
   showTitle: boolean;
   showAuthor: boolean;
   showJinxes: boolean;
-  useDarkGrayForAbilityText: boolean;
+  useBlackForAbilityText: boolean;
   nightSheetReminderTextAlign: NightOrderTextAlign;
   useOldJinxes: boolean;
   showSwirls: boolean;
@@ -115,5 +115,5 @@ export type PageDimensions = {
 
 export type CharacterNameReplacement = Record<string, string>;
 
-export const COLOR_DARK_GRAY = "#222";
+export const COLOR_BLACK = "#000";
 export const COLOR_DARK_BROWN = "#b34d00";

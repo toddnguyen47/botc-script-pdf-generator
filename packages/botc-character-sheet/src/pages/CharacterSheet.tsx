@@ -135,9 +135,7 @@ export function CharacterSheet({
                     title={section.title.toUpperCase()}
                     characters={section.chars}
                     charNameColor={section.color}
-                    useDarkGrayForAbilityText={
-                      options.useDarkGrayForAbilityText
-                    }
+                    useBlackForAbilityText={options.useBlackForAbilityText}
                     jinxes={jinxes}
                     allCharacters={[
                       ...characters.townsfolk,
@@ -188,9 +186,7 @@ export function CharacterSheet({
                       ]}
                       bootleggerRules={bootleggerRules}
                       iconUrlTemplate={iconUrlTemplate}
-                      useDarkGrayForAbilityText={
-                        options.useDarkGrayForAbilityText
-                      }
+                      useBlackForAbilityText={options.useBlackForAbilityText}
                     />
                   </>
                 )}

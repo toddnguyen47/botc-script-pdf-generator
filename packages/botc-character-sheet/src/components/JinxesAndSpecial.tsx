@@ -1,4 +1,4 @@
-import { COLOR_DARK_GRAY, Jinx, ResolvedCharacter } from "../types";
+import { COLOR_BLACK, Jinx, ResolvedCharacter } from "../types";
 import { teamColours } from "../utils/colours";
 import { FabledOrLoric } from "../utils/fabledOrLoric";
 import { getImageUrl, getGenericIconUrl } from "../utils/scriptUtils";
@@ -9,7 +9,7 @@ interface JinxesSectionProps {
   fabledAndLoric: FabledOrLoric[];
   bootleggerRules: string[];
   iconUrlTemplate?: string;
-  useDarkGrayForAbilityText: boolean;
+  useBlackForAbilityText: boolean;
 }
 
 export function JinxesAndSpecial({
@@ -18,7 +18,7 @@ export function JinxesAndSpecial({
   fabledAndLoric,
   bootleggerRules,
   iconUrlTemplate,
-  useDarkGrayForAbilityText,
+  useBlackForAbilityText,
 }: JinxesSectionProps) {
   // Create a map for quick character lookup
   const characterMap = new Map(
@@ -51,7 +51,7 @@ export function JinxesAndSpecial({
         jinx={jinx}
         charMap={characterMap}
         iconUrlTemplate={iconUrlTemplate}
-        useDarkGrayForAbilityText={useDarkGrayForAbilityText}
+        useBlackForAbilityText={useBlackForAbilityText}
       />
     ));
     rightColumn = fabledAndLoric.map((fl, i) => (
@@ -59,7 +59,7 @@ export function JinxesAndSpecial({
         key={`rc-${i}`}
         item={fl}
         bootleggerRules={bootleggerRules}
-        useDarkGrayForAbilityText={useDarkGrayForAbilityText}
+        useBlackForAbilityText={useBlackForAbilityText}
       />
     ));
   } else if (hasJinxesOnly && useTwoColumns) {
@@ -71,7 +71,7 @@ export function JinxesAndSpecial({
           jinx={jinx}
           charMap={characterMap}
           iconUrlTemplate={iconUrlTemplate}
-          useDarkGrayForAbilityText={useDarkGrayForAbilityText}
+          useBlackForAbilityText={useBlackForAbilityText}
         />
       ));
     rightColumn = jinxes
@@ -82,7 +82,7 @@ export function JinxesAndSpecial({
           jinx={jinx}
           charMap={characterMap}
           iconUrlTemplate={iconUrlTemplate}
-          useDarkGrayForAbilityText={useDarkGrayForAbilityText}
+          useBlackForAbilityText={useBlackForAbilityText}
         />
       ));
   } else if (hasSpecialOnly && useTwoColumns) {
@@ -93,7 +93,7 @@ export function JinxesAndSpecial({
           key={`lc-${i}`}
           item={item}
           bootleggerRules={bootleggerRules}
-          useDarkGrayForAbilityText={useDarkGrayForAbilityText}
+          useBlackForAbilityText={useBlackForAbilityText}
         />
       ));
     rightColumn = fabledAndLoric
@@ -103,7 +103,7 @@ export function JinxesAndSpecial({
           key={`rc-${i}`}
           item={item}
           bootleggerRules={bootleggerRules}
-          useDarkGrayForAbilityText={useDarkGrayForAbilityText}
+          useBlackForAbilityText={useBlackForAbilityText}
         />
       ));
   } else if (hasJinxesOnly) {
@@ -113,7 +113,7 @@ export function JinxesAndSpecial({
         jinx={jinx}
         charMap={characterMap}
         iconUrlTemplate={iconUrlTemplate}
-        useDarkGrayForAbilityText={useDarkGrayForAbilityText}
+        useBlackForAbilityText={useBlackForAbilityText}
       />
     ));
   } else if (hasSpecialOnly) {
@@ -122,7 +122,7 @@ export function JinxesAndSpecial({
         key={`lc-${i}`}
         item={item}
         bootleggerRules={bootleggerRules}
-        useDarkGrayForAbilityText={useDarkGrayForAbilityText}
+        useBlackForAbilityText={useBlackForAbilityText}
       />
     ));
   } else {
@@ -147,14 +147,14 @@ type JinxItemProps = {
   charMap: Map<string, ResolvedCharacter>;
   jinx: Jinx;
   iconUrlTemplate?: string;
-  useDarkGrayForAbilityText: boolean;
+  useBlackForAbilityText: boolean;
 };
 
 const JinxItem = ({
   charMap,
   jinx,
   iconUrlTemplate,
-  useDarkGrayForAbilityText,
+  useBlackForAbilityText,
 }: JinxItemProps) => {
   const char1 = charMap.get(jinx.characters[0]);
   const char2 = charMap.get(jinx.characters[1]);
@@ -190,8 +190,8 @@ const JinxItem = ({
       <p
         className="jinx-text"
         style={{
-          ...(useDarkGrayForAbilityText && {
-            color: COLOR_DARK_GRAY,
+          ...(useBlackForAbilityText && {
+            color: COLOR_BLACK,
           }),
         }}
       >
@@ -204,11 +204,11 @@ const JinxItem = ({
 function FabledLoricItem({
   item,
   bootleggerRules,
-  useDarkGrayForAbilityText,
+  useBlackForAbilityText,
 }: {
   item: FabledOrLoric;
   bootleggerRules: string[];
-  useDarkGrayForAbilityText: boolean;
+  useBlackForAbilityText: boolean;
 }) {
   const isBootlegger = item.name.toLowerCase() === "bootlegger";
   return (
@@ -231,8 +231,8 @@ function FabledLoricItem({
         <p
           className="jinx-text loric-text"
           style={{
-            ...(useDarkGrayForAbilityText && {
-              color: COLOR_DARK_GRAY,
+            ...(useBlackForAbilityText && {
+              color: COLOR_BLACK,
             }),
           }}
         >

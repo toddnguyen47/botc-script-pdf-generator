@@ -92,7 +92,7 @@ export const DEFAULT_OPTIONS: ScriptOptions = {
   showTitle: true,
   showAuthor: true,
   showJinxes: true,
-  useDarkGrayForAbilityText: true,
+  useBlackForAbilityText: true,
   nightSheetReminderTextAlign: "end",
   useOldJinxes: false,
   showSwirls: true,

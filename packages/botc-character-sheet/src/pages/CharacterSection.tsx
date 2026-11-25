@@ -1,7 +1,7 @@
 import {
   ResolvedCharacter,
   Jinx,
-  COLOR_DARK_GRAY,
+  COLOR_BLACK,
   CharacterNameReplacement,
 } from "../types";
 import { getJinxedCharacters } from "../utils/jinxUtils";
@@ -10,7 +10,7 @@ import { getImageUrl, getGenericIconUrl } from "../utils/scriptUtils";
 interface CharacterSectionProps {
   title: string;
   characters: ResolvedCharacter[];
-  useDarkGrayForAbilityText: boolean;
+  useBlackForAbilityText: boolean;
   charNameColor: string;
   jinxes: Jinx[];
   allCharacters: ResolvedCharacter[];
@@ -24,7 +24,7 @@ export function CharacterSection({
   title,
   characters,
   charNameColor,
-  useDarkGrayForAbilityText,
+  useBlackForAbilityText,
   jinxes,
   allCharacters: allChars,
   inlineJinxIcons,
@@ -59,7 +59,7 @@ export function CharacterSection({
                 allChars,
                 inlineJinxIcons,
               )}
-              useDarkGrayForAbilityText={useDarkGrayForAbilityText}
+              useBlackForAbilityText={useBlackForAbilityText}
               characterNameReplacement={characterNameReplacement}
             />
           ))}
@@ -77,7 +77,7 @@ export function CharacterSection({
                 allChars,
                 inlineJinxIcons,
               )}
-              useDarkGrayForAbilityText={useDarkGrayForAbilityText}
+              useBlackForAbilityText={useBlackForAbilityText}
               characterNameReplacement={characterNameReplacement}
             />
           ))}
@@ -91,7 +91,7 @@ interface CharacterCardProps {
   color: string;
   jinxedCharacters: ResolvedCharacter[];
   iconUrlTemplate?: string;
-  useDarkGrayForAbilityText: boolean;
+  useBlackForAbilityText: boolean;
   characterNameReplacement: CharacterNameReplacement;
 }
 
@@ -100,7 +100,7 @@ function CharacterCard({
   color,
   jinxedCharacters,
   iconUrlTemplate,
-  useDarkGrayForAbilityText,
+  useBlackForAbilityText,
   characterNameReplacement = {},
 }: CharacterCardProps) {
   const renderAbility = (ability: string) => {
@@ -121,7 +121,7 @@ function CharacterCard({
   };
 
   const imageUrl = getImageUrl(character, iconUrlTemplate);
-  const abilityTextColor = useDarkGrayForAbilityText ? COLOR_DARK_GRAY : color;
+  const abilityTextColor = useBlackForAbilityText ? COLOR_BLACK : color;
   let characterName = character.name;
   if (characterName in characterNameReplacement) {
     characterName = `${characterName} (${characterNameReplacement[characterName]} token)`;
@@ -140,7 +140,7 @@ function CharacterCard({
         <div className="character-name" style={{ color: color }}>
           <span
             style={{
-              ...(!useDarkGrayForAbilityText && {
+              ...(!useBlackForAbilityText && {
                 backgroundColor: "color-mix(in srgb, #FFFF00 40%, white)",
               }),
             }}

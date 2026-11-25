@@ -25,7 +25,7 @@
   text-align: center;
   letter-spacing: var(--title-letter-spacing);
   word-spacing: var(--title-word-spacing);
-  filter: drop-shadow(0.2mm 0.1mm 0 #222d) drop-shadow(0mm 0mm 0.1mm #2228);
+  filter: drop-shadow(0.2mm 0.1mm 0 #000d) drop-shadow(0mm 0mm 0.1mm #0008);
 }
 
 .info-sheet-content {

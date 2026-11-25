@@ -13,7 +13,7 @@
   text-align: end;
   margin: 0;
   flex-shrink: 0;
-  color: #222;
+  color: #000;
   font-size: 14.2pt;
 }
 
@@ -42,7 +42,7 @@
   object-fit: contain;
   box-sizing: border-box;
   scale: calc(1.2 * var(--icon-scale, 1));
-  filter: drop-shadow(0px 0px 2px #2224);
+  filter: drop-shadow(0px 0px 2px #0004);
 }
 
 .icon.marker-icon {

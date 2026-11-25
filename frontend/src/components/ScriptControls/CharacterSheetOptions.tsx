@@ -77,8 +77,8 @@ export function CharacterSheetOptions({
 
       <Toggle
         label="Use Dark Gray for Ability Text"
-        checked={options.useDarkGrayForAbilityText}
-        onChange={(value) => onOptionChange("useDarkGrayForAbilityText", value)}
+        checked={options.useBlackForAbilityText}
+        onChange={(value) => onOptionChange("useBlackForAbilityText", value)}
       />
 
       <Select

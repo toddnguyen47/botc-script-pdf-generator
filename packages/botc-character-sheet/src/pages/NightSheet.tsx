@@ -1,7 +1,7 @@
 import { type CSSProperties } from "preact";
 import {
   CharacterNameReplacement,
-  COLOR_DARK_GRAY,
+  COLOR_BLACK,
   NightMarker,
   NightOrderEntry,
   ScriptOptions,
@@ -46,7 +46,7 @@ export const NightSheet = ({
                 entry={reminder}
                 night="first"
                 iconUrlTemplate={options.iconUrlTemplate}
-                useDarkGrayForAbilityText={options.useDarkGrayForAbilityText}
+                useBlackForAbilityText={options.useBlackForAbilityText}
                 nightSheetReminderTextAlign={
                   options.nightSheetReminderTextAlign
                 }
@@ -68,7 +68,7 @@ export const NightSheet = ({
                 entry={reminder}
                 night="other"
                 iconUrlTemplate={options.iconUrlTemplate}
-                useDarkGrayForAbilityText={options.useDarkGrayForAbilityText}
+                useBlackForAbilityText={options.useBlackForAbilityText}
                 nightSheetReminderTextAlign={
                   options.nightSheetReminderTextAlign
                 }
@@ -86,7 +86,7 @@ type NightSheetEntryProps = {
   entry: NightOrderEntry;
   night: "first" | "other";
   iconUrlTemplate?: string;
-  useDarkGrayForAbilityText: boolean;
+  useBlackForAbilityText: boolean;
   nightSheetReminderTextAlign: string;
   characterNameReplacement: CharacterNameReplacement;
 };
@@ -126,11 +126,9 @@ export const NightSheetEntry = (props: NightSheetEntryProps) => {
 
   const color =
     typeof props.entry === "string"
-      ? COLOR_DARK_GRAY
+      ? COLOR_BLACK
       : teamColours[props.entry.team];
-  const reminderTextColor = props.useDarkGrayForAbilityText
-    ? COLOR_DARK_GRAY
-    : color;
+  const reminderTextColor = props.useBlackForAbilityText ? COLOR_BLACK : color;
 
   return (
     <div className="night-sheet-entry">

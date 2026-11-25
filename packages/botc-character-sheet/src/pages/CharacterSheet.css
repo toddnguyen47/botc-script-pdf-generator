@@ -227,10 +227,10 @@
   font-weight: bolder;
   line-height: 2;
 
-  /* filter: drop-shadow(0.1mm 0.1mm 0.3mm #222a)
-    drop-shadow(-0.1mm 0.1mm 0.3mm #2228)
-    drop-shadow(0.1mm -0.1mm 0.3mm #222a)
-    drop-shadow(-0.1mm -0.1mm 0.3mm #222a); */
+  /* filter: drop-shadow(0.1mm 0.1mm 0.3mm #000a)
+    drop-shadow(-0.1mm 0.1mm 0.3mm #0008)
+    drop-shadow(0.1mm -0.1mm 0.3mm #000a)
+    drop-shadow(-0.1mm -0.1mm 0.3mm #000a); */
 }
 
 .section-divider {
