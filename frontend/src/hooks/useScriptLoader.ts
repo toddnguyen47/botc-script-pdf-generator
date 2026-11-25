@@ -33,9 +33,13 @@ export function getInitialOptionsFromUrl(): {
       ? (savedOptions as Record<string, unknown>)
       : {};
 
-  const overrides: Record<string, unknown> = {};
-
   type OptionsKey = keyof ScriptOptions;
+  const validKeys = Object.keys(DEFAULT_OPTIONS) as string[];
+  const filteredSavedRecord = Object.fromEntries(
+    Object.entries(savedRecord).filter(([key]) => validKeys.includes(key)),
+  );
+
+  const overrides: Record<string, unknown> = {};
 
   for (const key of Object.keys(DEFAULT_OPTIONS) as OptionsKey[]) {
     const param = params.get(key);
@@ -74,11 +78,12 @@ export function getInitialOptionsFromUrl(): {
   }
 
   const merged = {
-    ...savedRecord,
+    ...filteredSavedRecord,
     ...overrides,
     dimensions: {
-      ...(savedRecord.dimensions && typeof savedRecord.dimensions === "object"
-        ? (savedRecord.dimensions as Record<string, unknown>)
+      ...(filteredSavedRecord.dimensions &&
+      typeof filteredSavedRecord.dimensions === "object"
+        ? (filteredSavedRecord.dimensions as Record<string, unknown>)
         : {}),
       ...dimensionOverrides,
     },
